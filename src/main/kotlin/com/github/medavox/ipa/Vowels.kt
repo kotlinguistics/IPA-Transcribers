@@ -1,7 +1,7 @@
-package com.github.medavox.ipa.vowels
+package com.github.medavox.ipa
 
-import com.github.medavox.ipa.vowels.Backness.*
-import com.github.medavox.ipa.vowels.Height.*
+import com.github.medavox.ipa.Backness.*
+import com.github.medavox.ipa.Height.*
 
 enum class Height {
     CLOSE,
@@ -25,13 +25,14 @@ data class Vowel(
      * So marked vowels like ̞e are considered two characters,
      * meaning they are not a valid Char (in the eyes of kotlin).*/
     val ipa:String,
-    val height:Height,
-    val backness:Backness,
+    val height: Height,
+    val backness: Backness,
     val rounded:Boolean=false,
-    val nasalised:Boolean=false
+    /**Any other features, marked by diacritics.*/
+    val features:Diacritics = Diacritics()
 )
 
-fun getQualitiesForIpaVowel(ipa:String):Vowel {
+fun getQualitiesForIpaVowel(ipa:String): Vowel {
     return when(ipa) {
         //FRONT VOWELS
         "i" -> Vowel(ipa, CLOSE, FRONT)
@@ -95,7 +96,6 @@ fun getQualitiesForIpaVowel(ipa:String):Vowel {
 
         "ɑ" -> Vowel(ipa, OPEN, BACK)
         "ɒ", "̞ɔ" -> Vowel(ipa, CLOSE, BACK, true)
-
 
 
         else -> Vowel("ə", MID, CENTRAL, false)

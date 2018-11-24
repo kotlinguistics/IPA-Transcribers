@@ -1,17 +1,17 @@
 package com.github.medavox.ipa
 
-interface Diacritics {
+interface DiacriticFeature {
     val diacritics:Array<Char>
 }
 
-enum class PhonationDiacritics(override val diacritics:Array<Char>):Diacritics {
+enum class PhonationDiacritics(override val diacritics:Array<Char>):DiacriticFeature {
     VOICELESS(arrayOf('̥', '̊')),
     VOICED(arrayOf('̬')),
     BREATHY_VOICED(arrayOf('̤')),
     CREAKY_VOICED(arrayOf('̰'))
 }
 
-enum class ArticulationDiacritics(override val diacritics: Array<Char>):Diacritics {
+enum class ArticulationDiacritics(override val diacritics: Array<Char>):DiacriticFeature {
     DENTAL(arrayOf('̪', '͆')),
     LINGUOLABIAL(arrayOf('̼')),
     APICAL(arrayOf('̺')),
@@ -24,7 +24,7 @@ enum class ArticulationDiacritics(override val diacritics: Array<Char>):Diacriti
     LOWERED(arrayOf('̞', '˕'))
 }
 
-enum class CoarticulationDiacritics(override val diacritics:Array<Char>):Diacritics {
+enum class CoarticulationDiacritics(override val diacritics:Array<Char>):DiacriticFeature {
     //todo: these super-weird ones
 //    MORE_ROUNDED(arrayOf('')),
 //    LESS_ROUNDED(arrayOf('')),
@@ -39,7 +39,7 @@ enum class CoarticulationDiacritics(override val diacritics:Array<Char>):Diacrit
     RHOTICITY(arrayOf('˞')),
     ;
 }
-enum class ConsonantReleaseDiacritics(override val diacritics: Array<Char>):Diacritics {
+enum class ConsonantReleaseDiacritics(override val diacritics: Array<Char>):DiacriticFeature {
     //todo:these weird ones
     ASPIRATED(arrayOf('ʰ')),
 //    NO_AUDIBLE_RELEASE(),
@@ -50,7 +50,13 @@ enum class ConsonantReleaseDiacritics(override val diacritics: Array<Char>):Diac
     MID_CENTRAL_VOWEL_RELEASE(arrayOf('ᵊ')),//from the accent of other kids in my childhood: "dowunt-uh!"
 }
 
-enum class SyllabicityDiacritics(override val diacritics: Array<Char>):Diacritics {
+enum class SyllabicityDiacritics(override val diacritics: Array<Char>):DiacriticFeature {
     SYLLABIC(arrayOf('̩', '̍')),
     NON_SYLLABIC(arrayOf('̯', '̑'))
 }
+
+data class Diacritics(val consonantReleaseDiacritics: ConsonantReleaseDiacritics?=null,
+                      val syllabicityDiacritics: SyllabicityDiacritics?=null,
+                      val coarticulationDiacritics: CoarticulationDiacritics?=null,
+                      val phonationDiacritics: PhonationDiacritics?=null,
+                      val articulationDiacritics: ArticulationDiacritics?=null)

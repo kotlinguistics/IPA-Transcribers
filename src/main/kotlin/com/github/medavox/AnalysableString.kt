@@ -4,6 +4,10 @@ package com.github.medavox
 class AnalysableString(val string:String, initialCursorPosition:Int=0) {
     var cursor = initialCursorPosition
 
+    val c:Char get(){
+        return string[cursor]
+    }
+
     /**Check that the substring matches this and enough following characters.
      * If this Analysable doesn't have that many letters, it returns false anyway.*/
     fun nextLettersMatch(other:String):Boolean {

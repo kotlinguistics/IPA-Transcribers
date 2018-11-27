@@ -1,8 +1,6 @@
 package com.github.medavox.ipa_transcribers
 
 import com.github.medavox.AnalysableString
-import com.github.medavox.fur
-import java.lang.IllegalArgumentException
 import java.lang.StringBuilder
 
 /**Spanish spelling is largely considered phonetic.
@@ -12,14 +10,10 @@ import java.lang.StringBuilder
  *
  * So I'll try to write my own.*/
 class SpanishIpaRuleBased: IpaTranscriber {
+    //the 'transcripcon' problem - does the voicedness of n bleed over onto s AND c?
+    //todo: account for voicing assimilation
     /**Maps >=1 characters to 1 IPA character. It's a string because diacritics count as extra characters
      *
-
-    3.  D is pronounced /d/ when it occurs at the beginning of an utterance
-    or after n or l (digo /′diƔo/, anda /′anda/, el dueño /el′dweɲo/)
-    and /ð/ in all other contexts (hada /′aða/, arde /′arðe/, los dados /loz′ðaðos/).
-    It is often not pronounced at all at the end of a word (libertad /liβer′ta(ð)/,
-    Madrid /ma′ðri(ð)/).
 
     7.  LL The pronunciation of ll varies greatly throughout the Spanish-speaking world.
 
@@ -49,7 +43,8 @@ class SpanishIpaRuleBased: IpaTranscriber {
     13.  X is pronounced /ks/, although there is a marked tendency to render it as /s/ before consonants,
     especially in less careful speech (extra /′ekstra/, /′estra/, or in some dialects /′ehtra/, see 11 above).
 
-    In some words derived from Nahuatl and other Indian languages it is pronounced /x/ (México /′mexiko/) and in others it is pronounced /s/ (Xochlmllco /sotʃi′milko/).
+    In some words derived from Nahuatl and other Indian languages it is pronounced /x/ (México /′mexiko/)
+    and in others it is pronounced /s/ (Xochlmllco /sotʃi′milko/).
 
     14.  Y (a) When followed by a vowel within the same syllable y is pronounced rather like the y in English yes
     (slightly more emphatically when at the beginning of an utterance).
@@ -69,7 +64,8 @@ class SpanishIpaRuleBased: IpaTranscriber {
      *  Eg in English: th sh ch*/
     val digraphs:Map<Char, Map<String, String>> = mapOf()
     override fun transcribeToIpa(nativeText: String): Set<Variant> {
-        val output = StringBuilder().append('/')
+        val american = StringBuilder().append('/')
+        val european = StringBuilder().append('/')
         val word = AnalysableString(nativeText.toLowerCase(), 0)
 
         while(word.cursor < word.string.length) {
@@ -78,7 +74,7 @@ class SpanishIpaRuleBased: IpaTranscriber {
                 //8. Ñ is always pronounced /ŋ/
                 word.c == 'ñ' ->  "ɲ"
 
-                //5.  H is mute in Spanish, (huevo /′ weβo/, almohada /almo′aða/) except in the combination ch, which is pronounced /tʃ/ (chico /′tʃiko/, leche /′letʃe/).
+                //5.  H is mute in Spanish, (huevo /′ weβo/, almohada /almo′aða/)
                 word.c == 'h' -> ""
 
                 //1.  B,V The letters b and v are pronounced in exactly the same way:
@@ -105,7 +101,7 @@ class SpanishIpaRuleBased: IpaTranscriber {
                 word.nextLettersMatch("nk") ||
                 word.nextLettersMatch("ng")-> {
                     //make n into m before b/v
-                        "ŋk"
+                        "ŋ"
                 }
 
                 //2.  C is pronounced /k/ when followed by a consonant other than h or by a, o or u
@@ -117,8 +113,9 @@ class SpanishIpaRuleBased: IpaTranscriber {
                 word.c == 'c' -> {
                     if (word.nextLettersMatch("ci") ||
                             word.nextLettersMatch("ce")) {
-                        "s"
+                        "θ|s"
                     } else if (word.nextLettersMatch("ch")) {//digraph
+                        //the combination 'ch' is pronounced /tʃ/ (chico /′tʃiko/, leche /′letʃe/).
                         word.cursor++
                         "tʃ"
                     } else {
@@ -152,7 +149,7 @@ class SpanishIpaRuleBased: IpaTranscriber {
                 }
 
                 //15.  Z is pronounced /s/ in Latin America and parts of southern Spain and /θ/ in the rest of Spain.
-                word.c == 'z' -> "s"
+                word.c == 'z' -> "θ|s"
 
                 //The double consonant rr is always pronounced /rr/.
                 //the letter /r/ represents the trilled r in IPA
@@ -175,13 +172,44 @@ class SpanishIpaRuleBased: IpaTranscriber {
                     "ki"
                 }
 
+                //3.  D is pronounced /d/ when it occurs at the beginning of an utterance
+                //or after n or l (digo /′diƔo/, anda /′anda/, el dueño /el′dweɲo/)
+                //and /ð/ in all other contexts (hada /′aða/, arde /′arðe/, los dados /loz′ðaðos/).
+                //It is often not pronounced at all at the end of a word (libertad /liβer′ta(ð)/,
+                //Madrid /ma′ðri(ð)/).
+                word.c == 'd' -> {
+                    if(word.cursor == 0) {
+                        "d"
+                    }else if(word.lastLettersMatch("nd") ||
+                        word.lastLettersMatch("ld")) {
+                        "d"
+                    }else {
+                        "ð"
+                    }
+                }
+
                 //there are no special rules for this native-orthography-letter; it is literally spelled as pronounced.
                 //just copy it to the output
                 else -> word.c.toString()
             }
+            if(next.contains("|")) {
+                //there's a difference in pronunciation between european and american spanish
+                //european on the left, american on the right of the pipe
+                val variants = next.split("|")
+                european.append(variants[0])
+                american.append(variants[1])
+            }
+            else{//otherwise, they're the same
+                american.append(next)
+                european.append(next)
+            }
             word.cursor++
-            output.append(next)
         }
-    return setOf(Variant("", output.append('/').toString()))
+
+        american.append('/')
+        european.append('/')
+    return setOf(
+        Variant("american", american.toString()),
+        Variant("Peninsular", european.toString())    )
     }
 }

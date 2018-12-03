@@ -12,8 +12,32 @@ import java.lang.StringBuilder
 class SpanishIpaRuleBased: IpaTranscriber {
     //the 'transcripcon' problem - does the voicedness of n bleed over onto s AND c?
     //todo: account for voicing assimilation
-    /**Maps >=1 characters to 1 IPA character. It's a string because diacritics count as extra characters
-     *
+    /**Maps >=1 characters to 1 IPA character. It's a string because diacritics count as extra characters.
+
+     METHODOLOGY
+    ============
+
+    all "before" and "after" rules cn be encoded here as digraphs,
+    even if this produces a lot of rules (eg, before a voiced consonant).
+
+    It's still simpler than creating an entire IPA-structure in code,
+    to look back at the voicedness of the last (or next) letter.
+
+    Digraphs require less code, but more rules.
+
+    We do however need to be able to distinguish Spanish syllable boundaries,
+    for two reasons:
+
+    1. Some rules are encoded as syllable-final or syllable-initial.
+     We need to know what part of the current syllable we're at.
+
+    2. Barring words that have specific accent-markers, Spanish word stress has rules along the lines of falling
+    on the final or pentultimate syllable.
+    We need to know which syllable of the word we're on, so we know which one to mark for stress in the IPA.
+
+    (having looked at the rules for syllabifiication in Spanish, we don't need the Spanish sonority hierarchy.)
+
+    -------
 
     7.  LL The pronunciation of ll varies greatly throughout the Spanish-speaking world.
 
@@ -28,9 +52,11 @@ class SpanishIpaRuleBased: IpaTranscriber {
     the air escaping through narrow channels on either side.
     (The nearest sound in English would be that of lli in million).
 
-    (c) In the River Plate area ll is pronounced /Ʒ/ (as in English measure), with some speakers using a sound which tends toward /ʃ / (as in shop).
+    (c) In the River Plate area ll is pronounced /Ʒ/ (as in English measure),
+    with some speakers using a sound which tends toward /ʃ / (as in shop).
 
-    When phonetic transcriptions of Spanish headwords containing ll are given in the dictionary, the symbol /J/ is used to represent the range of pronunciations described above.
+    When phonetic transcriptions of Spanish headwords containing ll are given in the dictionary,
+    the symbol /J/ is used to represent the range of pronunciations described above.
 
     10.  R is pronounced /r/ when it occurs between vowels or in syllable-final position (aro /′aro/, horma /′orma/, barco /′barko/, cantar /kan′tar/).
     It is pronounced /rr/ when in initial position (rama /′rrama/, romper /rrom′per/).
@@ -61,155 +87,114 @@ class SpanishIpaRuleBased: IpaTranscriber {
     /**Maps the first character of digraphs to all the possible rules it could represent,
      * if it forms a digraph with the next character.
      *  Digraphs are orthographical combos, usually two letters, that together represent one sound.
-     *  Eg in English: th sh ch*/
+     *  Eg in English: th sh ch.
+     *  */
     val digraphs:Map<Char, Map<String, String>> = mapOf()
     override fun transcribeToIpa(nativeText: String): Set<Variant> {
         val american = StringBuilder().append('/')
         val european = StringBuilder().append('/')
         val word = AnalysableString(nativeText.toLowerCase(), 0)
 
-        while(word.cursor < word.string.length) {
-            //System.out.println("i:$i")
-            val next:String = when {
-                //8. Ñ is always pronounced /ŋ/
-                word.c == 'ñ' ->  "ɲ"
+        //NOTE:rule order matters!
+        data class RuleOutput(val outputString:String, val lettersConsumed:Int=1)
+        data class Rule(val matcher:Regex, val replacement: () -> RuleOutput )
+        val rules:Array<Rule> = arrayOf(
+            //8. Ñ is always pronounced /ŋ/
+            Rule(Regex("ñ")) {RuleOutput("ɲ")},
+            //5.  H is mute in Spanish, (huevo /′ weβo/, almohada /almo′aða/)
+            Rule(Regex("h")) {RuleOutput("")},
+            Rule(Regex("(mb|mv|nb|nv)")) {RuleOutput("mb", 2)},
+            Rule(Regex("^(b|v)")) {RuleOutput("b")},
+            //1.  B,V The letters b and v are pronounced in exactly the same way:
+            //    /b/ when at the beginning of an utterance or after m or n (barco/′barko/, vaca/′baka/, ambos /′ambos/, en vano /em′bano/)
+            // and /β/ in all other contexts (rabo /′rraβo/, ave /′aβe/, árbol /′arβol/, Elvira /el′βira/).
 
-                //5.  H is mute in Spanish, (huevo /′ weβo/, almohada /almo′aða/)
-                word.c == 'h' -> ""
+            Rule(Regex("(b|v)")) {RuleOutput("β")},
+            Rule(Regex("(ng|nk)")) {RuleOutput("ŋ")},
 
-                //1.  B,V The letters b and v are pronounced in exactly the same way:
-                //    /b/ when at the beginning of an utterance or after m or n (barco/′barko/, vaca/′baka/, ambos /′ambos/, en vano /em′bano/)
-                // and /β/ in all other contexts (rabo /′rraβo/, ave /′aβe/, árbol /′arβol/, Elvira /el′βira/).
+            //the combination 'ch' is pronounced /tʃ/ (chico /′tʃiko/, leche /′letʃe/).
+            Rule(Regex("ch")) {RuleOutput("tʃ", 2)},
+            // When c is followed by e or i,
+            // it is pronounced /s/ in Latin America and parts of southern Spain and /θ/ in the rest of Spain
+            // (cero /′sero/, /′θero/; cinco /′siŋko/, /′θiŋko/).
+            Rule(Regex("c(i|e)")) {RuleOutput("θ|s")},
+            //2.  C is pronounced /k/ when followed by a consonant other than h or by a, o or u
+            Rule(Regex("c")) {RuleOutput("k")},
 
-                word.nextLettersMatch("mb") ||
-                word.nextLettersMatch("mv") ||
-                word.nextLettersMatch("nb") ||
-                word.nextLettersMatch("nv") -> {
-                    word.cursor++
-                    "mb"
-                }
+            //15.  Z is pronounced /s/ in Latin America and parts of southern Spain and /θ/ in the rest of Spain.
+            Rule(Regex("z")) {RuleOutput("θ|s")},
 
-                word.c == 'b' || word.c == 'v' -> {
-                    if (word.cursor == 0 ) {
-                        "b"
-                    } else {
-                        "β"
+            //9.  Q is always followed by ue or ui.
+            // It is pronounced /K/, and the u is silent (quema /′kema/, quiso /′kiso/).
+            Rule(Regex("que")) {RuleOutput("ke", 3)},
+            Rule(Regex("qui")) {RuleOutput("ki", 3)},
+
+            //3.  D is pronounced /d/ when it occurs at the beginning of an utterance
+            //or after n or l (digo /′diƔo/, anda /′anda/, el dueño /el′dweɲo/)
+            //and /ð/ in all other contexts (hada /′aða/, arde /′arðe/, los dados /loz′ðaðos/).
+            //It is often not pronounced at all at the end of a word (libertad /liβer′ta(ð)/,
+            //Madrid /ma′ðri(ð)/).
+            Rule(Regex("^d")) {RuleOutput("d")},
+            //todo: match this rule across word boundaries
+            Rule(Regex("ld")) {RuleOutput("ld", 2)},
+            Rule(Regex("nd")) {RuleOutput("nd", 2)},
+            Rule(Regex("d")) {RuleOutput("ð")},
+
+            //6.  J is always pronounced /x/ (jamón /xa′mon/, jefe /′xefe/).
+            Rule(Regex("j")) {RuleOutput("x")},
+
+            //4.  G is pronounced /x/ when followed by e or i (gitano /xi′tano/, auge /′awxe/).
+            Rule(Regex("g[ie]")) {RuleOutput("x")},
+            // Note that the u is not pronounced in the combinations gue and gui,
+            Rule(Regex("(^|n)gui")) {RuleOutput("gi", 3)},
+            Rule(Regex("(^|n)gue")) {RuleOutput("ge", 3)},
+            // When followed by a, o, u, ue or ui it is pronounced /g/ if at the beginning of an utterance or after n
+            // (gato /′gato/, gula/′gula/, tango /′taŋgo/, guiso /′giso/)
+            Rule(Regex("(^|n)g[aou]")) {RuleOutput("g")},
+            // and /Ɣ/ in all other contexts (hago /′aƔo/, trague /′traƔe/, alga /′alƔa/, águila /′aƔila/).
+            Rule(Regex("g")) {RuleOutput("Ɣ")},
+            // unless it is written with a diaeresis (paragüero /para′Ɣwero/, agüita /a′Ɣwita/).
+            Rule(Regex("güi")) {RuleOutput("Ɣwi", 3)},
+            Rule(Regex("güe")) {RuleOutput("Ɣwe", 3)},
+
+            //The double consonant rr is always pronounced /rr/.
+            //the letter /r/ represents the trilled r in IPA
+            Rule(Regex("rr")) {RuleOutput("r", 2)},
+
+        )
+
+        var processingWord = nativeText
+        loop@ while(processingWord.isNotEmpty()) {
+            for (i in 0 until rules.size) {
+                if(rules[i].matcher.matches(processingWord)) {
+                    val result = rules[i].replacement()
+                    if(result.outputString.contains("|")) {
+                        //there's a difference in pronunciation between european and american spanish
+                        //european on the left, american on the right of the pipe
+                        val variants = result.outputString.split("|")
+                        european.append(variants[0])
+                        american.append(variants[1])
                     }
-                }
-
-
-                word.nextLettersMatch("nk") ||
-                word.nextLettersMatch("ng")-> {
-                    //make n into m before b/v
-                        "ŋ"
-                }
-
-                //2.  C is pronounced /k/ when followed by a consonant other than h or by a, o or u
-                // (acto/′akto/, casa/′kasa/, coma /′koma/, cupo /′kupo/).
-
-                // When it is followed by e or i,
-                // it is pronounced /s/ in Latin America and parts of southern Spain and /θ/ in the rest of Spain
-                // (cero /′sero/, /′θero/; cinco /′siŋko/, /′θiŋko/).
-                word.c == 'c' -> {
-                    if (word.nextLettersMatch("ci") ||
-                            word.nextLettersMatch("ce")) {
-                        "θ|s"
-                    } else if (word.nextLettersMatch("ch")) {//digraph
-                        //the combination 'ch' is pronounced /tʃ/ (chico /′tʃiko/, leche /′letʃe/).
-                        word.cursor++
-                        "tʃ"
-                    } else {
-                        "k"
+                    else{//otherwise, they're the same
+                        american.append(result.outputString)
+                        european.append(result.outputString)
                     }
+
+                    processingWord = processingWord.substring(result.lettersConsumed)
+                    continue@loop
                 }
-
-                //4.  G is pronounced /x/ when followed by e or i (gitano /xi′tano/, auge /′awxe/).
-                // When followed by a, o, u, ue or ui
-                // if at the beginning of an utterance or after n, it is pronounced /g/
-                // (gato /′gato/, gula/′gula/, tango /′taŋgo/, guiso /′giso/)
-                // and /Ɣ/ in all other contexts (hago /′aƔo/, trague /′traƔe/, alga /′alƔa/, águila /′aƔila/).
-                //
-                // Note that the u is not pronounced in the combinations gue and gui,
-                // unless it is written with a diaeresis (paragüero /para′Ɣwero/, agüita /a′Ɣwita/).
-                word.c == 'g' -> {
-                    if (word.nextLettersMatch("gi") ||
-                        word.nextLettersMatch("ge")
-                    ) {
-                        "x"
-                    }else if(word.nextLettersMatch("gui") ||
-                        word.nextLettersMatch("gue")) {
-                        word.cursor++
-                        "g"
-                    }else if(word.cursor == 0 || word.lastLettersMatch("ng")) {
-                        "g"
-                    }
-                    else {
-                        "Ɣ"
-                    }
-                }
-
-                //15.  Z is pronounced /s/ in Latin America and parts of southern Spain and /θ/ in the rest of Spain.
-                word.c == 'z' -> "θ|s"
-
-                //The double consonant rr is always pronounced /rr/.
-                //the letter /r/ represents the trilled r in IPA
-                word.nextLettersMatch("rr") -> {
-                    word.cursor++
-                    "r"
-                }
-
-                //6.  J is always pronounced /x/ (jamón /xa′mon/, jefe /′xefe/).
-                word.c == 'j' -> "x"
-
-                //9.  Q is always followed by ue or ui.
-                // It is pronounced /K/, and the u is silent (quema /′kema/, quiso /′kiso/).
-                word.nextLettersMatch("que") -> {
-                    word.cursor++
-                    "ke"
-                }
-                word.nextLettersMatch("qui") -> {
-                    word.cursor++
-                    "ki"
-                }
-
-                //3.  D is pronounced /d/ when it occurs at the beginning of an utterance
-                //or after n or l (digo /′diƔo/, anda /′anda/, el dueño /el′dweɲo/)
-                //and /ð/ in all other contexts (hada /′aða/, arde /′arðe/, los dados /loz′ðaðos/).
-                //It is often not pronounced at all at the end of a word (libertad /liβer′ta(ð)/,
-                //Madrid /ma′ðri(ð)/).
-                word.c == 'd' -> {
-                    if(word.cursor == 0) {
-                        "d"
-                    }else if(word.lastLettersMatch("nd") ||
-                        word.lastLettersMatch("ld")) {
-                        "d"
-                    }else {
-                        "ð"
-                    }
-                }
-
-                //there are no special rules for this native-orthography-letter; it is literally spelled as pronounced.
+                //no rule matched; the spanish orthography matches the IPA.
                 //just copy it to the output
-                else -> word.c.toString()
+                american.append(processingWord[0])
+                european.append(processingWord[0])
+                processingWord = processingWord.substring(1)
             }
-            if(next.contains("|")) {
-                //there's a difference in pronunciation between european and american spanish
-                //european on the left, american on the right of the pipe
-                val variants = next.split("|")
-                european.append(variants[0])
-                american.append(variants[1])
-            }
-            else{//otherwise, they're the same
-                american.append(next)
-                european.append(next)
-            }
-            word.cursor++
         }
 
         american.append('/')
         european.append('/')
     return setOf(
-        Variant("american", american.toString()),
+        Variant("American", american.toString()),
         Variant("Peninsular", european.toString())    )
     }
 }

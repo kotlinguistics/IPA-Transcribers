@@ -1,6 +1,5 @@
 package com.github.medavox.ipa_transcribers
 
-import com.github.medavox.AnalysableString
 import java.lang.StringBuilder
 
 /**Spanish spelling is largely considered phonetic.
@@ -63,11 +62,9 @@ class SpanishIpaRuleBased: IpaTranscriber {
      *  Digraphs are orthographical combos, usually two letters, that together represent one sound.
      *  Eg in English: th sh ch.
      *  */
-    val digraphs:Map<Char, Map<String, String>> = mapOf()
     override fun transcribeToIpa(nativeText: String): Set<Variant> {
         val american = StringBuilder().append('/')
         val european = StringBuilder().append('/')
-        val word = AnalysableString(nativeText.toLowerCase(), 0)
 
         //NOTE:rule order matters!
         data class Rule(val matcher:Regex, val outputString:String, val lettersConsumed:Int=1 )
@@ -161,7 +158,7 @@ class SpanishIpaRuleBased: IpaTranscriber {
             Rule(Regex("ll"), "ʎ|ʝ")
         )
 
-        var processingWord = nativeText
+        var processingWord = nativeText.toLowerCase()
         loop@ while(processingWord.isNotEmpty()) {
             for (i in 0 until rules.size) {
                 if(rules[i].matcher.matches(processingWord)) {

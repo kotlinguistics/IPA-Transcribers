@@ -80,7 +80,7 @@ class SpanishIpaRuleBased: IpaTranscriber {
             // and /β/ in all other contexts (rabo /′rraβo/, ave /′aβe/, árbol /′arβol/, Elvira /el′βira/).
 
             Rule(Regex("(b|v)"), "β"),
-            Rule(Regex("(ng|nk)"), "ŋ"),
+            Rule(Regex("(ng|nk|nc)"), "ŋ"),
 
             //the combination 'ch' is pronounced /tʃ/ (chico /′tʃiko/, leche /′letʃe/).
             Rule(Regex("ch"), "tʃ", 2),
@@ -155,13 +155,15 @@ class SpanishIpaRuleBased: IpaTranscriber {
 
             //When phonetic transcriptions of Spanish headwords containing ll are given in the dictionary,
             //the symbol /J/ is used to represent the range of pronunciations described above.
-            Rule(Regex("ll"), "ʎ|ʝ")
+            Rule(Regex("ll"), "ʎ|ʝ", 2)
         )
 
         var processingWord = nativeText.toLowerCase()
         loop@ while(processingWord.isNotEmpty()) {
             for (i in 0 until rules.size) {
-                if(rules[i].matcher.matches(processingWord)) {
+                //if the rule matches the start of the remaining string
+                if(rules[i].matcher.find(processingWord)?.range?.start == 0) {
+                    System.out.println("rule '${rules[i]}' matches '$processingWord'")
                     if(rules[i].outputString.contains("|")) {
                         //there's a difference in pronunciation between european and american spanish
                         //european on the left, american on the right of the pipe
@@ -177,12 +179,12 @@ class SpanishIpaRuleBased: IpaTranscriber {
                     processingWord = processingWord.substring(rules[i].lettersConsumed)
                     continue@loop
                 }
-                //no rule matched; the spanish orthography matches the IPA.
-                //just copy it to the output
-                american.append(processingWord[0])
-                european.append(processingWord[0])
-                processingWord = processingWord.substring(1)
             }
+            //no rule matched; the spanish orthography matches the IPA.
+            //just copy it to the output
+            american.append(processingWord[0])
+            european.append(processingWord[0])
+            processingWord = processingWord.substring(1)
         }
 
         american.append('/')

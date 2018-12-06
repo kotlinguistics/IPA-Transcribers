@@ -7,12 +7,16 @@ import java.lang.StringBuilder
  * (with all the varying dialects), but it does mean that there aren't many IPA transcription
  * engines for spanish out there.
  *
- * So I'll try to write my own.*/
+ * So I'll try to write my own.
+ *
+ * Pronunciation Information sourced from:-
+ * * [Oxford Dictionary Spanish Pronunciation Guide](https://es.oxforddictionaries.com/grammar/spanish-pronunciation)]
+ * * [Wikipedia's IPA for Spanish](https://en.wikipedia.org/wiki/Help:IPA/Spanish)
+ * */
 class SpanishIpaRuleBased: IpaTranscriber {
     //the 'transcripcon' problem - does the voicedness of n bleed over onto s AND c?
     //todo: account for voicing assimilation
-    /**Maps >=1 characters to 1 IPA character. It's a string because diacritics count as extra characters.
-
+    /**
      METHODOLOGY
     ============
 
@@ -296,7 +300,7 @@ class SpanishIpaRuleBased: IpaTranscriber {
             for (i in 0 until rules.size) {
                 //if the rule matches the start of the remaining string
                 if(rules[i].matcher.find(processingWord)?.range?.start == 0) {
-                    System.out.println("rule '${rules[i]}' matches '$processingWord'")
+                    //System.out.println("rule '${rules[i]}' matches '$processingWord'")
                     if(rules[i].outputString.contains("|")) {
                         //there's a difference in pronunciation between european and american spanish
                         //european on the left, american on the right of the pipe

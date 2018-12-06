@@ -169,20 +169,21 @@ class SpanishIpaRuleBased: IpaTranscriber {
             //5.  H is mute in Spanish, (huevo /′ weβo/, almohada /almo′aða/)
             Rule(Regex("h"), ""),
             Rule(Regex("(mb|mv|nb|nv)"), "mb", 2),
-            Rule(Regex("^(b|v)"), "b"),
+            Rule(Regex("^[bv]"), "b"),
             //1.  B,V The letters b and v are pronounced in exactly the same way:
             //    /b/ when at the beginning of an utterance or after m or n (barco/′barko/, vaca/′baka/, ambos /′ambos/, en vano /em′bano/)
             // and /β/ in all other contexts (rabo /′rraβo/, ave /′aβe/, árbol /′arβol/, Elvira /el′βira/).
 
-            Rule(Regex("(b|v)"), "β"),
-            Rule(Regex("(ng|nk|nc)"), "ŋ"),
+            Rule(Regex("[bv]"), "β"),
+            Rule(Regex("ng"), "ŋg", 2),
+            Rule(Regex("(nk|nc)"), "ŋ"),
 
             //the combination 'ch' is pronounced /tʃ/ (chico /′tʃiko/, leche /′letʃe/).
             Rule(Regex("ch"), "tʃ", 2),
             // When c is followed by e or i,
             // it is pronounced /s/ in Latin America and parts of southern Spain and /θ/ in the rest of Spain
             // (cero /′sero/, /′θero/; cinco /′siŋko/, /′θiŋko/).
-            Rule(Regex("c(i|e)"), "θ|s"),
+            Rule(Regex("c[ie]"), "θ|s"),
             //2.  C is pronounced /k/ when followed by a consonant other than h or by a, o or u
             Rule(Regex("c"), "k"),
 
@@ -211,11 +212,11 @@ class SpanishIpaRuleBased: IpaTranscriber {
             //4.  G is pronounced /x/ when followed by e or i (gitano /xi′tano/, auge /′awxe/).
             Rule(Regex("g[ie]"), "x"),
             // Note that the u is not pronounced in the combinations gue and gui,
-            Rule(Regex("(^|n)gui"), "gi", 3),//fixme:loss of n
-            Rule(Regex("(^|n)gue"), "ge", 3),//fixme:loss of n
             // When followed by a, o, u, ue or ui it is pronounced /g/ if at the beginning of an utterance or after n
             // (gato /′gato/, gula/′gula/, tango /′taŋgo/, guiso /′giso/)
-            Rule(Regex("(^|n)g[aou]"), "g"),//fixme:loss of n
+            Rule(Regex("^gui"), "gi", 3),
+            Rule(Regex("^gue"), "ge", 3),
+            Rule(Regex("^g[aou]"), "g"),
             // and /Ɣ/ in all other contexts (hago /′aƔo/, trague /′traƔe/, alga /′alƔa/, águila /′aƔila/).
             Rule(Regex("g"), "Ɣ"),
             // unless it is written with a diaeresis (paragüero /para′Ɣwero/, agüita /a′Ɣwita/).
@@ -250,7 +251,44 @@ class SpanishIpaRuleBased: IpaTranscriber {
 
             //When phonetic transcriptions of Spanish headwords containing ll are given in the dictionary,
             //the symbol /J/ is used to represent the range of pronunciations described above.
-            Rule(Regex("ll"), "ʎ|ʝ", 2)
+            Rule(Regex("ll"), "ʎ|ʝ", 2),
+
+
+            //Spanish has both strong vowels (a, e, o) and weak vowels (i, u).
+            //Here are some rules on how the combinations of these vowels are divided into syllables.
+
+            //Two weak vowels together form a diphthong and are not separated into different syllables.
+            ///wa/ 	cuadro 	picture
+            ///we/ 	fuego 	fire
+            ///wi/[62] 	buitre 	vulture
+            ///wo/ 	cuota 	quota
+            Rule(Regex("u[aeio]"), "w"),
+            ///ja/ 	hacia 	towards
+            ///je/ 	tierra 	earth
+            ///ju/ 	viuda 	widow
+            ///jo/ 	radio 	radio
+            Rule(Regex("i[aeou]"), "j"),
+
+            //A weak vowel and a strong vowel together form a diphthong and are not separated into different syllables.
+            //Two strong vowels together form a hiatus and are separated into different syllables. Example: Leo
+
+            //Falling
+            ///ai/ 	aire 	air
+            ///au/ 	pausa 	pause
+            ///ei/ 	rey 	king
+            Rule(Regex("ey"), "ei", 2),
+            ///eu/ 	neutro 	neutral
+            ///oi/ 	hoy 	today
+            Rule(Regex("oy"), "oi", 2)
+            ///ou/[61] 	bou 	seine fishing
+
+
+//syllables:
+        //we either need to be able to produce
+        //1. the number of syllablesin a word, the number of the current syllable we're in,
+        //and the position in the current syllable (onset, nucleus, coda). Or
+        //2. A list of ranges, that correspond to the start and end of each syllable,
+        //and something to tell whether a letter is eg syllable-final or not
         )
 
         var processingWord = nativeText.toLowerCase()

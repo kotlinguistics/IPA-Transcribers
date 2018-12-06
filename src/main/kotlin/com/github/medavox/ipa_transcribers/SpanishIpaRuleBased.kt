@@ -55,6 +55,101 @@ class SpanishIpaRuleBased: IpaTranscriber {
     When phonetic transcriptions of Spanish headwords containing y are given in the dictionary,
     the symbol /J/ is used to represent both pronunciations described above.
     (b) As the conjunction y and in syllable-final position, y is pronounced /i/.
+
+     ----------
+
+     Syllabification Rules
+     ====================
+
+     from [https://www.spanishdict.com/guide/spanish-syllables-and-syllabification-rules]
+
+     Consonant Plus Vowel
+     -------------------
+
+     Whenever possible, you should break up words so that each syllable contains a consonant followed by a vowel.
+     A consonant between two vowels belongs to the syllable with the second vowel.
+     The goal is to end a syllable with a vowel whenever possible.
+
+     Check out the syllabification of these common Spanish words.
+
+     Word    | Syllabification
+     --------|----------------
+     sábana  | sá-ba-na
+     gato    | ga-to
+     casa    | ca-sa
+     mano    | ma-no
+     oro     | o-ro
+     mesa    | me-sa
+
+     Two Consecutive Consonants
+     -------------------------
+
+     Two consecutive consonants will generally belong to separate syllables.
+     However, if the second consonant in a consonant pair is r or l,
+     the consonant pair is not separated into different syllables.
+
+     Words that begin with prefixes often violate the above rules.
+     For example the syllabification of enloquecer is en-lo-que-cer.
+
+     Check out the syllabification of these common Spanish words containing consecutive consonants.
+
+     Word       | Syllabification
+     -----------|----------------
+     cuando     | cuan-do
+     alcanzar   | al-can-zar
+     costa      | cos-ta
+     sombrilla  | som-bri-lla
+     clave      | cla-ve
+     trabajo    | tra-ba-jo
+     aplicar    | a-pli-car
+     frecuente  | fre-cuen-te
+     hecho      | he-cho
+     amarillo   | a-ma-ri-llo
+     carro      | ca-rro
+     merengue   | me-ren-gue
+
+     In Puerto Rico and most of Spain, the consonant cluster tl is divided into separate syllables.
+     For example, the syllabification of atlántico is at-lán-ti-co.
+
+     In other regions, such as Mexico and the Canary Islands of Spain,
+     the consonant cluster tl is not divided into separate syllables.
+     For example, the syllabification of atlántico is a-tlán-ti-co
+     and the syllabification of tlacuache (possum) is tla-cua-che.
+
+     Three Consecutive Consonants
+     ---------------------------
+
+     When three consonants appear together, the first one will generally belong to a separate syllable.
+
+     Check out the syllabification of these words with three consecutive consonants.
+
+     Word       | Syllabification
+     -----------|----------------
+     inglés     | in-glés
+     compresar  | com-pre-sar
+     panfleto   | pan-fle-to
+     ombligo    | om-bli-go
+     constante  | cons-tan-te
+
+     Strong and Weak Vowels
+     ----------
+
+
+     A tilde placed over a letter changes the above pronunciation rules,
+     and the accented letter must be separated from any surrounding vowels. Example: mío
+
+     Check out the syllabification of these words containing groups of vowels.
+
+     Word    | Syllabification
+     --------|---------------
+     toalla  | to-a-lla
+     feo     | fe-o
+     iguana  | i-gua-na
+     reina   | rei-na
+     tío     | tí-o
+     ciudad  | ciu-dad
+     creer   | cre-er
+
      */
 
     /**Maps the first character of digraphs to all the possible rules it could represent,

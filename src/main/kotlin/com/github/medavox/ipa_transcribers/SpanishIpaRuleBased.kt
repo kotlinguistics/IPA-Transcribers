@@ -12,6 +12,7 @@ import java.lang.StringBuilder
  * Pronunciation Information sourced from:-
  * * [Oxford Dictionary Spanish Pronunciation Guide](https://es.oxforddictionaries.com/grammar/spanish-pronunciation)]
  * * [Wikipedia's IPA for Spanish](https://en.wikipedia.org/wiki/Help:IPA/Spanish)
+ * * [Wikipedia:Spanish Orthography](https://en.wikipedia.org/wiki/Spanish_orthography)
  * */
 class SpanishIpaRuleBased: IpaTranscriber {
     //the 'transcripcon' problem - does the voicedness of n bleed over onto s AND c?
@@ -289,7 +290,7 @@ class SpanishIpaRuleBased: IpaTranscriber {
 
 //syllables:
         //we either need to be able to produce
-        //1. the number of syllablesin a word, the number of the current syllable we're in,
+        //1. the number of syllables in a word, the number of the current syllable we're in,
         //and the position in the current syllable (onset, nucleus, coda). Or
         //2. A list of ranges, that correspond to the start and end of each syllable,
         //and something to tell whether a letter is eg syllable-final or not

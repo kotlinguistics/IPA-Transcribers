@@ -331,4 +331,74 @@ class SpanishIpaRuleBased: IpaTranscriber {
         Variant("American", american.toString()),
         Variant("Peninsular", european.toString())    )
     }
+/*
+    val String.syllableBoundaries:Array<IntRange> get() {
+        enum class Syllable
+        val word = toLowerCase()
+        val validVowels = "aeiouáéíóúü"
+        val validConsonants = "bcdfghjklmnñpqrstuvwxyz"
+        if(word.contains(Regex("[^$validVowels$validConsonants ]"))) {
+            throw IllegalArgumentException("input must only contain valid spanish characters")
+        }
+
+    }
+
+    val String.stressedSyllable:Int get() {
+
+    }
+    */
+    data class SyllabifierResults(val N:String, val T:String)
+    /**Adapted from the 2004 paper
+     * "A Syllabification Algorithm for Spanish" by Heriberto Cuayáhuitl.*/
+    fun syllabifier(s:String): SyllabifierResults {
+        val prefixes = arrayOf<String>()
+        val vowels = "aeiou"
+        val accentedVowels = "áéíóú"
+        val consonants = "bcdfghjklmnñpqrstuvwxyz"
+        val strongVowels = "aeo"
+        val weakAccentedVowels = "íú"
+        var N:String = ""
+        var T:String = ""
+        var preIndex = 0
+
+        for(prefix in prefixes) {
+            if(s.contains(prefix)) {
+                N = prefix+"-"
+                preIndex = prefix.length
+                break
+            }
+        }
+
+        for(i in preIndex until s.length) {
+
+            if( ( (s[i-1] in strongVowels || s[i-1] in weakAccentedVowels) && s[i] in strongVowels ) ||
+                (s[i-1] in vowels && s[i] in weakAccentedVowels) ) {
+                N += "-"
+                T = s[i].toString()
+                continue
+            }
+
+            if((s[i] in consonants && s[i+1] in vowels) ||
+                (s[i+1] in accentedVowels && T.isNotEmpty()) ) {
+                if(s[i] in "lr" && s[i-1] in consonants) {
+                    if(i > 1) {
+                        T = T //?? "T = T[k], for all 0 <= k <= R.length-1"
+                        N += T+"-"
+                        T = String(charArrayOf(s[i-1], s[i]))
+                    }
+                    else {
+                        T += s[i]
+                    }
+                }
+                else {
+                    N += T+"-"
+                    T = s[i].toString()
+                }
+            }
+            else {
+                T += s[i]
+            }
+        }
+        return SyllabifierResults(N, T)
+    }
 }

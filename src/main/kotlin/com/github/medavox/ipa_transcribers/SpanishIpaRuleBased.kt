@@ -61,100 +61,6 @@ class SpanishIpaRuleBased: IpaTranscriber {
     the symbol /J/ is used to represent both pronunciations described above.
     (b) As the conjunction y and in syllable-final position, y is pronounced /i/.
 
-     ----------
-
-     Syllabification Rules
-     ====================
-
-     from [https://www.spanishdict.com/guide/spanish-syllables-and-syllabification-rules]
-
-     Consonant Plus Vowel
-     -------------------
-
-     Whenever possible, you should break up words so that each syllable contains a consonant followed by a vowel.
-     A consonant between two vowels belongs to the syllable with the second vowel.
-     The goal is to end a syllable with a vowel whenever possible.
-
-     Check out the syllabification of these common Spanish words.
-
-     Word    | Syllabification
-     --------|----------------
-     sábana  | sá-ba-na
-     gato    | ga-to
-     casa    | ca-sa
-     mano    | ma-no
-     oro     | o-ro
-     mesa    | me-sa
-
-     Two Consecutive Consonants
-     -------------------------
-
-     Two consecutive consonants will generally belong to separate syllables.
-     However, if the second consonant in a consonant pair is r or l,
-     the consonant pair is not separated into different syllables.
-
-     Words that begin with prefixes often violate the above rules.
-     For example the syllabification of enloquecer is en-lo-que-cer.
-
-     Check out the syllabification of these common Spanish words containing consecutive consonants.
-
-     Word       | Syllabification
-     -----------|----------------
-     cuando     | cuan-do
-     alcanzar   | al-can-zar
-     costa      | cos-ta
-     sombrilla  | som-bri-lla
-     clave      | cla-ve
-     trabajo    | tra-ba-jo
-     aplicar    | a-pli-car
-     frecuente  | fre-cuen-te
-     hecho      | he-cho
-     amarillo   | a-ma-ri-llo
-     carro      | ca-rro
-     merengue   | me-ren-gue
-
-     In Puerto Rico and most of Spain, the consonant cluster tl is divided into separate syllables.
-     For example, the syllabification of atlántico is at-lán-ti-co.
-
-     In other regions, such as Mexico and the Canary Islands of Spain,
-     the consonant cluster tl is not divided into separate syllables.
-     For example, the syllabification of atlántico is a-tlán-ti-co
-     and the syllabification of tlacuache (possum) is tla-cua-che.
-
-     Three Consecutive Consonants
-     ---------------------------
-
-     When three consonants appear together, the first one will generally belong to a separate syllable.
-
-     Check out the syllabification of these words with three consecutive consonants.
-
-     Word       | Syllabification
-     -----------|----------------
-     inglés     | in-glés
-     compresar  | com-pre-sar
-     panfleto   | pan-fle-to
-     ombligo    | om-bli-go
-     constante  | cons-tan-te
-
-     Strong and Weak Vowels
-     ----------
-
-
-     A tilde placed over a letter changes the above pronunciation rules,
-     and the accented letter must be separated from any surrounding vowels. Example: mío
-
-     Check out the syllabification of these words containing groups of vowels.
-
-     Word    | Syllabification
-     --------|---------------
-     toalla  | to-a-lla
-     feo     | fe-o
-     iguana  | i-gua-na
-     reina   | rei-na
-     tío     | tí-o
-     ciudad  | ciu-dad
-     creer   | cre-er
-
      */
 
     /**Maps the first character of digraphs to all the possible rules it could represent,
@@ -162,7 +68,7 @@ class SpanishIpaRuleBased: IpaTranscriber {
      *  Digraphs are orthographical combos, usually two letters, that together represent one sound.
      *  Eg in English: th sh ch.
      *  */
-    override fun transcribeToIpa(nativeText: String): Set<Variant> {
+    override fun transcribeToIpa(input: String): Set<Variant> {
         val american = StringBuilder().append('/')
         val european = StringBuilder().append('/')
 
@@ -295,8 +201,7 @@ class SpanishIpaRuleBased: IpaTranscriber {
         //2. A list of ranges, that correspond to the start and end of each syllable,
         //and something to tell whether a letter is eg syllable-final or not
         )
-
-        var processingWord = nativeText.toLowerCase()
+        var processingWord = input.normalise()
         loop@ while(processingWord.isNotEmpty()) {
             for (i in 0 until rules.size) {
                 //if the rule matches the start of the remaining string
@@ -331,74 +236,17 @@ class SpanishIpaRuleBased: IpaTranscriber {
         Variant("American", american.toString()),
         Variant("Peninsular", european.toString())    )
     }
-/*
-    val String.syllableBoundaries:Array<IntRange> get() {
-        enum class Syllable
-        val word = toLowerCase()
-        val validVowels = "aeiouáéíóúü"
-        val validConsonants = "bcdfghjklmnñpqrstuvwxyz"
-        if(word.contains(Regex("[^$validVowels$validConsonants ]"))) {
-            throw IllegalArgumentException("input must only contain valid spanish characters")
-        }
 
-    }
-
-    val String.stressedSyllable:Int get() {
-
-    }
-    */
-    data class SyllabifierResults(val N:String, val T:String)
-    /**Adapted from the 2004 paper
-     * "A Syllabification Algorithm for Spanish" by Heriberto Cuayáhuitl.*/
-    fun syllabifier(s:String): SyllabifierResults {
-        val prefixes = arrayOf<String>()
-        val vowels = "aeiou"
-        val accentedVowels = "áéíóú"
-        val consonants = "bcdfghjklmnñpqrstuvwxyz"
-        val strongVowels = "aeo"
-        val weakAccentedVowels = "íú"
-        var N:String = ""
-        var T:String = ""
-        var preIndex = 0
-
-        for(prefix in prefixes) {
-            if(s.contains(prefix)) {
-                N = prefix+"-"
-                preIndex = prefix.length
-                break
-            }
-        }
-
-        for(i in preIndex until s.length) {
-
-            if( ( (s[i-1] in strongVowels || s[i-1] in weakAccentedVowels) && s[i] in strongVowels ) ||
-                (s[i-1] in vowels && s[i] in weakAccentedVowels) ) {
-                N += "-"
-                T = s[i].toString()
-                continue
-            }
-
-            if((s[i] in consonants && s[i+1] in vowels) ||
-                (s[i+1] in accentedVowels && T.isNotEmpty()) ) {
-                if(s[i] in "lr" && s[i-1] in consonants) {
-                    if(i > 1) {
-                        T = T //?? "T = T[k], for all 0 <= k <= R.length-1"
-                        N += T+"-"
-                        T = String(charArrayOf(s[i-1], s[i]))
-                    }
-                    else {
-                        T += s[i]
-                    }
-                }
-                else {
-                    N += T+"-"
-                    T = s[i].toString()
-                }
-            }
-            else {
-                T += s[i]
-            }
-        }
-        return SyllabifierResults(N, T)
+    /**Makes consistent the representation of spanish accented letters.
+     * That is, replaces letters with combined diacritic marks with single-character equivalents.*/
+    private fun String.normalise():String {
+        return this
+        .toLowerCase()
+            .replace(Regex("(ñ|̃n)"), "ñ")
+            .replace(Regex("(á|́a)"), "á")
+            .replace(Regex("(é|́e)"), "é")
+            .replace(Regex("(í|́i)"), "í")
+            .replace(Regex("(ó|́o)"), "ó")
+            .replace(Regex("(ú|́u)"), "ú")
     }
 }

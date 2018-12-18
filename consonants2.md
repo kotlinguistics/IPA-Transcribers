@@ -1,21 +1,14 @@
 Consonants
-Letter
-Context
-IPA
-Examples
-English approximation
+=========
 
 **b** or **v**
 --------
+
 word-initial after a pause, or after ⟨m⟩ or ⟨n⟩
 \[b\]
-**b**estia*; em**b**uste*; **v**aca*; en**v**idia*
+**b**estia; em**b**uste; **v**aca; en**v**idia
 
-elsewhere (i.e. after a vowel, even across a word boundary, or after any
-consonant other than ⟨m⟩ or ⟨n⟩)
-\[β\]
-be**b**é*; o**b**tuso*; vi**v**ir*; cur**v**a*; * mi **b**e**b**é*; * mi **v**aca*^[\[14\]](#cite_note-Approximant-14)^
-
+elsewhere (i.e. after a vowel, even across a word boundary, or after any consonant other than ⟨m⟩ or ⟨n⟩) | \[β\] | be**b**é; o**b**tuso; vi**v**ir; cur**v**a; mi **b**e**b**é; mi **v**aca
 
 
 **c**
@@ -23,14 +16,14 @@ be**b**é*; o**b**tuso*; vi**v**ir*; cur**v**a*; * mi **b**e**b**é*; * mi **v**
 
 before ⟨e⟩ or ⟨i⟩
 \[θ\]
-(central and northern Spain) or\
+(central and northern Spain) or
 \[s\]
-(most other regions)^[\[15\]](#cite_note-seseo-15)^
-***c**ereal*; * en**c**ima*
+(most other regions)
+**c**ereal; en**c**ima
 
 elsewhere
 \[k\]
-***c**asa*; ***c**laro*; * va**c**a*; * es**c**udo*
+**c**asa; **c**laro; * va**c**a*; * es**c**udo*
 
 before voiced consonants
 \[ɣ\]
@@ -40,7 +33,6 @@ ané**c**dota
 **ch**
 -----
 
-------
 everywhere^[\[16\]](#cite_note-16)^
 \[tʃ\]
 or \[ʃ\]
@@ -51,7 +43,6 @@ o**ch**o*; **ch**í**ch**aro*
 **d**
 -----
 
------
 word-initial after a pause, or after ⟨l⟩ or ⟨n⟩
 \[d\]
 ***d**edo*; * cuan**d**o*; * al**d**aba*
@@ -95,7 +86,7 @@ before ⟨a⟩ or ⟨o⟩, and either word-initial after a pause, or after ⟨n�
 
 before ⟨a⟩ or ⟨o⟩, and not in the above contexts
 \[ɣw\]
-* a**gu**a*; * averi**gu**ar*^[\[14\]](#cite_note-Approximant-14)^
+a**gu**a; averi**gu**ar
 
 before ⟨e⟩ or ⟨i⟩, and either word-initial after a pause, or after ⟨n⟩
 \[ɡ\]
@@ -121,16 +112,13 @@ before ⟨e⟩ or ⟨i⟩, and not in the above contexts
 -----
 
 everywhere
-(*silent*)^[\[17\]](#cite_note-17)^
-***h**oy*; ***h**acer*; * pro**h**ibir*; ***h**uevo*; ***h**ielo*
+(*silent*)
+**h**oy; **h**acer; pro**h**ibir; **h**uevo; **h**ielo
 
 everywhere; occurs in loanwords and foreign proper names
 \[x\]
 or \[h\]
-**h**ámster, **h**awaiano, **h**achís,
-* yi**h**ad*,
-***h**arakiri,
-Yoko**h**ama
+**h**ámster, **h**awaiano, **h**achís, yi**h**ad, **h**arakiri, Yoko**h**ama
 
 
 **hi**
@@ -197,7 +185,7 @@ or \[ŋ\]
 **n**
 -----
 
-* si**n***
+si**n***
 everywhere but before other consonants
 \[n\]
 ***n**ido*; * a**n**illo*; * a**n**helo*
@@ -269,7 +257,7 @@ i**s**la; mi**s**mo; de**s**de; de**s**huesar
 
 everywhere else
 \[s\]
-***s**aco*; * ca**s**a*; * de**s**hora*; * e**s**pita*^[\[22\]](#cite_note-debuccalize-22)^
+**s**aco; ca**s**a; de**s**hora; e**s**pita
 same as the typical English ⟨s⟩; ***s**a**ss***; in central and northern
 Spain, Paisa region of Colombia, and Andes, this
 sound is made with the tip of the tongue rather than the blade, with a
@@ -302,8 +290,6 @@ everywhere
 before voiced consonants
 \[ð\]
 * a**t**mósfera*
-same as the typical English voiced
-⟨th⟩; e.g. ***th**is*
 
 **tl**
 -----
@@ -312,7 +298,6 @@ rare; mostly in loanwords from Nahuatl
 \[tl\]
 or \[tɬ\]
 ***tl**apalería*; * cenzon**tl**e*; * Popocatépe**tl***
-similar to the combined ⟨tl⟩ sound in English *ca**t-l**ike*
 
 **tx**
 -----
@@ -320,7 +305,6 @@ similar to the combined ⟨tl⟩ sound in English *ca**t-l**ike*
 rare; from loanwords
 \[tʃ\]
 * pin**tx**o*
-same as "ch".
 
 **tz**
 -----
@@ -328,7 +312,6 @@ same as "ch".
 rare; from loanwords
 \[ts\]
 * que**tz**al*; * Pá**tz**cuaro*
-same as the "ts" in English *ca**ts***
 
 **w**
 -----
@@ -336,12 +319,10 @@ same as the "ts" in English *ca**ts***
 rare; in loanwords from English
 \[w\]
 ***w**aterpolo*
-**w**hen (sometimes turn to /gw/ or
-/bw/)^[\[18\]](#cite_note-spanish_w-18)^
+**w**hen (sometimes turns to /gw/ or /bw/)
 rare; in loanwords from German and in Visigothic names
-\[b\]^[1](#endnote_1)^
+\[b\]
 ***w**olframio*; ***W**amba*
-same as the typical English ⟨b⟩; e.g. ***b**i**b***
 
 **x**
 -----
@@ -363,7 +344,7 @@ in some words borrowed from Nahuatl, mostly place names, and in some
 Spanish proper names conserving archaic spelling
 \[x\]
 or \[h\]
-* Mé**x**ico*; * Oa**x**aca*; **x**iote; Te**x**as; La A**x**arquía; **X**imena; **X**iménez; Me**x**ía
+Mé**x**ico*; Oa**x**aca*; **x**iote; Te**x**as; La A**x**arquía; **X**imena; **X**iménez; Me**x**ía
 
 in some words from indigenous American languages, mostly place names
 \[ʃ\]
@@ -378,16 +359,14 @@ as a semivowel (almost always in a
 diphthong)
 \[i\]
 or \[j\]
-* ha**y***,
-* so**y***
+ha**y**,
+so**y**
 
 as a consonant
 \[j\],
 \[ʝ\],
 or \[dʒ\]
-***y**a*; ***y**elmo*; * a**y**uno*^[\[14\]](#cite_note-Approximant-14)^
-similar to the typical English ⟨y⟩, or ⟨j⟩ but softer; e.g. similar to
-***y**es* or ***J**ess*
+**y**a; **y**elmo; a**y**uno
 
 **z**
 -----

@@ -139,8 +139,7 @@ class SpanishIpaRuleBased: IpaTranscriber {
      \[ɣ\]
      si**gu**e
 
-      **gü**
-     ------
+⟨gü⟩
      before ⟨e⟩ or ⟨i⟩, and either word-initial after a pause, or after ⟨n⟩; but only in some dialects
      \[ɡw\]
 
@@ -227,9 +226,7 @@ class SpanishIpaRuleBased: IpaTranscriber {
       * e**n**yesar*\
       * ci**n**co*
 
-      **ñ**
-     -----
-
+⟨ñ⟩
      everywhere
      \[ɲ\]
       **ñ**andú; caba**ñ**a
@@ -367,7 +364,7 @@ class SpanishIpaRuleBased: IpaTranscriber {
      \[θ\]
      (central and northern Spain) or\
      \[s\]
-     (most other regions)^[\[15\]](#cite_note-seseo-15)^
+     (most other regions)
       ***z**orro*; * pa**z***; * ca**z**a*
 
      before voiced consonants

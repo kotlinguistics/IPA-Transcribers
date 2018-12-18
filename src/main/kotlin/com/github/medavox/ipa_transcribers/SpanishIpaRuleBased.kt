@@ -74,9 +74,7 @@ class SpanishIpaRuleBased: IpaTranscriber {
      elsewhere (i.e. after a vowel, even across a word boundary, or after any consonant other than ⟨m⟩ or ⟨n⟩) | \[β\] | be**b**é; o**b**tuso; vi**v**ir; cur**v**a; mi **b**e**b**é; mi **v**aca
 
 
-      **c**
-     -----
-
+⟨c⟩
      before ⟨e⟩ or ⟨i⟩
      \[θ\]
      (central and northern Spain) or
@@ -93,19 +91,14 @@ class SpanishIpaRuleBased: IpaTranscriber {
      ané**c**dota
 
 
-      **ch**
-     -----
-
+⟨ch⟩
      everywhere^[\[16\]](#cite_note-16)^
      \[tʃ\]
      or \[ʃ\]
      (depending upon the dialect)
      o**ch**o*; **ch**í**ch**aro*
 
-
-      **d**
-     -----
-
+⟨d⟩
      word-initial after a pause, or after ⟨l⟩ or ⟨n⟩
      \[d\]
       ***d**edo*; * cuan**d**o*; * al**d**aba*
@@ -114,18 +107,7 @@ class SpanishIpaRuleBased: IpaTranscriber {
      \[ð\]
      dá**d**iva*; ar**d**er*; a**d**mirar*; mi* **d**e**d**o; ver**d**a**d**
 
-
-      **f**
-     -----
-
-     everywhere
-     \[f\]
-      **f**ase; ca**f**é
-
-
-      **g**
-     -----
-
+⟨g⟩
      before ⟨e⟩ or ⟨i⟩
      \[x\]
      or \[h\]
@@ -140,9 +122,7 @@ class SpanishIpaRuleBased: IpaTranscriber {
      tri**g**o; amar**g**o*; si**g**no*; mi **g**ato
 
 
-      **gu**
-     -----
-
+⟨gu⟩
      before ⟨a⟩ or ⟨o⟩, and either word-initial after a pause, or after ⟨n⟩; but only in some dialects
      \[ɡw\]
       ***gu**ante*; * len**gu**a*
@@ -171,9 +151,7 @@ class SpanishIpaRuleBased: IpaTranscriber {
      \[ɣw\]
       * averi**gü**e
 
-      **h**
-     -----
-
+⟨h⟩
      everywhere
      (*silent*)
       **h**oy; **h**acer; pro**h**ibir; **h**uevo; **h**ielo
@@ -184,47 +162,35 @@ class SpanishIpaRuleBased: IpaTranscriber {
       **h**ámster, **h**awaiano, **h**achís, yi**h**ad, **h**arakiri, Yoko**h**ama
 
 
-      **hi**
-     -----
-
+⟨hi⟩
      before a vowel
      \[j\]
      or \[ʝ\]
       ***hi**erba*; ***hi**elo*
 
-      **hu**
-     -----
-
+⟨hu⟩
      before a vowel
      \[w\]
       **hu**eso; **hu**evo
 
-      **j**
-     -----
-
+⟨j⟩
      everywhere
      \[x\]
      or \[h\]
       **j**amón; e**j**e; relo**j**
 
-      **k**
-     -----
-
+⟨k⟩
      rare; only occurs in a few loanwords
      \[k\]
       ***k**ilo*,
       ***k**arate*
 
-      **l**
-     -----
-
+⟨l⟩
      everywhere
      \[l\]
       **l**ino; a**l**haja; principa**l**
 
-      **ll**
-     -----
-
+⟨ll⟩
      everywhere
      \[ʎ\],
      \[ʝ\]
@@ -232,9 +198,7 @@ class SpanishIpaRuleBased: IpaTranscriber {
      upon the dialect)
       ***ll**ave*; * po**ll**o*
 
-      **m**
-     -----
-
+⟨m⟩
      everywhere except word-finally
      \[m\]
       **m**adre; co**m**er; ca**m**po
@@ -245,9 +209,7 @@ class SpanishIpaRuleBased: IpaTranscriber {
      (depending upon the dialect)
       * álbu**m***
 
-      **n**
-     -----
-
+⟨n⟩
      si**n***
      everywhere but before other consonants
      \[n\]
@@ -272,23 +234,12 @@ class SpanishIpaRuleBased: IpaTranscriber {
      \[ɲ\]
       **ñ**andú; caba**ñ**a
 
-      **p**
-     -----
-
-     everywhere
-     \[p\]
-      ***p**ozo*; * to**p**o*; * es**p**osa*
-
-      **qu**
-     -----
-
+⟨qu⟩
      only occurs before ⟨e⟩ or ⟨i⟩
      \[k\]
       ***qu**ise*
 
-      **r**
-     -----
-
+⟨r⟩
      word-initial, morpheme-initial,^[\[21\]](#cite_note-21)^\
      or after ⟨l⟩, ⟨n⟩, or ⟨s⟩, or syllable-final (especially before ⟨l⟩,
      ⟨m⟩, ⟨n⟩, or ⟨s⟩) and word-final positions (before pause or
@@ -303,17 +254,13 @@ class SpanishIpaRuleBased: IpaTranscriber {
      \[ɾ\]
      ca**r**o; cab**r**a; b**r**avo; **r**umbo; hon**r**a; Is**r**ael; sub**r**ayar; invie**r**no; pe**r**sona; ve**r**de; ca**r**ta; amo**r** puro; amo**r** eterno
 
-      **rr**
-     -----
-
+⟨rr⟩
      only occurs between vowels
      \[r\]
       * ca**rr**o*
      trilled or rolled ⟨r⟩
 
-      **s**
-     -----
-
+⟨s⟩
      before a voiced consonant (e.g. ⟨l⟩, ⟨m⟩, ⟨d⟩)
      \[z\]
      i**s**la; mi**s**mo; de**s**de; de**s**huesar
@@ -328,9 +275,7 @@ class SpanishIpaRuleBased: IpaTranscriber {
      of English ***s**ea* and the palato-alveolar \[ʃ\]
      of ***s**he*
 
-      **sh**
-     -----
-
+⟨sh⟩
      Not considered to be a Spanish digraph (hence words like *sherpa, show,
      flash* are considered *extranjerismos crudos*), but used in proper names
      from other languages, some of them being accentuated in the Spanish
@@ -343,9 +288,7 @@ class SpanishIpaRuleBased: IpaTranscriber {
       ***sh**ah*,
      Wa**sh**ington
 
-      **t**
-     -----
-
+⟨t⟩
      everywhere
      \[t\]
       ***t**amiz*; * á**t**omo*
@@ -354,31 +297,23 @@ class SpanishIpaRuleBased: IpaTranscriber {
      \[ð\]
       * a**t**mósfera*
 
-      **tl**
-     -----
-
+⟨tl⟩
      rare; mostly in loanwords from Nahuatl
      \[tl\]
      or \[tɬ\]
       ***tl**apalería*; * cenzon**tl**e*; * Popocatépe**tl***
 
-      **tx**
-     -----
-
+⟨tx⟩
      rare; from loanwords
      \[tʃ\]
       * pin**tx**o*
 
-      **tz**
-     -----
-
+⟨tz⟩
      rare; from loanwords
      \[ts\]
       * que**tz**al*; * Pá**tz**cuaro*
 
-      **w**
-     -----
-
+⟨w⟩
      rare; in loanwords from English
      \[w\]
       ***w**aterpolo*
@@ -387,9 +322,7 @@ class SpanishIpaRuleBased: IpaTranscriber {
      \[b\]
       ***w**olframio*; ***W**amba*
 
-      **x**
-     -----
-
+⟨x⟩
      between vowels and word-finally
      \[ks\]
       * e**x**acto*; * ta**x**i*; * rela**x***
@@ -415,9 +348,7 @@ class SpanishIpaRuleBased: IpaTranscriber {
      (sometimes \[s\])
       **X**ela; **x**ocoyote
 
-      **y**
-     -----
-
+⟨y⟩
      as a semivowel (almost always in a
      diphthong)
      \[i\]
@@ -431,9 +362,7 @@ class SpanishIpaRuleBased: IpaTranscriber {
      or \[dʒ\]
       **y**a; **y**elmo; a**y**uno
 
-      **z**
-     -----
-
+⟨z⟩
      usually does not occur before ⟨e⟩ or ⟨i⟩
      \[θ\]
      (central and northern Spain) or\
@@ -448,8 +377,6 @@ class SpanishIpaRuleBased: IpaTranscriber {
       * ja**z**mín*,
       * ju**z**gado*,
      A**z**nar
-
-
      */
 
     /**Maps the first character of digraphs to all the possible rules it could represent,

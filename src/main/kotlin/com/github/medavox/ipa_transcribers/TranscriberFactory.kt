@@ -10,6 +10,7 @@ object TranscriberFactory {
     fun getTranscriberForLang(language: Language): IpaTranscriber {
         return when(language) {
             Language.English -> EnglishIpaCambridge()
+            Language.Spanish -> SpanishIpaRuleBased()
             else -> UselessDefaultIpaTranscriber()
         }
     }

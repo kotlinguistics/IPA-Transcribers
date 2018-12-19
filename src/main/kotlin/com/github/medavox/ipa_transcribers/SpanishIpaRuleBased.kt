@@ -66,155 +66,125 @@ class SpanishIpaRuleBased: IpaTranscriber {
 
 ⟨c⟩
      before ⟨e⟩ or ⟨i⟩
-     \[θ\]
+     [θ]
      (central and northern Spain) or
-     \[s\]
+     [s]
      (most other regions)
       **c**ereal; en**c**ima
 
      elsewhere
-     \[k\]
+     [k]
       **c**asa; **c**laro; * va**c**a*; * es**c**udo*
 
      before voiced consonants
-     \[ɣ\]
+     [ɣ]
      ané**c**dota
-
-⟨d⟩
-     word-initial after a pause, or after ⟨l⟩ or ⟨n⟩
-     \[d\]
-      ***d**edo*; * cuan**d**o*; * al**d**aba*
-
-     elsewhere
-     \[ð\]
-     dá**d**iva*; ar**d**er*; a**d**mirar*; mi* **d**e**d**o; ver**d**a**d**
 
 ⟨g⟩
      before ⟨e⟩ or ⟨i⟩
-     \[x\]
-     or \[h\]
+     [x]
+     or [h]
       ***g**eneral*
      not before ⟨e⟩ or ⟨i⟩, and either word-initial after a pause, or after
      ⟨n⟩
-     \[ɡ\]
+     [ɡ]
       ***g**ato*; ***g**rande*; * ven**g**o*
 
      not before ⟨e⟩ or ⟨i⟩, and not in the above contexts
-     \[ɣ\]
+     [ɣ]
      tri**g**o; amar**g**o*; si**g**no*; mi **g**ato
 
 
 ⟨gu⟩
      before ⟨a⟩ or ⟨o⟩, and either word-initial after a pause, or after ⟨n⟩; but only in some dialects
-     \[ɡw\]
+     [ɡw]
       ***gu**ante*; * len**gu**a*
 
      before ⟨a⟩ or ⟨o⟩, and not in the above contexts
-     \[ɣw\]
+     [ɣw]
      a**gu**a; averi**gu**ar
 
      before ⟨e⟩ or ⟨i⟩, and either word-initial after a pause, or after ⟨n⟩
-     \[ɡ\]
+     [ɡ]
       ***gu**erra*
 
      before ⟨e⟩ or ⟨i⟩, and not in the above contexts
-     \[ɣ\]
+     [ɣ]
      si**gu**e
 
 ⟨gü⟩
      before ⟨e⟩ or ⟨i⟩, and either word-initial after a pause, or after ⟨n⟩; but only in some dialects
-     \[ɡw\]
+     [ɡw]
 
       ***gü**ero*,
       * pin**gü**ino*
 
      before ⟨e⟩ or ⟨i⟩, and not in the above contexts
-     \[ɣw\]
+     [ɣw]
       * averi**gü**e
 
 ⟨hi⟩
      before a vowel
-     \[j\]
-     or \[ʝ\]
+     [j]
+     or [ʝ]
       ***hi**erba*; ***hi**elo*
 
 ⟨hu⟩
      before a vowel
-     \[w\]
+     [w]
       **hu**eso; **hu**evo
 
 ⟨ll⟩
      everywhere
-     \[ʎ\],
-     \[ʝ\]
-     or \[dʒ\](depending
+     [ʎ],
+     [ʝ]
+     or [dʒ](depending
      upon the dialect)
       ***ll**ave*; * po**ll**o*
 
 ⟨m⟩
      everywhere except word-finally
-     \[m\]
+     [m]
       **m**adre; co**m**er; ca**m**po
 
      word-final
-     \[n\]
-     or \[ŋ\]
+     [n]
+     or [ŋ]
      (depending upon the dialect)
       * álbu**m***
 
 ⟨n⟩
      si**n***
      everywhere but before other consonants
-     \[n\]
+     [n]
       ***n**ido*; * a**n**illo*; * a**n**helo*
 
      before other consonants
-     \[m\]\
-     \[ɱ\]\
-     \[n\]\
-     \[ɲ\]\
-     \[ŋ\]\
-      * i**n**vierno*\
-      * co**n**fite*\
-      * mu**n**do*\
-      * e**n**yesar*\
-      * ci**n**co*
+     [m]
+     [ɱ]
+     [n]
+     [ɲ]
+     [ŋ]
+      i**n**vierno
+      co**n**fite
+      mu**n**do
+      e**n**yesar
+      ci**n**co
 
 ⟨r⟩
-     word-initial, morpheme-initial,^[\[21\]](#cite_note-21)^\
+     word-initial, morpheme-initial,
      or after ⟨l⟩, ⟨n⟩, or ⟨s⟩, or syllable-final (especially before ⟨l⟩,
      ⟨m⟩, ⟨n⟩, or ⟨s⟩) and word-final positions (before pause or
      consonant-initial words only)
-     \[r\]
+     [r]
       ***r**umbo*; * hon**r**a*; * Is**r**ael*; * sub**r**ayar*; invie**r**no; pe**r**sona; ve**r**de; * ca**r**ta*; amo**r** puro
 
      elsewhere (sometimes word-initial (after a pause or consonant-ending
      words only), morpheme-initial (when preceded by prefixes ending in
      consonants), or after ⟨l⟩, ⟨n⟩, or ⟨s⟩, or syllable-final positions, and
      word-final positions before vowel-initial words only)
-     \[ɾ\]
+     [ɾ]
      ca**r**o; cab**r**a; b**r**avo; **r**umbo; hon**r**a; Is**r**ael; sub**r**ayar; invie**r**no; pe**r**sona; ve**r**de; ca**r**ta; amo**r** puro; amo**r** eterno
-
-⟨rr⟩
-     only occurs between vowels
-     \[r\]
-      * ca**rr**o*
-     trilled or rolled ⟨r⟩
-
-⟨s⟩
-     before a voiced consonant (e.g. ⟨l⟩, ⟨m⟩, ⟨d⟩)
-     \[z\]
-     i**s**la; mi**s**mo; de**s**de; de**s**huesar
-
-     everywhere else
-     \[s\]
-      **s**aco; ca**s**a; de**s**hora; e**s**pita
-     same as the typical English ⟨s⟩; ***s**a**ss***; in central and northern
-     Spain, Paisa region of Colombia, and Andes, this
-     sound is made with the tip of the tongue rather than the blade, with a
-     sound quality intermediate between the alveolar \[s\]
-     of English ***s**ea* and the palato-alveolar \[ʃ\]
-     of ***s**he*
 
 ⟨sh⟩
      Not considered to be a Spanish digraph (hence words like *sherpa, show,
@@ -222,102 +192,78 @@ class SpanishIpaRuleBased: IpaTranscriber {
      from other languages, some of them being accentuated in the Spanish
      manner (names from Native American languages or from languages using
      non-Latin writing systems)
-     \[ʃ\]
-     or \[tʃ\]
-     (sometimes \[s\])
+     [ʃ]
+     or [tʃ]
+     (sometimes [s])
      Ánca**sh**; **Sh**anghái; **sh**iitake,
       ***sh**ah*,
      Wa**sh**ington
 
-⟨t⟩
-     everywhere
-     \[t\]
-      ***t**amiz*; * á**t**omo*
-
-     before voiced consonants
-     \[ð\]
-      * a**t**mósfera*
-
 ⟨tl⟩
      rare; mostly in loanwords from Nahuatl
-     \[tl\]
-     or \[tɬ\]
+     [tl]
+     or [tɬ]
       ***tl**apalería*; * cenzon**tl**e*; * Popocatépe**tl***
 
 ⟨tx⟩
      rare; from loanwords
-     \[tʃ\]
+     [tʃ]
       * pin**tx**o*
 
 ⟨tz⟩
      rare; from loanwords
-     \[ts\]
+     [ts]
       * que**tz**al*; * Pá**tz**cuaro*
 
 ⟨w⟩
      rare; in loanwords from English
-     \[w\]
-      ***w**aterpolo*
+     [w]
+      **w**aterpolo
       **w**hen (sometimes turns to /gw/ or /bw/)
      rare; in loanwords from German and in Visigothic names
-     \[b\]
-      ***w**olframio*; ***W**amba*
+     [b]
+      **w**olframio; **W**amba
 
 ⟨x⟩
      between vowels and word-finally
-     \[ks\]
+     [ks]
       * e**x**acto*; * ta**x**i*; * rela**x***
 
      word-initially
-     \[s\]
+     [s]
       ***x**enofobia*
 
      before a consonant
-     \[ks\]
-     or \[s\]
+     [ks]
+     or [s]
      e**x**tremo
 
      in some words borrowed from Nahuatl, mostly place names, and in some
      Spanish proper names conserving archaic spelling
-     \[x\]
-     or \[h\]
+     [x]
+     or [h]
      Mé**x**ico*; Oa**x**aca*; **x**iote; Te**x**as; La A**x**arquía; **X**imena; **X**iménez; Me**x**ía
 
      in some words from indigenous American languages, mostly place names
-     \[ʃ\]
-     or \[tʃ\]
-     (sometimes \[s\])
+     [ʃ]
+     or [tʃ]
+     (sometimes [s])
       **X**ela; **x**ocoyote
 
 ⟨y⟩
      as a semivowel (almost always in a
      diphthong)
-     \[i\]
-     or \[j\]
+     [i]
+     or [j]
      ha**y**,
      so**y**
 
      as a consonant
-     \[j\],
-     \[ʝ\],
-     or \[dʒ\]
+     [j],
+     [ʝ],
+     or [dʒ]
       **y**a; **y**elmo; a**y**uno
 
-⟨z⟩
-     usually does not occur before ⟨e⟩ or ⟨i⟩
-     \[θ\]
-     (central and northern Spain) or\
-     \[s\]
-     (most other regions)
-      ***z**orro*; * pa**z***; * ca**z**a*
-
-     before voiced consonants
-     \[ð\]
-     (central and northern Spain) or \[z\]
-     (most other regions)^[\[15\]](#cite_note-seseo-15)^
-      * ja**z**mín*,
-      * ju**z**gado*,
-     A**z**nar
      */
 
     /**Maps the first character of digraphs to all the possible rules it could represent,
@@ -328,33 +274,34 @@ class SpanishIpaRuleBased: IpaTranscriber {
     override fun transcribeToIpa(nativeText: String): Set<Variant> {
         val american = StringBuilder().append('/')
         val european = StringBuilder().append('/')
+        val voicedConsonants = "([bdglmnñvwy]|hu|hi)"
 
         //NOTE:rule order matters!
         data class Rule(val matcher:Regex, val outputString:String, val lettersConsumed:Int=1 )
         val rules:Array<Rule> = arrayOf(
             //8. Ñ is always pronounced /ŋ/
-            //⟨ñ⟩ everywhere = \[ɲ\] (ñandú; cabaña)
+            //⟨ñ⟩ everywhere = [ɲ] (ñandú; cabaña)
             Rule(Regex("ñ"), "ɲ"),
             //5.  H is mute in Spanish, (huevo /′ weβo/, almohada /almo′aða/)
             //⟨h⟩ everywhere = silent (hoy; hacer; prohibir; huevo; hielo)
-            //     in loanwords and foreign proper names = \[x\] or \[h\]
+            //     in loanwords and foreign proper names = [x] or [h]
             //      (hámster, hawaiano, hachís, yihad, harakiri, Yokohama)
             Rule(Regex("h"), ""),
-            //⟨b⟩ or ⟨v⟩ word-initial after a pause, or after ⟨m⟩ or ⟨n⟩ \[b\] (bestia; embuste; vaca; envidia)
+            //⟨b⟩ or ⟨v⟩ word-initial after a pause, or after ⟨m⟩ or ⟨n⟩ [b] (bestia; embuste; vaca; envidia)
             Rule(Regex("(mb|mv|nb|nv)"), "mb", 2),
             Rule(Regex("^[bv]"), "b"),
             //1.  B,V The letters b and v are pronounced in exactly the same way:
             //    /b/ when at the beginning of an utterance or after m or n (barco/′barko/, vaca/′baka/, ambos /′ambos/, en vano /em′bano/)
             // and /β/ in all other contexts (rabo /′rraβo/, ave /′aβe/, árbol /′arβol/, Elvira /el′βira/).
             //⟨b⟩ or ⟨v⟩ elsewhere (i.e. after a vowel, even across a word boundary,
-            // or after any consonant other than ⟨m⟩ or ⟨n⟩) | \[β\] |
+            // or after any consonant other than ⟨m⟩ or ⟨n⟩) | [β] |
             // be_b_é; o_b_tuso; vi_v_ir; cur_v_a; mi _b_e_b_é; mi _v_aca
             Rule(Regex("[bv]"), "β"),
             Rule(Regex("ng"), "ŋg", 2),
             Rule(Regex("(nk|nc)"), "ŋ"),
 
             //the combination 'ch' is pronounced /tʃ/ (chico /′tʃiko/, leche /′letʃe/).
-            //⟨ch⟩ everywhere = \[tʃ\] or \[ʃ\] (depending upon the dialect) //(ocho; chícharo)
+            //⟨ch⟩ everywhere = [tʃ] or [ʃ] (depending upon the dialect) //(ocho; chícharo)
             Rule(Regex("ch"), "tʃ", 2),
             // When c is followed by e or i,
             // it is pronounced /s/ in Latin America and parts of southern Spain and /θ/ in the rest of Spain
@@ -364,9 +311,12 @@ class SpanishIpaRuleBased: IpaTranscriber {
             Rule(Regex("c"), "k"),
 
             //15.  Z is pronounced /s/ in Latin America and parts of southern Spain and /θ/ in the rest of Spain.
+            //⟨z⟩ [θ] (central and northern Spain) or [s] (most other regions)
+            //     before voiced consonants = [ð] (central and northern Spain) or [z] (most other regions)
+            Rule(Regex("z[$voicedConsonants]"), "ð̞|z"),
             Rule(Regex("z"), "θ|s"),
 
-            //⟨qu⟩ only occurs before ⟨e⟩ or ⟨i⟩ = \[k\] (quise)
+            //⟨qu⟩ only occurs before ⟨e⟩ or ⟨i⟩ = [k] (quise)
             //9.  Q is always followed by ue or ui.
             // It is pronounced /K/, and the u is silent (quema /′kema/, quiso /′kiso/).
             Rule(Regex("que"), "ke", 3),
@@ -377,6 +327,10 @@ class SpanishIpaRuleBased: IpaTranscriber {
             //and /ð/ in all other contexts (hada /′aða/, arde /′arðe/, los dados /loz′ðaðos/).
             //It is often not pronounced at all at the end of a word (libertad /liβer′ta(ð)/,
             //Madrid /ma′ðri(ð)/).
+            //⟨d⟩ word-initial after a pause, or after ⟨l⟩ or ⟨n⟩ = [d]
+            //      ***d**edo*; * cuan**d**o*; * al**d**aba*
+            //     elsewhere = [ð]
+            //     dá**d**iva*; ar**d**er*; a**d**mirar*; mi* **d**e**d**o; ver**d**a**d**
             Rule(Regex("^d"), "d"),
             //todo: match this rule across word boundaries
             Rule(Regex("ld"), "ld", 2),
@@ -384,7 +338,7 @@ class SpanishIpaRuleBased: IpaTranscriber {
             Rule(Regex("d"), "ð"),
 
             //6.  J is always pronounced /x/ (jamón /xa′mon/, jefe /′xefe/).
-            //⟨j⟩ everywhere = \[x\] or \[h\]  (jamón; eje; reloj)
+            //⟨j⟩ everywhere = [x] or [h]  (jamón; eje; reloj)
             Rule(Regex("j"), "x"),
 
             //4.  G is pronounced /x/ when followed by e or i (gitano /xi′tano/, auge /′awxe/).
@@ -403,6 +357,9 @@ class SpanishIpaRuleBased: IpaTranscriber {
 
             //The double consonant rr is always pronounced /rr/.
             //the letter /r/ represents the trilled r in IPA
+            //⟨rr⟩ only occurs between vowels = [r]
+            //      * ca**rr**o*
+            //     trilled or rolled ⟨r⟩
             Rule(Regex("rr"), "r", 2),
 
             //13.  X is pronounced /ks/, although there is a marked tendency to render it as /s/ before consonants,
@@ -430,6 +387,22 @@ class SpanishIpaRuleBased: IpaTranscriber {
             //When phonetic transcriptions of Spanish headwords containing ll are given in the dictionary,
             //the symbol /J/ is used to represent the range of pronunciations described above.
             Rule(Regex("ll"), "ʎ|ʝ", 2),
+
+            //⟨t⟩ everywhere = [t]
+            //    before voiced consonants = [ð]
+            Rule(Regex("t[$voicedConsonants]"), "ð"),
+
+            //⟨s⟩ before a voiced consonant (e.g. ⟨l⟩, ⟨m⟩, ⟨d⟩) = [z]
+            //     i**s**la; mi**s**mo; de**s**de; de**s**huesar
+            //    everywhere else = [s]
+            //      **s**aco; ca**s**a; de**s**hora; e**s**pita
+            //     same as the typical English ⟨s⟩; ***s**a**ss***; in central and northern
+            //     Spain, Paisa region of Colombia, and Andes, this
+            //     sound is made with the tip of the tongue rather than the blade, with a
+            //     sound quality intermediate between the alveolar [s]
+            //     of English ***s**ea* and the palato-alveolar [ʃ]
+            //     of ***s**he*
+            Rule(Regex("s[$voicedConsonants]"), "z"),
 
 
             //Spanish has both strong vowels (a, e, o) and weak vowels (i, u).

@@ -47,11 +47,6 @@ class SpanishIpaRuleBased: IpaTranscriber {
     (aro /′aro/, horma /′orma/, barco /′barko/, cantar /kan′tar/).
     It is pronounced /rr/ when in initial position (rama /′rrama/, romper /rrom′per/).
 
-
-    11.  S is pronounced /s/ but it is aspirated in many dialects of Spanish
-    when it occurs in syllable-final position (hasta /′ahta/, los cuatro /loh′kwatro/).
-    In other dialects it is voiced when followed by a voiced consonant (mismo/′mIzmo/, los dos /loz′ðos/).
-
     14.  Y (a) When followed by a vowel within the same syllable y is pronounced rather like the y in English yes
     (slightly more emphatically when at the beginning of an utterance).
     In the River Plate area it is pronounced /Ʒ/ (as in English measure),
@@ -63,22 +58,6 @@ class SpanishIpaRuleBased: IpaTranscriber {
 
      Consonants
      =========
-
-⟨c⟩
-     before ⟨e⟩ or ⟨i⟩
-     [θ]
-     (central and northern Spain) or
-     [s]
-     (most other regions)
-      **c**ereal; en**c**ima
-
-     elsewhere
-     [k]
-      **c**asa; **c**laro; * va**c**a*; * es**c**udo*
-
-     before voiced consonants
-     [ɣ]
-     ané**c**dota
 
 ⟨g⟩
      before ⟨e⟩ or ⟨i⟩
@@ -111,36 +90,6 @@ class SpanishIpaRuleBased: IpaTranscriber {
      before ⟨e⟩ or ⟨i⟩, and not in the above contexts
      [ɣ]
      si**gu**e
-
-⟨gü⟩
-     before ⟨e⟩ or ⟨i⟩, and either word-initial after a pause, or after ⟨n⟩; but only in some dialects
-     [ɡw]
-
-      ***gü**ero*,
-      * pin**gü**ino*
-
-     before ⟨e⟩ or ⟨i⟩, and not in the above contexts
-     [ɣw]
-      * averi**gü**e
-
-⟨hi⟩
-     before a vowel
-     [j]
-     or [ʝ]
-      ***hi**erba*; ***hi**elo*
-
-⟨hu⟩
-     before a vowel
-     [w]
-      **hu**eso; **hu**evo
-
-⟨ll⟩
-     everywhere
-     [ʎ],
-     [ʝ]
-     or [dʒ](depending
-     upon the dialect)
-      ***ll**ave*; * po**ll**o*
 
 ⟨m⟩
      everywhere except word-finally
@@ -205,11 +154,6 @@ class SpanishIpaRuleBased: IpaTranscriber {
      or [tɬ]
       ***tl**apalería*; * cenzon**tl**e*; * Popocatépe**tl***
 
-⟨tx⟩
-     rare; from loanwords
-     [tʃ]
-      * pin**tx**o*
-
 ⟨tz⟩
      rare; from loanwords
      [ts]
@@ -263,7 +207,6 @@ class SpanishIpaRuleBased: IpaTranscriber {
      [ʝ],
      or [dʒ]
       **y**a; **y**elmo; a**y**uno
-
      */
 
     /**Maps the first character of digraphs to all the possible rules it could represent,
@@ -303,17 +246,30 @@ class SpanishIpaRuleBased: IpaTranscriber {
             //the combination 'ch' is pronounced /tʃ/ (chico /′tʃiko/, leche /′letʃe/).
             //⟨ch⟩ everywhere = [tʃ] or [ʃ] (depending upon the dialect) //(ocho; chícharo)
             Rule(Regex("ch"), "tʃ", 2),
+
+            //⟨tx⟩ (rare; from loanwords) = [tʃ]
+            //      * pin**tx**o*
+            Rule(Regex("tx"), "tʃ", 2),
+
             // When c is followed by e or i,
             // it is pronounced /s/ in Latin America and parts of southern Spain and /θ/ in the rest of Spain
             // (cero /′sero/, /′θero/; cinco /′siŋko/, /′θiŋko/).
+            //⟨c⟩ before ⟨e⟩ or ⟨i⟩ = [θ]
+            //     (central and northern Spain) or [s] (most other regions)
+            //      **c**ereal; en**c**ima
             Rule(Regex("c[ie]"), "θ|s"),
             //2.  C is pronounced /k/ when followed by a consonant other than h or by a, o or u
+            //     elsewhere = [k]
+            //      **c**asa; **c**laro; * va**c**a*; * es**c**udo*
+            //     before voiced consonants = [ɣ]
+            //     ané**c**dota
+            Rule(Regex("c$voicedConsonants"), "ɣ"),
             Rule(Regex("c"), "k"),
 
             //15.  Z is pronounced /s/ in Latin America and parts of southern Spain and /θ/ in the rest of Spain.
             //⟨z⟩ [θ] (central and northern Spain) or [s] (most other regions)
             //     before voiced consonants = [ð] (central and northern Spain) or [z] (most other regions)
-            Rule(Regex("z[$voicedConsonants]"), "ð̞|z"),
+            Rule(Regex("z$voicedConsonants"), "ð̞|z"),
             Rule(Regex("z"), "θ|s"),
 
             //⟨qu⟩ only occurs before ⟨e⟩ or ⟨i⟩ = [k] (quise)
@@ -352,7 +308,15 @@ class SpanishIpaRuleBased: IpaTranscriber {
             // and /Ɣ/ in all other contexts (hago /′aƔo/, trague /′traƔe/, alga /′alƔa/, águila /′aƔila/).
             Rule(Regex("g"), "Ɣ"),
             // unless it is written with a diaeresis (paragüero /para′Ɣwero/, agüita /a′Ɣwita/).
+            //⟨gü⟩ before ⟨e⟩ or ⟨i⟩, and either word-initial after a pause, or after ⟨n⟩; but only in some dialects
+            //    = [ɡw]
+            //      **gü**ero, pin**gü**ino
+            //
+            //     before ⟨e⟩ or ⟨i⟩, and not in the above contexts = [ɣw]
+            //      averi**gü**e
+            Rule(Regex("^güi"), "gwi", 3),
             Rule(Regex("güi"), "Ɣwi", 3),
+            Rule(Regex("^güe"), "gwe", 3),
             Rule(Regex("güe"), "Ɣwe", 3),
 
             //The double consonant rr is always pronounced /rr/.
@@ -386,12 +350,17 @@ class SpanishIpaRuleBased: IpaTranscriber {
 
             //When phonetic transcriptions of Spanish headwords containing ll are given in the dictionary,
             //the symbol /J/ is used to represent the range of pronunciations described above.
+            //⟨ll⟩ everywhere = [ʎ], [ʝ] or [dʒ] (depending upon the dialect)
+            //      ***ll**ave*; * po**ll**o*
             Rule(Regex("ll"), "ʎ|ʝ", 2),
 
             //⟨t⟩ everywhere = [t]
             //    before voiced consonants = [ð]
             Rule(Regex("t[$voicedConsonants]"), "ð"),
 
+            //    11.  S is pronounced /s/ but it is aspirated in many dialects of Spanish
+            //    when it occurs in syllable-final position (hasta /′ahta/, los cuatro /loh′kwatro/).
+            //    In other dialects it is voiced when followed by a voiced consonant (mismo/′mIzmo/, los dos /loz′ðos/).
             //⟨s⟩ before a voiced consonant (e.g. ⟨l⟩, ⟨m⟩, ⟨d⟩) = [z]
             //     i**s**la; mi**s**mo; de**s**de; de**s**huesar
             //    everywhere else = [s]
@@ -400,10 +369,19 @@ class SpanishIpaRuleBased: IpaTranscriber {
             //     Spain, Paisa region of Colombia, and Andes, this
             //     sound is made with the tip of the tongue rather than the blade, with a
             //     sound quality intermediate between the alveolar [s]
-            //     of English ***s**ea* and the palato-alveolar [ʃ]
+            //     of English **s**ea and the palato-alveolar [ʃ]
             //     of ***s**he*
-            Rule(Regex("s[$voicedConsonants]"), "z"),
+            Rule(Regex("s$voicedConsonants"), "z"),
 
+            //⟨hu⟩ before a vowel = [w]
+            //      **hu**eso; **hu**evo
+            Rule(Regex("hu"), "w"),
+
+            //⟨hi⟩ before a vowel = [j] or [ʝ]
+            //      **hi**erba; **hi**elo
+            Rule(Regex("hi"), "ʝ"),
+
+            // --------- Vowels -------------------
 
             //Spanish has both strong vowels (a, e, o) and weak vowels (i, u).
             //Here are some rules on how the combinations of these vowels are divided into syllables.

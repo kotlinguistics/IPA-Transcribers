@@ -445,6 +445,18 @@ class SpanishIpaRuleBased: IpaTranscriber {
         Variant("Peninsular", european.toString())    )
     }
 
+    /**Removes the stress accents from vowels,
+     * which aren't needed for our IPA orthography-to-sound transcription,
+     * and in fact get in the way ("o" != "ó")*/
+    private fun String.removeStressAccents():String {
+        return this
+            .replace("á", "a")
+            .replace("é", "e")
+            .replace("í", "i")
+            .replace("ó", "o")
+            .replace("ú", "u")
+    }
+
     /**Makes consistent the representation of spanish accented letters.
      * That is, replaces letters with combined diacritic marks with single-character equivalents.*/
     private fun String.normalise():String {

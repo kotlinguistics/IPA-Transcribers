@@ -59,38 +59,6 @@ class SpanishIpaRuleBased: IpaTranscriber {
      Consonants
      =========
 
-⟨g⟩
-     before ⟨e⟩ or ⟨i⟩
-     [x]
-     or [h]
-      ***g**eneral*
-     not before ⟨e⟩ or ⟨i⟩, and either word-initial after a pause, or after
-     ⟨n⟩
-     [ɡ]
-      ***g**ato*; ***g**rande*; * ven**g**o*
-
-     not before ⟨e⟩ or ⟨i⟩, and not in the above contexts
-     [ɣ]
-     tri**g**o; amar**g**o*; si**g**no*; mi **g**ato
-
-
-⟨gu⟩
-     before ⟨a⟩ or ⟨o⟩, and either word-initial after a pause, or after ⟨n⟩; but only in some dialects
-     [ɡw]
-      ***gu**ante*; * len**gu**a*
-
-     before ⟨a⟩ or ⟨o⟩, and not in the above contexts
-     [ɣw]
-     a**gu**a; averi**gu**ar
-
-     before ⟨e⟩ or ⟨i⟩, and either word-initial after a pause, or after ⟨n⟩
-     [ɡ]
-      ***gu**erra*
-
-     before ⟨e⟩ or ⟨i⟩, and not in the above contexts
-     [ɣ]
-     si**gu**e
-
 ⟨m⟩
      everywhere except word-finally
      [m]
@@ -240,7 +208,6 @@ class SpanishIpaRuleBased: IpaTranscriber {
             // or after any consonant other than ⟨m⟩ or ⟨n⟩) | [β] |
             // be_b_é; o_b_tuso; vi_v_ir; cur_v_a; mi _b_e_b_é; mi _v_aca
             Rule(Regex("[bv]"), "β"),
-            Rule(Regex("ng"), "ŋg", 2),
             Rule(Regex("(nk|nc)"), "ŋ"),
 
             //the combination 'ch' is pronounced /tʃ/ (chico /′tʃiko/, leche /′letʃe/).
@@ -297,15 +264,38 @@ class SpanishIpaRuleBased: IpaTranscriber {
             //⟨j⟩ everywhere = [x] or [h]  (jamón; eje; reloj)
             Rule(Regex("j"), "x"),
 
+            //⟨gu⟩ before ⟨a⟩ or ⟨o⟩, and either word-initial after a pause, or after ⟨n⟩; but only in some dialects
+            //      = [ɡw]
+            //      ***gu**ante*; * len**gu**a*
+            Rule(Regex("^gu[ao]"), "gw", 2),
+            Rule(Regex("^ngu[ao]"), "ŋgw", 3),
+
+            //     before ⟨a⟩ or ⟨o⟩, and not in the above contexts = [ɣw]
+            //     a**gu**a; averi**gu**ar
+            Rule(Regex("gu[ao]"), "ɣw", 2),
+
+            //     before ⟨e⟩ or ⟨i⟩, and either word-initial after a pause, or after ⟨n⟩ = [ɡ]
+            //      ***gu**erra*
+            Rule(Regex("^gu[ie]"), "g", 2),
+
+            //     before ⟨e⟩ or ⟨i⟩, and not in the above contexts = [ɣ]
+            //     si**gu**e
+            // the u is not pronounced in the combinations gue and gui.
+            Rule(Regex("gu[ie]"), "ɣ", 2),
+
+            //⟨g⟩ before ⟨e⟩ or ⟨i⟩ = [x] or [h]
+            //      ***g**eneral*
             //4.  G is pronounced /x/ when followed by e or i (gitano /xi′tano/, auge /′awxe/).
             Rule(Regex("g[ie]"), "x"),
-            // Note that the u is not pronounced in the combinations gue and gui,
-            // When followed by a, o, u, ue or ui it is pronounced /g/ if at the beginning of an utterance or after n
-            // (gato /′gato/, gula/′gula/, tango /′taŋgo/, guiso /′giso/)
-            Rule(Regex("^gui"), "gi", 3),
-            Rule(Regex("^gue"), "ge", 3),
+
+            // ⟨g⟩ not before ⟨e⟩ or ⟨i⟩, and either word-initial after a pause, or after ⟨n⟩ = [ɡ]
+            //      ***g**ato*; ***g**rande*; * ven**g**o*
+            Rule(Regex("ng"), "ŋg", 2),
             Rule(Regex("^g[aou]"), "g"),
             // and /Ɣ/ in all other contexts (hago /′aƔo/, trague /′traƔe/, alga /′alƔa/, águila /′aƔila/).
+            //     not before ⟨e⟩ or ⟨i⟩, and not in the above contexts
+            //     [ɣ]
+            //     tri**g**o; amar**g**o*; si**g**no*; mi **g**ato
             Rule(Regex("g"), "Ɣ"),
             // unless it is written with a diaeresis (paragüero /para′Ɣwero/, agüita /a′Ɣwita/).
             //⟨gü⟩ before ⟨e⟩ or ⟨i⟩, and either word-initial after a pause, or after ⟨n⟩; but only in some dialects

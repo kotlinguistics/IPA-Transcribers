@@ -1,5 +1,7 @@
-package com.github.medavox.ipa_transcribers
+package com.github.medavox.ipa_transcribers.spanish
 
+import com.github.medavox.ipa_transcribers.IpaTranscriber
+import com.github.medavox.ipa_transcribers.Variant
 import java.lang.StringBuilder
 
 /**Spanish spelling is largely considered phonetic.
@@ -9,7 +11,7 @@ import java.lang.StringBuilder
  *
  * So I'll try to write my own.
  *
- * Pronunciation Information sourced from:-
+ * Pronunciation information sourced from:-
  * * [Oxford Dictionary Spanish Pronunciation Guide](https://es.oxforddictionaries.com/grammar/spanish-pronunciation)]
  * * [Wikipedia's IPA for Spanish](https://en.wikipedia.org/wiki/Help:IPA/Spanish)
  * * [Wikipedia:Spanish Orthography](https://en.wikipedia.org/wiki/Spanish_orthography)
@@ -21,7 +23,7 @@ class SpanishIpaRuleBased: IpaTranscriber {
      METHODOLOGY
     ============
 
-    all "before" and "after" rules cn be encoded here as digraphs,
+    all "before" and "after" rules can be encoded here as digraphs,
     even if this produces a lot of rules (eg, before a voiced consonant).
 
     It's still simpler than creating an entire IPA-structure in code,
@@ -58,17 +60,6 @@ class SpanishIpaRuleBased: IpaTranscriber {
 
      Consonants
      =========
-
-⟨m⟩
-     everywhere except word-finally
-     [m]
-      **m**adre; co**m**er; ca**m**po
-
-     word-final
-     [n]
-     or [ŋ]
-     (depending upon the dialect)
-      * álbu**m***
 
 ⟨n⟩
      si**n***
@@ -116,52 +107,6 @@ class SpanishIpaRuleBased: IpaTranscriber {
       ***sh**ah*,
      Wa**sh**ington
 
-⟨tl⟩
-     rare; mostly in loanwords from Nahuatl
-     [tl]
-     or [tɬ]
-      ***tl**apalería*; * cenzon**tl**e*; * Popocatépe**tl***
-
-⟨tz⟩
-     rare; from loanwords
-     [ts]
-      * que**tz**al*; * Pá**tz**cuaro*
-
-⟨w⟩
-     rare; in loanwords from English
-     [w]
-      **w**aterpolo
-      **w**hen (sometimes turns to /gw/ or /bw/)
-     rare; in loanwords from German and in Visigothic names
-     [b]
-      **w**olframio; **W**amba
-
-⟨x⟩
-     between vowels and word-finally
-     [ks]
-      * e**x**acto*; * ta**x**i*; * rela**x***
-
-     word-initially
-     [s]
-      ***x**enofobia*
-
-     before a consonant
-     [ks]
-     or [s]
-     e**x**tremo
-
-     in some words borrowed from Nahuatl, mostly place names, and in some
-     Spanish proper names conserving archaic spelling
-     [x]
-     or [h]
-     Mé**x**ico*; Oa**x**aca*; **x**iote; Te**x**as; La A**x**arquía; **X**imena; **X**iménez; Me**x**ía
-
-     in some words from indigenous American languages, mostly place names
-     [ʃ]
-     or [tʃ]
-     (sometimes [s])
-      **X**ela; **x**ocoyote
-
 ⟨y⟩
      as a semivowel (almost always in a
      diphthong)
@@ -176,6 +121,32 @@ class SpanishIpaRuleBased: IpaTranscriber {
      or [dʒ]
       **y**a; **y**elmo; a**y**uno
      */
+
+    /*//CAN'T TRANSCRIBE THESE IRREGULAR RULES:
+⟨x⟩     in some words borrowed from Nahuatl, mostly place names, and in some
+        Spanish proper names conserving archaic spelling
+        [x] or [h]
+        Mé**x**ico*; Oa**x**aca*; **x**iote; Te**x**as; La A**x**arquía; **X**imena; **X**iménez; Me**x**ía
+
+        in some words from indigenous American languages, mostly place names
+        [ʃ] or [tʃ] (sometimes [s])
+           **X**ela; **x**ocoyote
+
+⟨tl⟩
+     rare; mostly in loanwords from Nahuatl
+     [tl]
+     or [tɬ]
+      ***tl**apalería*; * cenzon**tl**e*; * Popocatépe**tl***
+
+⟨w⟩
+     rare; in loanwords from English
+     [w]
+      **w**aterpolo
+      **w**hen (sometimes turns to /gw/ or /bw/)
+     rare; in loanwords from German and in Visigothic names
+     [b]
+      **w**olframio; **W**amba
+*/
 
     /**Maps the first character of digraphs to all the possible rules it could represent,
      * if it forms a digraph with the next character.
@@ -320,7 +291,18 @@ class SpanishIpaRuleBased: IpaTranscriber {
             //especially in less careful speech (extra /′ekstra/, /′estra/, or in some dialects /′ehtra/, see 11 above).
             //In some words derived from Nahuatl and other Indian languages it is pronounced /x/ (México /′mexiko/)
             //and in others it is pronounced /s/ (Xochlmllco /sotʃi′milko/).
+            //⟨x⟩  before a consonant = [ks] or [s]
+            //     e**x**tremo
             Rule(Regex("x"), "ks"),
+
+            //⟨x⟩ between vowels and word-finally = [ks]
+            //      * e**x**acto*; * ta**x**i*; * rela**x***
+            Rule(Regex("x$"), "ks"),
+            Rule(Regex("[aeiou]x[aeiou]"), "ks"),
+
+            //⟨x⟩  word-initially = [s]
+            //      ***x**enofobia*
+            Rule(Regex("^x"), "s"),
 
             //7. The pronunciation of ll varies greatly throughout the Spanish-speaking world.
 
@@ -370,6 +352,18 @@ class SpanishIpaRuleBased: IpaTranscriber {
             //⟨hi⟩ before a vowel = [j] or [ʝ]
             //      **hi**erba; **hi**elo
             Rule(Regex("hi"), "ʝ"),
+
+            //⟨tz⟩ rare; from loanwords = [ts]
+            //      * que**tz**al*; * Pá**tz**cuaro*
+            Rule(Regex("tz"), "ts"),
+
+            //⟨m⟩  word-final = [n] or [ŋ] (depending upon the dialect)
+            //      * álbu**m***
+            Rule(Regex("m$"), "n"),
+
+            //⟨m⟩ everywhere except word-finally = [m]
+            //      **m**adre; co**m**er; ca**m**po
+            //(no rule is necessary to transcribe letters verbatim)
 
             // --------- Vowels -------------------
 
@@ -442,7 +436,8 @@ class SpanishIpaRuleBased: IpaTranscriber {
         european.append('/')
     return setOf(
         Variant("American", american.toString()),
-        Variant("Peninsular", european.toString())    )
+        Variant("Peninsular", european.toString())
+    )
     }
 
     /**Removes the stress accents from vowels,

@@ -1,5 +1,7 @@
 package com.github.medavox.ipa_transcribers
 
+import com.github.medavox.ipa_transcribers.spanish.SpanishIpaRuleBased
+
 /**Provides instances that each transcribe a specific language and orthography to IPA.*/
 object TranscriberFactory {
 

@@ -45,54 +45,6 @@ class SpanishIpaRuleBased: IpaTranscriber {
 
     -------
 
-    10.  R is pronounced /r/ when it occurs between vowels or in syllable-final position
-    (aro /′aro/, horma /′orma/, barco /′barko/, cantar /kan′tar/).
-    It is pronounced /rr/ when in initial position (rama /′rrama/, romper /rrom′per/).
-
-    14.  Y (a) When followed by a vowel within the same syllable y is pronounced rather like the y in English yes
-    (slightly more emphatically when at the beginning of an utterance).
-    In the River Plate area it is pronounced /Ʒ/ (as in English measure),
-    with some speakers using a sound which tends toward /ʃ/ (as in shop).
-
-    When phonetic transcriptions of Spanish headwords containing y are given in the dictionary,
-    the symbol /J/ is used to represent both pronunciations described above.
-    (b) As the conjunction y and in syllable-final position, y is pronounced /i/.
-
-     Consonants
-     =========
-
-⟨n⟩
-     si**n***
-     everywhere but before other consonants
-     [n]
-      ***n**ido*; * a**n**illo*; * a**n**helo*
-
-     before other consonants
-     [m]
-     [ɱ]
-     [n]
-     [ɲ]
-     [ŋ]
-      i**n**vierno
-      co**n**fite
-      mu**n**do
-      e**n**yesar
-      ci**n**co
-
-⟨r⟩
-     word-initial, morpheme-initial,
-     or after ⟨l⟩, ⟨n⟩, or ⟨s⟩, or syllable-final (especially before ⟨l⟩,
-     ⟨m⟩, ⟨n⟩, or ⟨s⟩) and word-final positions (before pause or
-     consonant-initial words only)
-     [r]
-      ***r**umbo*; * hon**r**a*; * Is**r**ael*; * sub**r**ayar*; invie**r**no; pe**r**sona; ve**r**de; * ca**r**ta*; amo**r** puro
-
-     elsewhere (sometimes word-initial (after a pause or consonant-ending
-     words only), morpheme-initial (when preceded by prefixes ending in
-     consonants), or after ⟨l⟩, ⟨n⟩, or ⟨s⟩, or syllable-final positions, and
-     word-final positions before vowel-initial words only)
-     [ɾ]
-     ca**r**o; cab**r**a; b**r**avo; **r**umbo; hon**r**a; Is**r**ael; sub**r**ayar; invie**r**no; pe**r**sona; ve**r**de; ca**r**ta; amo**r** puro; amo**r** eterno
 
 ⟨sh⟩
      Not considered to be a Spanish digraph (hence words like *sherpa, show,
@@ -106,20 +58,6 @@ class SpanishIpaRuleBased: IpaTranscriber {
      Ánca**sh**; **Sh**anghái; **sh**iitake,
       ***sh**ah*,
      Wa**sh**ington
-
-⟨y⟩
-     as a semivowel (almost always in a
-     diphthong)
-     [i]
-     or [j]
-     ha**y**,
-     so**y**
-
-     as a consonant
-     [j],
-     [ʝ],
-     or [dʒ]
-      **y**a; **y**elmo; a**y**uno
      */
 
     /*//CAN'T TRANSCRIBE THESE IRREGULAR RULES:
@@ -164,12 +102,21 @@ class SpanishIpaRuleBased: IpaTranscriber {
             //8. Ñ is always pronounced /ŋ/
             //⟨ñ⟩ everywhere = [ɲ] (ñandú; cabaña)
             Rule(Regex("ñ"), "ɲ"),
+
+            //⟨hu⟩ before a vowel = [w]
+            //      **hu**eso; **hu**evo
+            Rule(Regex("hu"), "w"),
+            //⟨hi⟩ before a vowel = [j] or [ʝ]
+            //      **hi**erba; **hi**elo
+            Rule(Regex("hi"), "ʝ"),
             //5.  H is mute in Spanish, (huevo /′ weβo/, almohada /almo′aða/)
             //⟨h⟩ everywhere = silent (hoy; hacer; prohibir; huevo; hielo)
             //     in loanwords and foreign proper names = [x] or [h]
             //      (hámster, hawaiano, hachís, yihad, harakiri, Yokohama)
             Rule(Regex("h"), ""),
+
             //⟨b⟩ or ⟨v⟩ word-initial after a pause, or after ⟨m⟩ or ⟨n⟩ [b] (bestia; embuste; vaca; envidia)
+            //⟨n⟩  i**n**vierno = [m]
             Rule(Regex("(mb|mv|nb|nv)"), "mb", 2),
             Rule(Regex("^[bv]"), "b"),
             //1.  B,V The letters b and v are pronounced in exactly the same way:
@@ -179,7 +126,17 @@ class SpanishIpaRuleBased: IpaTranscriber {
             // or after any consonant other than ⟨m⟩ or ⟨n⟩) | [β] |
             // be_b_é; o_b_tuso; vi_v_ir; cur_v_a; mi _b_e_b_é; mi _v_aca
             Rule(Regex("[bv]"), "β"),
+
+            //⟨n⟩  ci**n**co = [ŋ]
             Rule(Regex("(nk|nc)"), "ŋ"),
+            //⟨n⟩  co**n**fite = [ɱ]
+            Rule(Regex("nf"), "ɱ"),
+            //⟨n⟩  e**n**yesar = [ɲ]
+            Rule(Regex("ny"), "ɲʝ", 2),
+            //⟨n⟩ si**n*** everywhere but before other consonants = [n]
+            //      ***n**ido*; * a**n**illo*; * a**n**helo*
+            //     mu**n**do = [n]
+            //(verbatim transcription needs no rule)
 
             //the combination 'ch' is pronounced /tʃ/ (chico /′tʃiko/, leche /′letʃe/).
             //⟨ch⟩ everywhere = [tʃ] or [ʃ] (depending upon the dialect) //(ocho; chícharo)
@@ -328,7 +285,7 @@ class SpanishIpaRuleBased: IpaTranscriber {
 
             //⟨t⟩ everywhere = [t]
             //    before voiced consonants = [ð]
-            Rule(Regex("t[$voicedConsonants]"), "ð"),
+            Rule(Regex("t$voicedConsonants"), "ð"),
 
             //    11.  S is pronounced /s/ but it is aspirated in many dialects of Spanish
             //    when it occurs in syllable-final position (hasta /′ahta/, los cuatro /loh′kwatro/).
@@ -345,14 +302,6 @@ class SpanishIpaRuleBased: IpaTranscriber {
             //     of ***s**he*
             Rule(Regex("s$voicedConsonants"), "z"),
 
-            //⟨hu⟩ before a vowel = [w]
-            //      **hu**eso; **hu**evo
-            Rule(Regex("hu"), "w"),
-
-            //⟨hi⟩ before a vowel = [j] or [ʝ]
-            //      **hi**erba; **hi**elo
-            Rule(Regex("hi"), "ʝ"),
-
             //⟨tz⟩ rare; from loanwords = [ts]
             //      * que**tz**al*; * Pá**tz**cuaro*
             Rule(Regex("tz"), "ts"),
@@ -360,10 +309,27 @@ class SpanishIpaRuleBased: IpaTranscriber {
             //⟨m⟩  word-final = [n] or [ŋ] (depending upon the dialect)
             //      * álbu**m***
             Rule(Regex("m$"), "n"),
-
             //⟨m⟩ everywhere except word-finally = [m]
             //      **m**adre; co**m**er; ca**m**po
             //(no rule is necessary to transcribe letters verbatim)
+
+            //⟨y⟩ as a semivowel (almost always in a diphthong) = [i] or [j]
+            //     ha**y**, so**y**
+            //14.  Y (a) When followed by a vowel within the same syllable y is pronounced rather like the y in English yes
+            //    (slightly more emphatically when at the beginning of an utterance).
+            //    In the River Plate area it is pronounced /Ʒ/ (as in English measure),
+            //    with some speakers using a sound which tends toward /ʃ/ (as in shop).
+            Rule(Regex("y"), "j"),
+            //    When phonetic transcriptions of Spanish headwords containing y are given in the dictionary,
+            //    the symbol /J/ is used to represent both pronunciations described above.
+            //    (b) As the conjunction y and in syllable-final position, y is pronounced /i/.
+            //⟨y⟩  as a consonant
+            //     [j],
+            //     [ʝ],
+            //     or [dʒ]
+            //      **y**a; **y**elmo; a**y**uno
+            Rule(Regex("y[^aeiou]"), "i"),
+            Rule(Regex("y$"), "i"),
 
             // --------- Vowels -------------------
 
@@ -371,6 +337,8 @@ class SpanishIpaRuleBased: IpaTranscriber {
             //Here are some rules on how the combinations of these vowels are divided into syllables.
 
             //Two weak vowels together form a diphthong and are not separated into different syllables.
+
+            //A weak vowel and a strong vowel together form a diphthong and are not separated into different syllables.
             ///wa/ 	cuadro 	picture
             ///we/ 	fuego 	fire
             ///wi/[62] 	buitre 	vulture
@@ -382,7 +350,6 @@ class SpanishIpaRuleBased: IpaTranscriber {
             ///jo/ 	radio 	radio
             Rule(Regex("i[aeou]"), "j"),
 
-            //A weak vowel and a strong vowel together form a diphthong and are not separated into different syllables.
             //Two strong vowels together form a hiatus and are separated into different syllables. Example: Leo
 
             //Falling

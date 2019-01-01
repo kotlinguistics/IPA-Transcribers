@@ -19,87 +19,84 @@ enum class Backness {
     BACK
 }
 
-data class Vowel(
+enum class Vowel(
     /**This would be a [Char],
      * but Kotlin considers diacritic marks to be separate characters.
      * So marked vowels like ̞e are considered two characters,
-     * meaning they are not a valid Char (in the eyes of kotlin).*/
-    val ipa:String,
+     * meaning they are not a valid Char (in the eyes of kotlin).
+     *
+     * It's an array because some vowels have multiple symbol variants,
+     * from historical changes and nonstandard usage*/
+    val symbols:Array<String>,
     val height: Height,
     val backness: Backness,
     val rounded:Boolean=false,
     /**Any other features, marked by diacritics.*/
     val features:Diacritics = Diacritics()
-)
+) {
+    //FRONT VOWELS
+    CLOSE_FRONT_UNROUNDED(arrayOf("i" ), CLOSE, FRONT),
+    CLOSE_FRONT_ROUNDED(arrayOf("y" ), CLOSE, FRONT, true),
 
-fun getQualitiesForIpaVowel(ipa:String): Vowel {
-    return when(ipa) {
-        //FRONT VOWELS
-        "i" -> Vowel(ipa, CLOSE, FRONT)
-        "y" -> Vowel(ipa, CLOSE, FRONT, true)
+    NEAR_CLOSE_FRONT_UNROUNDED(arrayOf("ɪ" ), NEAR_CLOSE, FRONT),
+    NEAR_CLOSE_FRONT_ROUNDED(arrayOf("ʏ" ), NEAR_CLOSE, FRONT, true),
 
-        "ɪ" -> Vowel(ipa, NEAR_CLOSE, FRONT)
-        "ʏ" -> Vowel(ipa, NEAR_CLOSE, FRONT, true)
+    CLOSE_MID_FRONT_UNROUNDED(arrayOf("e" ), CLOSE_MID, FRONT),
+    CLOSE_MID_FRONT_ROUNDED(arrayOf("ø" ), CLOSE_MID, FRONT, true),
 
-        "e" -> Vowel(ipa, CLOSE_MID, FRONT)
-        "ø" -> Vowel(ipa, CLOSE_MID, FRONT, true)
+    MID_FRONT_UNROUNDED(arrayOf("̞e", "̝ɛ" ), MID, FRONT),
+    MID_FRONT_ROUNDED(arrayOf("̞ø", "̝œ" ), MID, FRONT, true),
 
-        "̞e", "̝ɛ" -> Vowel(ipa, MID, FRONT)
-        "̞ø", "̝œ" -> Vowel(ipa, MID, FRONT, true)
+    OPEN_MID_FRONT_UNROUNDED(arrayOf("ɛ" ), OPEN_MID, FRONT),
+    OPEN_MID_FRONT_ROUNDED(arrayOf("œ" ), OPEN_MID, FRONT, true),
 
-        "ɛ" -> Vowel(ipa, OPEN_MID, FRONT)
-        "œ" -> Vowel(ipa, OPEN_MID, FRONT, true)
+    NEAR_OPEN_FRONT_UNROUNDED(arrayOf("æ", "̝a" ), NEAR_OPEN, FRONT),
 
-        "æ", "̝a" -> Vowel(ipa, NEAR_OPEN, FRONT)
-
-        "a", "̟a", "̞æ" -> Vowel(ipa, OPEN, FRONT)
-        "ɶ" -> Vowel(ipa, CLOSE_MID, FRONT, true)
+    OPEN_FRONT_UNROUNDED(arrayOf("a", "̟a", "̞æ" ), OPEN, FRONT),
+    OPEN_FRONT_ROUNDED(arrayOf("ɶ" ), CLOSE_MID, FRONT, true),
 
 
-        //CENTRAL VOWELS
-        "ɨ", "ï", "̈ɯ" -> Vowel(ipa, CLOSE, CENTRAL)
-        "ʉ" -> Vowel(ipa, CLOSE, CENTRAL, true)
+    //CENTRAL VOWELS
+    CLOSE_CENTRAL_UNROUNDED(arrayOf("ɨ", "ï", "̈ɯ" ), CLOSE, CENTRAL),
+    CLOSE_CENTRAL_ROUNDED(arrayOf("ʉ" ), CLOSE, CENTRAL, true),
 
-        "̞ɨ" -> Vowel(ipa, NEAR_CLOSE, CENTRAL)
-        "̞ʉ", "ü" -> Vowel(ipa, NEAR_CLOSE, CENTRAL, true)
+    NEAR_CLOSE_CENTRAL_UNROUNDED(arrayOf("̞ɨ" ), NEAR_CLOSE, CENTRAL),
+    NEAR_CLOSE_CENTRAL_ROUNDED(arrayOf("̞ʉ", "ü" ), NEAR_CLOSE, CENTRAL, true),
 
-        "ɘ", "ë", "̈ɤ", "̝ə" -> Vowel(ipa, CLOSE_MID, CENTRAL)
-        "ɵ", "ö" -> Vowel(ipa, CLOSE_MID, CENTRAL, true)
+    CLOSE_MID_CENTRAL_UNROUNDED(arrayOf("ɘ", "ë", "̈ɤ", "̝ə" ), CLOSE_MID, CENTRAL),
+    CLOSE_MID_CENTRAL_ROUNDED(arrayOf("ɵ", "ö" ), CLOSE_MID, CENTRAL, true),
 
-        //all hail the immortal schwa!
-        "ə" -> Vowel(ipa, MID, CENTRAL, false)
+    //all hail the immortal schwa!
+    SCHWA(arrayOf("ə"),MID, CENTRAL, false),
 
-        "ɜ", "̈ɛ", "̞ə", "̝ɐ" -> Vowel(ipa, OPEN_MID, CENTRAL)
-        "ɞ", "̈ɔ" -> Vowel(ipa, OPEN_MID, CENTRAL, true)
+    OPEN_MID_CENTRAL_UNROUNDED(arrayOf("ɜ", "̈ɛ", "̞ə", "̝ɐ" ), OPEN_MID, CENTRAL),
+    OPEN_MID_CENTRAL_ROUNDED(arrayOf("ɞ", "̈ɔ" ), OPEN_MID, CENTRAL, true),
 
-        "ɐ" -> Vowel(ipa, NEAR_OPEN, CENTRAL)
+    NEAR_OPEN_CENTRAL_UNROUNDED(arrayOf("ɐ" ), NEAR_OPEN, CENTRAL),
 
-        "ä","̠a", "̈ɑ", "̞ɐ" -> Vowel(ipa, OPEN, CENTRAL)
-        "̈ɒ", "̈ɶ" -> Vowel(ipa, OPEN, CENTRAL, true)
-
-
-        //BACK VOWELS
-        "ɯ" -> Vowel(ipa, CLOSE, BACK)
-        "u" -> Vowel(ipa, CLOSE, BACK, true)
-
-        "̞ɯ", "̝ɤ", "̽ɯ" -> Vowel(ipa, NEAR_CLOSE, BACK)
-        "ʊ" -> Vowel(ipa, NEAR_CLOSE, BACK, true)
-
-        "ɤ" -> Vowel(ipa, CLOSE_MID, BACK)
-        "o" -> Vowel(ipa, CLOSE_MID, BACK, true)
-
-        "̞ɤ", "̝ʌ" -> Vowel(ipa, MID, BACK)
-        "̞o", "̝ɔ" -> Vowel(ipa, MID, BACK, true)
-
-        "ʌ" -> Vowel(ipa, OPEN_MID, BACK)
-        "ɔ" -> Vowel(ipa, OPEN_MID, BACK, true)
-
-        "ɑ" -> Vowel(ipa, OPEN, BACK)
-        "ɒ", "̞ɔ" -> Vowel(ipa, CLOSE, BACK, true)
+    OPEN_CENTRAL_UNROUNDED(arrayOf("ä","̠a", "̈ɑ", "̞ɐ" ), OPEN, CENTRAL),
+    OPEN_CENTRAL_ROUNDED(arrayOf("̈ɒ", "̈ɶ" ), OPEN, CENTRAL, true),
 
 
-        else -> Vowel("ə", MID, CENTRAL, false)
-    }
+    //BACK VOWELS
+    CLOSE_BACK_UNROUNDED(arrayOf("ɯ" ), CLOSE, BACK),
+    CLOSE_BACK_ROUNDED(arrayOf("u" ), CLOSE, BACK, true),
+
+    NEAR_CLOSE_BACK_UNROUNDED(arrayOf("̞ɯ", "̝ɤ", "̽ɯ" ), NEAR_CLOSE, BACK),
+    NEAR_CLOSE_BACK_ROUNDED(arrayOf("ʊ" ), NEAR_CLOSE, BACK, true),
+
+    CLOSE_MID_BACK_UNROUNDED(arrayOf("ɤ" ), CLOSE_MID, BACK),
+    CLOSE_MID_BACK_ROUNDED(arrayOf("o" ), CLOSE_MID, BACK, true),
+
+    MID_BACK_UNROUNDED(arrayOf("̞ɤ", "̝ʌ" ), MID, BACK),
+    MID_BACK_ROUNDED(arrayOf("̞o", "̝ɔ" ), MID, BACK, true),
+
+    OPEN_MID_BACK_UNROUNDED(arrayOf("ʌ" ), OPEN_MID, BACK),
+    OPEN_MID_BACK_ROUNDED(arrayOf("ɔ" ), OPEN_MID, BACK, true),
+
+    OPEN_BACK_UNROUNDED(arrayOf("ɑ" ), OPEN, BACK),
+    OPEN_BACK_ROUNDED(arrayOf("ɒ", "̞ɔ" ), CLOSE, BACK, true),
 }
+
 
 

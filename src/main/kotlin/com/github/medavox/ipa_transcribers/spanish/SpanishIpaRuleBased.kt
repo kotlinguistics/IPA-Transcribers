@@ -368,10 +368,10 @@ class SpanishIpaRuleBased: Transcriber {
 
         american.append('/')
         european.append('/')
-    return setOf(
-        Variant("American", american.toString()),
-        Variant("Peninsular", european.toString())
-    )
+        return setOf(
+            Variant("American", american.toString()),
+            Variant("Peninsular", european.toString())
+        )
     }
 
     /**Removes the stress accents from vowels,

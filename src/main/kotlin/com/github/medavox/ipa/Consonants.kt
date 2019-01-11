@@ -13,8 +13,6 @@ enum class Manner {
     LATERAL_FRICATIVE,
     LATERAL_APPROXIMANT,
     LATERAL_TAP_FLAP,
-
-
 }
 
 enum class Place {
@@ -49,7 +47,8 @@ enum class PulmonicConsonants(ipaSymbol:String,
                               voiced:Boolean=false) {
     //not all of these combinations are valid consonants
 
-    //TODO: encode sounds judged impossible-to-produce. All others may be written using the below symbol & diacritics
+    //TODO: encode sounds judged impossible-to-produce.
+    // All others may be written using a combination of a symbol below & some diacritic mark(s)
 
     //BILABIALS
     //=========

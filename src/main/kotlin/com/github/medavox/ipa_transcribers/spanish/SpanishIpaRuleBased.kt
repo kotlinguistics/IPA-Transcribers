@@ -1,6 +1,6 @@
 package com.github.medavox.ipa_transcribers.spanish
 
-import com.github.medavox.ipa_transcribers.IpaTranscriber
+import com.github.medavox.ipa_transcribers.Transcriber
 import com.github.medavox.ipa_transcribers.Variant
 import java.lang.StringBuilder
 
@@ -15,8 +15,9 @@ import java.lang.StringBuilder
  * * [Oxford Dictionary Spanish Pronunciation Guide](https://es.oxforddictionaries.com/grammar/spanish-pronunciation)]
  * * [Wikipedia's IPA for Spanish](https://en.wikipedia.org/wiki/Help:IPA/Spanish)
  * * [Wikipedia:Spanish Orthography](https://en.wikipedia.org/wiki/Spanish_orthography)
+ * * [Wikipedia phonology of spanish](https://en.wikipedia.org/wiki/Spanish_language#Phonology)
  * */
-class SpanishIpaRuleBased: IpaTranscriber {
+class SpanishIpaRuleBased: Transcriber {
     //the 'transcripcon' problem - does the voicedness of n bleed over onto s AND c?
     //todo: account for voicing assimilation
     /**
@@ -332,7 +333,7 @@ class SpanishIpaRuleBased: IpaTranscriber {
      *  Digraphs are orthographical combos, usually two letters, that together represent one sound.
      *  Eg in English: th sh ch.
      *  */
-    override fun transcribeToIpa(nativeText: String): Set<Variant> {
+    override fun transcribe(nativeText: String): Set<Variant> {
         val american = StringBuilder().append('/')
         val european = StringBuilder().append('/')
 

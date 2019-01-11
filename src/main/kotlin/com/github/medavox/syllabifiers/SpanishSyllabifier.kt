@@ -276,13 +276,12 @@ class SpanishSyllabifier : Syllabifier {
      * I have serious doubts about its correctness,
      * but this is the algorithm converted to Kotlin,
      * as verbatim as possible.*/
-    private fun syllabifyPseudocode(input:String): String {
-        /**Returns this.get(index), or null if the index is not valid for the string.*/
-        fun String.c(index:Int):Char?{
+    fun syllabifyPseudocode(input:String): String {
+        fun on(a:String, index:Int, b:String):Boolean{
             return try {
-                get(index)
+                a.get(index) in b
             }catch (sioobe:StringIndexOutOfBoundsException) {
-                null
+                false
             }
         }
         val consonants = "bcdfghjklmnñpqrstuvwxyz"
@@ -301,15 +300,15 @@ class SpanishSyllabifier : Syllabifier {
 
         for(i in preIndex until s.length) {
 
-            if( ( (s[i-1] in strongVowels || s[i-1] in weakAccentedVowels) && s[i] in strongVowels ) ||
-                (s.c(i-1) in vowels && s[i] in weakAccentedVowels) ) {
+            if( ( (on(s,i-1, strongVowels) || on(s, i-1, weakAccentedVowels)) && s[i] in strongVowels ) ||
+                (on(s,i-1, vowels) && s[i] in weakAccentedVowels) ) {
                 N += "-"
                 T = s[i].toString()
                 continue
             }
 
-            if((s[i] in consonants && s[i+1] in vowels) ||
-                (s[i+1] in accentedVowels && T.isNotEmpty()) ) {
+            if((s[i] in consonants && on(s, i+1, vowels)) ||
+                (on(s,i+1, accentedVowels) && T.isNotEmpty()) ) {
                 if(s[i] in "lr" && s[i-1] in consonants) {
                     if(i > 1) {
                         T = T //?? "T = T[k], for all 0 <= k <= R.length-1"

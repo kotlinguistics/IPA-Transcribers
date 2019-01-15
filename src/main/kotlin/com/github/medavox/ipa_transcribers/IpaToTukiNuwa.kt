@@ -14,21 +14,21 @@ class IpaToTukiNuwa: Transcriber {
      * AND whose stressed syllable is after the first,
      * drop the unstressed syllable(s) before the stressed one*/
     private val rules:Array<Rule> = arrayOf(
-        Rule(Regex("[a]"), "a"),
-        Rule(Regex("[h]"), "h"),
-        Rule(Regex("[i]"), "i"),
-        Rule(Regex("[j]"), "j"),
-        Rule(Regex("[kg]"), "k"),
-        Rule(Regex("[l]"), "l"),
-        Rule(Regex("[m]"), "m"),
-        Rule(Regex("[n]"), "n"),
-        Rule(Regex("[pb]"), "p"),
-        Rule(Regex("[sz]"), "s"),
-        Rule(Regex("[td]"), "t"),
-        Rule(Regex("[u]"), "u"),
-        Rule(Regex("[wv]"), "w")
+        Rule(Regex("[aɶäɒɑæɐɛəʌ]+"), "a"),
+        Rule(Regex("[hɦχxħçʁʕ]+"), "h"),
+        Rule(Regex("[iyɪʏeø]+"), "i"),
+        Rule(Regex("[jʎʝ]+"), "j"),
+        Rule(Regex("[kgqɢ]+"), "k"),
+        Rule(Regex("[lɫɭɹ]+"), "l"),
+        Rule(Regex("[mɱ]+"), "m"),
+        Rule(Regex("[nŋɲɴ]+"), "n"),
+        Rule(Regex("[pbʙɸβ]+"), "p"),
+        Rule(Regex("[szʃʒʂʐɕʑθ]+"), "s"),
+        Rule(Regex("[tdðʈɖ]+"), "t"),
+        Rule(Regex("[uʊɯɤoɔ]+"), "u"),
+        Rule(Regex("[ʋwvʍ]+"), "w")
     )
     override fun transcribe(nativeText: String): Set<Variant> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return setOf(Variant("tn", processWithRules(nativeText, rules)))
     }
 }

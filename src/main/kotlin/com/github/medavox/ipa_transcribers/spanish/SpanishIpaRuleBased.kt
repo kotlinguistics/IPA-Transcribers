@@ -95,10 +95,10 @@ class SpanishIpaRuleBased: Transcriber {
 
         //⟨hu⟩ before a vowel = [w]
         //      **hu**eso; **hu**evo
-        Rule(Regex("hu"), "w"),
+        Rule(Regex("hu[aeio]"), "w", 2),
         //⟨hi⟩ before a vowel = [j] or [ʝ]
         //      **hi**erba; **hi**elo
-        Rule(Regex("hi"), "ʝ"),
+        Rule(Regex("hi[aeio]"), "ʝ", 2),
         //⟨h⟩ everywhere = silent (hoy; hacer; prohibir; huevo; hielo)
         //(huevo /′ weβo/, almohada /almo′aða/)
         //     in loanwords and foreign proper names = [x] or [h]

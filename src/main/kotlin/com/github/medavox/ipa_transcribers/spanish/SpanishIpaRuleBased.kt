@@ -1,6 +1,7 @@
 package com.github.medavox.ipa_transcribers.spanish
 
 import com.github.medavox.ipa_transcribers.Transcriber
+import com.github.medavox.ipa_transcribers.Transcriber.Rule
 import com.github.medavox.ipa_transcribers.Variant
 import java.lang.StringBuilder
 
@@ -88,7 +89,6 @@ class SpanishIpaRuleBased: Transcriber {
 */
     //NOTE:rule order matters!
     private val voicedConsonants = "([bdglmnñvwy]|hu|hi)"
-    data class Rule(val matcher:Regex, val outputString:String, val lettersConsumed:Int=1 )
     private val rules:Array<Rule> = arrayOf(
         //⟨ñ⟩ = [ɲ] (ñandú; cabaña)
         Rule(Regex("ñ"), "ɲ"),
@@ -108,7 +108,7 @@ class SpanishIpaRuleBased: Transcriber {
         //⟨b⟩ or ⟨v⟩ word-initial after a pause, or after ⟨m⟩ or ⟨n⟩ = [b] (bestia; embuste; vaca; envidia)
         //⟨n⟩  i**n**vierno = [m]
         //(barco/′barko/, vaca/′baka/, ambos /′ambos/, en vano /em′bano/)
-        Rule(Regex("(mb|mv|nb|nv)"), "mb", 2),
+        Rule(Regex("(mb|mv|nb|nv)"), "mb"),
         Rule(Regex("^[bv]"), "b"),
         //⟨b⟩ or ⟨v⟩ elsewhere (i.e. after a vowel, even across a word boundary,
         // or after any consonant other than ⟨m⟩ or ⟨n⟩) = [β]
@@ -116,11 +116,11 @@ class SpanishIpaRuleBased: Transcriber {
         Rule(Regex("[bv]"), "β"),
 
         //⟨n⟩  ci_n_co = [ŋ]
-        Rule(Regex("(nk|nc)"), "ŋ"),
+        Rule(Regex("(nk|nc)"), "ŋ", 1),
         //⟨n⟩  co_n_fite = [ɱ]
-        Rule(Regex("nf"), "ɱ"),
+        Rule(Regex("nf"), "ɱ", 1),
         //⟨n⟩  e_n_yesar = [ɲ]
-        Rule(Regex("ny"), "ɲʝ", 2),
+        Rule(Regex("ny"), "ɲʝ"),
         //⟨n⟩ si**n*** everywhere but before other consonants = [n]
         //      _n_ido; a_n_illo; a_n_helo
         //     mu**n**do = [n]
@@ -128,39 +128,39 @@ class SpanishIpaRuleBased: Transcriber {
 
         //⟨ch⟩ = [tʃ] or [ʃ] (depending upon the dialect) (ocho; chícharo)
         //(chico /′tʃiko/, leche /′letʃe/).
-        Rule(Regex("ch"), "tʃ", 2),
+        Rule(Regex("ch"), "tʃ"),
 
         //⟨tx⟩ (rare; from loanwords) = [tʃ] (pin_tx_o)
-        Rule(Regex("tx"), "tʃ", 2),
+        Rule(Regex("tx"), "tʃ"),
 
         //⟨c⟩ before ⟨e⟩ or ⟨i⟩ = [θ] (central and northern Spain) or [s] (most other regions)
         // (cero /′sero/, /′θero/; cinco /′siŋko/, /′θiŋko/).
         //      **c**ereal; en**c**ima
-        Rule(Regex("c[ie]"), "θ|s"),
+        Rule(Regex("c[ie]"), "θ|s", 1),
         //2.  C is pronounced /k/ when followed by a consonant other than h or by a, o or u
         //     elsewhere = [k]
         //      **c**asa; **c**laro; * va**c**a*; * es**c**udo*
         //     before voiced consonants = [ɣ]
         //     ané**c**dota
-        Rule(Regex("c$voicedConsonants"), "ɣ"),
+        Rule(Regex("c$voicedConsonants"), "ɣ", 1),
         Rule(Regex("c"), "k"),
 
         //15.  Z is pronounced /s/ in Latin America and parts of southern Spain and /θ/ in the rest of Spain.
         //⟨z⟩ = [θ] (central and northern Spain) or [s] (most other regions)
         //     before voiced consonants = [ð] (central and northern Spain) or [z] (most other regions)
-        Rule(Regex("z$voicedConsonants"), "ð̞|z"),
+        Rule(Regex("z$voicedConsonants"), "ð̞|z", 1),
         Rule(Regex("z"), "θ|s"),
 
         //⟨qu⟩ only occurs before ⟨e⟩ or ⟨i⟩ = [k] (quema /′kema/, quiso /′kiso/)
-        Rule(Regex("que"), "ke", 3),
-        Rule(Regex("qui"), "ki", 3),
+        Rule(Regex("que"), "ke"),
+        Rule(Regex("qui"), "ki"),
 
         //⟨d⟩ word-initial after a pause, or after ⟨l⟩ or ⟨n⟩ = [d]
         //(digo /′diƔo/, anda /′anda/, el dueño /el′dweɲo/)
         //     dá_d_iva; ar_d_er; a_d_mirar; mi _d_e_d_o; ver_d_a_d_
         Rule(Regex("^d"), "d"),
-        Rule(Regex("ld"), "ld", 2),
-        Rule(Regex("nd"), "nd", 2),
+        Rule(Regex("ld"), "ld"),
+        Rule(Regex("nd"), "nd"),
         //todo: match this rule across word boundaries
         //⟨d⟩  elsewhere = [ð] (hada /′aða/, arde /′arðe/, los dados /loz′ðaðos/)
         Rule(Regex("d"), "ð"),
@@ -188,11 +188,11 @@ class SpanishIpaRuleBased: Transcriber {
 
         //⟨g⟩ before ⟨e⟩ or ⟨i⟩ = [x] or [h]
         //(gitano /xi′tano/, auge /′awxe/).
-        Rule(Regex("g[ie]"), "x"),
+        Rule(Regex("g[ie]"), "x", 1),
         //⟨g⟩ not before ⟨e⟩ or ⟨i⟩, and either word-initial after a pause, or after ⟨n⟩ = [ɡ]
         //      ***g**ato*; ***g**rande*; * ven**g**o*
         Rule(Regex("ng[^ie]"), "ŋg", 2),
-        Rule(Regex("^g[^ie]"), "g"),
+        Rule(Regex("^g[^ie]"), "g", 1),
         //⟨g⟩  not before ⟨e⟩ or ⟨i⟩, and not in the above contexts = [ɣ]
         //     tri**g**o; amar**g**o*; si**g**no*; mi **g**ato
         //(hago /′aƔo/, trague /′traƔe/, alga /′alƔa/, águila /′aƔila/).
@@ -204,15 +204,15 @@ class SpanishIpaRuleBased: Transcriber {
         //(paragüero /para′Ɣwero/, agüita /a′Ɣwita/).
         //     before ⟨e⟩ or ⟨i⟩, and not in the above contexts = [ɣw]
         //      averi**gü**e
-        Rule(Regex("^güi"), "gwi", 3),
-        Rule(Regex("güi"), "Ɣwi", 3),
-        Rule(Regex("^güe"), "gwe", 3),
-        Rule(Regex("güe"), "Ɣwe", 3),
+        Rule(Regex("^güi"), "gwi"),
+        Rule(Regex("güi"), "Ɣwi"),
+        Rule(Regex("^güe"), "gwe"),
+        Rule(Regex("güe"), "Ɣwe"),
 
         //⟨rr⟩ only occurs between vowels = [r]
         //(the letter /r/ represents the trilled r in IPA)
         //      * ca**rr**o*
-        Rule(Regex("rr"), "r", 2),
+        Rule(Regex("rr"), "r"),
 
         //13.  X is pronounced /ks/, although there is a marked tendency to render it as /s/ before consonants,
         //especially in less careful speech (extra /′ekstra/, /′estra/, or in some dialects /′ehtra/, see 11 above).
@@ -224,7 +224,8 @@ class SpanishIpaRuleBased: Transcriber {
         //⟨x⟩ between vowels and word-finally = [ks]
         //      * e**x**acto*; * ta**x**i*; * rela**x***
         Rule(Regex("x$"), "ks"),
-        Rule(Regex("[aeiou]x[aeiou]"), "ks"),
+
+        Rule(Regex("[aeiou]x[aeiou]"), "ks", 1),//FIXME: broken rule. Look-backs are prohibited!
         //⟨x⟩  word-initially = [s]
         //      ***x**enofobia*
         Rule(Regex("^x"), "s"),
@@ -249,11 +250,11 @@ class SpanishIpaRuleBased: Transcriber {
         //the symbol /J/ is used to represent the range of pronunciations described above.
         //⟨ll⟩ everywhere = [ʎ], [ʝ] or [dʒ] (depending upon the dialect)
         //      ***ll**ave*; * po**ll**o*
-        Rule(Regex("ll"), "ʎ|ʝ", 2),
+        Rule(Regex("ll"), "ʎ|ʝ"),
 
         //⟨t⟩ everywhere = [t]
         //    before voiced consonants = [ð]
-        Rule(Regex("t$voicedConsonants"), "ð"),
+        Rule(Regex("t$voicedConsonants"), "ð", 1),
 
         //    11.  S is pronounced /s/ but it is aspirated in many dialects of Spanish
         //    when it occurs in syllable-final position (hasta /′ahta/, los cuatro /loh′kwatro/).
@@ -268,7 +269,7 @@ class SpanishIpaRuleBased: Transcriber {
         //     sound quality intermediate between the alveolar [s]
         //     of English **s**ea and the palato-alveolar [ʃ]
         //     of ***s**he*
-        Rule(Regex("s$voicedConsonants"), "z"),
+        Rule(Regex("s$voicedConsonants"), "z", 1),
 
         //⟨tz⟩ rare; from loanwords = [ts]
         //      * que**tz**al*; * Pá**tz**cuaro*
@@ -292,7 +293,7 @@ class SpanishIpaRuleBased: Transcriber {
         //    (b) As the conjunction y and in syllable-final position, y is pronounced /i/.
         //⟨y⟩  as a consonant = [j], [ʝ], or [dʒ]
         //      **y**a; **y**elmo; a**y**uno
-        Rule(Regex("y[^aeiou]"), "i"),
+        Rule(Regex("y[^aeiou]"), "i", 1),
         Rule(Regex("y$"), "i"),
         Rule(Regex("y"), "ʝ"),
 
@@ -308,12 +309,12 @@ class SpanishIpaRuleBased: Transcriber {
         ///we/ 	fuego 	fire
         ///wi/[62] 	buitre 	vulture
         ///wo/ 	cuota 	quota
-        Rule(Regex("u[aeio]"), "w"),
+        Rule(Regex("u[aeio]"), "w", 1),
         ///ja/ 	hacia 	towards
         ///je/ 	tierra 	earth
         ///ju/ 	viuda 	widow
         ///jo/ 	radio 	radio
-        Rule(Regex("i[aeou]"), "j"),
+        Rule(Regex("i[aeou]"), "j", 1),
 
         //Two strong vowels together form a hiatus and are separated into different syllables. Example: Leo
 
@@ -321,10 +322,10 @@ class SpanishIpaRuleBased: Transcriber {
         ///ai/ 	aire 	air
         ///au/ 	pausa 	pause
         ///ei/ 	rey 	king
-        Rule(Regex("ey"), "ei", 2),
+        Rule(Regex("ey"), "ei"),
         ///eu/ 	neutro 	neutral
         ///oi/ 	hoy 	today
-        Rule(Regex("oy"), "oi", 2)
+        Rule(Regex("oy"), "oi")
         ///ou/[61] 	bou 	seine fishing
     )
 

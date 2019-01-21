@@ -40,11 +40,36 @@ sealed class Variant<Language> {
 
 sealed class GenericRule(matcher:Regex, lettersConsumed: Int?)
 
-class  VariantRule<T:Language>(val matcher:Regex,
-                               vararg val variantOutputs:Map.Entry<Variant<T>, String>,
-                               lettersConsumed: Int?=null):GenericRule(matcher, lettersConsumed)
+data class VariantRule<T : Language>(
+    /**The native text that this rule operates on.*/
+    val matcher: Regex,
+    /**Define a different string output for each (major) variant of the language.*/
+    val variantOutputs: Map<Variant<T>, String>,
+    /**the output to use for Variants not defined in [variantOutputs].*/
+    val defaultOutput: String? = null,
+    val lettersConsumed: Int? = null
+) : GenericRule(matcher, lettersConsumed)
 
-data class Rool(val matcher:Regex, val outputString:() -> String, val lettersConsumed:Int?=null ):GenericRule(matcher, lettersConsumed) {
-    constructor(matcher:Regex, outputString: String, lettersConsumed:Int?=null)
-            :this(matcher, {outputString}, lettersConsumed)
+data class Rule(
+    /**The native text that this rule operates on.*/
+    val matcher: Regex,
+    /**A lambda which returns the text to append to the output string.
+     * Use this constructor if your rule has side effects, such as counting vowels so far.*/
+    val outputString: () -> String,
+    /**The number of letters of native text that have been 'consumed'.
+     * if not specified, defaults to the size of the Regex match.*/
+    val lettersConsumed: Int? = null)
+        :GenericRule(matcher, lettersConsumed)
+{
+    constructor(
+        /**The native text that this rule operates on.*/
+        matcher: Regex,
+        /**The text to append to the output string*/
+        outputString: String,
+        /**The number of letters of native text that have been 'consumed'.
+         * if not specified, defaults to the size of the Regex match.*/
+        lettersConsumed: Int? = null)
+            : this(matcher, { outputString }, lettersConsumed)
 }
+
+val gob:GenericRule = VariantRule<English>(Regex("lol"), mapOf(Variant.British to "no"), "yes")

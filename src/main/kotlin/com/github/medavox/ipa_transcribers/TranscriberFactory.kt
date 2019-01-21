@@ -11,6 +11,7 @@ object TranscriberFactory {
      * If there is no [Transcriber] implementation available for the specified language,
      * A dummy implementation is returned which only returns empty sets.*/
     fun getTranscriberForLang(language: Language): Transcriber {
+      //todo:instead of directly transcribing arabic to IPA, try transcribing the google-romanised text to IPA
         return when(language) {
             Language.English -> EnglishIpaCambridge()
             Language.Spanish -> SpanishIpaRuleBased()

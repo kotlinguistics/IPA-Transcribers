@@ -2,7 +2,6 @@ package com.github.medavox.ipa_transcribers.spanish
 
 import com.github.medavox.ipa_transcribers.Transcriber
 import com.github.medavox.ipa_transcribers.Transcriber.Rule
-import com.github.medavox.ipa_transcribers.Variant
 import java.lang.StringBuilder
 
 /**Spanish spelling is largely considered phonetic.

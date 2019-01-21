@@ -5,6 +5,13 @@ import java.lang.StringBuilder
 /**Converts text in the native orthography of a language,
  * into a collection of broad IPA transcriptions for important language variants.
  *
+ * This API takes a context-free approach:
+ * Regex is matched to the start of the string only,
+ * and the output String is not interpreted as Regex.
+ *
+ * Therefore, there is no state held by the Transcriber;
+ * only simple substitutions matched bvy Regular expressions may be used.
+ *
  *  The aim here is not to capture the nuances of every dialect/accent of a language;
  *  but rather to provide the pronunciation of a standard or prestige dialect(s)
  *  that every speaker should be able to understand.
@@ -16,7 +23,15 @@ import java.lang.StringBuilder
  *  call [TranscriberFactory.getTranscriberForLang]*/
 interface Transcriber {
     fun transcribe(nativeText:String):Set<Variant>
-    class RuleSet(rules:Array<Rule>)
+
+    /**Specifies one replacement rule, from a Regex matching native text,
+     * to the IPA characters corresponding to them.
+     *
+     * Required features:
+     * optionally specify number of letters consumed, if different from match length
+    (per-rule) either a string or lambda. The lambba can access state persisting across whole word
+    lambda on no rule matched
+    support for multiple simultaneous output variants, eg british and american english*/
     data class Rule(val matcher:Regex, val outputString:() -> String, val lettersConsumed:Int?=null ) {
         constructor( matcher:Regex, outputString:String, lettersConsumed:Int?=null )
                 :this(matcher, {outputString}, lettersConsumed)

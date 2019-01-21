@@ -21,44 +21,6 @@ import java.lang.StringBuilder
  *
  *  To get an instance for a particular language,
  *  call [TranscriberFactory.getTranscriberForLang]*/
-interface Transcriber {
-    fun transcribe(nativeText:String):Set<Variant>
-
-    /**Specifies one replacement rule, from a Regex matching native text,
-     * to the IPA characters corresponding to them.
-     *
-     * Required features:
-     * optionally specify number of letters consumed, if different from match length
-    (per-rule) either a string or lambda. The lambba can access state persisting across whole word
-    lambda on no rule matched
-    support for multiple simultaneous output variants, eg british and american english*/
-    data class Rule(val matcher:Regex, val outputString:() -> String, val lettersConsumed:Int?=null ) {
-        constructor( matcher:Regex, outputString:String, lettersConsumed:Int?=null )
-                :this(matcher, {outputString}, lettersConsumed)
-    }
-    fun processWithRules(nativeText:String, rules:Array<Rule>):String {
-        val out = StringBuilder()//.append('/')
-        var processingWord = nativeText
-        loop@ while(processingWord.isNotEmpty()) {
-            for (i in 0 until rules.size) {
-                //if the rule matches the start of the remaining string
-                val matchResult:MatchResult? = rules[i].matcher.find(processingWord)
-
-                if(matchResult?.range?.start == 0) {
-                    //System.out.println("rule '${rules[i]}' matches '$processingWord'")
-
-                    out.append(rules[i].outputString())
-                    //number of letters consumed is the match length, unless explicitly specified
-                    val actualLettersConsumed = rules[i].lettersConsumed ?: matchResult.value.length
-                    processingWord = processingWord.substring(actualLettersConsumed)
-                    continue@loop
-                }
-            }
-            //no rule matched; the spanish orthography matches the IPA.
-            //just copy it to the output
-            out.append(processingWord[0])
-            processingWord = processingWord.substring(1)
-        }
-        return out.toString()
-    }
+interface Transcriber<T:Language> {
+    fun transcribe(nativeText:String):Map<Variant<T>, String>
 }

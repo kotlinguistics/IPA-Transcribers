@@ -1,7 +1,15 @@
 package com.github.medavox.ipa_transcribers.spanish
 
+import com.github.medavox.ipa_transcribers.Language.Spanish
+import com.github.medavox.ipa_transcribers.rulebased.Rule
 import com.github.medavox.ipa_transcribers.Transcriber
-import com.github.medavox.ipa_transcribers.Transcriber.Rule
+import com.github.medavox.ipa_transcribers.Variant
+import com.github.medavox.ipa_transcribers.Variant.PanAmerican
+import com.github.medavox.ipa_transcribers.Variant.Peninsular
+import com.github.medavox.ipa_transcribers.rulebased.VariantRule
+import com.github.medavox.ipa_transcribers.rulebased.GenericRule
+import com.github.medavox.ipa_transcribers.rulebased.RuleProcessor
+import com.github.medavox.ipa_transcribers.rulebased.RuleProcessor.UnmatchedOutput
 import java.lang.StringBuilder
 
 /**Spanish spelling is largely considered phonetic.
@@ -17,7 +25,7 @@ import java.lang.StringBuilder
  * * [Wikipedia:Spanish Orthography](https://en.wikipedia.org/wiki/Spanish_orthography)
  * * [Wikipedia phonology of spanish](https://en.wikipedia.org/wiki/Spanish_language#Phonology)
  * */
-class SpanishIpaRuleBased: Transcriber {
+class SpanishIpaRuleBased: Transcriber<Spanish>, RuleProcessor<Spanish> {
     //the 'transcripcon' problem - does the voicedness of n bleed over onto s AND c?
     //todo: account for voicing assimilation
     /**
@@ -88,7 +96,7 @@ class SpanishIpaRuleBased: Transcriber {
 */
     //NOTE:rule order matters!
     private val voicedConsonants = "([bdglmnñvwy]|hu|hi)"
-    private val rules:Array<Rule> = arrayOf(
+    private val rules:Array<GenericRule> = arrayOf(
         //⟨ñ⟩ = [ɲ] (ñandú; cabaña)
         Rule(Regex("ñ"), "ɲ"),
 
@@ -135,7 +143,7 @@ class SpanishIpaRuleBased: Transcriber {
         //⟨c⟩ before ⟨e⟩ or ⟨i⟩ = [θ] (central and northern Spain) or [s] (most other regions)
         // (cero /′sero/, /′θero/; cinco /′siŋko/, /′θiŋko/).
         //      **c**ereal; en**c**ima
-        Rule(Regex("c[ie]"), "θ|s", 1),
+        VariantRule(Regex("c[ie]"), mapOf(Peninsular to "θ", PanAmerican to "s"), lettersConsumed = 1),
         //2.  C is pronounced /k/ when followed by a consonant other than h or by a, o or u
         //     elsewhere = [k]
         //      **c**asa; **c**laro; * va**c**a*; * es**c**udo*
@@ -147,8 +155,9 @@ class SpanishIpaRuleBased: Transcriber {
         //15.  Z is pronounced /s/ in Latin America and parts of southern Spain and /θ/ in the rest of Spain.
         //⟨z⟩ = [θ] (central and northern Spain) or [s] (most other regions)
         //     before voiced consonants = [ð] (central and northern Spain) or [z] (most other regions)
-        Rule(Regex("z$voicedConsonants"), "ð̞|z", 1),
-        Rule(Regex("z"), "θ|s"),
+        VariantRule(Regex("z$voicedConsonants"),
+            mapOf(Peninsular to "ð", PanAmerican to "z"), lettersConsumed = 1),
+        VariantRule(Regex("z"), mapOf(Peninsular to "θ", PanAmerican to "s")),
 
         //⟨qu⟩ only occurs before ⟨e⟩ or ⟨i⟩ = [k] (quema /′kema/, quiso /′kiso/)
         Rule(Regex("que"), "ke"),
@@ -333,45 +342,18 @@ class SpanishIpaRuleBased: Transcriber {
      *  Digraphs are orthographical combos, usually two letters, that together represent one sound.
      *  Eg in English: th sh ch.
      *  */
-    override fun transcribe(nativeText: String): Set<Variant> {
-        val american = StringBuilder().append('/')
-        val european = StringBuilder().append('/')
-
-        var processingWord = nativeText.toLowerCase().normaliseAccents()
-        loop@ while(processingWord.isNotEmpty()) {
-            for (i in 0 until rules.size) {
-                //if the rule matches the start of the remaining string
-                if(rules[i].matcher.find(processingWord)?.range?.start == 0) {
-                    //System.out.println("rule '${rules[i]}' matches '$processingWord'")
-                    if(rules[i].outputString.contains("|")) {
-                        //there's a difference in pronunciation between european and american spanish
-                        //european on the left, american on the right of the pipe
-                        val variants = rules[i].outputString.split("|")
-                        european.append(variants[0])
-                        american.append(variants[1])
-                    }
-                    else{//otherwise, they're the same
-                        american.append(rules[i].outputString)
-                        european.append(rules[i].outputString)
-                    }
-
-                    processingWord = processingWord.substring(rules[i].lettersConsumed)
-                    continue@loop
-                }
-            }
+    override fun transcribe(nativeText: String):Map<Variant<Spanish>, String> {
+        return processWithRules(
+            nativeText.toLowerCase().normaliseAccents(),
+            rules,
+            mapOf(
+                Peninsular to StringBuilder(),//.append('/'),
+                PanAmerican to StringBuilder()//.append('/')
+            )) {unmatched ->
             //no rule matched; the spanish orthography matches the IPA.
             //just copy it to the output
-            american.append(processingWord[0])
-            european.append(processingWord[0])
-            processingWord = processingWord.substring(1)
+            UnmatchedOutput(unmatched.substring(1), unmatched[0].toString())
         }
-
-        american.append('/')
-        european.append('/')
-        return setOf(
-            Variant("American", american.toString()),
-            Variant("Peninsular", european.toString())
-        )
     }
 
     /**Removes the stress accents from vowels,

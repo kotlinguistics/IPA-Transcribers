@@ -1,11 +1,10 @@
 package com.github.medavox.ipa_transcribers.spanish
 
 import com.github.medavox.ipa_transcribers.Language.Spanish
+import com.github.medavox.ipa_transcribers.Language.Spanish.PanAmerican
+import com.github.medavox.ipa_transcribers.Language.Spanish.Peninsular
 import com.github.medavox.ipa_transcribers.rulebased.Rule
 import com.github.medavox.ipa_transcribers.Transcriber
-import com.github.medavox.ipa_transcribers.Variant
-import com.github.medavox.ipa_transcribers.Variant.PanAmerican
-import com.github.medavox.ipa_transcribers.Variant.Peninsular
 import com.github.medavox.ipa_transcribers.rulebased.VariantRule
 import com.github.medavox.ipa_transcribers.rulebased.GenericRule
 import com.github.medavox.ipa_transcribers.rulebased.RuleProcessor
@@ -96,7 +95,7 @@ class SpanishIpaRuleBased: Transcriber<Spanish>, RuleProcessor<Spanish> {
 */
     //NOTE:rule order matters!
     private val voicedConsonants = "([bdglmnñvwy]|hu|hi)"
-    private val rules:Array<GenericRule> = arrayOf(
+    private val rules:Array<GenericRule<Spanish>> = arrayOf(
         //⟨ñ⟩ = [ɲ] (ñandú; cabaña)
         Rule(Regex("ñ"), "ɲ"),
 
@@ -143,7 +142,8 @@ class SpanishIpaRuleBased: Transcriber<Spanish>, RuleProcessor<Spanish> {
         //⟨c⟩ before ⟨e⟩ or ⟨i⟩ = [θ] (central and northern Spain) or [s] (most other regions)
         // (cero /′sero/, /′θero/; cinco /′siŋko/, /′θiŋko/).
         //      **c**ereal; en**c**ima
-        VariantRule(Regex("c[ie]"), mapOf(Peninsular to "θ", PanAmerican to "s"), lettersConsumed = 1),
+        VariantRule(Regex("c[ie]"), 1){
+            when(it) { Peninsular -> "θ"; PanAmerican -> "s" }},
         //2.  C is pronounced /k/ when followed by a consonant other than h or by a, o or u
         //     elsewhere = [k]
         //      **c**asa; **c**laro; * va**c**a*; * es**c**udo*
@@ -155,9 +155,9 @@ class SpanishIpaRuleBased: Transcriber<Spanish>, RuleProcessor<Spanish> {
         //15.  Z is pronounced /s/ in Latin America and parts of southern Spain and /θ/ in the rest of Spain.
         //⟨z⟩ = [θ] (central and northern Spain) or [s] (most other regions)
         //     before voiced consonants = [ð] (central and northern Spain) or [z] (most other regions)
-        VariantRule(Regex("z$voicedConsonants"),
-            mapOf(Peninsular to "ð", PanAmerican to "z"), lettersConsumed = 1),
-        VariantRule(Regex("z"), mapOf(Peninsular to "θ", PanAmerican to "s")),
+        VariantRule(Regex("z$voicedConsonants"), 1){
+            when(it) {Peninsular -> "ð"; PanAmerican -> "z"}},
+        VariantRule(Regex("z")){ when(it){Peninsular -> "θ"; PanAmerican -> "s"}},
 
         //⟨qu⟩ only occurs before ⟨e⟩ or ⟨i⟩ = [k] (quema /′kema/, quiso /′kiso/)
         Rule(Regex("que"), "ke"),
@@ -342,7 +342,7 @@ class SpanishIpaRuleBased: Transcriber<Spanish>, RuleProcessor<Spanish> {
      *  Digraphs are orthographical combos, usually two letters, that together represent one sound.
      *  Eg in English: th sh ch.
      *  */
-    override fun transcribe(nativeText: String):Map<Variant<Spanish>, String> {
+    override fun transcribe(nativeText: String):Map<Spanish, String> {
         return processWithRules(
             nativeText.toLowerCase().normaliseAccents(),
             rules,

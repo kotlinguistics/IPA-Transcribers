@@ -1,7 +1,5 @@
 package com.github.medavox.ipa_transcribers
 
-import java.lang.StringBuilder
-
 /**Converts text in the native orthography of a language,
  * into a collection of broad IPA transcriptions for important language variants.
  *
@@ -22,5 +20,5 @@ import java.lang.StringBuilder
  *  To get an instance for a particular language,
  *  call [TranscriberFactory.getTranscriberForLang]*/
 interface Transcriber<T:Language> {
-    fun transcribe(nativeText:String):Map<Variant<T>, String>
+    fun transcribe(nativeText:String):Map<T, String>//:String
 }

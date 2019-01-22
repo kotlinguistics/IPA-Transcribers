@@ -1,15 +1,14 @@
 package com.github.medavox.ipa_transcribers.rulebased
 
 import com.github.medavox.ipa_transcribers.Language
-import com.github.medavox.ipa_transcribers.Variant
 import java.lang.StringBuilder
 
 interface RuleProcessor<T: Language> {
     data class UnmatchedOutput(val newWorkingInput:String, val output:String)
     fun processWithRules(nativeText:String,
-                         rules:Array<GenericRule>,
-                         variantBuilders:Map<Variant<T>, StringBuilder>,
-                         onNoRuleMatch:(unmatched:String) -> UnmatchedOutput):Map<Variant<T>, String> {
+                         rules:Array<out GenericRule<T>>,
+                         variantBuilders:Map<T, StringBuilder>,
+                         onNoRuleMatch:(unmatched:String) -> UnmatchedOutput):Map<T, String> {
 
         //val out = StringBuilder()//.append('/')
         var processingWord = nativeText
@@ -33,8 +32,10 @@ interface RuleProcessor<T: Language> {
                         // and if the default rule was specified.
                         //if there are unhandled variants after this,
                         //fixme: WAT DO?
-                        is VariantRule<*> -> {
-                            this bit is not finished yet
+                        is VariantRule<T> -> {
+                            for (variant in variantBuilders.entries) {
+                                variant.value.append(rule.outputForEveryVariant(variant.key))
+                            }
                         }
                     }
 

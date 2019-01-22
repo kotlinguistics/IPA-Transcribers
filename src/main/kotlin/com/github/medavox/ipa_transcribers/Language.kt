@@ -3,9 +3,16 @@ package com.github.medavox.ipa_transcribers
 import com.github.medavox.ipa_transcribers.Language.*
 
 sealed class Language(val code: String) {
-    object Spanish : Language("es")
-    object English : Language("en")
-    object Arabic : Language("ar") //I intend this to mean objectical Arabic which, thanks to the Qu'ran,
+    //object Spanish : Language("es")
+    sealed class Spanish : Language("es") {
+        object Peninsular:Spanish()
+        object PanAmerican:Spanish()
+    }
+    sealed class English : Language("en") {
+        object American : English()
+        object British : English()
+    }
+    object Arabic : Language("ar") //I intend this to mean classical Arabic which, thanks to the Qu'ran,
     // should be understood by most arabic dialect speakers
     object Hindi : Language("hi")
     object Bengali : Language("bn")
@@ -26,14 +33,5 @@ sealed class Language(val code: String) {
     object Tamil : Language("ta")
     object Italian : Language("it")
     object Persian : Language("fa")
-}
-
-sealed class Variant<Language> {
-    object All : Variant<Language>()
-
-    object British : Variant<English>()
-    object American : Variant<English>()
-
-    object Peninsular : Variant<Spanish>()
-    object PanAmerican : Variant<Spanish>()
+    object InternationalPhoneticAlphabet : Language("ipa")
 }

@@ -18,7 +18,7 @@ package com.github.medavox.ipa_transcribers
  *  transcriptions, but ignore Irish, Scottish, Texan, Indian, African, and International variants.
  *
  *  To get an instance for a particular language,
- *  call [TranscriberFactory.getTranscriberForLang]*/
+ *  call [TranscriberFactory.getTranscriber]*/
 interface Transcriber<T:Language> {
     fun transcribe(nativeText:String):Map<T, String>//:String
 }

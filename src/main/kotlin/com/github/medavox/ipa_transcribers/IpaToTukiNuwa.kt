@@ -21,7 +21,7 @@ class IpaToTukiNuwa: RuleProcessor<InternationalPhoneticAlphabet>, Transcriber<I
         Rule(Regex("[hɦχxħçʁʕ]+"), "h"),
         Rule(Regex("[iyɪʏeø]+"), "i"),
         Rule(Regex("[jʎʝ]+"), "j"),
-        Rule(Regex("[kgqɢ]+"), "k"),
+        Rule(Regex("[kgqɢɡ]+"), "k"),
         Rule(Regex("[lɫɭɹ]+"), "l"),
         Rule(Regex("[mɱ]+"), "m"),
         Rule(Regex("[nŋɲɴ]+"), "n"),

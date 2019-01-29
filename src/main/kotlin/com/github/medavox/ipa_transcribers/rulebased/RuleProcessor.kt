@@ -1,15 +1,12 @@
 package com.github.medavox.ipa_transcribers.rulebased
 
-import com.github.medavox.ipa_transcribers.PluricentricLanguage
 import com.github.medavox.ipa_transcribers.Language
 import java.lang.StringBuilder
 
-data class UnmatchedOutput(val newWorkingInput:String, val output:String)
-
-interface VariantRuleProcessor<T: PluricentricLanguage> {
+/*interface VariantRuleProcessor<T: PluricentricLanguage> {
 
     fun processWithRules(nativeText:String,
-                         rules:Array<out GenericRule<T>>,
+                         rules:Array<Rule>,
                          variantBuilders:Map<T, StringBuilder>,
                          onNoRuleMatch:(unmatched:String) -> UnmatchedOutput):Map<T, String> {
 
@@ -57,15 +54,14 @@ interface VariantRuleProcessor<T: PluricentricLanguage> {
         }
         return variantBuilders.mapValues {  it.value.toString() }
     }
-}
+}*/
 
-interface UnifiedRuleProcessor<T:Language> {
-    fun processWithRules(nativeText:String,
-                         rules:Array<out Rule<T>>,
-                         onNoRuleMatch:(unmatched:String) -> UnmatchedOutput
-    ):String{
+interface RuleProcessor<T:Language> {
+    data class UnmatchedOutput(val newWorkingInput:String, val output:String)
+    fun String.processWithRules(rules:List<Rule>,
+                         onNoRuleMatch:(unmatched:String) -> UnmatchedOutput) : String {
         val out = StringBuilder()//.append('/')
-        var processingWord = nativeText
+        var processingWord = this
         loop@ while(processingWord.isNotEmpty()) {
             for (rule in rules) {
                 //for (i in 0 until rules.size) {

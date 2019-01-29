@@ -16,7 +16,7 @@ class IpaToTukiNuwa: RuleProcessor<InternationalPhoneticAlphabet>, Transcriber<I
      * with words that have too many syllables
      * AND whose stressed syllable is after the first,
      * drop the unstressed syllable(s) before the stressed one*/
-    private val rules:Array<Rule<InternationalPhoneticAlphabet>> = arrayOf(
+    private val initialRules:List<Rule> = listOf(
         Rule(Regex("[aɶäɒɑæɐɛəʌ]+"), "a"),
         Rule(Regex("[hɦχxħçʁʕ]+"), "h"),
         Rule(Regex("[iyɪʏeø]+"), "i"),
@@ -32,11 +32,26 @@ class IpaToTukiNuwa: RuleProcessor<InternationalPhoneticAlphabet>, Transcriber<I
         Rule(Regex("[ʋwvʍ]+"), "w")
     )
 
-    override fun transcribe(nativeText: String): Map<InternationalPhoneticAlphabet, String> {
-        return processWithRules(nativeText, rules, mapOf(InternationalPhoneticAlphabet to StringBuilder())){
+    private val phonotacticsRules:List<Rule> = listOf(
+        //tuki nuwa doesn't allow these combinations.
+        Rule(Regex("ji"), "i"),
+        Rule(Regex("wu"), "u")
+    )
+
+    private val cleanupAfterPhonotacticsRules:List<Rule> = listOf(
+        //tuki nuwa doesn't allow this combination.
+        Rule(Regex("i+"), "i"),
+        Rule(Regex("u+"), "u")
+    )
+
+    override fun transcribe(nativeText: String): String {
+        val noMatchLambda:(unmatched:String) -> RuleProcessor.UnmatchedOutput = {
             //drop unhandled characters
             System.out.println("character ${it[0]} in $it doesn't match any IPA->TN rules. Skipping...")
             RuleProcessor.UnmatchedOutput(it.substring(1), "")
         }
+        return nativeText.processWithRules(initialRules, noMatchLambda)
+            .processWithRules(phonotacticsRules, noMatchLambda)
+            .processWithRules(cleanupAfterPhonotacticsRules, noMatchLambda)
     }
 }

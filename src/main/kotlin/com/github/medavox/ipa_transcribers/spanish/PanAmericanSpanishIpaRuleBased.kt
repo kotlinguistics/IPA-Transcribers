@@ -1,15 +1,8 @@
 package com.github.medavox.ipa_transcribers.spanish
 
-import com.github.medavox.ipa_transcribers.Language.Spanish
-import com.github.medavox.ipa_transcribers.Language.Spanish.PanAmerican
-import com.github.medavox.ipa_transcribers.Language.Spanish.Peninsular
-import com.github.medavox.ipa_transcribers.rulebased.Rule
+import com.github.medavox.ipa_transcribers.Language.PanAmericanSpanish
 import com.github.medavox.ipa_transcribers.Transcriber
-import com.github.medavox.ipa_transcribers.rulebased.VariantRule
-import com.github.medavox.ipa_transcribers.rulebased.GenericRule
-import com.github.medavox.ipa_transcribers.rulebased.RuleProcessor
-import com.github.medavox.ipa_transcribers.rulebased.RuleProcessor.UnmatchedOutput
-import java.lang.StringBuilder
+import com.github.medavox.ipa_transcribers.rulebased.*
 
 /**Spanish spelling is largely considered phonetic.
  * I'm not sure how true that is practice
@@ -24,7 +17,7 @@ import java.lang.StringBuilder
  * * [Wikipedia:Spanish Orthography](https://en.wikipedia.org/wiki/Spanish_orthography)
  * * [Wikipedia phonology of spanish](https://en.wikipedia.org/wiki/Spanish_language#Phonology)
  * */
-class SpanishIpaRuleBased: Transcriber<Spanish>, RuleProcessor<Spanish> {
+object PanAmericanSpanishIpaRuleBased: Transcriber<PanAmericanSpanish>, RuleProcessor<PanAmericanSpanish> {
     //the 'transcripcon' problem - does the voicedness of n bleed over onto s AND c?
     //todo: account for voicing assimilation
     /**
@@ -94,8 +87,8 @@ class SpanishIpaRuleBased: Transcriber<Spanish>, RuleProcessor<Spanish> {
       **w**olframio; **W**amba
 */
     //NOTE:rule order matters!
-    private val voicedConsonants = "([bdglmnñvwy]|hu|hi)"
-    private val rules:Array<GenericRule<Spanish>> = arrayOf(
+    internal val voicedConsonants = "([bdglmnñvwy]|hu|hi)"
+    internal val rules:List<Rule> = listOf(
         //⟨ñ⟩ = [ɲ] (ñandú; cabaña)
         Rule(Regex("ñ"), "ɲ"),
 
@@ -142,8 +135,7 @@ class SpanishIpaRuleBased: Transcriber<Spanish>, RuleProcessor<Spanish> {
         //⟨c⟩ before ⟨e⟩ or ⟨i⟩ = [θ] (central and northern Spain) or [s] (most other regions)
         // (cero /′sero/, /′θero/; cinco /′siŋko/, /′θiŋko/).
         //      **c**ereal; en**c**ima
-        VariantRule(Regex("c[ie]"), 1){
-            when(it) { Peninsular -> "θ"; PanAmerican -> "s" }},
+        Rule(Regex("c[ie]"), "s", 1),
         //2.  C is pronounced /k/ when followed by a consonant other than h or by a, o or u
         //     elsewhere = [k]
         //      **c**asa; **c**laro; * va**c**a*; * es**c**udo*
@@ -155,9 +147,8 @@ class SpanishIpaRuleBased: Transcriber<Spanish>, RuleProcessor<Spanish> {
         //15.  Z is pronounced /s/ in Latin America and parts of southern Spain and /θ/ in the rest of Spain.
         //⟨z⟩ = [θ] (central and northern Spain) or [s] (most other regions)
         //     before voiced consonants = [ð] (central and northern Spain) or [z] (most other regions)
-        VariantRule(Regex("z$voicedConsonants"), 1){
-            when(it) {Peninsular -> "ð"; PanAmerican -> "z"}},
-        VariantRule(Regex("z")){ when(it){Peninsular -> "θ"; PanAmerican -> "s"}},
+        Rule(Regex("z$voicedConsonants"), "z", 1),
+        Rule(Regex("z"), "s"),
 
         //⟨qu⟩ only occurs before ⟨e⟩ or ⟨i⟩ = [k] (quema /′kema/, quiso /′kiso/)
         Rule(Regex("que"), "ke"),
@@ -342,17 +333,11 @@ class SpanishIpaRuleBased: Transcriber<Spanish>, RuleProcessor<Spanish> {
      *  Digraphs are orthographical combos, usually two letters, that together represent one sound.
      *  Eg in English: th sh ch.
      *  */
-    override fun transcribe(nativeText: String):Map<Spanish, String> {
-        return processWithRules(
-            nativeText.toLowerCase().normaliseAccents(),
-            rules,
-            mapOf(
-                Peninsular to StringBuilder(),//.append('/'),
-                PanAmerican to StringBuilder()//.append('/')
-            )) {unmatched ->
+    override fun transcribe(nativeText: String):String {
+        return nativeText.toLowerCase().normaliseAccents().processWithRules(rules) {unmatched ->
             //no rule matched; the spanish orthography matches the IPA.
             //just copy it to the output
-            UnmatchedOutput(unmatched.substring(1), unmatched[0].toString())
+            RuleProcessor.UnmatchedOutput(unmatched.substring(1), unmatched[0].toString())
         }
     }
 

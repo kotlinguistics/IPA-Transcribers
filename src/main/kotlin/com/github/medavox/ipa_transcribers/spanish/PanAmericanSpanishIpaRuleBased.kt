@@ -2,7 +2,7 @@ package com.github.medavox.ipa_transcribers.spanish
 
 import com.github.medavox.ipa_transcribers.Language.PanAmericanSpanish
 import com.github.medavox.ipa_transcribers.Transcriber
-import com.github.medavox.ipa_transcribers.rulebased.*
+import com.github.medavox.ipa_transcribers.rulesystem.*
 
 /**Spanish spelling is largely considered phonetic.
  * I'm not sure how true that is practice

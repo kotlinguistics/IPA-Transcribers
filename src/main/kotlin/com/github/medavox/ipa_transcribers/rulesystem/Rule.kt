@@ -1,4 +1,4 @@
-package com.github.medavox.ipa_transcribers.rulebased
+package com.github.medavox.ipa_transcribers.rulesystem
 
 /**Specifies one replacement rule, from a Regex matching native text,
  * to the IPA characters corresponding to them.

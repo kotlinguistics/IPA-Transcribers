@@ -1,4 +1,4 @@
-package com.github.medavox.ipa_transcribers.rulebased
+package com.github.medavox.ipa_transcribers.rulesystem
 
 import com.github.medavox.ipa_transcribers.Language
 import java.lang.StringBuilder

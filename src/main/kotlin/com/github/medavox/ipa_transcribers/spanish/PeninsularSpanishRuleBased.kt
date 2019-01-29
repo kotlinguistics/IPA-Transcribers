@@ -2,7 +2,7 @@ package com.github.medavox.ipa_transcribers.spanish
 
 import com.github.medavox.ipa_transcribers.Language.PeninsularSpanish
 import com.github.medavox.ipa_transcribers.Transcriber
-import com.github.medavox.ipa_transcribers.rulebased.Rule
+import com.github.medavox.ipa_transcribers.rulesystem.Rule
 
 object PeninsularSpanishRuleBased:Transcriber<PeninsularSpanish> {
     val rules:List<Rule> = PanAmericanSpanishIpaRuleBased.rules.map{

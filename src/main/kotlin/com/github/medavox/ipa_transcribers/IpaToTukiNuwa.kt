@@ -1,8 +1,8 @@
 package com.github.medavox.ipa_transcribers
 
 import com.github.medavox.ipa_transcribers.Language.InternationalPhoneticAlphabet
-import com.github.medavox.ipa_transcribers.rulebased.Rule
-import com.github.medavox.ipa_transcribers.rulebased.RuleProcessor
+import com.github.medavox.ipa_transcribers.rulesystem.Rule
+import com.github.medavox.ipa_transcribers.rulesystem.RuleProcessor
 
 
 class IpaToTukiNuwa: RuleProcessor<InternationalPhoneticAlphabet>, Transcriber<InternationalPhoneticAlphabet> {

@@ -1,17 +1,13 @@
 package com.github.medavox.ipa_transcribers
 
-import com.github.medavox.ipa_transcribers.Language.*
+//sealed class PluricentricLanguage(code:String):Language(code) {
+import com.github.medavox.ipa_transcribers.PluricentricLanguage.*
 
-sealed class Language(val code: String) {
-    //object Spanish : Language("es")
-    sealed class Spanish : Language("es") {
-        object Peninsular:Spanish()
-        object PanAmerican:Spanish()
-    }
-    sealed class English : Language("en") {
-        object American : English()
-        object British : English()
-    }
+sealed class GenericLanguage(val code: String)
+
+/**Languages with only one standard variant internationally.
+ * Most languages have plenty of regional and social variants, but I'm not counting them here.*/
+sealed class Language(code: String):GenericLanguage(code) {
     object Arabic : Language("ar") //I intend this to mean classical Arabic which, thanks to the Qu'ran,
     // should be understood by most arabic dialect speakers
     object Hindi : Language("hi")
@@ -34,4 +30,18 @@ sealed class Language(val code: String) {
     object Italian : Language("it")
     object Persian : Language("fa")
     object InternationalPhoneticAlphabet : Language("ipa")
+}
+
+/**Languages with multiple internationally-accepted standard versions.*/
+sealed class PluricentricLanguage(code:String):GenericLanguage(code) {
+    //a PluricentricLanguage implementor has to have a variant object which implements Variant<ThatLanguage>
+    //the only implementor of this is a data class with every variant as a required field
+    //but how can the RuleProcessor iterate through properties?
+    object Spanish : PluricentricLanguage("es")
+    object English : PluricentricLanguage("en")
+}
+
+sealed class VariantsOutput<T:PluricentricLanguage> {
+    data class SpanishVariants(val Peninsular: String, val PanAmerican: String): VariantsOutput<Spanish>()
+    data class EnglishVariants(val British: String, val American: String): VariantsOutput<English>()
 }

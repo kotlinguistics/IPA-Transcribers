@@ -51,7 +51,7 @@ class IpaToTukiNuwa: RuleProcessor<InternationalPhoneticAlphabet>, Transcriber<I
             RuleProcessor.UnmatchedOutput(it.substring(1), "")
         }
         return nativeText.processWithRules(initialRules, noMatchLambda)
-            .processWithRules(phonotacticsRules, noMatchLambda)
-            .processWithRules(cleanupAfterPhonotacticsRules, noMatchLambda)
+            .processWithRules(phonotacticsRules){RuleProcessor.UnmatchedOutput(it.substring(1), it[0].toString())}
+            .processWithRules(cleanupAfterPhonotacticsRules){RuleProcessor.UnmatchedOutput(it.substring(1), it[0].toString())}
     }
 }

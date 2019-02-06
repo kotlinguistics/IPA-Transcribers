@@ -24,5 +24,8 @@ data class Rule(
         /**The text to append to the output string*/
         outputString: String,
         lettersConsumed: Int? = null)
-            : this(matcher, { outputString }, lettersConsumed)
+    : this(matcher, { outputString }, lettersConsumed)
+
+    constructor(match:String, outputString:String, lettersUsed:Int? = null)
+    :this(Regex(match), {outputString}, lettersUsed)
 }

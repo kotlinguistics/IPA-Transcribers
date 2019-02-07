@@ -9,6 +9,33 @@ import java.text.Normalizer
 object KoreanRuleBased:Transcriber<Korean>, RuleProcessor<Korean> {
     private val rules:List<Rule> = listOf(
 
+        //syllable-initial (choseong) consonants
+        Rule("ᄀ", "k"),
+        Rule("ᄁ", "k͈"),
+        Rule("ᄂ", "n"),
+        Rule("ᄃ", "t"),
+        Rule("ᄄ", "t͈"),
+        Rule("ᄅ", "ɾ"),
+        Rule("ᄆ", "m"),
+        Rule("ᄇ", "p"),
+        Rule("ᄈ", "p͈"),
+        Rule("ᄉ", "s"),
+        Rule("ᄊ", "s͈"),
+        Rule("ᄋ", ""),
+        Rule("ᄌ", "tɕ"),
+        Rule("ᄍ", "t͈ɕ"),
+        Rule("ᄎ", "tɕʰ"),
+        Rule("ᄏ", "kʰ"),
+        Rule("ᄐ", "tʰ"),
+        Rule("ᄑ", "pʰ"),
+        Rule("ᄒ", "h"),
+
+        // syllable-final (jongseong) consonants
+        Rule(Regex("[ᆨㄲ]"), "k̚"),
+        Rule("ᆪ", "k̚t̚"),
+        Rule("ᆫ", "n"),
+        Rule("ᆬ", "nt̚"),
+
         //nice and simple vowel rules.
         //the same symbol appears twice,
         // because there are two unicode blocks which represent korean hangul jamo.

@@ -1,6 +1,8 @@
 package com.github.medavox.ipa_transcribers
 
 sealed class Language(code: String) {
+    object MandarinChinese:Language("zh")
+    object CantoneseChinese:Language("zh")
     object PeninsularSpanish:Language("es")
     object PanAmericanSpanish:Language("es")
 

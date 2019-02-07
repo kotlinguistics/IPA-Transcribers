@@ -29,7 +29,8 @@ class IpaToTukiNuwa: RuleProcessor<InternationalPhoneticAlphabet>, Transcriber<I
         Rule(Regex("[szʃʒʂʐɕʑθ]+"), "s"),
         Rule(Regex("[tdðʈɖ]+"), "t"),
         Rule(Regex("[uʊɯɤoɔ]+"), "u"),
-        Rule(Regex("[ʋwvʍ]+"), "w")
+        Rule(Regex("[ʋwvʍ]+"), "w"),
+        Rule(Regex(" "), " ")
     )
 
     private val phonotacticsRules:List<Rule> = listOf(
@@ -39,15 +40,26 @@ class IpaToTukiNuwa: RuleProcessor<InternationalPhoneticAlphabet>, Transcriber<I
     )
 
     private val cleanupAfterPhonotacticsRules:List<Rule> = listOf(
-        //tuki nuwa doesn't allow this combination.
-        Rule(Regex("i+"), "i"),
-        Rule(Regex("u+"), "u")
+        //deduplicate any resulting repeated letters
+        Rule("a+", "a"),
+        Rule("h+", "h"),
+        Rule("i+", "i"),
+        Rule("j+", "j"),
+        Rule("k+", "k"),
+        Rule("l+", "l"),
+        Rule("m+", "m"),
+        Rule("n+", "n"),
+        Rule("p+", "p"),
+        Rule("s+", "s"),
+        Rule("t+", "t"),
+        Rule("u+", "u"),
+        Rule("w+", "w")
     )
 
     override fun transcribe(nativeText: String): String {
         val noMatchLambda:(unmatched:String) -> RuleProcessor.UnmatchedOutput = {
             //drop unhandled characters
-            System.out.println("character ${it[0]} in $it doesn't match any IPA->TN rules. Skipping...")
+            System.out.println("character '${it[0]}' in \"$it\" doesn't match any IPA->TN rules. Skipping...")
             RuleProcessor.UnmatchedOutput(it.substring(1), "")
         }
         return nativeText.processWithRules(initialRules, noMatchLambda)

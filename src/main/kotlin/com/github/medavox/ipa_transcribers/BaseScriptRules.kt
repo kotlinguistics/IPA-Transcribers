@@ -11,17 +11,16 @@ object BaseScriptRules {
     val latinBaseRules:List<Rule> = listOf(
         Rule("a", "a"),
         Rule("b", "b"),
+
         Rule("d", "d"),
-
-        Rule("e", "e"),//[a]
+        Rule("e", "e"),
         Rule("f", "f"),
-
-        Rule("g", "ɡ"), ///ɟ/[b]
-
+        Rule("g", "ɡ"),
         Rule("h", "h"),
         Rule("i", "i"),
-        Rule("k", "k"),//, /c/[b]
-        Rule("l", "l"),//, /l/[b]
+
+        Rule("k", "k"),
+        Rule("l", "l"),
         Rule("m", "m"),
         Rule("n", "n"),
         Rule("o", "o"),
@@ -32,6 +31,7 @@ object BaseScriptRules {
         Rule("u", "u"),
         Rule("v", "v"),
         Rule("w", "w"),
+
         Rule("y", "j"),
         Rule("z", "z")
     )

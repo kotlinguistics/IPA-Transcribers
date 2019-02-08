@@ -1,5 +1,15 @@
 package com.github.medavox.ipa_transcribers
 
+//todo:re-evaluate language speakers to include L2 speakers
+//indo-aryan languages and their scripts:
+//hindi     Devanagari
+//urdu      Perso-Arabic
+//bengali   Unique brahmic abugida (unstandardised)
+//punjabi   Shahmukhi=Perso-Arabic (punjabi muslims), Gurmukhi = Unique Brahmic abugida (punjabi Hindus & Sikhs)
+//telugu    Unique brahmic abugida (brahmi-derived)
+//marathi   Devanagari (Balbodh)
+//tamil     Unique brahmic abugida
+//Persian/Farsi/Dari/Tajiki Perso-Arabic
 sealed class Language(code: String) {
     object MandarinChinese:Language("zh")
     object CantoneseChinese:Language("zh")

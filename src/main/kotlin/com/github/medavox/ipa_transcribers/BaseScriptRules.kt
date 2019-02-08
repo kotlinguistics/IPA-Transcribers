@@ -1,6 +1,6 @@
-package com.github.medavox.ipa_transcribers.baserules
+package com.github.medavox.ipa_transcribers
 
-import com.github.medavox.ipa_transcribers.rulesystem.Rule
+import com.github.medavox.ipa_transcribers.Rule
 
 /**common pronunciation rules for scripts shared by multiple languages*/
 object BaseScriptRules {

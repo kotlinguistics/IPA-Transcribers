@@ -1,8 +1,9 @@
 package com.github.medavox.ipa_transcribers.spanish
 
 import com.github.medavox.ipa_transcribers.Language.PanAmericanSpanish
+import com.github.medavox.ipa_transcribers.Rule
+import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
 import com.github.medavox.ipa_transcribers.Transcriber
-import com.github.medavox.ipa_transcribers.rulesystem.*
 
 /**Spanish spelling is largely considered phonetic.
  * I'm not sure how true that is practice
@@ -17,7 +18,7 @@ import com.github.medavox.ipa_transcribers.rulesystem.*
  * * [Wikipedia:Spanish Orthography](https://en.wikipedia.org/wiki/Spanish_orthography)
  * * [Wikipedia phonology of spanish](https://en.wikipedia.org/wiki/Spanish_language#Phonology)
  * */
-object PanAmericanSpanishIpaRuleBased: Transcriber<PanAmericanSpanish>, RuleProcessor<PanAmericanSpanish> {
+object PanAmericanSpanishIpaRuleBased: RuleBasedTranscriber<PanAmericanSpanish> {
     //the 'transcripcon' problem - does the voicedness of n bleed over onto s AND c?
     //todo: account for voicing assimilation
     /**
@@ -337,7 +338,7 @@ object PanAmericanSpanishIpaRuleBased: Transcriber<PanAmericanSpanish>, RuleProc
         return nativeText.toLowerCase().normaliseAccents().processWithRules(rules) {unmatched ->
             //no rule matched; the spanish orthography matches the IPA.
             //just copy it to the output
-            RuleProcessor.UnmatchedOutput(unmatched.substring(1), unmatched[0].toString())
+            RuleBasedTranscriber.UnmatchedOutput(unmatched.substring(1), unmatched[0].toString())
         }
     }
 

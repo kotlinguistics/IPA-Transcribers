@@ -1,12 +1,11 @@
 package com.github.medavox.ipa_transcribers.korean
 
 import com.github.medavox.ipa_transcribers.Language.Korean
-import com.github.medavox.ipa_transcribers.Transcriber
-import com.github.medavox.ipa_transcribers.rulesystem.Rule
-import com.github.medavox.ipa_transcribers.rulesystem.RuleProcessor
+import com.github.medavox.ipa_transcribers.Rule
+import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
 import java.text.Normalizer
 
-object KoreanRuleBased:Transcriber<Korean>, RuleProcessor<Korean> {
+object KoreanRuleBased: RuleBasedTranscriber<Korean> {
     private val rules:List<Rule> = listOf(
 
         //syllable-initial (choseong) consonants
@@ -73,7 +72,7 @@ object KoreanRuleBased:Transcriber<Korean>, RuleProcessor<Korean> {
         //thanks to https://stackoverflow.com/a/41311169
         return Normalizer.normalize(nativeText, Normalizer.Form.NFD).processWithRules(rules){
             System.err.println("unknown symbol '${it[0]}' in korean output")
-            RuleProcessor.UnmatchedOutput(it.substring(1), it[0].toString())
+            RuleBasedTranscriber.UnmatchedOutput(it.substring(1), it[0].toString())
         }
     }
 }

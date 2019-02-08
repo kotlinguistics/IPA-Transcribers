@@ -1,12 +1,11 @@
 package com.github.medavox.ipa_transcribers.malay
 
 import com.github.medavox.ipa_transcribers.Language.IndonesianMalay
-import com.github.medavox.ipa_transcribers.Transcriber
-import com.github.medavox.ipa_transcribers.baserules.BaseScriptRules
-import com.github.medavox.ipa_transcribers.rulesystem.Rule
-import com.github.medavox.ipa_transcribers.rulesystem.RuleProcessor
+import com.github.medavox.ipa_transcribers.BaseScriptRules
+import com.github.medavox.ipa_transcribers.Rule
+import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
 
-object MalayRuleBased:Transcriber<IndonesianMalay>, RuleProcessor<IndonesianMalay> {
+object MalayRuleBased:RuleBasedTranscriber<IndonesianMalay> {
     val rules:List<Rule> = listOf(
         Rule("c", "t͡ʃ"),
         Rule("j", "d͡ʒ"),

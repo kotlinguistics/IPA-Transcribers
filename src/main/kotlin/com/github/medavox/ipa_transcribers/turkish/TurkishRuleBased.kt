@@ -1,15 +1,14 @@
 package com.github.medavox.ipa_transcribers.turkish
 
 import com.github.medavox.ipa_transcribers.Language.Turkish
-import com.github.medavox.ipa_transcribers.Transcriber
-import com.github.medavox.ipa_transcribers.baserules.BaseScriptRules
-import com.github.medavox.ipa_transcribers.rulesystem.Rule
-import com.github.medavox.ipa_transcribers.rulesystem.RuleProcessor
+import com.github.medavox.ipa_transcribers.BaseScriptRules
+import com.github.medavox.ipa_transcribers.Rule
+import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
 
-object TurkishRuleBased: Transcriber<Turkish>, RuleProcessor<Turkish> {
+object TurkishRuleBased: RuleBasedTranscriber<Turkish> {
     private val rules:List<Rule> = listOf(
-        Rule("c",   "d͡ʒ"),
-        Rule("ç",   "t͡ʃ"),
+        Rule("c", "d͡ʒ"),
+        Rule("ç", "t͡ʃ"),
 
         // /e/ is realized as [ɛ]~[æ] before coda /m, n, l, r/. E.g. gelmek [ɡæɫˈmec].
         Rule("e", "e"),//[a]
@@ -55,7 +54,7 @@ object TurkishRuleBased: Transcriber<Turkish>, RuleProcessor<Turkish> {
     override fun transcribe(nativeText: String): String {
         return nativeText.toLowerCase().processWithRules(rules) {
             System.err.println("unknown char ${it[0]} in $it; skipping...")
-            RuleProcessor.UnmatchedOutput(it.substring(1), "")
+            RuleBasedTranscriber.UnmatchedOutput(it.substring(1), "")
         }
     }
 }

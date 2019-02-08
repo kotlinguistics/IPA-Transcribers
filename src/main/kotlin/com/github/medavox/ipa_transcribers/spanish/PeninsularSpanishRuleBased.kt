@@ -1,10 +1,10 @@
 package com.github.medavox.ipa_transcribers.spanish
 
 import com.github.medavox.ipa_transcribers.Language.PeninsularSpanish
-import com.github.medavox.ipa_transcribers.Transcriber
-import com.github.medavox.ipa_transcribers.rulesystem.Rule
+import com.github.medavox.ipa_transcribers.Rule
+import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
 
-object PeninsularSpanishRuleBased:Transcriber<PeninsularSpanish> {
+object PeninsularSpanishRuleBased: RuleBasedTranscriber<PeninsularSpanish> {
     val rules:List<Rule> = PanAmericanSpanishIpaRuleBased.rules.map{
         when(it.matcher) {
             Regex("c[ie]") -> it.copy(outputString = {"θ"})

@@ -1,12 +1,12 @@
-package com.github.medavox.ipa_transcribers.rulesystem
+package com.github.medavox.ipa_transcribers
 
-import com.github.medavox.ipa_transcribers.Language
 import java.lang.StringBuilder
 
-interface RuleProcessor<T:Language> {
+interface RuleBasedTranscriber<T:Language>:Transcriber<T> {
     data class UnmatchedOutput(val newWorkingInput:String, val output:String)
     fun String.processWithRules(rules:List<Rule>,
-                         onNoRuleMatch:(unmatched:String) -> UnmatchedOutput) : String {
+                                onNoRuleMatch:(unmatched:String) -> UnmatchedOutput
+    ) : String {
         val out = StringBuilder()//.append('/')
         var processingWord = this
         loop@ while(processingWord.isNotEmpty()) {

@@ -1,11 +1,9 @@
 package com.github.medavox.ipa_transcribers
 
 import com.github.medavox.ipa_transcribers.Language.InternationalPhoneticAlphabet
-import com.github.medavox.ipa_transcribers.rulesystem.Rule
-import com.github.medavox.ipa_transcribers.rulesystem.RuleProcessor
 
 
-class IpaToTukiNuwa: RuleProcessor<InternationalPhoneticAlphabet>, Transcriber<InternationalPhoneticAlphabet> {
+class IpaToTukiNuwa: RuleBasedTranscriber<InternationalPhoneticAlphabet> {
     /**Essentially an automated repair strategy for Tuki Nuwa.
      * replaces every IPA sound with the nearest legal sound in Tuki Nuwa.
 
@@ -57,13 +55,13 @@ class IpaToTukiNuwa: RuleProcessor<InternationalPhoneticAlphabet>, Transcriber<I
     )
 
     override fun transcribe(nativeText: String): String {
-        val noMatchLambda:(unmatched:String) -> RuleProcessor.UnmatchedOutput = {
+        val noMatchLambda:(unmatched:String) -> RuleBasedTranscriber.UnmatchedOutput = {
             //drop unhandled characters
             System.out.println("character '${it[0]}' in \"$it\" doesn't match any IPA->TN rules. Skipping...")
-            RuleProcessor.UnmatchedOutput(it.substring(1), "")
+            RuleBasedTranscriber.UnmatchedOutput(it.substring(1), "")
         }
         return nativeText.processWithRules(initialRules, noMatchLambda)
-            .processWithRules(phonotacticsRules){RuleProcessor.UnmatchedOutput(it.substring(1), it[0].toString())}
-            .processWithRules(cleanupAfterPhonotacticsRules){RuleProcessor.UnmatchedOutput(it.substring(1), it[0].toString())}
+            .processWithRules(phonotacticsRules){ RuleBasedTranscriber.UnmatchedOutput(it.substring(1), it[0].toString())}
+            .processWithRules(cleanupAfterPhonotacticsRules){ RuleBasedTranscriber.UnmatchedOutput(it.substring(1), it[0].toString())}
     }
 }

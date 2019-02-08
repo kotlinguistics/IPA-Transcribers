@@ -21,7 +21,7 @@ object KoreanRuleBased:Transcriber<Korean>, RuleProcessor<Korean> {
         Rule("ᄈ", "p͈"),
         Rule("ᄉ", "s"),
         Rule("ᄊ", "s͈"),
-        Rule("ᄋ", ""),
+        Rule("ᄋ", ""),//silent
         Rule("ᄌ", "tɕ"),
         Rule("ᄍ", "t͈ɕ"),
         Rule("ᄎ", "tɕʰ"),
@@ -31,10 +31,17 @@ object KoreanRuleBased:Transcriber<Korean>, RuleProcessor<Korean> {
         Rule("ᄒ", "h"),
 
         // syllable-final (jongseong) consonants
-        Rule(Regex("[ᆨㄲ]"), "k̚"),
-        Rule("ᆪ", "k̚t̚"),
+        Rule("[ᆨㄲ]", "k̚"),
+        Rule("ᆪ", "gs"),
         Rule("ᆫ", "n"),
         Rule("ᆬ", "nt̚"),
+        Rule("ᆮ", "t̚"),
+        Rule("ᆯ", "l"),
+        Rule("ᆷ", "m"),
+        Rule("ᆸ", "p̚"),
+        Rule("[ᆺㅆ]", "t̚"),
+        Rule("ᆼ", "ŋ"),
+        Rule("ᆽ", "t̚"),
 
         //nice and simple vowel rules.
         //the same symbol appears twice,

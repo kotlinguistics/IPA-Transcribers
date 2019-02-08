@@ -6,10 +6,10 @@ import com.github.medavox.ipa_transcribers.rulesystem.Rule
 
 object PeninsularSpanishRuleBased:Transcriber<PeninsularSpanish> {
     val rules:List<Rule> = PanAmericanSpanishIpaRuleBased.rules.map{
-        when {
-            it.matcher == Regex("c[ie]") -> it.copy(outputString = {"θ"})
-            it.matcher == Regex("z${PanAmericanSpanishIpaRuleBased.voicedConsonants}") -> it.copy(outputString = {"ð"})
-            it.matcher == Regex("z") -> it.copy(outputString = {"θ"})
+        when(it.matcher) {
+            Regex("c[ie]") -> it.copy(outputString = {"θ"})
+            Regex("z${PanAmericanSpanishIpaRuleBased.voicedConsonants}") -> it.copy(outputString = {"ð"})
+            Regex("z") -> it.copy(outputString = {"θ"})
             else -> it
         }
     }

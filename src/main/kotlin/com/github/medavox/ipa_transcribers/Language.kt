@@ -31,6 +31,9 @@ sealed class Language(code: String) {
     object Japanese : Language("ja")//DONE scraper. Ineligible for rule-based:
     // The most common writing system (Kanji) doesn't record pronunciation. Or at least, not directly.
     object Punjabi : Language("pa") //listed on Ethnologue as Lahnda with related dialects,
+
+    //according to wikipedia, "Most speakers of Javanese also speak Indonesian".
+    object IndonesianMalay:Language("id")
     // but I've excluded them here.
     object Javanese : Language("jw")//Uses the latin script, presumably imposed on it during colonial times.
     //or the language is a colonial creole of a eurooean and a 'native' language.

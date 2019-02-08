@@ -19,6 +19,6 @@ object MalayRuleBased:RuleBasedTranscriber<IndonesianMalay> {
         Rule("sy", "ʃ")
     ) + BaseScriptRules.latinBaseRules
     override fun transcribe(nativeText: String): String {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return nativeText.processWithRules(rules, reportAndSkip)
     }
 }

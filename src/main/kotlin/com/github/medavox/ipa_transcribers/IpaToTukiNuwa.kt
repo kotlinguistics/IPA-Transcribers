@@ -55,13 +55,8 @@ class IpaToTukiNuwa: RuleBasedTranscriber<InternationalPhoneticAlphabet> {
     )
 
     override fun transcribe(nativeText: String): String {
-        val noMatchLambda:(unmatched:String) -> RuleBasedTranscriber.UnmatchedOutput = {
-            //drop unhandled characters
-            System.out.println("character '${it[0]}' in \"$it\" doesn't match any IPA->TN rules. Skipping...")
-            RuleBasedTranscriber.UnmatchedOutput(it.substring(1), "")
-        }
-        return nativeText.processWithRules(initialRules, noMatchLambda)
-            .processWithRules(phonotacticsRules){ RuleBasedTranscriber.UnmatchedOutput(it.substring(1), it[0].toString())}
-            .processWithRules(cleanupAfterPhonotacticsRules){ RuleBasedTranscriber.UnmatchedOutput(it.substring(1), it[0].toString())}
+        return nativeText.processWithRules(initialRules, reportAndSkip)
+            .processWithRules(phonotacticsRules, copyVerbatim)
+            .processWithRules(cleanupAfterPhonotacticsRules, copyVerbatim)
     }
 }

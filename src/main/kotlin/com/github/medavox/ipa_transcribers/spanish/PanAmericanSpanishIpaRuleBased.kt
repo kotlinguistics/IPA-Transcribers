@@ -335,17 +335,13 @@ object PanAmericanSpanishIpaRuleBased: RuleBasedTranscriber<PanAmericanSpanish> 
      *  Eg in English: th sh ch.
      *  */
     override fun transcribe(nativeText: String):String {
-        return nativeText.toLowerCase().normaliseAccents().processWithRules(rules) {unmatched ->
-            //no rule matched; the spanish orthography matches the IPA.
-            //just copy it to the output
-            RuleBasedTranscriber.UnmatchedOutput(unmatched.substring(1), unmatched[0].toString())
-        }
+        return nativeText.toLowerCase().normaliseAccents().removeStressAccents().processWithRules(rules, copyVerbatim)
     }
 
     /**Removes the stress accents from vowels,
      * which aren't needed for our IPA orthography-to-sound transcription,
      * and in fact get in the way ("o" != "ó")*/
-    private fun String.removeStressAccents():String {
+    fun String.removeStressAccents():String {
         return this
             .replace("á", "a")
             .replace("é", "e")
@@ -356,7 +352,7 @@ object PanAmericanSpanishIpaRuleBased: RuleBasedTranscriber<PanAmericanSpanish> 
 
     /**Makes consistent the representation of spanish accented letters.
      * That is, replaces letters with combined diacritic marks with single-character equivalents.*/
-    private fun String.normaliseAccents():String {
+    fun String.normaliseAccents():String {
         return this
             .replace(Regex("(ñ|̃n)"), "ñ")
             .replace(Regex("(á|́a)"), "á")

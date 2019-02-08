@@ -4,6 +4,15 @@ import java.lang.StringBuilder
 
 interface RuleBasedTranscriber<T:Language>:Transcriber<T> {
     data class UnmatchedOutput(val newWorkingInput:String, val output:String)
+    val reportAndSkip:(String) -> UnmatchedOutput get() = {
+        System.err.println("unknown char ${it[0]} in $it; skipping...")
+        RuleBasedTranscriber.UnmatchedOutput(it.substring(1), "")
+    }
+
+    val copyVerbatim:(String) -> UnmatchedOutput get() = {
+        System.err.println("copying unknown char ${it[0]} to output...")
+        RuleBasedTranscriber.UnmatchedOutput(it.substring(1), it[0].toString())
+    }
     fun String.processWithRules(rules:List<Rule>,
                                 onNoRuleMatch:(unmatched:String) -> UnmatchedOutput
     ) : String {

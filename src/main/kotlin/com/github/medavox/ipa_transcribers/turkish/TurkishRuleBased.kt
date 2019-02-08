@@ -52,9 +52,6 @@ object TurkishRuleBased: RuleBasedTranscriber<Turkish> {
     // e.g. gâvur ('infidel'), mahkûm ('condemned'), lâzım ('necessary'),
     // although this diacritic's usage has been increasingly archaic.
     override fun transcribe(nativeText: String): String {
-        return nativeText.toLowerCase().processWithRules(rules) {
-            System.err.println("unknown char ${it[0]} in $it; skipping...")
-            RuleBasedTranscriber.UnmatchedOutput(it.substring(1), "")
-        }
+        return nativeText.toLowerCase().processWithRules(rules, reportAndSkip)
     }
 }

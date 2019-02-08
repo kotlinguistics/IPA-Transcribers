@@ -70,9 +70,6 @@ object KoreanRuleBased: RuleBasedTranscriber<Korean> {
     )
     override fun transcribe(nativeText: String): String {
         //thanks to https://stackoverflow.com/a/41311169
-        return Normalizer.normalize(nativeText, Normalizer.Form.NFD).processWithRules(rules){
-            System.err.println("unknown symbol '${it[0]}' in korean output")
-            RuleBasedTranscriber.UnmatchedOutput(it.substring(1), it[0].toString())
-        }
+        return Normalizer.normalize(nativeText, Normalizer.Form.NFD).processWithRules(rules, copyVerbatim)
     }
 }

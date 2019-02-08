@@ -2,20 +2,17 @@ package com.github.medavox.ipa_transcribers.turkish
 
 import com.github.medavox.ipa_transcribers.Language.Turkish
 import com.github.medavox.ipa_transcribers.Transcriber
+import com.github.medavox.ipa_transcribers.baserules.BaseScriptRules
 import com.github.medavox.ipa_transcribers.rulesystem.Rule
 import com.github.medavox.ipa_transcribers.rulesystem.RuleProcessor
 
 object TurkishRuleBased: Transcriber<Turkish>, RuleProcessor<Turkish> {
     private val rules:List<Rule> = listOf(
-        Rule("a", "a"),
-        Rule("b", "b"),
         Rule("c",   "d͡ʒ"),
         Rule("ç",   "t͡ʃ"),
-        Rule("d", "d"),
 
         // /e/ is realized as [ɛ]~[æ] before coda /m, n, l, r/. E.g. gelmek [ɡæɫˈmec].
         Rule("e", "e"),//[a]
-        Rule("f", "f"),
 
         Rule("g", "ɡ"), ///ɟ/[b]
 
@@ -26,30 +23,18 @@ object TurkishRuleBased: Transcriber<Turkish>, RuleProcessor<Turkish> {
         // (3) In other cases: Lengthening of the preceding vowel. E.g. bağ [ˈbaː].
         // (4) There is also a rare, dialectal occurrence of [ɰ], in Eastern and lower Ankara dialects.
         Rule("ğ", "ː"),//, /‿/, /j/   —[c]
-        Rule("h", "h"),
         Rule("ı", "ɯ"),
-        Rule("i", "i"),
         Rule("j", "ʒ"),
         Rule("k", "k"),//, /c/[b]
         Rule("l", "ɫ"),//, /l/[b]
-        Rule("m", "m"),
-        Rule("n", "n"),
-        Rule("o", "o"),
         Rule("ö", "ø"),
-        Rule("p", "p"),
 
         //^d The alveolar tap /ɾ/ doesn't exist as a separate phoneme in English,
         // though a similar sound appears in words like butter in a number of dialects.
         Rule("r", "ɾ"),
-        Rule("s", "s"),
         Rule("ş", "ʃ"),
-        Rule("t", "t"),
-        Rule("u", "u"),
-        Rule("ü", "y"),
-        Rule("v", "v"),
-        Rule("y", "j"),
-        Rule("z", "z")
-    )
+        Rule("ü", "y")
+    ) + BaseScriptRules.latinBaseRules
 
     //^b In native Turkic words, the velar consonants /k, ɡ/ are palatalized to [c, ɟ]
     // when adjacent to the front vowels /e, i, ø, y/.

@@ -25,7 +25,7 @@ class IpaToTukiNuwa: RuleBasedTranscriber<InternationalPhoneticAlphabet> {
         Rule(Regex("[nŋɲɴ]+"), "n"),
         Rule(Regex("[pbʙɸβ]+"), "p"),
         Rule(Regex("[szʃʒʂʐɕʑθ]+"), "s"),
-        Rule(Regex("[tdðʈɖ]+"), "t"),
+        Rule(Regex("[tdðʈɖɾ]+"), "t"),
         Rule(Regex("[uʊɯɤoɔ]+"), "u"),
         Rule(Regex("[ʋwvʍ]+"), "w"),
         Rule(Regex(" "), " ")

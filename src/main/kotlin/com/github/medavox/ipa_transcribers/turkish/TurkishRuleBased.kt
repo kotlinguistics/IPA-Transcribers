@@ -1,7 +1,6 @@
 package com.github.medavox.ipa_transcribers.turkish
 
 import com.github.medavox.ipa_transcribers.Language.Turkish
-import com.github.medavox.ipa_transcribers.BaseScriptRules
 import com.github.medavox.ipa_transcribers.Rule
 import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
 
@@ -33,7 +32,7 @@ object TurkishRuleBased: RuleBasedTranscriber<Turkish> {
         Rule("r", "ɾ"),
         Rule("ş", "ʃ"),
         Rule("ü", "y")
-    ) + BaseScriptRules.latinBaseRules
+    ) + latinBaseRules
 
     //^b In native Turkic words, the velar consonants /k, ɡ/ are palatalized to [c, ɟ]
     // when adjacent to the front vowels /e, i, ø, y/.

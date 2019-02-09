@@ -1,7 +1,6 @@
 package com.github.medavox.ipa_transcribers.malay
 
 import com.github.medavox.ipa_transcribers.Language.IndonesianMalay
-import com.github.medavox.ipa_transcribers.BaseScriptRules
 import com.github.medavox.ipa_transcribers.Rule
 import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
 
@@ -17,7 +16,7 @@ object MalayRuleBased:RuleBasedTranscriber<IndonesianMalay> {
         Rule("ng", "ŋ"),
         Rule("ny", "ɲ"),
         Rule("sy", "ʃ")
-    ) + BaseScriptRules.latinBaseRules
+    ) + latinBaseRules
     override fun transcribe(nativeText: String): String {
         return nativeText.processWithRules(rules, reportAndSkip)
     }

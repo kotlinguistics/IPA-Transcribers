@@ -40,7 +40,9 @@ sealed class Language {
     // though expect some spelling irregularities, given the long period of Russian linguistic stability.
     object Japanese : Language()//DONE scraper. Ineligible for rule-based:
     // The most common writing system (Kanji) doesn't record pronunciation. Or at least, not directly.
-    object Punjabi : Language() //listed on Ethnologue as Lahnda with related dialects,
+    object Punjabi : Language() //listed on Ethnologue as Lahnda with related dialects
+
+    object Swahili:Language()
 
     //according to wikipedia, "Most speakers of Javanese also speak Indonesian".
     object IndonesianMalay:Language()

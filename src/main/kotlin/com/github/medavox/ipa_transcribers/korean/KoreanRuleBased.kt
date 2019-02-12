@@ -5,6 +5,23 @@ import com.github.medavox.ipa_transcribers.Rule
 import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
 import java.text.Normalizer
 
+/**Status:INCOMPLETE
+ * all the 'basic' jamo with clear pronunciations on the releveant wikipedia articles have been transcribed.
+ *
+ * Standalone letters have only been included for vowels so far.
+ *
+ *
+ * All Unicode combining-character syllable-initial consonants have been transcribed (unicode block U+1100 - U+1112).
+ * All Unicode combining-character vowels have been transcribed (Unicode block U+1161 - U+1175).
+ * For Unicode combining-character syllable-final consonants: the simple ones have been transcribed -
+ * jamo which are only a single 'plain' letter.
+ * However, the jamo for syllable-final consonant clusters have not been transcribed,
+ * as their pronunciation is unclear from wikipedia (as of 12 feb 2019).
+ *
+ * There are also complex rules involving a syllable-final but not word-final consonant being pronounced as part of the
+ * next syllable, if it starts with the null consonant 'ᄋ'.
+ *
+ * Overall, it looks like the rest of korean transcription will involve complex rules, like spanish.*/
 object KoreanRuleBased: RuleBasedTranscriber<Korean> {
     private val rules:List<Rule> = listOf(
 
@@ -31,9 +48,9 @@ object KoreanRuleBased: RuleBasedTranscriber<Korean> {
 
         // syllable-final (jongseong) consonants
         Rule("[ᆨㄲ]", "k̚"),
-        Rule("ᆪ", "gs"),
+        //Rule("ᆪ", "gs"),
         Rule("ᆫ", "n"),
-        Rule("ᆬ", "nt̚"),
+        //Rule("ᆬ", "nt̚"),
         Rule("ᆮ", "t̚"),
         Rule("ᆯ", "l"),
         Rule("ᆷ", "m"),

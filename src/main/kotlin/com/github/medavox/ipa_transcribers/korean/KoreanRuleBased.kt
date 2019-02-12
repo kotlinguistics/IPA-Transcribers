@@ -21,7 +21,20 @@ import java.text.Normalizer
  * There are also complex rules involving a syllable-final but not word-final consonant being pronounced as part of the
  * next syllable, if it starts with the null consonant 'ᄋ'.
  *
- * Overall, it looks like the rest of korean transcription will involve complex rules, like spanish.*/
+ * Overall, it looks like the rest of korean transcription will involve complex rules, like spanish.
+ *
+ * Links:
+ *
+ * [Hangul unicode characters](https://en.wikipedia.org/wiki/Hangul#Unicode)
+ * [Unicode character inspector](https://apps.timwhitlock.info/unicode/inspect)
+ * (for checking which identical glyph we have: the choseong, jongseong, or standalone version)
+ * https://en.wikipedia.org/wiki/Korean_phonology#Positional_allophones
+ * https://en.wikipedia.org/wiki/Help:IPA/Korean
+ * https://en.wikipedia.org/wiki/Hangul_consonant_and_vowel_tables
+ * (lists all the consonant clusters, but only with the less-precise romanisation)
+ * https://linguistics.stackexchange.com/q/2805 describes the syllable-final assimilation rules
+ * [An independent reference wiki for the korean language](http://www.koreanwikiproject.com/wiki/index.php?title=IPA)
+ * */
 object KoreanRuleBased: RuleBasedTranscriber<Korean> {
     private val rules:List<Rule> = listOf(
 

@@ -6,7 +6,7 @@ package com.github.medavox.ipa_transcribers
 //urdu      Perso-Arabic
 //bengali   Unique brahmic abugida (unstandardised)
 //punjabi   Shahmukhi=Perso-Arabic (punjabi muslims), Gurmukhi = Unique Brahmic abugida (punjabi Hindus & Sikhs)
-//telugu    Unique brahmic abugida (brahmi-derived)
+//telugu    Unique brahmic abugida
 //marathi   Devanagari (Balbodh)
 //tamil     Unique brahmic abugida
 //Persian/Farsi/Dari/Tajiki Perso-Arabic
@@ -40,7 +40,8 @@ sealed class Language {
     // though expect some spelling irregularities, given the long period of Russian linguistic stability.
     object Japanese : Language()//DONE scraper. Ineligible for rule-based:
     // The most common writing system (Kanji) doesn't record pronunciation. Or at least, not directly.
-    object Punjabi : Language() //listed on Ethnologue as Lahnda with related dialects
+    object ShahmukhiPunjabi : Language() //listed on Ethnologue as Lahnda with related dialects
+    object GurmukhiPunjabi : Language() //listed on Ethnologue as Lahnda with related dialects
 
     object Swahili:Language()
 

@@ -16,6 +16,72 @@ interface RuleBasedTranscriber<T:Language>:Transcriber<T> {
 
     val devanagariBaseRules:List<Rule> get() = listOf(
 
+        //consonants.
+        // These have an inherent schwa (which is often romanised as 'a'),
+        //if there isn't another vowel attached to that character.
+        //so it isn't output in these rules.
+        Rule("ब", "b"),
+        Rule("भ", "bʱ"),
+        Rule("द", "d"),
+        Rule("ध", "dʱ"),
+        Rule("ज", "dʒ"),
+        Rule("झ", "dʒʱ"),
+        Rule("ड", "ɖ"),
+        Rule("ढ", "ɖʱ"),
+        Rule("फ़", "f"),
+        Rule("ग", "ɡ"),
+        Rule("घ", "ɡʱ"),
+        Rule("ग़", "ɣ"),
+        Rule("ह", "ɦ"),
+        Rule("य", "j"),
+        Rule("क", "k"),
+        Rule("ख", "kʰ"),
+        Rule("ल", "l"),
+        Rule("म", "m"),
+        Rule("न", "n"),
+        Rule("ण", "ɳ"),
+        Rule("ञ", "ɲ"),
+        Rule("ङ", "ŋ"),
+        Rule("प", "p"),
+        Rule("फ", "pʰ"),
+        Rule("क़", "q"),
+        Rule("र", "ɾ"),
+        Rule("ɽ", "r"),
+        Rule("ढ़", "ɽʱ"),
+        Rule("स", "s"),
+        Rule("ष", "ʂ"),
+        Rule("श", "ʃ"),
+        Rule("त", "t"),
+        Rule("थ", "tʰ"),
+        Rule("च", "tʃ"),
+        Rule("छ", "tʃʰ"),
+        Rule("ट", "ʈ"),
+        Rule("ठ", "ʈʰ"),
+        Rule("व", "ʋ"),
+        Rule("ख़", "x"),
+        Rule("ज़", "z"),
+        Rule("झ़", "ʒ"),
+
+        //Vowels. Each vowel has an independent form, and a form which attaches to the previous consonant.
+        //Much kudos to Unicode's Devanagari support;
+        // the vowels act like separate characters on a character level,
+        // but combine with their previous consonant to form the right character visually.
+        //this means we use the minimum number of code points possible to represent Devanagari.
+        Rule("[आा]", "aː"),
+        Rule("[एे]", "eː"),
+        Rule("[ऐै]", "ɛː"),
+        Rule("[अ]", "ə"),
+        Rule("[ईी]", "iː"),
+        Rule("[इि]", "ɪ"),
+        Rule("[ओो]", "oː"),
+        Rule("[औौ]", "ɔː"),
+        Rule("[ऊू]", "uː"),
+        Rule("[उु]", "ʊ"),
+        Rule("[ऋृ]", "ɾɪ"),
+        Rule("ँ", "̃") //nasal vowel
+
+    //schwa rule
+
     )
 
     val latinBaseRules:List<Rule> get() = listOf(

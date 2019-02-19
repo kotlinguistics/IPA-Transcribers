@@ -16,73 +16,83 @@ interface RuleBasedTranscriber<T:Language>:Transcriber<T> {
         RuleBasedTranscriber.UnmatchedOutput(it.substring(1), it[0].toString())
     }
 
+    private fun l(it:String):String{
+        return if(it.endsWith("ə")) it.substring(0, it.length-1) else it
+    }
     val devanagariBaseRules:List<Rule> get() = listOf(
 
         //consonants.
         // These have an inherent schwa (which is often romanised as 'a'),
         //if there isn't another vowel attached to that character.
         //so it isn't output in these rules.
-        Rule("ब", "b"),
-        Rule("भ", "bʱ"),
-        Rule("द", "d"),
-        Rule("ध", "dʱ"),
-        Rule("ज", "dʒ"),
-        Rule("झ", "dʒʱ"),
-        Rule("ड", "ɖ"),
-        Rule("ढ", "ɖʱ"),
-        Rule("फ़", "f"),
-        Rule("ग", "ɡ"),
-        Rule("घ", "ɡʱ"),
-        Rule("ग़", "ɣ"),
-        Rule("ह", "ɦ"),
-        Rule("य", "j"),
-        Rule("क", "k"),
-        Rule("ख", "kʰ"),
-        Rule("ल", "l"),
-        Rule("म", "m"),
-        Rule("न", "n"),
-        Rule("ण", "ɳ"),
-        Rule("ञ", "ɲ"),
-        Rule("ङ", "ŋ"),
-        Rule("प", "p"),
-        Rule("फ", "pʰ"),
-        Rule("क़", "q"),
-        Rule("र", "ɾ"),
-        Rule("ɽ", "r"),
-        Rule("ढ़", "ɽʱ"),
-        Rule("स", "s"),
-        Rule("ष", "ʂ"),
-        Rule("श", "ʃ"),
-        Rule("त", "t"),
-        Rule("थ", "tʰ"),
-        Rule("च", "tʃ"),
-        Rule("छ", "tʃʰ"),
-        Rule("ट", "ʈ"),
-        Rule("ठ", "ʈʰ"),
-        Rule("व", "ʋ"),
-        Rule("ख़", "x"),
-        Rule("ज़", "z"),
-        Rule("झ़", "ʒ"),
+        Rule("क़", "qə"),//2
+        Rule("क", "kə"),//1
+        Rule("ख़", "xə"),//2
+        Rule("ख", "kʰə"),//1
+        Rule("ग़", "ɣə"),//2
+        Rule("ग", "ɡə"),//1
+        Rule("घ", "ɡʱə"),//1
+        Rule("ङ", "ŋə"),//1
+        Rule("च", "tʃə"),//1
+        Rule("छ", "tʃʰə"),//1
+        Rule("ज़", "zə"),//2
+        Rule("ज", "dʒə"),//1
+        Rule("झ़", "ʒə"),//2
+        Rule("झ", "dʒʱə"),//1
+        Rule("ञ", "ɲə"),//1
+        Rule("ट", "ʈə"),//1
+        Rule("ठ", "ʈʰə"),//1
+        Rule("ड", "ɖə"),//1
+        Rule("ढ़", "ɽʱə"),//2
+        Rule("ढ", "ɖʱə"),//1
+        Rule("ण", "ɳə"),//1
+        Rule("त", "tə"),//1
+        Rule("थ", "tʰə"),//1
+        Rule("द", "də"),//1
+        Rule("ध", "dʱə"),//1
+        Rule("न", "nə"),//1
+        Rule("प", "pə"),//1
+        Rule("फ़", "fə"),//2
+        Rule("फ", "pʰə"),//1
+        Rule("ब", "bə"),//1
+        Rule("भ", "bʱə"),//1
+        Rule("म", "mə"),//1
+        Rule("य", "jə"),//1
+        Rule("र", "ɾə"),//1
+        Rule("ल", "lə"),//1
+        Rule("व", "ʋə"),//1
+        Rule("श", "ʃə"),//1
+        Rule("ष", "ʂə"),//1
+        Rule("स", "sə"),//1
+        Rule("ह", "ɦə"),//1
+
 
         //Vowels. Each vowel has an independent form, and a form which attaches to the previous consonant.
         //Much kudos to Unicode's Devanagari support;
         // the vowels act like separate characters on a character level,
         // but combine with their previous consonant to form the right character visually.
         //this means we use the minimum number of code points possible to represent Devanagari.
-        Rule("[आा]", "aː"),
-        Rule("[एे]", "eː"),
-        Rule("[ऐै]", "ɛː"),
-        Rule("[अ]", "ə"),
-        Rule("[ईी]", "iː"),
-        Rule("[इि]", "ɪ"),
-        Rule("[ओो]", "oː"),
-        Rule("[औौ]", "ɔː"),
-        Rule("[ऊू]", "uː"),
-        Rule("[उु]", "ʊ"),
-        Rule("[ऋृ]", "ɾɪ"),
-        Rule("ँ", "̃") //nasal vowel
+        Rule("[आा]", {l(it)+"aː"}),
+        Rule("[एे]", {l(it)+"eː"}),
+        Rule("[ऐै]", {l(it)+"ɛː"}),
+        Rule("[अ]", {l(it)+"ə"}),
+        Rule("[ईी]", {l(it)+"iː"}),
+        Rule("[इि]", {l(it)+"ɪ"}),
+        Rule("[ओो]", {l(it)+"oː"}),
+        Rule("[औौ]", {l(it)+"ɔː"}),
+        Rule("[ऊू]", {l(it)+"uː"}),
+        Rule("[उु]", {l(it)+"ʊ"}),
+        Rule("[ऋृ]", {l(it)+"ɾɪ"}),
+        Rule("्", {l(it)}),// ् "virama" is a diacritic which suppresses the inherent vowel
 
-    //schwa rule
+        Rule("ँ", "̃"), //nasal vowel. Presumably can go over any (or some) other vowels
+
+        //todo:
+        //schwa rule
+
+    //punctuation
+        Rule("।", "."),//danda or 'stick'. equivalent to a full stop.
+        Rule(" ", " ")
 
     )
 

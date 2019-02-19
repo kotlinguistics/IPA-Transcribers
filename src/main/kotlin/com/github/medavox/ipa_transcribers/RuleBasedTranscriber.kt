@@ -154,7 +154,7 @@ interface RuleBasedTranscriber<T:Language>:Transcriber<T> {
     fun String.processWithRules(rules:List<Rule>,
                                 onNoRuleMatch:(unmatched:String) -> UnmatchedOutput
     ) : String {
-        val out = StringBuilder()//.append('/')
+        var out:String = ""
         var processingWord = this
         loop@ while(processingWord.isNotEmpty()) {
             for (rule in rules) {
@@ -163,19 +163,21 @@ interface RuleBasedTranscriber<T:Language>:Transcriber<T> {
                 //if the rule matches the start of the remaining string
                 if(matchResult?.range?.start == 0) {
                     //System.out.println("rule '${rules[i]}' matches '$processingWord'")
-                    out.append(rule.outputString())
-
+                    out = rule.outputString(out)
+                    //System.out.println("matched rule:$rule")
                     //number of letters consumed is the match length, unless explicitly specified
                     val actualLettersConsumed = rule.lettersConsumed ?: matchResult.value.length
-                    processingWord = processingWord.substring(actualLettersConsumed)
-                    continue@loop
+                    if(actualLettersConsumed > 0) {
+                        processingWord = processingWord.substring(actualLettersConsumed)
+                        continue@loop
+                    }//else keep going through the rule list
                 }
             }
             //no rule matched; call the lambda!
             val unmatchedOutput = onNoRuleMatch(processingWord)
             processingWord = unmatchedOutput.newWorkingInput
-            out.append(unmatchedOutput.output)
+            out = unmatchedOutput.output(out)
         }
-        return out.toString()
+        return out
     }
 }

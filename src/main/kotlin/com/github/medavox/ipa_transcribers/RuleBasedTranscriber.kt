@@ -3,7 +3,9 @@ package com.github.medavox.ipa_transcribers
 import java.lang.StringBuilder
 
 interface RuleBasedTranscriber<T:Language>:Transcriber<T> {
-    data class UnmatchedOutput(val newWorkingInput:String, val output:String)
+    data class UnmatchedOutput(val newWorkingInput:String, val output:(soFar:String) -> String) {
+        constructor(newWorkingInput: String, output:String):this(newWorkingInput, {it+output})
+    }
     val reportAndSkip:(String) -> UnmatchedOutput get() = {
         System.err.println("unknown char '${it[0]}' in $it; skipping...")
         RuleBasedTranscriber.UnmatchedOutput(it.substring(1), "")

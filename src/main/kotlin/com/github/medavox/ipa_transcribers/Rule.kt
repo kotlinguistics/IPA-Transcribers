@@ -14,8 +14,8 @@ data class Rule(
     val matcher: Regex,
     /**A lambda which returns the text to append to the output string.
      * Use this constructor if your rule has side effects, such as counting vowels so far.*/
-    val outputString: () -> String,
-    /**The number of letters of native text that have been 'consumed'.
+    val outputString: (soFar:String) -> String,
+    /**The number of letters of native/input text that have been 'consumed'.
      * if not specified, defaults to the size of the Regex match.*/
     val lettersConsumed: Int? = null)
 {
@@ -24,8 +24,11 @@ data class Rule(
         /**The text to append to the output string*/
         outputString: String,
         lettersConsumed: Int? = null)
-    : this(matcher, { outputString }, lettersConsumed)
+    : this(matcher, { it+outputString }, lettersConsumed)
 
     constructor(match:String, outputString:String, lettersUsed:Int? = null)
-    :this(Regex(match), {outputString}, lettersUsed)
+    :this(Regex(match), {it+outputString}, lettersUsed)
+
+    constructor(match:String, outputString:(soFar:String) -> String, lettersUsed:Int? = null)
+            :this(Regex(match), outputString, lettersUsed)
 }

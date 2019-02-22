@@ -5,9 +5,9 @@ package com.github.medavox.ipa_transcribers
  * Required features:
 [ / ] optionally specify number of letters consumed, if different from match length
 [ / ] (per-rule) either a string or lambda. The lambba can access state persisting across whole word
-[   ] lambda on no rule matched
+[ / ] lambda on no rule matched
 [ / ] support for multiple simultaneous output variants, eg british and american english
-[   ] transcribe() function can return just a String for languages with only one variant
+[ / ] transcribe() function can return just a String for languages with only one variant
  */
 data class Rule(
     /**The native text that this rule operates on.*/

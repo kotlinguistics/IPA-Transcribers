@@ -204,6 +204,7 @@ object PanAmericanSpanishIpaRuleBased: RuleBasedTranscriber<PanAmericanSpanish> 
         //(paragüero /para′Ɣwero/, agüita /a′Ɣwita/).
         //     before ⟨e⟩ or ⟨i⟩, and not in the above contexts = [ɣw]
         //      averi**gü**e
+        //fixme:because we work on the chopped string, it's ALWAYS at the beginning
         Rule(Regex("^güi"), "gwi"),
         Rule(Regex("güi"), "Ɣwi"),
         Rule(Regex("^güe"), "gwe"),

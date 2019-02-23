@@ -16,6 +16,12 @@ interface RuleBasedTranscriber<T:Language>:Transcriber<T> {
         RuleBasedTranscriber.UnmatchedOutput(it.substring(1), it[0].toString())
     }
 
+    val westernPunctuation:List<Rule> get() = listOf(
+        Rule(" ", " "),
+        Rule(",", ","),
+        Rule(".", ".")
+    )
+
     private fun l(it:String):String{
         return if(it.endsWith("ə")) it.substring(0, it.length-1) else it
     }

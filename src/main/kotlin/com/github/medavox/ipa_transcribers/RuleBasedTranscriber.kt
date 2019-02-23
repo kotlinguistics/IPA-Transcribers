@@ -90,11 +90,10 @@ interface RuleBasedTranscriber<T:Language>:Transcriber<T> {
         Rule("[उु]", {l(it)+"ʊ"}),
         Rule("[ऋृ]", {l(it)+"ɾɪ"}),
         Rule("्", {l(it)}),// ् "virama" is a diacritic which suppresses the inherent vowel
+        Rule("ं", {l(it)}),// "anusvara" diacritic nasalises the preceding consonant*
+        //or in modern hindi and marathi, sometimes its vowel as well. It's comlicated.
 
-        Rule("ँ", "̃"), //nasal vowel. Presumably can go over any (or some) other vowels
-
-        //todo:
-        //schwa rule
+        Rule("ँ", "̃"), //nasalised vowel diacritic. Presumably can go over any (or some) other vowels
 
     //punctuation
         Rule("।", "."),//danda or 'stick'. equivalent to a full stop.

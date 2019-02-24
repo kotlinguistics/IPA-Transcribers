@@ -3,10 +3,9 @@ package com.github.medavox.ipa_transcribers.spanish
 import com.github.medavox.ipa_transcribers.Language.PanAmericanSpanish
 import com.github.medavox.ipa_transcribers.Rule
 import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
-import com.github.medavox.ipa_transcribers.Transcriber
 
 /**Spanish spelling is largely considered phonetic.
- * I'm not sure how true that is practice
+ * I'm not sure how true that is in practice
  * (with all the varying dialects), but it does mean that there aren't many IPA transcription
  * engines for spanish out there.
  *
@@ -109,7 +108,7 @@ object PanAmericanSpanishIpaRuleBased: RuleBasedTranscriber<PanAmericanSpanish> 
         //⟨n⟩  i**n**vierno = [m]
         //(barco/′barko/, vaca/′baka/, ambos /′ambos/, en vano /em′bano/)
         Rule(Regex("(mb|mv|nb|nv)"), "mb"),
-        Rule(Regex("^[bv]"), "b"),
+        Rule(Regex("^$"), Regex("[bv]"), "b"),
         //⟨b⟩ or ⟨v⟩ elsewhere (i.e. after a vowel, even across a word boundary,
         // or after any consonant other than ⟨m⟩ or ⟨n⟩) = [β]
         //(rabo /′rraβo/, ave /′aβe/, árbol /′arβol/, Elvira /el′βira/)
@@ -158,7 +157,7 @@ object PanAmericanSpanishIpaRuleBased: RuleBasedTranscriber<PanAmericanSpanish> 
         //⟨d⟩ word-initial after a pause, or after ⟨l⟩ or ⟨n⟩ = [d]
         //(digo /′diƔo/, anda /′anda/, el dueño /el′dweɲo/)
         //     dá_d_iva; ar_d_er; a_d_mirar; mi _d_e_d_o; ver_d_a_d_
-        Rule(Regex("^d"), "d"),
+        Rule(Regex("^$"), Regex("d"), "d"),
         Rule(Regex("ld"), "ld"),
         Rule(Regex("nd"), "nd"),
         //todo: match this rule across word boundaries
@@ -174,14 +173,14 @@ object PanAmericanSpanishIpaRuleBased: RuleBasedTranscriber<PanAmericanSpanish> 
         //⟨gu⟩ before ⟨a⟩ or ⟨o⟩, and either word-initial after a pause, or after ⟨n⟩; but only in some dialects
         //      = [ɡw]
         //      ***gu**ante*; * len**gu**a*
-        Rule(Regex("^gu[ao]"), "gw", 2),
-        Rule(Regex("^ngu[ao]"), "ŋgw", 3),
+        Rule(Regex("^$"), Regex("gu[ao]"), "gw", 2),
+        Rule(Regex("^$"), Regex("ngu[ao]"), "ŋgw", 3),
         //⟨gu⟩ before ⟨a⟩ or ⟨o⟩, and not in the above contexts = [ɣw]
         //     a**gu**a; averi**gu**ar
         Rule(Regex("gu[ao]"), "ɣw", 2),
         //⟨gu⟩ before ⟨e⟩ or ⟨i⟩, and either word-initial after a pause, or after ⟨n⟩ = [ɡ]
         //      ***gu**erra*
-        Rule(Regex("^gu[ie]"), "g", 2),
+        Rule(Regex("^$"), Regex("gu[ie]"), "g", 2),
         //⟨gu⟩ before ⟨e⟩ or ⟨i⟩, and not in the above contexts = [ɣ]
         //     si**gu**e
         Rule(Regex("gu[ie]"), "ɣ", 2),
@@ -192,7 +191,7 @@ object PanAmericanSpanishIpaRuleBased: RuleBasedTranscriber<PanAmericanSpanish> 
         //⟨g⟩ not before ⟨e⟩ or ⟨i⟩, and either word-initial after a pause, or after ⟨n⟩ = [ɡ]
         //      ***g**ato*; ***g**rande*; * ven**g**o*
         Rule(Regex("ng[^ie]"), "ŋg", 2),
-        Rule(Regex("^g[^ie]"), "g", 1),
+        Rule(Regex("^$"), Regex("g[^ie]"), "g", 1),
         //⟨g⟩  not before ⟨e⟩ or ⟨i⟩, and not in the above contexts = [ɣ]
         //     tri**g**o; amar**g**o*; si**g**no*; mi **g**ato
         //(hago /′aƔo/, trague /′traƔe/, alga /′alƔa/, águila /′aƔila/).
@@ -205,9 +204,9 @@ object PanAmericanSpanishIpaRuleBased: RuleBasedTranscriber<PanAmericanSpanish> 
         //     before ⟨e⟩ or ⟨i⟩, and not in the above contexts = [ɣw]
         //      averi**gü**e
         //fixme:because we work on the chopped string, it's ALWAYS at the beginning
-        Rule(Regex("^güi"), "gwi"),
+        Rule(Regex("^$"), Regex("güi"), "gwi"),
         Rule(Regex("güi"), "Ɣwi"),
-        Rule(Regex("^güe"), "gwe"),
+        Rule(Regex("^$"), Regex("güe"), "gwe"),
         Rule(Regex("güe"), "Ɣwe"),
 
         //⟨rr⟩ only occurs between vowels = [r]
@@ -229,7 +228,7 @@ object PanAmericanSpanishIpaRuleBased: RuleBasedTranscriber<PanAmericanSpanish> 
         Rule(Regex("[aeiou]x[aeiou]"), "ks", 1),//FIXME: broken rule. Look-backs are prohibited!
         //⟨x⟩  word-initially = [s]
         //      ***x**enofobia*
-        Rule(Regex("^x"), "s"),
+        Rule(Regex("^$"), Regex("x"), "s"),
 
         //7. The pronunciation of ll varies greatly throughout the Spanish-speaking world.
 

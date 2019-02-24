@@ -100,6 +100,6 @@ object KoreanRuleBased: RuleBasedTranscriber<Korean> {
     )
     override fun transcribe(nativeText: String): String {
         //thanks to https://stackoverflow.com/a/41311169
-        return Normalizer.normalize(nativeText, Normalizer.Form.NFD).processWithRules(rules, copyVerbatim)
+        return Normalizer.normalize(nativeText, Normalizer.Form.NFD).processWithRules(rules, reportAndCopy)
     }
 }

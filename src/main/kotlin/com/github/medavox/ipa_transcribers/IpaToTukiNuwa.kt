@@ -56,7 +56,7 @@ class IpaToTukiNuwa: RuleBasedTranscriber<InternationalPhoneticAlphabet> {
 
     override fun transcribe(nativeText: String): String {
         return nativeText.processWithRules(initialRules, reportAndSkip)
-            .processWithRules(phonotacticsRules, copyVerbatim)
-            .processWithRules(cleanupAfterPhonotacticsRules, copyVerbatim)
+            .processWithRules(phonotacticsRules, reportAndCopy)
+            .processWithRules(cleanupAfterPhonotacticsRules, reportAndCopy)
     }
 }

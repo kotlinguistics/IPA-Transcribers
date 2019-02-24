@@ -336,7 +336,8 @@ object PanAmericanSpanishIpaRuleBased: RuleBasedTranscriber<PanAmericanSpanish> 
      *  Eg in English: th sh ch.
      *  */
     override fun transcribe(nativeText: String):String {
-        return nativeText.toLowerCase().normaliseAccents().removeStressAccents().processWithRules(rules, copyVerbatim)
+        return nativeText.toLowerCase().normaliseAccents().removeStressAccents().processWithRules(rules, reportAndCopy)
+        //return nativeText.toLowerCase().normaliseAccents().removeStressAccents().greedy(rules, reportAndCopy)
     }
 
     /**Removes the stress accents from vowels,

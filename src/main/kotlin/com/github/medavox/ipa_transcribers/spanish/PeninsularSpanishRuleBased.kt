@@ -9,7 +9,7 @@ import com.github.medavox.ipa_transcribers.spanish.PanAmericanSpanishIpaRuleBase
 
 object PeninsularSpanishRuleBased: RuleBasedTranscriber<PeninsularSpanish> {
     val rules:List<Rule> = PanAmericanSpanishIpaRuleBased.rules.map{
-        when(it.matcher) {
+        when(it.unconsumedMatcher) {
             Regex("c[ie]") -> it.copy(outputString = {"θ"})
             Regex("z$voicedConsonants") -> it.copy(outputString = {"ð"})
             Regex("z") -> it.copy(outputString = {"θ"})
@@ -17,6 +17,6 @@ object PeninsularSpanishRuleBased: RuleBasedTranscriber<PeninsularSpanish> {
         }
     }
     override fun transcribe(nativeText: String): String {
-        return nativeText.toLowerCase().normaliseAccents().removeStressAccents().processWithRules(rules, copyVerbatim)
+        return nativeText.toLowerCase().normaliseAccents().removeStressAccents().processWithRules(rules, reportAndCopy)
     }
 }

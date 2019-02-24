@@ -16,7 +16,6 @@ interface BaseRules {
         //consonants.
         // These have an inherent schwa (which is often romanised as 'a'),
         //if there isn't another vowel attached to that character.
-        //so it isn't output in these rules.
         Rule("क़", "qə"),//2
         Rule("क", "kə"),//1
         Rule("ख़", "xə"),//2

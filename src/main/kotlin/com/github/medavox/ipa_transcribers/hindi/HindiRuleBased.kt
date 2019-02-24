@@ -5,6 +5,6 @@ import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
 
 object HindiRuleBased:RuleBasedTranscriber<Hindi> {
     override fun transcribe(nativeText: String): String {
-        return nativeText.processWithRules(devanagariBaseRules, copyVerbatim)
+        return nativeText.processWithRules(rules, reportAndCopy)
     }
 }

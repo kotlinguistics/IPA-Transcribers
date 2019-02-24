@@ -5,6 +5,6 @@ import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
 
 object PersianRuleBased:RuleBasedTranscriber<Persian> {
     override fun transcribe(nativeText: String): String {
-        return nativeText.processWithRules(persoArabicBaseRules, copyVerbatim)
+        return nativeText.processWithRules(persoArabicBaseRules, reportAndCopy)
     }
 }

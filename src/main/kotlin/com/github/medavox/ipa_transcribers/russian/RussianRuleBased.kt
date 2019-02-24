@@ -76,6 +76,6 @@ object RussianRuleBased:RuleBasedTranscriber<Russian> {
         Rule("я", "ja") //  or / ʲa/
     )
     override fun transcribe(nativeText: String): String {
-        return nativeText.toLowerCase().processWithRules(rules, copyVerbatim)
+        return nativeText.toLowerCase().processWithRules(rules, reportAndCopy)
     }
 }

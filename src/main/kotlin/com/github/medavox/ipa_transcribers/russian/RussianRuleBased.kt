@@ -46,11 +46,14 @@ object RussianRuleBased:RuleBasedTranscriber<Russian> {
         Rule("в", "v"), //  or /vʲ/
         Rule("г", "ɡ"), //  or /gʲ/
         Rule("д", "d"), //  or /dʲ/
-        Rule("е", "je"), // , / ʲe/ or /e/
-        Rule("ё", "jo"), //  or / ʲo/
-        Rule("ж", "ʐ"), //
-        Rule("з", "z"), //  or /zʲ/
-        Rule("и", "i"), // , / ʲi/, or /ɨ/
+        Rule("[$softenableConsonants]", "е", "ʲe"), //, / ʲe/ or /e/
+        Rule("е", "je"), //, / ʲe/ or /e/
+        Rule("[$softenableConsonants]", "ё", "ʲo"),
+        Rule("ё", "jo"),
+        Rule("ж", "ʐ"),
+        Rule("з", "z"), // or /zʲ/
+        Rule("[$softenableConsonants]", "и", "ʲi"), //, / ʲi/, or /ɨ/
+        Rule("и", "i"), //, / ʲi/, or /ɨ/
         Rule("й", "j"),
         Rule("к", "k"), //  or /kʲ/
         Rule("л", "ɫ"), //  or /lʲ/
@@ -68,13 +71,15 @@ object RussianRuleBased:RuleBasedTranscriber<Russian> {
         Rule("ч", "tɕ"),
         Rule("ш", "ʂ"),
         Rule("щ", "ɕɕ"),
-        //ъ
-        //        ы  [ɨ]
-        Rule("ь", " ʲ"), //
+        Rule("ъ", ""), //"hard sign" silent, prevents palatalization of the preceding consonant
+        Rule("ы", "ɨ"),
+        Rule("[$softenableConsonants]", "ь", "ʲ"),//"soft sign" silent, palatalizes the preceding consonant
         Rule("э", "e"), //
+        Rule("[$softenableConsonants]", "ю", "ʲu"), //  or / ʲu/
         Rule("ю", "ju"), //  or / ʲu/
-        Rule("я", "ja") //  or / ʲa/
-    )
+        Rule("[$softenableConsonants]", "я", "ʲa"), // ja or / ʲa/
+        Rule("я", "ja") // ja or / ʲa/
+    )+westernPunctuation
     override fun transcribe(nativeText: String): String {
         return nativeText.toLowerCase().processWithRules(rules, reportAndCopy)
     }

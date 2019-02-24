@@ -8,10 +8,14 @@ package com.github.medavox.ipa_transcribers
 [ / ] lambda on no rule matched
 [ / ] support for multiple simultaneous output variants, eg british and american english
 [ / ] transcribe() function can return just a String for languages with only one variant
+ @constructor primary constructor
+ @property consumedMatcher
  */
 data class Rule(
+    /**If specified, BOTH matchers must match*/
+    val consumedMatcher:Regex?,
     /**The native text that this rule operates on.*/
-    val matcher: Regex,
+    val unconsumedMatcher: Regex,
     /**A lambda which returns the text to append to the output string.
      * Use this constructor if your rule has side effects, such as counting vowels so far.*/
     val outputString: (soFar:String) -> String,
@@ -19,16 +23,20 @@ data class Rule(
      * if not specified, defaults to the size of the Regex match.*/
     val lettersConsumed: Int? = null)
 {
-    constructor(
-        matcher: Regex,
-        /**The text to append to the output string*/
-        outputString: String,
-        lettersConsumed: Int? = null)
-    : this(matcher, { it+outputString }, lettersConsumed)
+    /**@param outputString The text to append to the output string*/
+    constructor(matcher: Regex, outputString: String, lettersConsumed: Int? = null)
+            :this(null, matcher, { it+outputString }, lettersConsumed)
 
     constructor(match:String, outputString:String, lettersUsed:Int? = null)
-    :this(Regex(match), {it+outputString}, lettersUsed)
+            :this(null, Regex(match), {it+outputString}, lettersUsed)
 
     constructor(match:String, outputString:(soFar:String) -> String, lettersUsed:Int? = null)
-            :this(Regex(match), outputString, lettersUsed)
+            :this(null, Regex(match), outputString, lettersUsed)
+
+    constructor(consumedMatcher:Regex, unconsumedMatcher:Regex, output:String, lettersConsumed:Int?=null )
+            :this(consumedMatcher, unconsumedMatcher, {it+output}, lettersConsumed)
+
+    constructor(consumedMatcher:String, unconsumedMatcher:String, output:String, lettersConsumed:Int?=null )
+            :this(Regex(consumedMatcher), Regex(unconsumedMatcher), {it+output}, lettersConsumed)
 }
+//private val anything = Regex("[\\s\\S]*")

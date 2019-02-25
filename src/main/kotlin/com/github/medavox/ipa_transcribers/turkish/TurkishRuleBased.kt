@@ -7,46 +7,50 @@ import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
 object TurkishRuleBased: RuleBasedTranscriber<Turkish> {
 
     val frontVowels = "eiöü"
+    val backVowels = "aâıouû"
+    val allVowels = "aâeiıoöuüû"
 
-    //    The phonemes /ʒ/ and /f/ only occur in loanwords and interjections.
-    //    /h/ is realised [x] in most dialects, including standard TRT speech.
     private val rules:List<Rule> = listOf(
         Rule("â", "a"),
         Rule("c", "d͡ʒ"),
+        Rule("c[$allVowels]", "d͡ʒʰ", 1),
         Rule("ç", "t͡ʃ"),
 
         // /e/ is realized as [ɛ]~[æ] before coda /m, n, l, r/. E.g. gelmek [ɡæɫˈmec].
+        Rule("e[mnlr]", "æ", 1),
         Rule("e", "e"),//[a]
 
-        //⟨ğ⟩     Word-finally and preconsonantally, it lengthens the preceding vowel.[5]
-        //        Between front vowels it is an approximant, either front-velar [ɰ̟] or palatal [j].[5]
-        //        Otherwise, intervocalic /ɣ/ is phonetically zero (deleted).[5] Before the loss of this sound,
-        // Turkish did not allow vowel sequences in native words, and today the letter ⟨ğ⟩ serves largely to
-        // indicate vowel length and vowel sequences where /ɰ/ once occurred.[6]
-        // (1) Syllable initially: Silent, indicates a syllable break.
-        // That is Erdoğan /ˈeɾ.do.an/ (the English equivalent is approximately a W, i.e. "Erdowan")
-        // and değil [ˈde.il] (the English equivalent is approximately a Y, i.e. "deyil").
-        // (2) Syllable finally after /e/: [j]. E.g. eğri [ej.ˈɾi].
-        // (3) In other cases: Lengthening of the preceding vowel. E.g. bağ [ˈbaː].
-        // (4) There is also a rare, dialectal occurrence of [ɰ], in Eastern and lower Ankara dialects.
+        //⟨ğ⟩ only occurs after a vowel.
+        //-----------------------------
+        //a debatable phoneme, called yumuşak g ('soft g').
+        //It is sometimes transcribed /ɰ/ or /ɣ/.
+        //Before the loss of this sound, Turkish did not allow vowel sequences in native words,
+        //and today the letter ⟨ğ⟩ serves largely to indicate vowel length and vowel sequences where /ɰ/ once occurred.
 
-        //there is a debatable phoneme, called yumuşak g ('soft g') and written ⟨ğ⟩, which only occurs after a vowel.
-        //It is sometimes transcribed /ɰ/ or /ɣ/. Between back vowels, it may be silent or sound like a bilabial glide.
         // Between front vowels, it is either silent or realized as [j] (e.g. düğün 'marriage',
         // where the [j] is even mandatory in fast speech to distinguish it from dün 'yesterday'),
         // depending on the preceding and following vowels.
+        Rule("[$frontVowels]", "ğ[$frontVowels]", "j", 1),//, /‿/, /j/   —[c]
+
+        //Between back vowels, it may be silent or sound like a bilabial glide.
+        Rule("[$backVowels]", "ğ[$backVowels]", "ɰ̟", 1),//, /‿/, /j/   —[c]
+
+        // (1) Syllable initially: Silent, indicates a syllable break.
+        // That is Erdoğan /ˈeɾ.do.an/ (the English equivalent is approximately a W, i.e. "Erdowan")
+        // and değil [ˈde.il] (the English equivalent is approximately a Y, i.e. "deyil").
+        Rule("[$allVowels]", "ğ[$allVowels]", "", 1),//, /‿/, /j/   —[c]
+
+        // (2) Syllable finally after /e/: [j]. E.g. eğri [ej.ˈɾi].
+        Rule("[e]", "ğ[^$allVowels]", "j", 1),//, /‿/, /j/   —[c]
+
+        //Word-finally and preconsonantally, it lengthens the preceding vowel.
         // When not between vowels (that is, word finally and before a consonant),
         // it is generally realized as vowel length, lengthening the preceding vowel,
         // or as a slight [j] if preceded by a front vowel.[4]
-        // According to Zimmer & Orgun (1999), who transcribe this sound as /ɣ/:
-            //Word-finally and preconsonantally, it lengthens the preceding vowel.[5]
-            //Between front vowels it is an approximant, either front-velar [ɰ̟] or palatal [j].[5]
-            //Otherwise, intervocalic /ɣ/ is phonetically zero (deleted).[5] Before the loss of this sound,
-            //Turkish did not allow vowel sequences in native words,
-            // and today the letter ⟨ğ⟩ serves largely to indicate vowel length and vowel sequences where /ɰ/ once occurred.[6]
+        Rule("[$allVowels]", "ğ", "ː"),//, /‿/, /j/   —[c]
 
-        Rule("ğ", "ː"),//, /‿/, /j/   —[c]
         Rule("ı", "ɯ"),
+        //The phonemes /ʒ/ and /f/ only occur in loanwords and interjections.
         Rule("j", "ʒ"),
 
         //In native Turkic words, the velar consonants /k, ɡ/ are palatalized to [c, ɟ] (similar to Russian)
@@ -57,19 +61,19 @@ object TurkishRuleBased: RuleBasedTranscriber<Turkish> {
 
         // These alternations are not indicated orthographically: the same letters ⟨k⟩, ⟨g⟩, and ⟨l⟩ are used for
         // both pronunciations.
-        //
-        // In foreign borrowings and proper nouns, however, these distinct realizations of /k, ɡ, l/ are contrastive.
 
+        // In foreign borrowings and proper nouns, however, these distinct realizations of /k, ɡ, l/ are contrastive.
         // In particular, [c, ɟ] and clear [l] are sometimes found in conjunction with the vowels [a] and [u].
 
         // This pronunciation can be indicated by adding a circumflex accent over the vowel: e.g. gâvur ('infidel'),
         // mahkûm ('condemned'), lâzım ('necessary'),
         // although the use of this diacritic has become increasingly archaic.[2]
         // An example of a minimal pair is kar ('snow') vs. kâr (with palatalized [c]) ('profit').
-
         Rule("[$frontVowels]","k", "c"),
         Rule("k[$frontVowels]", "c", 1),
         Rule("k[âû]", "c", 1),
+        //Syllable-initial /p, t, c, k/ are usually aspirated.
+        Rule("", "k[$backVowels]", "kʰ"),
         Rule("k", "k"),
 
         Rule("[$frontVowels]", "g", "ɟ"),
@@ -87,6 +91,10 @@ object TurkishRuleBased: RuleBasedTranscriber<Turkish> {
         Rule("ş", "ʃ"),
         Rule("û", "u"),
         Rule("ü", "y"),
+
+        //Syllable-initial /p, t, c, k/ are usually aspirated.
+        Rule("p[$allVowels]", "pʰ"),
+        Rule("t[$allVowels]", "tʰ"),
 
         //Final /h/ may be fronted to a voiceless velar fricative [x].[5]
         // It may be fronted even further after front vowels, then tending towards a voiceless palatal fricative [ç].
@@ -110,18 +118,6 @@ object TurkishRuleBased: RuleBasedTranscriber<Turkish> {
 
     //back vowels (/a, ɯ, o, u/)
     //front vowels (/e, i, œ, y/)
-    //= e, i, ö, ü
-
-    //Syllable-initial /p, t, c, k/ are usually aspirated.[5]
-
-
-
-
-    ///b, d, d͡ʒ, ɡ, ɟ/ are devoiced to [p, t, t͡ʃ, k, c] word- and morpheme-finally,
-    // as well as before a consonant: /edˈmeɟ/ ('to do, to make') is pronounced [etˈmec].
-    // (This is reflected in the orthography, so that it is spelled ⟨etmek⟩).
-    // When a vowel is added to nouns ending with postvocalic /ɡ/, it is lenited to ⟨ğ⟩ (see below);
-    // this is also reflected in the orthography.[11]
     override fun transcribe(nativeText: String): String {
         return nativeText.toLowerCase().processWithRules(rules, reportAndSkip)
     }

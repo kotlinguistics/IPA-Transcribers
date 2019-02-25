@@ -6,23 +6,24 @@ import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
 
 object TurkishRuleBased: RuleBasedTranscriber<Turkish> {
 
+    val frontVowels = "eiöü"
 
-
-    //        Word-finally and preconsonantally, it lengthens the preceding vowel.[5]
-    //        Between front vowels it is an approximant, either front-velar [ɰ̟] or palatal [j].[5]
-    //        Otherwise, intervocalic /ɣ/ is phonetically zero (deleted).[5] Before the loss of this sound, Turkish did not allow vowel sequences in native words, and today the letter ⟨ğ⟩ serves largely to indicate vowel length and vowel sequences where /ɰ/ once occurred.[6]
     //    The phonemes /ʒ/ and /f/ only occur in loanwords and interjections.
     //    /h/ is realised [x] in most dialects, including standard TRT speech.
     private val rules:List<Rule> = listOf(
+        Rule("â", "a"),
         Rule("c", "d͡ʒ"),
         Rule("ç", "t͡ʃ"),
 
         // /e/ is realized as [ɛ]~[æ] before coda /m, n, l, r/. E.g. gelmek [ɡæɫˈmec].
         Rule("e", "e"),//[a]
 
-        Rule("g", "ɡ"), ///ɟ/[b]
-
-        //^c (1) Syllable initially: Silent, indicates a syllable break.
+        //⟨ğ⟩     Word-finally and preconsonantally, it lengthens the preceding vowel.[5]
+        //        Between front vowels it is an approximant, either front-velar [ɰ̟] or palatal [j].[5]
+        //        Otherwise, intervocalic /ɣ/ is phonetically zero (deleted).[5] Before the loss of this sound,
+        // Turkish did not allow vowel sequences in native words, and today the letter ⟨ğ⟩ serves largely to
+        // indicate vowel length and vowel sequences where /ɰ/ once occurred.[6]
+        // (1) Syllable initially: Silent, indicates a syllable break.
         // That is Erdoğan /ˈeɾ.do.an/ (the English equivalent is approximately a W, i.e. "Erdowan")
         // and değil [ˈde.il] (the English equivalent is approximately a Y, i.e. "deyil").
         // (2) Syllable finally after /e/: [j]. E.g. eğri [ej.ˈɾi].
@@ -47,26 +48,49 @@ object TurkishRuleBased: RuleBasedTranscriber<Turkish> {
         Rule("ğ", "ː"),//, /‿/, /j/   —[c]
         Rule("ı", "ɯ"),
         Rule("j", "ʒ"),
+
         //In native Turkic words, the velar consonants /k, ɡ/ are palatalized to [c, ɟ] (similar to Russian)
         // when adjacent to the front vowels /e, i, ø, y/.
+
         // Similarly, the consonant /l/ is realized as a clear or light [l] next to front vowels
         // (including word finally), and as a velarized [ɫ] next to the central and back vowels /a, ɯ, o, u/.
+
         // These alternations are not indicated orthographically: the same letters ⟨k⟩, ⟨g⟩, and ⟨l⟩ are used for
-        // both pronunciations. In foreign borrowings and proper nouns, however, these distinct realizations
-        // of /k, ɡ, l/ are contrastive.
+        // both pronunciations.
+        //
+        // In foreign borrowings and proper nouns, however, these distinct realizations of /k, ɡ, l/ are contrastive.
+
         // In particular, [c, ɟ] and clear [l] are sometimes found in conjunction with the vowels [a] and [u].
+
         // This pronunciation can be indicated by adding a circumflex accent over the vowel: e.g. gâvur ('infidel'),
         // mahkûm ('condemned'), lâzım ('necessary'),
         // although the use of this diacritic has become increasingly archaic.[2]
         // An example of a minimal pair is kar ('snow') vs. kâr (with palatalized [c]) ('profit').
-        Rule("k", "k"),//, /c/[b]
-        Rule("l", "ɫ"),//, /l/[b]
-        Rule("ö", "ø"),
 
+        Rule("[$frontVowels]","k", "c"),
+        Rule("k[$frontVowels]", "c", 1),
+        Rule("k[âû]", "c", 1),
+        Rule("k", "k"),
 
+        Rule("[$frontVowels]", "g", "ɟ"),
+        Rule("g[$frontVowels]", "ɟ", 1),
+        Rule("g[âû]", "ɟ", 1),
+        Rule("g", "ɡ"),
+
+        Rule("[$frontVowels]", "l", "l"),
+        Rule("l[$frontVowels]", "l", 1),
+        Rule("l[âû]", "l", 1),
+        Rule("l", "ɫ"),
+
+        Rule("ö", "ø̞"),
         Rule("r", "ɾ"),
         Rule("ş", "ʃ"),
+        Rule("û", "u"),
         Rule("ü", "y"),
+
+        //Final /h/ may be fronted to a voiceless velar fricative [x].[5]
+        // It may be fronted even further after front vowels, then tending towards a voiceless palatal fricative [ç].
+        Rule("[$frontVowels]", "h", "ç"),
         ///h/ is realised [x] in most dialects, including standard Turkish Radio & Television speech.
         Rule("h", "x")
     ) + latinBaseRules
@@ -86,35 +110,18 @@ object TurkishRuleBased: RuleBasedTranscriber<Turkish> {
 
     //back vowels (/a, ɯ, o, u/)
     //front vowels (/e, i, œ, y/)
+    //= e, i, ö, ü
 
     //Syllable-initial /p, t, c, k/ are usually aspirated.[5]
 
 
-    //Final /h/ may be fronted to a voiceless velar fricative [x].[5]
-    // It may be fronted even further after front vowels, then tending towards a voiceless palatal fricative [ç].
+
 
     ///b, d, d͡ʒ, ɡ, ɟ/ are devoiced to [p, t, t͡ʃ, k, c] word- and morpheme-finally,
     // as well as before a consonant: /edˈmeɟ/ ('to do, to make') is pronounced [etˈmec].
     // (This is reflected in the orthography, so that it is spelled ⟨etmek⟩).
     // When a vowel is added to nouns ending with postvocalic /ɡ/, it is lenited to ⟨ğ⟩ (see below);
     // this is also reflected in the orthography.[11]
-
-    //^b In native Turkic words, the velar consonants /k, ɡ/ are palatalized to [c, ɟ]
-    // when adjacent to the front vowels /e, i, ø, y/.
-    //
-    // Similarly, the consonant /l/ is realized as a clear or light [l] next to front vowels (including word finally),
-    // and as a velarized [ɫ] next to the central and back vowels /a, ɯ, o, u/.
-    //
-    // These alternations are not indicated orthographically:
-    // the same letters ⟨k⟩, ⟨g⟩, and ⟨l⟩ are used for both pronunciations.
-    //
-    // In foreign borrowings and proper nouns, however, these distinct realizations of /k, ɡ, l/ are contrastive.
-    //
-    // In particular, [c, ɟ] and clear [l] are sometimes found in conjunction with the vowels [a] and [u].
-
-    // This pronunciation can be indicated by adding a circumflex accent over the vowel:
-    // e.g. gâvur ('infidel'), mahkûm ('condemned'), lâzım ('necessary'),
-    // although this diacritic's usage has been increasingly archaic.
     override fun transcribe(nativeText: String): String {
         return nativeText.toLowerCase().processWithRules(rules, reportAndSkip)
     }

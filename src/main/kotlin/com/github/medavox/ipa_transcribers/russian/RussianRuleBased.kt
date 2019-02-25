@@ -10,28 +10,6 @@ object RussianRuleBased:RuleBasedTranscriber<Russian> {
     //vowel reduction
     //the third one
     private const val softenableConsonants = "бвгдзклмнпрстфх"
-    //problem:
-
-    //we need to know the previous consonant to check if it can be softened;
-    //but we also need to print out the following vowel so we don't reprocess it again as a word-initial.
-
-    //this means one rule for every pair of softenable consonant + softening vowel,
-    //or 5 * 15 = 75 rules.
-
-    //this is bad.
-
-    //so instead we need to be able to 'look back' at previous, consumed letters -- preferably in a Regex-friendly way.
-    //so maybe instead of feeding the chopped-off string (with the characters consumed so far removed),
-    //we feed in the whole string each time, with a pointer to the current one?
-
-    //maybe we have to match regexes on two strings: the consumed-so-far characters AND the unconsumed characters?
-
-    //like this:
-
-    // para aq | ui
-
-    //this would allow us to use regex to read the end of the last-consumed characters
-
     //Consonant letters represent both
     // "soft" (palatalized, represented in the IPA with a ⟨ʲ⟩) and
     // "hard" consonant phonemes.

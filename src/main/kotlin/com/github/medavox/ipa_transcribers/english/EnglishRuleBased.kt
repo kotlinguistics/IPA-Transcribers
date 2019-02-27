@@ -18,6 +18,8 @@ object EnglishRuleBased:RuleBasedTranscriber<AmericanEnglish> {
         return "not yet implemented"
     }
     const val vowels = "aeiou"
+    const val longI = "aɪ"
+    //const val longO = "oʊ"//might not actually be what he means by long o
     val rules:List<Rule> = listOf(
         Rule("ch", "tʃ"),
         Rule("sh", "ʃ"),
@@ -36,6 +38,28 @@ object EnglishRuleBased:RuleBasedTranscriber<AmericanEnglish> {
         Rule("x", "ks"),
 
         Rule("rh", "r"),
+
+        //The notorious gh
+        //Before a vowel, gh becomes g: ghost = göst.
+        Rule("gh[$vowels]", "g", 1),
+        //gh turns a preceding single vowel long: right = rït.
+        //[my note: i don't think <aght>, <eght>, <oght> or <ught> occur naturally in english, so this can just be for i ]
+        Rule("igh", longI),
+        //aught and ought become òt: daughter = dòt@r, sought = sòt.
+        Rule("aught", "ɔt"),
+        Rule("ought", "ɔt"),
+        //Any other ough becomes ö: dough = dö.
+        Rule("ough", "oʊ"),
+        //Elsewhere, gh is simply dropped: freight = frät.
+        Rule("gh", ""),
+
+        //In initial gn, kn, mn, pt, ps, tm, pronounce the second letter only: gnostic = nôstîk, psycho = sïkö, knight = nït.
+        Rule("( |^)", "gn", "n"),
+        Rule("( |^)", "kn", "n"),
+        Rule("( |^)", "mn", "n"),
+        Rule("( |^)", "pt", "t"),
+        Rule("( |^)", "tm", "m"),
+
         //Ignore apostrophes (can't, cop's, o'clock).
         Rule("'", ""),
 

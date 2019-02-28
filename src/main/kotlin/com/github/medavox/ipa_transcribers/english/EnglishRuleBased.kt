@@ -76,10 +76,6 @@ IPA 	Phoneme 	Samples
     /*
 Replacing y
 
-10. Replace y with ï if it ends a one-syllable word: ply = plï.
-
-11. ey is pronounced ë; ay is ä; and oy is öy: say, monkey boy = sä mûnkë böy.
-
 12. Replace y with i if it's not adjacent to a vowel-- we'll worry later about how to pronounce the i.
 
 Thus, system = sîst@m but you, where the y adjoins a vowel, is yu.
@@ -87,10 +83,10 @@ Simplification of stl
 
 13. The t in stl is lost before a final vowel: bustle = bûs@l", bristly = brîslë.
 
-This could perhaps be generalized; but in slow speech I leave the t in (say) coastline or Christlike. I'm also tempted to generalize to all stops, but the only instance in the sample lexicon is muscle, and it's pretty silly to have a rule that applies to a single word.
+This could perhaps be generalized; but in slow speech I leave the t in (say) coastline or Christlike.
+I'm also tempted to generalize to all stops, but the only instance in the sample lexicon is muscle,
+and it's pretty silly to have a rule that applies to a single word.
 (Af)frication before i
-
-14. ci or ti becomes $ before a vowel: gracious = grä$@s, nation = ä$@n.
 
 15. tu becomes çu before a vowel, or before a liquid (r, l) followed by a vowel: mutual = müçu@l, mature = m@çur.
 
@@ -100,36 +96,34 @@ This could perhaps be generalized; but in slow speech I leave the t in (say) coa
     before ur-- assure = @$ur; leisure = lë$@r.
     after k and before a vowel: sexual = sêk$u@l.
 
-At some point English affricated a number of consonants before a i or y that preceded another vowel, including the [y] sound that begins ü Sometimes the y has been lost since. This process seems to be no longer productive-- compare costume, Casio. (Or is it? In quick speech I do say kôsçùm.)
+At some point English affricated a number of consonants before a i or y that preceded another vowel,
+including the [y] sound that begins ü Sometimes the y has been lost since.
+This process seems to be no longer productive-- compare costume, Casio. (Or is it? In quick speech I do say kôsçùm.)
 
 Rule 14 shows another reason ghoti is a fraud: ti only fricativizes when it's followed by a vowel.
 Voicing of s
 
 17. s is voiced between two vowels (amuse, design, prison), except after a (base, parasite).
 
-It's easy to find exception to this rule: disagree, opposite, analysis-- there's even words where the rule applies only for verbs (abuse, house). The rule as stated has more successes than failures, and I haven't been able to find merely lexical rules that do much better. A better rule might take the language of origin into account: the voicing tends to occur in French and Latin words (resent, please, reason, miserable), but not if they're from Greek (analysis, isoceles) or more exotic languages (papoose, Osaka).
+It's easy to find exception to this rule: disagree, opposite, analysis--
+there's even words where the rule applies only for verbs (abuse, house).
+The rule as stated has more successes than failures,
+and I haven't been able to find merely lexical rules that do much better.
 
-The voicing of s is so almost predictable that there are orthographic conventions (borrowed from French) to indicate that we really do want an s: double the s (cf. Moses vs. mosses), or use c instead (race vs. rase). Annoyingly, there are a few cases of unexpectedly voiced ss (dessert, dissolve).
+A better rule might take the language of origin into account:
+the voicing tends to occur in French and Latin words (resent, please, reason, miserable),
+but not if they're from Greek (analysis, isoceles) or more exotic languages (papoose, Osaka).
+
+The voicing of s is so almost predictable that there are orthographic conventions (borrowed from French) to indicate
+that we really do want an s: double the s (cf. Moses vs. mosses), or use c instead (race vs. rase). Annoyingly, there are a few cases of unexpectedly voiced ss (dessert, dissolve).
 
 As a corollary of this rule, the American use of -ize for British -ise was unnecessary, although of course it is more foolproof.
-You know me, al
 
-18. al is pronounced òl before r, s, m, a dental stop, or final ll: also, already, wall, bald, although, almost.
-
-19. alk becomes òk, except initially: walk = wòk.
-
-I suspect this is a sound change, obscured by later borrowings like alcohol.
 Softening of velars
+------------------
 
-20. c becomes s before a front vowel, k elsewhere: cell = sêl, acid = âsîd, but cow = kôw, backer = bâk@r, clear = klër.
-
-21. Similarly, g becomes j before a front vowel, g elsewhere: gel = jêl, turgid = t@rjîd, but got = gôt, twig = twîg, gleam = glëm.
-
-22. If the g doesn't begin the word, and the triggering e precedes o or a, the e is lost: changeable = cänj@b@l; dungeon = dûnj@n (but geology = jëôl@jë).
-
-23. Initial gu or final gue is pronounced g: guest = gêst, plague = pläg. (Medially, it tends to be gw instead: language, anguish.)
-
-Front vowels are i and e; note that y was changed to i by rule 12. We owe these rules to a sound change, and not even our own-- it derives from the history of French.
+Front vowels are i and e; note that y was changed to i by rule 12.
+We owe these rules to a sound change, and not even our own-- it derives from the history of French.
 
 The last two rules allow g to be used for two sounds:
 
@@ -146,32 +140,30 @@ In French, there's a parallel with c:
 but it doesn't work so well in English, since our qu is still kw. The inserted e is found in just a few words (e.g. placeable), due to compounding.
 Untangle reverse-written final liquids
 
-24. le and re (after a consonant, and ending the word) should be rewritten @l, @r.
+To be precise, they become syllabic consonants: the final sound in bottle is a prolonged dark l.
+I think this is an allophonic detail, however: if you like, just add a rule at the end to turn all instances of @r into syllabic r.
 
-To be precise, they become syllabic consonants: the final sound in bottle is a prolonged dark l. I think this is an allophonic detail, however: if you like, just add a rule at the end to turn all instances of @r into syllabic r.
 Short and long vowels
+--------------------
 
-OK, listen up, because these are the two most important rules of English spelling.
+English has a dozen or so vowel phonemes,
+and this silly alphabet we inherited from the Romans has just five vowel symbols
+(y is sometimes used as a vowel, but as we've seen, it pointlessly duplicates i).
+The five symbols can represent ten sounds, thanks to these rules.
 
-25. Vowels are pronounced long before an intervocalic consonant (rate, mete, fine, rote, cute = rät mët fïn röt küt).
+Each vowel letter has two basic interpretations, which by convention are called long and short.
+(Phonetically they're not distinguished by length; tense and lax would be more accurate.
+But I think the more familiar terms will be more readable,
+and remind readers that their old English teachers were onto something after all.)
 
-26. They're short before two consonants (baffle, held, children, rotten, butler), or before a final consonant (pat, pet, pit, pot, but = pât pêt pît pôt bût).
-
-English has a dozen or so vowel phonemes, and this silly alphabet we inherited from the Romans has just five vowel symbols (y is sometimes used as a vowel, but as we've seen, it pointlessly duplicates i). The five symbols can represent ten sounds, thanks to these rules.
-
-Each vowel letter has two basic interpretations, which by convention are called long and short. (Phonetically they're not distinguished by length; tense and lax would be more accurate. But I think the more familiar terms will be more readable, and remind readers that their old English teachers were onto something after all.)
-
-In my transcription, long vowels are marked with a diaresis, since html doesn't supply a macron (äëïöü), and short vowels with a circumflex (âêîôû). Now you can see why I chose those odd representations-- they come from the basic logic of English spelling. (Think of the diaresis as the IPA : long mark.)
-
-Note that the names of the letters A E I O U are simply the 'long' vowels.
-
-And where did that come from?
-
-    The spelling of the long vowels is the fault of the Great Vowel Shift of early modern times. Middle English spoke the vowels with their 'proper' vowels, so that (say) mate would have been pronounced môt@.
-    The short vowels are simply laxed versions of the original sounds of the long vowels. ê, for instance, is a lazy version of ä (the original sound of long e)-- closer to the muddy center of the vowel space.
+In my transcription, long vowels are marked with a diaresis, since html doesn't supply a macron (äëïöü),
+and short vowels with a circumflex (âêîôû).
+Now you can see why I chose those odd representations-- they come from the basic logic of English spelling.
 
 The above rules work in conjunction with rule 54, which means that doubling a consonant changes a medial vowel from long to short: later/latter, Peter/petter, biter/bitter, hoping/hopping, cuter/cutter.
+
 Exceptions, but general ones
+---------------------------
 
 27. Final ind is ïnd, final oss is òs; final og is òg: mind, boss, dog = mïnd bòs dòg.
 
@@ -181,12 +173,21 @@ Exceptions, but general ones
 
 29a. u is pronounced u before l, or after a labial stop (pb) and before a sibilant (s$ç): adult, push, butch. (This doesn't apply if the u is long: mule.)
 
-I don't think I ever noticed these generalizations till I started working out the rules for this page. At least some of these, such as 29a, are sound changes from Shakespeare's time.
+I don't think I ever noticed these generalizations till I started working out the rules for this page.
+At least some of these, such as 29a, are sound changes from Shakespeare's time.
 
-Rules such as 6, 18, 19, 27, 28, and 51 introduce ò, a vowel which (as signalled by the odd diacritic in my transcription) doesn't fit well into English phonology. The fact that a velar occurs in many of the rule conditions suggests that it was originally an allophonic variant of /ô/ and /â/ in this environment-- compare dog, ought, long, walk with dot, out, lot, wad. But it's now phonemic in GA, as can be seen in the minimum triad caught, cot, cat. These rules would have to be modified (and some could be eliminated) in dialects that merge ò and ô.
+Rules such as 6, 18, 19, 27, 28, and 51 introduce ò,
+a vowel which (as signalled by the odd diacritic in my transcription) doesn't fit well into English phonology.
+The fact that a velar occurs in many of the rule conditions suggests that
+it was originally an allophonic variant of /ô/ and /â/ in this environment --
+compare dog, ought, long, walk with dot, out, lot, wad.
+But it's now phonemic in GA, as can be seen in the minimum triad caught, cot, cat.
+These rules would have to be modified (and some could be eliminated) in dialects that merge ò and ô.
 
 For some speakers, rule 29a only applies after labials, so that pull and dull don't rhyme.
+
 Softening of gn
+--------
 
 30. Except before a vowel, the vowel in ign or igm lengthens, and the g is lost: alignment paradigm = @lïnm@nt, pär@dïm, but igneous = îgnë@s.
 
@@ -202,25 +203,37 @@ Removal of silent e
 
 33. Remove final e: rate mike cute = rät mïk küt (unless it's the only vowel in the word, as in he).
 
-This and rules 25 and 26 (on long and short vowels) are the guts of the English spelling system. They allow the five vowel symbols to represent ten vowel phonemes.
+This and rules 25 and 26 (on long and short vowels) are the guts of the English spelling system.
+They allow the five vowel symbols to represent ten vowel phonemes.
 
-English orthography tends to preserve the spelling of morphemes in derived words, including their final e. The program is too stupid to handle this, since it has no way of recognizing compounds. But of course in words like safety, lovely, changeable, careful, warehouse, jukebox, placement, placeholder the e in the first morpheme should be deleted by this rule.
+English orthography tends to preserve the spelling of morphemes in derived words, including their final e.
+The program is too stupid to handle this, since it has no way of recognizing compounds.
+But of course in words like safety, lovely, changeable, careful, warehouse, jukebox, placement, placeholder the e in the first morpheme should be deleted by this rule.
 
 People pay tribute to these rules every time they make up words-- whether for marketing purposes (Nite-Lite, Cold-Eeze, Unix), slang (reefer, dweeb, doofus), a created world (hobbit, Leela, Oz, Alley Oop, Naboo, Mr. Magoo, Morlock), or for borrowings ( thuggee, kangaroo, tycoon, igloo, tepee). Words that don't fit the pattern, like Linux, can cause confusion.
 Add shortening; stir
 
-Some vowels that are orthographically long are pronounced short, and frankly I haven't put my finger on the pattern. In the file I did add this rule:
+Some vowels that are orthographically long are pronounced short, and frankly I haven't put my finger on the pattern.
+In the file I did add this rule:
 
 34. Shorten a vowel that precedes a simple, final CV syllable (and is not the first syllable in the word).
 
-This handles words like anomaly, cinema, sanity, biology, century; but it fails on other words, like patina, tuxedo, agora. Obviously the shortened vowels are all unstressed; but the idea here is to predict pronunciations from the spelling, and the spelling doesn't indicate the stress.
+This handles words like anomaly, cinema, sanity, biology, century;
+but it fails on other words, like patina, tuxedo, agora.
+Obviously the shortened vowels are all unstressed; but the idea here is to predict pronunciations from the spelling,
+and the spelling doesn't indicate the stress.
 
 (We've already removed silent e, so this rule isn't triggered by words like phoneme.)
 
-Somewhere I read that long vowels can't occur earlier than the antepenult; but obvious counterexamples are isolating or unification. I'll see if I can improve the generalization, however.
-Vowel digraphs
+Somewhere I read that long vowels can't occur earlier than the antepenult;
+but obvious counterexamples are isolating or unification. I'll see if I can improve the generalization, however.
 
-Besides the long/short trick, English expands its repertoire of vowel representations with digraphs. Quite a few of these are redundant, and there are lots of exceptions-- this, and not ch or ough, is the real weak point of English spelling.
+Vowel digraphs
+--------------
+
+Besides the long/short trick, English expands its repertoire of vowel representations with digraphs.
+Quite a few of these are redundant, and there are lots of exceptions--
+this, and not ch or ough, is the real weak point of English spelling.
 
 35. iV (that is, i plus another vowel) becomes ï@ in the initial syllable: bias, diagram = bï@s, dï@grâm.
 
@@ -252,12 +265,19 @@ Besides the long/short trick, English expands its repertoire of vowel representa
  ue 	 u
  ui 	 u
 
-Again, the program is not smart enough to recognize when the digraph spans a morpheme boundary, and thus should be treated as two separate vowels: goer = gö@r, coaxial = köâksë@l.
+Again, the program is not smart enough to recognize when the digraph spans a morpheme boundary,
+and thus should be treated as two separate vowels: goer = gö@r, coaxial = köâksë@l.
 
-Annoyingly, some of these digraphs have at least two values: cf. wool, fool; mead, dread; fief, friend; reign, seize; ground, group. The values in the table are those that occur most often. (The alternatives are generally just a step or two apart phonetically, e.g. u/ù, ë/ê, ä/ë.)
+Annoyingly, some of these digraphs have at least two values:
+cf. wool, fool; mead, dread; fief, friend; reign, seize; ground, group.
+The values in the table are those that occur most often.
+(The alternatives are generally just a step or two apart phonetically, e.g. u/ù, ë/ê, ä/ë.)
 
-For ease of exposition I've put the final ie rule here, but it really goes before rule 14 (affrication); otherwise terrible things happen to words like untie.
+For ease of exposition I've put the final ie rule here, but it really goes before rule 14 (affrication);
+otherwise terrible things happen to words like untie.
+
 Those pesky final syllabics
+--------------------------
 
 38. Any vowel reduces to @ before final l: battle, final, hovel, evil, symbol.
 
@@ -275,7 +295,8 @@ Suffix simplifications
  -lion 	 ly@n
  -nion 	 ny@n
 
-Again, we really shouldn't have 'rules' for single lexical entries. But these suffixes are common, so the rule has a large yield.
+Again, we really shouldn't have 'rules' for single lexical entries.
+But these suffixes are common, so the rule has a large yield.
 Unpronounceable finals
 
 41. A final b or n is not pronounced if preceded by an m: damn bomb = dâm bôm.
@@ -328,7 +349,9 @@ Voicing of s
 53. It's also voiced before final m: prism = prîzm.
 
 The first of these rules is really morphophonemic: the plural, possessive, and 3p singular inflections of English are spelled s even when, by assimilation, they're pronounced z. This rule is not phonological, as can be seen by a word like chance = çâns; compare fans = fânz.
+
 Double consonants
+----------------
 
 54. A double consonant is pronounced singly: dinner, buzzard, hassle = dîn@r, bûz@rd, hâs@l.
 
@@ -349,11 +372,13 @@ Rule 56 goes with rule 16, which changed s to $ before some instances of u. */
         return "not yet implemented"
     }
     const val vowels = "aeiou"
+    const val consonants = "bcdfghjklmnpqrstvwxz"
     const val longI = "aɪ"
     //const val longO = "oʊ"//might not actually be what he means by long o
     val rules:List<Rule> = listOf(
-        Rule("ch", "tʃ"),
-        Rule("sh", "ʃ"),
+        //1. Make the following unconditional replacements:
+        Rule("t?ch", "tʃ"),
+        Rule("sc?h", "ʃ"),
         Rule("ph", "f"),
         Rule("th", "θ"),
         Rule("qu", "kw"),
@@ -361,7 +386,7 @@ Rule 56 goes with rule 16, which changed s to $ before some instances of u. */
         //Before an o, replace wh with h instead: who, whore, whole.
         Rule("who", "h", 1),
         Rule("wh", "w"),
-        //Replace x with ks; but after e and before another vowel, use gz instead.
+        //2. Replace x with ks; but after e and before another vowel, use gz instead.
         // (This is not an allophonic rule: compare the near-minimal pair exist and excite.)
         Rule("e", "xh[$vowels]", "gz", 2),
         Rule("xh", "ks"),
@@ -371,33 +396,104 @@ Rule 56 goes with rule 16, which changed s to $ before some instances of u. */
         Rule("rh", "r"),
 
         //The notorious gh
-        //Before a vowel, gh becomes g: ghost = göst.
-        Rule("gh[$vowels]", "g", 1),
-        //gh turns a preceding single vowel long: right = rït.
+        //4. Before a vowel, gh becomes g: ghost = göst.
+        Rule("gh[$vowels]", "g", 2),
+        //5. gh turns a preceding single vowel long: right = rït.
         //[my note: i don't think <aght>, <eght>, <oght> or <ught> occur naturally in english, so this can just be for i ]
         Rule("igh", longI),
-        //aught and ought become òt: daughter = dòt@r, sought = sòt.
+        //6. aught and ought become òt: daughter = dòt@r, sought = sòt.
         Rule("aught", "ɔt"),
         Rule("ought", "ɔt"),
-        //Any other ough becomes ö: dough = dö.
+        //7. Any other ough becomes ö: dough = dö.
+        //[note: Americans and their blind-spots for ough!]
+        Rule("rough", "rʌf"),
+        Rule(" cough", " kɒf"),
+        Rule(" through ", " θru "),
         Rule("ough", "oʊ"),
-        //Elsewhere, gh is simply dropped: freight = frät.
+        //8. Elsewhere, gh is simply dropped: freight = frät.
         Rule("gh", ""),
 
-        //In initial gn, kn, mn, pt, ps, tm, pronounce the second letter only: gnostic = nôstîk, psycho = sïkö, knight = nït.
+        //9. In initial gn, kn, mn, pt, ps, tm, pronounce the second letter only: gnostic = nôstîk, psycho = sïkö, knight = nït.
         Rule("( |^)", "gn", "n"),
         Rule("( |^)", "kn", "n"),
         Rule("( |^)", "mn", "n"),
         Rule("( |^)", "pt", "t"),
         Rule("( |^)", "tm", "m"),
 
-        //Ignore apostrophes (can't, cop's, o'clock).
+        // 10. Replace y with ï if it ends a one-syllable word: ply = plï.
+        Rule("(^|\\s)[^$vowels]+", "y(\\s|$)", "aɪ", 1),
+
+        //11. ey is pronounced ë;
+        Rule("ey", "i"),
+        // ay is ä;
+        Rule("ay", "eɪ"),
+        // and oy is öy: say, monkey boy = sä mûnkë böy.
+        Rule("oy", "oj"),
+
+        //14. ci or ti becomes $ before a vowel: gracious = grä$@s, nation = nä$@n.
+        Rule(Regex("(ti|ci)[$vowels]"), "ʃ", 2),
+
+        //18. al is pronounced òl before r, s, m, a dental stop, or final ll: also, already, wall, bald, although, almost.
+        Rule(Regex("al([lrsmtd]|th)"), "ɔl", 2),
+
+        //19. alk becomes òk, except initially: walk = wòk.
+        Rule("[^\\s]", "alk", "ɔk"),
+
+        //20. c becomes s before a front vowel, k elsewhere: cell = sêl, acid = âsîd,
+        // but cow = kôw, backer = bâk@r, clear = klër.
+        Rule("c[iey]", "s", 1),
+        Rule("c", "k"),
+
+        //22. If the g doesn't begin the word, and the triggering e precedes o or a, the e is lost:
+        // changeable = cänj@b@l; dungeon = dûnj@n (but geology = jëôl@jë).
+        Rule("ge[oa]", "dʒ", 2),
+        //21. g becomes j before a front vowel, g elsewhere: gel = jêl, turgid = t@rjîd, but got = gôt, twig = twîg, gleam = glëm.
+        Rule("g[iey]", "dʒ", 1),
+        Rule("g", "g"),
+        //23. Initial gu or final gue is pronounced g: guest = gêst, plague = pläg.
+        Rule("(^$|\\s)", "gu", "g"),
+        Rule("gue($|\\s)", "g"),
+        // (Medially, it tends to be gw instead: language, anguish.)
+        Rule("gu", "gw"),
+
+        //24. le and re (after a consonant, and ending the word) should be rewritten @l, @r.
+        Rule("[$consonants]", "le(\\s|$)", "əl", 2),
+        Rule("[$consonants]", "re(\\s|$)", "ər", 2),
+
+        //these are the two most important rules of English spelling.
+        //25. Vowels are pronounced long before an intervocalic consonant
+        // (rate, mete, fine, rote, cute = rät mët fïn röt küt).
+        //26. They're short before two consonants (baffle, held, children, rotten, butler),
+        //or before a final consonant (pat, pet, pit, pot, but = pât pêt pît pôt bût).
+        Rule(Regex("a[$consonants][$vowels]"), "eɪ", 1),
+        Rule(Regex("e[$consonants][$vowels]"), "iː", 1),
+        Rule(Regex("i[$consonants][$vowels]"), "aɪ", 1),
+        Rule(Regex("o[$consonants][$vowels]"), "oʊ", 1),
+        Rule(Regex("u[$consonants][$vowels]"), "ju", 1),
+
+        Rule(Regex("a[$consonants]([$consonants]|\\s|$)"), "æ", 1),
+        Rule(Regex("e[$consonants]([$consonants]|\\s|\$)"), "ɛ", 1),
+        Rule(Regex("i[$consonants]([$consonants]|\\s|\$)"), "ɪ", 1),
+        Rule(Regex("o[$consonants]([$consonants]|\\s|\$)"), "ɒ", 1),
+        Rule(Regex("u[$consonants]([$consonants]|\\s|\$)"), "ʌ", 1),
+
+        //33. Remove final e: rate mike cute = rät mïk küt (unless it's the only vowel in the word, as in he).
+        Rule("[$vowels][$consonants]{1,2}", "e", ""),
+        //This and rules 25 and 26 (on long and short vowels) are the guts of the English spelling system. They allow the five vowel symbols to represent ten vowel phonemes.
+
+        //English orthography tends to preserve the spelling of morphemes in derived words, including their final e.
+        // The program is too stupid to handle this, since it has no way of recognizing compounds.
+        // But of course in words like
+        // safety, lovely, changeable, careful, warehouse, jukebox, placement, placeholder
+        // the e in the first morpheme should be deleted by this rule.
+
+        //3. Ignore apostrophes (can't, cop's, o'clock).
         Rule("'", ""),
 
         // Hyphens can however be treated as word separators (mother-in-law is pronounced like mother in law).
         Rule("-", " "),
         Rule("", "")
-    )+latinBaseRules+westernPunctuation
+    )//+latinBaseRules+westernPunctuation
     override fun transcribe(nativeText: String): String {
         return nativeText.toLowerCase().processWithRules(rules, reportAndCopy)
     }

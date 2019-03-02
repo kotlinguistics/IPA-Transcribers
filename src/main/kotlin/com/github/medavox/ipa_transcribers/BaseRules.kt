@@ -80,6 +80,18 @@ interface BaseRules {
 
         Rule("ँ", "̃"), //nasalised vowel diacritic. Presumably can go over any (or some) other vowels
 
+        //numbers, for completeness' sake
+        Rule("०", "0"),
+        Rule("१", "1"),
+        Rule("२", "2"),
+        Rule("३", "3"),
+        Rule("४", "4"),
+        Rule("५", "5"),
+        Rule("६", "6"),
+        Rule("७", "7"),
+        Rule("८", "8"),
+        Rule("९", "9"),
+
         //punctuation
         Rule("।", "."),//danda or 'stick'. equivalent to a full stop.
         Rule(" ", " ")

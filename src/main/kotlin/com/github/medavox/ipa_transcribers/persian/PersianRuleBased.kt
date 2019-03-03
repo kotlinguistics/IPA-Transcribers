@@ -9,9 +9,9 @@ import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
  *
  * A lookup dictionary wouldn't even solve this problem. According to Wikipedia:
  *
- * "words distinguished from each other only by short vowels are ambiguous in writing:
- * Western Persian kerm "worm", karam "generosity", kerem "cream",
- * and krom "chrome" are all spelled krm (کرم) in Persian"
+ * >words distinguished from each other only by short vowels are ambiguous in writing:
+ * >Western Persian kerm "worm", karam "generosity", kerem "cream",
+ * >and krom "chrome" are all spelled krm (کرم) in Persian
  *
  * "Context" is necessary for first working out which word the vowel-less spelling refers to;
  * and context is no simple thing, requiring tools more complex than regex matching.

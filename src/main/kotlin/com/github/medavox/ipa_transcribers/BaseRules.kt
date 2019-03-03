@@ -127,6 +127,8 @@ interface BaseRules {
         Rule(" ", " ")
     )
 
+    /**Although persian letters have different repesentations whether they are initial, medial, or final --
+     * all forms are represented by the same unicode character.*/
     val persoArabicBaseRules:List<Rule> get() = listOf(
         Rule("ا", "ɒ"),
         Rule("ب", "b"),
@@ -146,7 +148,7 @@ interface BaseRules {
         Rule("ش", "ʃ"),
         Rule("ص", "s"),
         Rule("ض", "z"),
-        Rule("ط", "s"),
+        Rule("ط", "t"),
         Rule("ظ", "z"),
         Rule("ع", "ʔ"),
         Rule("غ", "ɣ"),
@@ -157,9 +159,9 @@ interface BaseRules {
         Rule("ل", "l"),
         Rule("م", "m"),
         Rule("ن", "n"),
-        Rule("و", "[v] / [uː] / [o] / [ow] / ([w] / [aw] / [oː] in Dari)"),
+        Rule("و", "ʋ"),// [v] / [uː] / [o] / [ow] / ([w] / [aw] / [oː] in Dari)),
         Rule("ه", "h"),
-        Rule("ی", "[j] / [i] / [ɒː] / ([aj] / [eː] in Dari)"),
+        Rule("ی", "i"),// / [j] / [ɒː] / ([aj] / [eː] in Dari)),
         Rule(" ", " ")
     )
 

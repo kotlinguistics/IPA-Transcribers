@@ -5,7 +5,7 @@ interface BaseRules {
     val westernPunctuation:List<Rule> get() = listOf(
         Rule(" ", " "),
         Rule(",", ","),
-        Rule(".", ".")
+        Rule(Regex("\\."), ".")
     )
 
     private fun l(it:String):String{

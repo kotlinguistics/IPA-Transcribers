@@ -17,19 +17,18 @@ object IpaToTukiNuwa: RuleBasedTranscriber<InternationalPhoneticAlphabet> {
     private val initialRules:List<Rule> = listOf(
         Rule(Regex("[aɶäɒɑæɐɛəʌ]+"), "a"),
         Rule(Regex("[hɦχxħçʁʕ]+"), "h"),
-        Rule(Regex("[iyɪʏeø]+"), "i"),
+        Rule(Regex("[iyɪʏeɨ]+"), "i"),
         Rule(Regex("[jʎʝ]+"), "j"),
-        Rule(Regex("[kgqɢɡ]+"), "k"),
-        Rule(Regex("[lɫɭɹ]+"), "l"),
+        Rule(Regex("[ɣkgqɢɡ]+"), "k"),
+        Rule(Regex("[lɫɭr]+"), "l"),
         Rule(Regex("[mɱ]+"), "m"),
         Rule(Regex("[nŋɲɴ]+"), "n"),
-        Rule(Regex("[pbʙɸβ]+"), "p"),
+        Rule(Regex("[fpbʙɸβ]+"), "p"),
         Rule(Regex("[szʃʒʂʐɕʑθ]+"), "s"),
         Rule(Regex("[tdðʈɖɾ]+"), "t"),
-        Rule(Regex("[uʊɯɤoɔ]+"), "u"),
-        Rule(Regex("[ʋwvʍ]+"), "w"),
-        Rule(Regex(" "), " ")
-    )
+        Rule(Regex("[uʊɯɤoɔø]+"), "u"),
+        Rule(Regex("[ʋwvʍɹ]+"), "w")
+    ) + westernPunctuation
 
     private val phonotacticsRules:List<Rule> = listOf(
         //tuki nuwa doesn't allow these combinations.

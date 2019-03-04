@@ -3,7 +3,7 @@ package com.github.medavox.ipa_transcribers
 import com.github.medavox.ipa_transcribers.Language.InternationalPhoneticAlphabet
 
 
-class IpaToTukiNuwa: RuleBasedTranscriber<InternationalPhoneticAlphabet> {
+object IpaToTukiNuwa: RuleBasedTranscriber<InternationalPhoneticAlphabet> {
     /**Essentially an automated repair strategy for Tuki Nuwa.
      * replaces every IPA sound with the nearest legal sound in Tuki Nuwa.
 

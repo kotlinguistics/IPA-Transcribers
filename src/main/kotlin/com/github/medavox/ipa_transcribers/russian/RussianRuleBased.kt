@@ -4,11 +4,15 @@ import com.github.medavox.ipa_transcribers.Language.Russian
 import com.github.medavox.ipa_transcribers.Rule
 import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
 
+/**Completion state: vowel reduction in unstressed syllables not handled yet.
+ * However, these require stress info, and by all accounts,
+ * the stresses of Russian words follow no pattern, and can only be memorised
+ *
+ * So this may be as far as we can get for Russian.
+ *
+ * Also a static list of any exceptions.*/
 object RussianRuleBased:RuleBasedTranscriber<Russian> {
-    //features of russian orthography
-    //1.hardening and softening of consonants
-    //vowel reduction
-    //the third one
+    //todo: implement vowel reduction in unstressed vowels
     private const val softenableConsonants = "бвгдзклмнпрстфх"
     //Consonant letters represent both
     // "soft" (palatalized, represented in the IPA with a ⟨ʲ⟩) and

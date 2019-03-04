@@ -207,38 +207,38 @@ interface BaseRules {
         Rule("إ", ""),//LETTER ALEF WITH HAMZA BELOW
         Rule("ئ", ""),//LETTER YEH WITH HAMZA ABOVE
         Rule("ا", ""),//LETTER ALEF
-        Rule("ب", ""),//LETTER BEH
+        Rule("ب", "b"),//LETTER BEH
         Rule("ة", ""),//LETTER TEH MARBUTA
-        Rule("ت", ""),//LETTER TEH
-        Rule("ث", ""),//LETTER THEH
-        Rule("ج", ""),//LETTER JEEM
-        Rule("ح", ""),//LETTER HAH
-        Rule("خ", ""),//LETTER KHAH
-        Rule("د", ""),//LETTER DAL
-        Rule("ذ", ""),//LETTER THAL
-        Rule("ر", ""),//LETTER REH
-        Rule("ز", ""),//LETTER ZAIN
-        Rule("س", ""),//LETTER SEEN
-        Rule("ش", ""),//LETTER SHEEN
-        Rule("ص", ""),//LETTER SAD
-        Rule("ض", ""),//LETTER DAD
-        Rule("ط", ""),//LETTER TAH
-        Rule("ظ", ""),//LETTER ZAH
-        Rule("ع", ""),//LETTER AIN
-        Rule("غ", ""),//LETTER GHAIN
+        Rule("ت", "t"),//LETTER TEH
+        Rule("ث", "θ"),//LETTER THEH
+        Rule("ج", "d͡ʒ"),//LETTER JEEM
+        Rule("ح", "ħ"),//LETTER HAH
+        Rule("خ", "x"),//LETTER KHAH
+        Rule("د", "d"),//LETTER DAL
+        Rule("ذ", "ð"),//LETTER THAL
+        Rule("ر", "r"),//LETTER REH
+        Rule("ز", "z"),//LETTER ZAIN
+        Rule("س", "s"),//LETTER SEEN
+        Rule("ش", "ʃ"),//LETTER SHEEN
+        Rule("ص", "sˤ"),//LETTER SAD
+        Rule("ض", "dˤ"),//LETTER DAD
+        Rule("ط", "tˤ"),//LETTER TAH
+        Rule("ظ", "ðˤ"),//LETTER ZAH
+        Rule("ع", "ʕ"),//LETTER AIN
+        Rule("غ", "ɣ"),//LETTER GHAIN
         Rule("ػ", ""),//LETTER KEHEH WITH TWO DOTS ABOVE
         Rule("ؼ", ""),//LETTER KEHEH WITH THREE DOTS BELOW
         Rule("ؽ", ""),//LETTER FARSI YEH WITH INVERTED V
         Rule("ؾ", ""),//LETTER FARSI YEH WITH TWO DOTS ABOVE
         Rule("ؿ", ""),//LETTER FARSI YEH WITH THREE DOTS ABOVE
         Rule("ـ", ""),//TATWEEL
-        Rule("ف", ""),//LETTER FEH
-        Rule("ق", ""),//LETTER QAF
-        Rule("ك", ""),//LETTER KAF
-        Rule("ل", ""),//LETTER LAM
-        Rule("م", ""),//LETTER MEEM
-        Rule("ن", ""),//LETTER NOON
-        Rule("ه", ""),//LETTER HEH
+        Rule("ف", "f"),//LETTER FEH
+        Rule("ق", "q"),//LETTER QAF
+        Rule("ك", "k"),//LETTER KAF
+        Rule("ل", "l"),//LETTER LAM
+        Rule("م", "m"),//LETTER MEEM
+        Rule("ن", "n"),//LETTER NOON
+        Rule("ه", "h"),//LETTER HEH
         Rule("و", ""),//LETTER WAW
         Rule("ى", ""),//LETTER ALEF MAKSURA
         Rule("ي", ""),//LETTER YEH

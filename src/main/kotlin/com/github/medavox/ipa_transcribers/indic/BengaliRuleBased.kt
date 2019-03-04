@@ -1,4 +1,4 @@
-package com.github.medavox.ipa_transcribers.bengali
+package com.github.medavox.ipa_transcribers.indic
 
 import com.github.medavox.ipa_transcribers.Language.Bengali
 import com.github.medavox.ipa_transcribers.Rule

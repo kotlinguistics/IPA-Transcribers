@@ -1,4 +1,4 @@
-package com.github.medavox.ipa_transcribers.malay
+package com.github.medavox.ipa_transcribers.latin
 
 import com.github.medavox.ipa_transcribers.Language.IndonesianMalay
 import com.github.medavox.ipa_transcribers.Rule

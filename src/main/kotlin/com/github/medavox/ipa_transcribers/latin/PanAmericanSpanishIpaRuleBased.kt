@@ -1,4 +1,4 @@
-package com.github.medavox.ipa_transcribers.spanish
+package com.github.medavox.ipa_transcribers.latin
 
 import com.github.medavox.ipa_transcribers.Language.PanAmericanSpanish
 import com.github.medavox.ipa_transcribers.Rule

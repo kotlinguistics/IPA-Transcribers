@@ -1,4 +1,4 @@
-package com.github.medavox.ipa_transcribers.korean
+package com.github.medavox.ipa_transcribers.asian_unique
 
 import com.github.medavox.ipa_transcribers.Language.Korean
 import com.github.medavox.ipa_transcribers.Rule

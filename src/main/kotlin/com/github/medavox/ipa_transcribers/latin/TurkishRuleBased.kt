@@ -1,4 +1,4 @@
-package com.github.medavox.ipa_transcribers.turkish
+package com.github.medavox.ipa_transcribers.latin
 
 import com.github.medavox.ipa_transcribers.Language.Turkish
 import com.github.medavox.ipa_transcribers.Rule

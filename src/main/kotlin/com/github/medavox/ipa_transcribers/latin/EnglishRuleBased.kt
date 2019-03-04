@@ -1,4 +1,4 @@
-package com.github.medavox.ipa_transcribers.english
+package com.github.medavox.ipa_transcribers.latin
 
 import com.github.medavox.ipa_transcribers.Language.AmericanEnglish
 import com.github.medavox.ipa_transcribers.Rule

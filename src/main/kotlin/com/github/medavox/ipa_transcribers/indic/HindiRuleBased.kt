@@ -1,4 +1,4 @@
-package com.github.medavox.ipa_transcribers.hindi
+package com.github.medavox.ipa_transcribers.indic
 
 import com.github.medavox.ipa_transcribers.Language.Hindi
 import com.github.medavox.ipa_transcribers.Rule

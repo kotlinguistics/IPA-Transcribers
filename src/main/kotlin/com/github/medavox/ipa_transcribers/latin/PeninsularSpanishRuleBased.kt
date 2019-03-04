@@ -1,11 +1,11 @@
-package com.github.medavox.ipa_transcribers.spanish
+package com.github.medavox.ipa_transcribers.latin
 
 import com.github.medavox.ipa_transcribers.Language.PeninsularSpanish
 import com.github.medavox.ipa_transcribers.Rule
 import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
-import com.github.medavox.ipa_transcribers.spanish.PanAmericanSpanishIpaRuleBased.voicedConsonants
-import com.github.medavox.ipa_transcribers.spanish.PanAmericanSpanishIpaRuleBased.normaliseAccents
-import com.github.medavox.ipa_transcribers.spanish.PanAmericanSpanishIpaRuleBased.removeStressAccents
+import com.github.medavox.ipa_transcribers.latin.PanAmericanSpanishIpaRuleBased.voicedConsonants
+import com.github.medavox.ipa_transcribers.latin.PanAmericanSpanishIpaRuleBased.normaliseAccents
+import com.github.medavox.ipa_transcribers.latin.PanAmericanSpanishIpaRuleBased.removeStressAccents
 
 object PeninsularSpanishRuleBased: RuleBasedTranscriber<PeninsularSpanish> {
     val rules:List<Rule> = PanAmericanSpanishIpaRuleBased.rules.map{

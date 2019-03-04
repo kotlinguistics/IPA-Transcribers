@@ -1,4 +1,4 @@
-package com.github.medavox.ipa_transcribers.russian
+package com.github.medavox.ipa_transcribers.asian_unique
 
 import com.github.medavox.ipa_transcribers.Language.Russian
 import com.github.medavox.ipa_transcribers.Rule

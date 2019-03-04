@@ -1,5 +1,12 @@
 package com.github.medavox.ipa_transcribers
 
+/***This API takes a context-free approach:
+ * Regex is matched to the start of the string only,
+ * and the output String is not interpreted as Regex.
+ *
+ * Therefore, there is no state held by the Transcriber;
+ * only simple substitutions matched by Regular expressions may be used.
+ **/
 interface RuleBasedTranscriber<T:Language>:Transcriber<T>, BaseRules {
     data class UnmatchedOutput(val newWorkingInput:String, val output:(soFar:String) -> String) {
         constructor(newWorkingInput: String, output:String):this(newWorkingInput, {it+output})
@@ -55,10 +62,9 @@ interface RuleBasedTranscriber<T:Language>:Transcriber<T>, BaseRules {
             for (rule in rules) {
                 val unconsumedMatch:MatchResult? = rule.unconsumedMatcher.find(processingWord)
 
-
                 //val f = rule.consumedMatcher?.findAll(consumed)?.lastOrNull()
                 //if(f != null) System.out.println("rule: $rule; match: ${f.value}, range:${f.range} of $consumed|$processingWord")
-                val consumedMatches = rule.consumedMatcher == null ||
+                val consumedMatches:Boolean = rule.consumedMatcher == null ||
                     rule.consumedMatcher.findAll(consumed).lastOrNull()?.range?.endInclusive == consumed.length-1
 
                 //if the rule matches the start of the remaining string, and the end of the consumed string
@@ -80,7 +86,7 @@ interface RuleBasedTranscriber<T:Language>:Transcriber<T>, BaseRules {
             processingWord = unmatchedOutput.newWorkingInput
             out = unmatchedOutput.output(out)
         }
-        System.out.println("consumed: $consumed")
+        //System.out.println("consumed: $consumed")
         return out
     }
 }

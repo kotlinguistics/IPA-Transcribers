@@ -19,28 +19,13 @@ object EnglishRuleBased:RuleBasedTranscriber<AmericanEnglish> {
     Consonants
     ----------
 IPA 	Phoneme 	Samples
-p 	 p 	 paper
-b 	 b 	 book
-t 	 t 	 take
-d 	 d 	 dead
-k 	 k 	 cape, talk, quite
-g 	 g 	 get
-m 	 m 	 moon
-n 	 n 	 new
 ŋ 	 ñ 	 sing, think
-f 	 f 	 four, physics
-v 	 v 	 vine
 θ 	 + 	 thin
 ð 	 + 	 this  NOTE: was originally underlined in HTML. Check original page for the rules involving this
-s 	 s 	 so
-z 	 z 	 zoo
 ʃ 	 $ 	 shack
 ʒ 	 $ 	 measure NOTE: was also originally underlined in the HTML version.
 tʃ 	 ç 	 chew
 dʒ 	 j 	 judge
-r 	 r 	 ran
-l 	 l 	 late
-h 	 h 	 hang
 
 
     Vowels

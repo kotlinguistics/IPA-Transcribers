@@ -54,9 +54,27 @@ class IpaToTukiNuwa: RuleBasedTranscriber<InternationalPhoneticAlphabet> {
         Rule("w+", "w")
     )
 
+    private val breakUpConsonantClustersAndDiphthongs:List<Rule> = listOf(
+        Rule(Regex("au"), "aju"),
+        Rule(Regex("ai"), "awi"),
+        Rule(Regex("h[^aiu]"), "hi", 1),
+        Rule(Regex("i[au]"), "ij", 1),
+        Rule(Regex("j[^aiu]"), "ja", 1),
+        Rule(Regex("k[^aiu]"), "ku", 1),
+        Rule(Regex("l[^aiu]"), "la", 1),
+        Rule(Regex("m[^aiu]"), "mu", 1),
+        Rule(Regex("n[hjklmnpstw]"), "na", 1),
+        Rule(Regex("p[^aiu]"), "pu", 1),
+        Rule(Regex("s[^aiu]"), "sa", 1),
+        Rule(Regex("t[^aiu]"), "ta", 1),
+        Rule(Regex("u[ai]"), "uw", 1),
+        Rule(Regex("w[^aiu]"), "wa", 1)
+    )
+
     override fun transcribe(nativeText: String): String {
         return nativeText.processWithRules(initialRules, reportAndSkip)
-            .processWithRules(phonotacticsRules, reportAndCopy)
-            .processWithRules(cleanupAfterPhonotacticsRules, reportAndCopy)
+            .processWithRules(phonotacticsRules, copy)
+            .processWithRules(cleanupAfterPhonotacticsRules, copy)
+            .processWithRules(breakUpConsonantClustersAndDiphthongs, copy)
     }
 }

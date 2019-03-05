@@ -1,10 +1,9 @@
 package com.github.medavox.ipa_transcribers.latin
 
-import com.github.medavox.ipa_transcribers.Language.Turkish
 import com.github.medavox.ipa_transcribers.Rule
 import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
 
-object TurkishRuleBased: RuleBasedTranscriber<Turkish> {
+object TurkishRuleBased: RuleBasedTranscriber {
 
     val frontVowels = "eiöü"
     val backVowels = "aâıouû"

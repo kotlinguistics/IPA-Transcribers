@@ -18,7 +18,7 @@ import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
  *
  * Even so, this transcriber does the best job possible,
  * given the information that *has* been recorded in the orthography.*/
-object PersianRuleBased:RuleBasedTranscriber<Persian> {
+object PersianRuleBased:RuleBasedTranscriber {
     override fun transcribe(nativeText: String): String {
         return nativeText.processWithRules(persoArabicBaseRules, reportAndCopy)
     }

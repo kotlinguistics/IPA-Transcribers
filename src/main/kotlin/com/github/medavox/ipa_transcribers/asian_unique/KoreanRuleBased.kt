@@ -35,7 +35,7 @@ import java.text.Normalizer
  * https://linguistics.stackexchange.com/q/2805 describes the syllable-final assimilation rules
  * [An independent reference wiki for the korean language](http://www.koreanwikiproject.com/wiki/index.php?title=IPA)
  * */
-object KoreanRuleBased: RuleBasedTranscriber<Korean> {
+object KoreanRuleBased: RuleBasedTranscriber {
     private val rules:List<Rule> = listOf(
 
         //syllable-initial (choseong) consonants

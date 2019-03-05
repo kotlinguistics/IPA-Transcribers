@@ -7,7 +7,7 @@ import com.github.medavox.ipa_transcribers.latin.PanAmericanSpanishIpaRuleBased.
 import com.github.medavox.ipa_transcribers.latin.PanAmericanSpanishIpaRuleBased.normaliseAccents
 import com.github.medavox.ipa_transcribers.latin.PanAmericanSpanishIpaRuleBased.removeStressAccents
 
-object PeninsularSpanishRuleBased: RuleBasedTranscriber<PeninsularSpanish> {
+object PeninsularSpanishRuleBased: RuleBasedTranscriber {
     val rules:List<Rule> = PanAmericanSpanishIpaRuleBased.rules.map{
         when(it.unconsumedMatcher) {
             Regex("c[ie]") -> it.copy(outputString = {"θ"})

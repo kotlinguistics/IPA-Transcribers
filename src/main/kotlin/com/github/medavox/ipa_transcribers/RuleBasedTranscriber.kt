@@ -7,7 +7,7 @@ package com.github.medavox.ipa_transcribers
  * Therefore, there is no state held by the Transcriber;
  * only simple substitutions matched by Regular expressions may be used.
  **/
-interface RuleBasedTranscriber<T:Language>:Transcriber<T>, BaseRules {
+interface RuleBasedTranscriber:Transcriber, BaseRules {
     data class UnmatchedOutput(val newWorkingInput:String, val output:(soFar:String) -> String) {
         constructor(newWorkingInput: String, output:String):this(newWorkingInput, {it+output})
     }

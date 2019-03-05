@@ -4,7 +4,7 @@ import com.github.medavox.ipa_transcribers.Language.IndonesianMalay
 import com.github.medavox.ipa_transcribers.Rule
 import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
 
-object MalayRuleBased:RuleBasedTranscriber<IndonesianMalay> {
+object MalayRuleBased:RuleBasedTranscriber {
     val rules:List<Rule> = listOf(
         Rule("c", "t͡ʃ"),
         Rule("j", "d͡ʒ"),

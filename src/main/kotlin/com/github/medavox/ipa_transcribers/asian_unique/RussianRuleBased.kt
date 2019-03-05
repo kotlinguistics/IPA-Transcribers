@@ -11,7 +11,7 @@ import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
  * So this may be as far as we can get for Russian.
  *
  * Also a static list of any exceptions.*/
-object RussianRuleBased:RuleBasedTranscriber<Russian> {
+object RussianRuleBased:RuleBasedTranscriber {
     //todo: implement vowel reduction in unstressed vowels
     private const val softenableConsonants = "бвгдзклмнпрстфх"
     //Consonant letters represent both

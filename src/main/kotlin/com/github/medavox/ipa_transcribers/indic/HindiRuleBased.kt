@@ -4,7 +4,7 @@ import com.github.medavox.ipa_transcribers.Language.Hindi
 import com.github.medavox.ipa_transcribers.Rule
 import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
 
-object HindiRuleBased:RuleBasedTranscriber<Hindi> {
+object HindiRuleBased:RuleBasedTranscriber {
     private val consonants = "बभदधजझडढफ़गघग़हयकखलमनणञङपफक़रढ़सषशतथचछटठवख़ज़झ़"
     private var lastWasConsonant:Boolean = false
     //todo:use these schwa-deletion rules (and the relevant paper!)

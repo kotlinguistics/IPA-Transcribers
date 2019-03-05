@@ -11,7 +11,7 @@ import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
  * However, Google's romanisation also throws away a lot of the original information in the arabic text.
  * For example, glottalised consonants are not transliterated differently than glottalised consonants,
  * despite these being distinguished in Arabic.*/
-object GoogleRomanisedArabic: RuleBasedTranscriber<Language> {
+object GoogleRomanisedArabic: RuleBasedTranscriber {
     val rules:List<Rule> = listOf<Rule>(
         Rule("'", "ʕ"),
         Rule("gh", "ɣ"),

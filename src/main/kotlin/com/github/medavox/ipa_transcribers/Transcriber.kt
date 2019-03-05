@@ -13,6 +13,6 @@ package com.github.medavox.ipa_transcribers
  *
  *  To get an instance for a particular language,
  *  call [TranscriberFactory.getTranscriber]*/
-interface Transcriber<T:Language> {
+interface Transcriber {
     fun transcribe(nativeText:String):String//:String
 }

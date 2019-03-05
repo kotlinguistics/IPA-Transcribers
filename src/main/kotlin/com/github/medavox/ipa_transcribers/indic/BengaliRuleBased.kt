@@ -5,7 +5,7 @@ import com.github.medavox.ipa_transcribers.Rule
 import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
 
 
-object BengaliRuleBased : RuleBasedTranscriber<Bengali> {
+object BengaliRuleBased : RuleBasedTranscriber {
     //todo:write rules for vowels,
     //todo:modify RuleTranscriber so we can handle those vowel diacritics that come BEFORE their consonant
     val rules:List<Rule> = listOf(

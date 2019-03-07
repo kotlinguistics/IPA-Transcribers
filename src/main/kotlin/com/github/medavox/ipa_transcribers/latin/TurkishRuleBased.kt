@@ -1,5 +1,6 @@
 package com.github.medavox.ipa_transcribers.latin
 
+import com.github.medavox.ipa_transcribers.CompletionStatus
 import com.github.medavox.ipa_transcribers.Rule
 import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
 
@@ -9,7 +10,7 @@ import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
  * Turkish spelling is extremely regular, because it systematically adopted the latin alphabet in 1929.
  * thanks Atatürk!*/
 object TurkishRuleBased: RuleBasedTranscriber {
-
+    override val completionStatus: CompletionStatus = CompletionStatus.COMPLETE
     val frontVowels = "eiöü"
     val backVowels = "aâıouû"
     val allVowels = "aâeiıoöuüû"

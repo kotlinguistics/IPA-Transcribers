@@ -1,5 +1,6 @@
 package com.github.medavox.ipa_transcribers.latin
 
+import com.github.medavox.ipa_transcribers.CompletionStatus
 import com.github.medavox.ipa_transcribers.Rule
 import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
 
@@ -11,7 +12,8 @@ import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
  * Based on [work by Mark Rosenfelder](http://zompist.com/spell.html)
  * See also more formal work by Edward Carney*/
 object EnglishRuleBased:RuleBasedTranscriber {
-//todo:english: download Mellon Carnegie Uni pronouncing dictionary, check it has the 1000 most common english words
+    override val completionStatus: CompletionStatus = CompletionStatus.IN_PROGRESS
+    //todo:english: download Mellon Carnegie Uni pronouncing dictionary, check it has the 1000 most common english words
 //fallback system: try MCU (which includes exceptions), then try composable morphemes, then mark rosenfelder's rules
     //mark rosenfelder's transcription system:
     /*

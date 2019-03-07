@@ -1,10 +1,16 @@
 package com.github.medavox.ipa_transcribers.indic
 
+import com.github.medavox.ipa_transcribers.CompletionStatus
 import com.github.medavox.ipa_transcribers.Rule
 import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
 
-
+/**Completion Status: SURFACE-LEVEL COMPLETE
+ *
+ * meaning that pronunciation rules for single letters and simple digraphs have been implemented,
+ * but more complex linguistic rules not directly represented in the orthography are as-yet unimplemented.
+ **/
 object BengaliRuleBased : RuleBasedTranscriber {
+    override val completionStatus: CompletionStatus = CompletionStatus.SURFACE_LEVEL_COMPLETE
     private var unhandledChars = ""
     private fun reportOnceAndCopy(it:String):RuleBasedTranscriber.UnmatchedOutput {
         if(!unhandledChars.contains(it[0])) {

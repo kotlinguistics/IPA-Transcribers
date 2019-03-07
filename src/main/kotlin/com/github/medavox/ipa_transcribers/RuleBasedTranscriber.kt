@@ -8,6 +8,7 @@ package com.github.medavox.ipa_transcribers
  * only simple substitutions matched by Regular expressions may be used.
  **/
 interface RuleBasedTranscriber:Transcriber, BaseRules {
+    val completionStatus:CompletionStatus
     data class UnmatchedOutput(val newWorkingInput:String, val output:(soFar:String) -> String) {
         constructor(newWorkingInput: String, output:String):this(newWorkingInput, {it+output})
     }

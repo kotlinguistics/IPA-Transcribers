@@ -1,5 +1,6 @@
 package com.github.medavox.ipa_transcribers.latin
 
+import com.github.medavox.ipa_transcribers.CompletionStatus
 import com.github.medavox.ipa_transcribers.Rule
 import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
 
@@ -17,6 +18,7 @@ import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
  * * [Wikipedia phonology of spanish](https://en.wikipedia.org/wiki/Spanish_language#Phonology)
  * */
 object SpanishPanAmericanRuleBased: RuleBasedTranscriber {
+    override val completionStatus: CompletionStatus = CompletionStatus.COMPLETE
     //the 'transcripcon' problem - does the voicedness of n bleed over onto s AND c?
     //todo: account for voicing assimilation
     /**

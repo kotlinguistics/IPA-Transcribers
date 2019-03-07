@@ -1,5 +1,6 @@
 package com.github.medavox.ipa_transcribers.asian_unique
 
+import com.github.medavox.ipa_transcribers.CompletionStatus
 import com.github.medavox.ipa_transcribers.Rule
 import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
 import java.text.Normalizer
@@ -33,6 +34,7 @@ import java.text.Normalizer
  * [An independent reference wiki for the korean language](http://www.koreanwikiproject.com/wiki/index.php?title=IPA)
  * */
 object KoreanRuleBased: RuleBasedTranscriber {
+    override val completionStatus: CompletionStatus = CompletionStatus.IN_PROGRESS
     private val rules:List<Rule> = listOf(
 
         //syllable-initial (choseong) consonants

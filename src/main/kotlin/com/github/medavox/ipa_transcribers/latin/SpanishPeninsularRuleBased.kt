@@ -1,5 +1,6 @@
 package com.github.medavox.ipa_transcribers.latin
 
+import com.github.medavox.ipa_transcribers.CompletionStatus
 import com.github.medavox.ipa_transcribers.Rule
 import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
 import com.github.medavox.ipa_transcribers.latin.SpanishPanAmericanRuleBased.voicedConsonants
@@ -7,6 +8,7 @@ import com.github.medavox.ipa_transcribers.latin.SpanishPanAmericanRuleBased.nor
 import com.github.medavox.ipa_transcribers.latin.SpanishPanAmericanRuleBased.removeStressAccents
 
 object SpanishPeninsularRuleBased: RuleBasedTranscriber {
+    override val completionStatus: CompletionStatus = CompletionStatus.COMPLETE
     val rules:List<Rule> = SpanishPanAmericanRuleBased.rules.map{
         when(it.unconsumedMatcher) {
             Regex("c[ie]") -> it.copy(outputString = {"θ"})

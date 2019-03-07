@@ -1,5 +1,6 @@
 package com.github.medavox.ipa_transcribers.arabic
 
+import com.github.medavox.ipa_transcribers.CompletionStatus
 import com.github.medavox.ipa_transcribers.Rule
 import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
 //write google -> IPA arabic transcriber
@@ -11,6 +12,7 @@ import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
  * For example, glottalised consonants are not transliterated differently than glottalised consonants,
  * despite these being distinguished in Arabic.*/
 object GoogleRomanisedArabic: RuleBasedTranscriber {
+    override val completionStatus: CompletionStatus = CompletionStatus.COMPLETE_PARTIAL
     val rules:List<Rule> = listOf<Rule>(
         Rule("'", "ʕ"),
         Rule("gh", "ɣ"),

@@ -1,5 +1,6 @@
 package com.github.medavox.ipa_transcribers.asian_unique
 
+import com.github.medavox.ipa_transcribers.CompletionStatus
 import com.github.medavox.ipa_transcribers.Rule
 import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
 
@@ -11,6 +12,7 @@ import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
  *
  * Also a static list of any exceptions.*/
 object RussianRuleBased:RuleBasedTranscriber {
+    override val completionStatus: CompletionStatus = CompletionStatus.IN_PROGRESS
     //todo: implement vowel reduction in unstressed vowels
     //TODO:voicing assimilation, and devoicing at end of word
     private const val softenableConsonants = "бвгдзклмнпрстфх"

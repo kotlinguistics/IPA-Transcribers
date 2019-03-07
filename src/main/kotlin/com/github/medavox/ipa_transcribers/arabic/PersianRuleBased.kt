@@ -1,6 +1,5 @@
 package com.github.medavox.ipa_transcribers.arabic
 
-import com.github.medavox.ipa_transcribers.Language.Persian
 import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
 
 /**Persian, like Modern Standard Arabic, does not write short vowels.

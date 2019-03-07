@@ -1,6 +1,5 @@
 package com.github.medavox.ipa_transcribers.arabic
 
-import com.github.medavox.ipa_transcribers.Language
 import com.github.medavox.ipa_transcribers.Rule
 import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
 //write google -> IPA arabic transcriber

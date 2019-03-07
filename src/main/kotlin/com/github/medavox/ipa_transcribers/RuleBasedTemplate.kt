@@ -1,10 +1,6 @@
 package com.github.medavox.ipa_transcribers
 
-import com.github.medavox.ipa_transcribers.Language.*
-import com.github.medavox.ipa_transcribers.Rule
-import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
-
-object RuleBasedTemplate : RuleBasedTranscriber<Language> {
+object RuleBasedTemplate : RuleBasedTranscriber {
     val rules:List<Rule> = listOf(
 
     )

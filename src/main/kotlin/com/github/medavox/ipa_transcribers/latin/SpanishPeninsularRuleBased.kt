@@ -1,6 +1,5 @@
 package com.github.medavox.ipa_transcribers.latin
 
-import com.github.medavox.ipa_transcribers.Language.PeninsularSpanish
 import com.github.medavox.ipa_transcribers.Rule
 import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
 import com.github.medavox.ipa_transcribers.latin.PanAmericanSpanishIpaRuleBased.voicedConsonants

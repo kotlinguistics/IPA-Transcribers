@@ -1,6 +1,5 @@
 package com.github.medavox.ipa_transcribers.indic
 
-import com.github.medavox.ipa_transcribers.Language.Marathi
 import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
 
 object MarathiRuleBased:RuleBasedTranscriber {

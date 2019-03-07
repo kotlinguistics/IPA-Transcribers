@@ -16,7 +16,7 @@ import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
  * * [Wikipedia:Spanish Orthography](https://en.wikipedia.org/wiki/Spanish_orthography)
  * * [Wikipedia phonology of spanish](https://en.wikipedia.org/wiki/Spanish_language#Phonology)
  * */
-object PanAmericanSpanishIpaRuleBased: RuleBasedTranscriber {
+object SpanishPanAmericanRuleBased: RuleBasedTranscriber {
     //the 'transcripcon' problem - does the voicedness of n bleed over onto s AND c?
     //todo: account for voicing assimilation
     /**

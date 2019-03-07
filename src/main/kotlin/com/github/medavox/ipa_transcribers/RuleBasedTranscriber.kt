@@ -12,7 +12,7 @@ interface RuleBasedTranscriber:Transcriber, BaseRules {
         constructor(newWorkingInput: String, output:String):this(newWorkingInput, {it+output})
     }
     val reportAndSkip:(String) -> UnmatchedOutput get() = {
-        System.err.println("unknown char '${it[0]}' in $it; skipping...")
+        System.err.println("unknown char '${it[0]}'; skipping...")
         UnmatchedOutput(it.substring(1), "")
     }
 

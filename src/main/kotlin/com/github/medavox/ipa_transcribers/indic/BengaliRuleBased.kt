@@ -5,9 +5,31 @@ import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
 
 
 object BengaliRuleBased : RuleBasedTranscriber {
-    //todo:write rules for vowels,
-    //todo:modify RuleTranscriber so we can handle those vowel diacritics that come BEFORE their consonant
+    private var unhandledChars = ""
+    private fun reportOnceAndCopy(it:String):RuleBasedTranscriber.UnmatchedOutput {
+        if(!unhandledChars.contains(it[0])) {
+            System.err.println("copying unknown char '${it[0]}' to output...")
+            unhandledChars += it[0]
+        }
+        return RuleBasedTranscriber.UnmatchedOutput(it.substring(1), it[0].toString())
+    }
+
+    fun l(it:String):String{
+        return if(it.endsWith("ɔ")) it.substring(0, it.length-1) else it
+    }
+
+    //bengali's vowel diacritics only APPEAR VISUALLY to come before their consonant:
+    //they still combine only with the next consonant in a string!
+    // meaning we don't need any complex stack-based parsing; at least not for this.
+    //todo: conjunct consonants (consonant cluster letters)
+    //todo: inherent vowel dropping
     val rules:List<Rule> = listOf(
+        //post-reform consonants -
+        //from a character standpoint they are digraphs, using a nuqta ় ,
+        //so apply them first
+        Rule("ড়", "ɽɔ"),
+        Rule("ঢ়", "ɽʱɔ"),
+        Rule("য়", "jɔ"),
         //consonants
         Rule("ব", "bɔ"),
         Rule("ভ", "bʱɔ"),
@@ -32,12 +54,54 @@ object BengaliRuleBased : RuleBasedTranscriber {
         Rule("(ড়|ঢ়)", "ɽɔ"),
         Rule("স", "sɔ"),
         Rule("[শষস]", "ʃɔ"),
-        Rule("[তৎ]", "tɔ"),
+        Rule("ত", "tɔ"),
         Rule("থ", "tʰɔ"),
         Rule("ট", "ʈɔ"),
         Rule("ঠ", "ʈʰɔ"),
         Rule("চ", "tʃɔ"),
-        Rule("ছ ", "tʃʰɔ"),
+        Rule("ছ", "tʃʰɔ"),
+
+        //special letters
+        Rule("ৎ", "̪t"), //final T
+        Rule("্", {l(it)}), //suppresses inherent vowel
+
+        //Vowels
+        Rule("অ", "ɔ"),
+
+        Rule("[ইঈ]", "i"),
+        Rule("(ি|ী)", {l(it)+"i"}),
+
+        Rule("[ঊউ]", "u"),
+        Rule("(ু|ূ)", {l(it)+"u"}),
+
+        Rule("ঋ", "ri"),
+        Rule("ৃ", {l(it)+"ri"}),
+
+
+        Rule("আ", "a"),
+        Rule("া", {l(it)+"ri"}),
+
+        //complex vowels
+        Rule("ঐ", "oi"),
+        Rule("ৈ", {l(it)+"oi"}),
+
+        Rule("ঔ", "ou"),
+        Rule("ৌ", {l(it)+"ou"}),
+
+        Rule("এ", "e"),
+        Rule("ে", {l(it)+"e"}),
+
+        Rule("ও", "ʊ"),
+        Rule("ো", {l(it)+"ʊ"}),
+
+        //"deprecated" vowels
+        Rule("ঌ", "li"),//supposed to have been removed from the abugida, but you never know...
+        Rule("ৢ", {l(it)+"li"}),
+
+        Rule("ৡ", "lːi"),//supposed to have been removed from the abugida, but you never know...
+        Rule("ৣ", {l(it)+"lːi"}),
+
+        Rule("ৠ", "rːi"),//supposed to have been removed from the abugida, but you never know...
 
         //numbers
         Rule("০", "0"),
@@ -49,12 +113,23 @@ object BengaliRuleBased : RuleBasedTranscriber {
         Rule("৬", "6"),
         Rule("৭", "7"),
         Rule("৮", "8"),
-        Rule("৯", "9")
+        Rule("৯", "9"),
+        Rule(" ", " "),//space
 
+        //Punctuation
+        Rule("।", ".")//devanagari danda 'stick' == full stop.
 
+//Even though the open-mid front unrounded vowel /ɛ/ is one of the seven main vowel sounds in standard Bengali,
+// no distinct vowel symbol has been allotted for it in the script since there is no /ɛ/ sound in Sanskrit,
+// the primary written language when the script was conceived.
 
-        )
+// As a result, the sound is orthographically realised by multiple means in modern Bengali orthography,
+// usually using some combination of "এ" e (স্বর এ shôrô e, "vocalic e") /e/, "অ", "আ" a (স্বর আ shôrô a) /a/
+// and the যফলা jôfôla (diacritic form of the consonant grapheme য jô).
+
+    )
     override fun transcribe(nativeText: String): String {
-        return nativeText.processWithRules(rules, reportAndCopy)
+        unhandledChars = ""
+        return nativeText.processWithRules(rules, ::reportOnceAndCopy)
     }
 }

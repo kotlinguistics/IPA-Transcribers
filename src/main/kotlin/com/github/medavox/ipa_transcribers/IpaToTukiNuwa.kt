@@ -13,6 +13,10 @@ object IpaToTukiNuwa: RuleBasedTranscriber {
      * AND whose stressed syllable is after the first,
      * drop the unstressed syllable(s) before the stressed one*/
     private val initialRules:List<Rule> = listOf(
+        //simplifying consonant clusters
+        Rule(Regex("[sʃzʒʂʐɕʑθ]+t[sʃzʒʂʐɕʑθ]+"), "s"),
+
+
         Rule(Regex("[aɶäɒɑæɐɛəʌ]+"), "a"),
         Rule(Regex("[hɦχxħçʁʕ]+"), "h"),
         Rule(Regex("[iyɪʏeɨ]+"), "i"),

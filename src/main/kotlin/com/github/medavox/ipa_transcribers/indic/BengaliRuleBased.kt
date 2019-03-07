@@ -8,6 +8,7 @@ object BengaliRuleBased : RuleBasedTranscriber {
     //todo:write rules for vowels,
     //todo:modify RuleTranscriber so we can handle those vowel diacritics that come BEFORE their consonant
     val rules:List<Rule> = listOf(
+        //consonants
         Rule("ব", "bɔ"),
         Rule("ভ", "bʱɔ"),
         Rule("দ", "dɔ"),

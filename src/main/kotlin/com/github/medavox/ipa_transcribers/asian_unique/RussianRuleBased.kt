@@ -12,6 +12,7 @@ import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
  * Also a static list of any exceptions.*/
 object RussianRuleBased:RuleBasedTranscriber {
     //todo: implement vowel reduction in unstressed vowels
+    //TODO:voicing assimilation, and devoicing at end of word
     private const val softenableConsonants = "бвгдзклмнпрстфх"
     //Consonant letters represent both
     // "soft" (palatalized, represented in the IPA with a ⟨ʲ⟩) and

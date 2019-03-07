@@ -1,9 +1,20 @@
 package com.github.medavox.ipa_transcribers.indic
 
-import com.github.medavox.ipa_transcribers.Language.Hindi
 import com.github.medavox.ipa_transcribers.Rule
 import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
 
+/**Status: surface-level complete
+ * Hindi uses the Devanagari writing system, a descendant of the Brahmi writing system
+ * that was once widespread across historical India.
+ * All Brahmic scripts are abugidas, which means each consonant glyph contains an inherent vowel
+ * (usually a schwa) which can be overridden by vowel diacritics.
+ *
+ * This makes it relatively straightforward to transliterate the content of the orthography into IPA.
+ * However, like most languages the pronunciation of Hindi differs from its writing.
+ * Specifically, many inherent schwas are dropped.
+ *
+ * The rules governing which schwas are dropped are fairly complex,
+ * and haven't been implemented yet.*/
 object HindiRuleBased:RuleBasedTranscriber {
     private val consonants = "बभदधजझडढफ़गघग़हयकखलमनणञङपफक़रढ़सषशतथचछटठवख़ज़झ़"
     private var lastWasConsonant:Boolean = false

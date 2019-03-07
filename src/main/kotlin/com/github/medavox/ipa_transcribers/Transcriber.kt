@@ -9,10 +9,7 @@ package com.github.medavox.ipa_transcribers
  *
  *  For instance, English IPA transcribers should provide American English and British English
  *  transcriptions, but ignore
- *  Irish, Scottish, Texan, Indian, African, Australian, New Zealand, South African and International variants.
- *
- *  To get an instance for a particular language,
- *  call [TranscriberFactory.getTranscriber]*/
+ *  Irish, Scottish, Texan, Indian, African, Australian, New Zealand, South African and International variants.*/
 interface Transcriber {
     fun transcribe(nativeText:String):String//:String
 }

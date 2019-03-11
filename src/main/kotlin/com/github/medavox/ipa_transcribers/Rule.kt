@@ -52,5 +52,14 @@ data class Rule(
 
     constructor(consumedMatcher:String, unconsumedMatcher:String, output:String, lettersConsumed:Int?=null )
             :this(Regex(consumedMatcher), Regex(unconsumedMatcher), {it+output}, lettersConsumed)
+
+    fun asKotlin():String {
+        return "Rule("+
+                (if(consumedMatcher==null) "" else "\"$consumedMatcher\", ")+
+                "\"$unconsumedMatcher\", "+
+                "\""+outputString("")+"\""+
+                (if(lettersConsumed==null) "" else ", $lettersConsumed")+
+                ")"
+    }
 }
 //private val anything = Regex("[\\s\\S]*")

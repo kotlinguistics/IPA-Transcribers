@@ -1,7 +1,7 @@
 package com.github.medavox.ipa_transcribers
 
 
-object IpaToTukiNuwa: RuleBasedTranscriber {
+object IpaToTukiNuwa: RuleBasedTranscriber() {
     override val completionStatus: CompletionStatus = CompletionStatus.COMPLETE
     /**Essentially an automated repair strategy for Tuki Nuwa.
      * replaces every IPA sound with the nearest legal sound in Tuki Nuwa.

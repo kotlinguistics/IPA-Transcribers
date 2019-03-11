@@ -33,7 +33,7 @@ import java.text.Normalizer
  * https://linguistics.stackexchange.com/q/2805 describes the syllable-final assimilation rules
  * [An independent reference wiki for the korean language](http://www.koreanwikiproject.com/wiki/index.php?title=IPA)
  * */
-object KoreanRuleBased: RuleBasedTranscriber {
+object KoreanRuleBased: RuleBasedTranscriber() {
     override val completionStatus: CompletionStatus = CompletionStatus.IN_PROGRESS
     private val rules:List<Rule> = listOf(
 

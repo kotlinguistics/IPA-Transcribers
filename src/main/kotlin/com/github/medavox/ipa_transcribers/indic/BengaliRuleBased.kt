@@ -9,16 +9,8 @@ import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
  * meaning that pronunciation rules for single letters and simple digraphs have been implemented,
  * but more complex linguistic rules not directly represented in the orthography are as-yet unimplemented.
  **/
-object BengaliRuleBased : RuleBasedTranscriber {
+object BengaliRuleBased : RuleBasedTranscriber() {
     override val completionStatus: CompletionStatus = CompletionStatus.SURFACE_LEVEL_COMPLETE
-    private var unhandledChars = ""
-    private fun reportOnceAndCopy(it:String):RuleBasedTranscriber.UnmatchedOutput {
-        if(!unhandledChars.contains(it[0])) {
-            System.err.println("copying unknown char '${it[0]}' to output...")
-            unhandledChars += it[0]
-        }
-        return RuleBasedTranscriber.UnmatchedOutput(it.substring(1), it[0].toString())
-    }
 
     fun l(it:String):String{
         return if(it.endsWith("ɔ")) it.substring(0, it.length-1) else it

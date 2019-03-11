@@ -7,7 +7,7 @@ import com.github.medavox.ipa_transcribers.latin.SpanishPanAmericanRuleBased.voi
 import com.github.medavox.ipa_transcribers.latin.SpanishPanAmericanRuleBased.normaliseAccents
 import com.github.medavox.ipa_transcribers.latin.SpanishPanAmericanRuleBased.removeStressAccents
 
-object SpanishPeninsularRuleBased: RuleBasedTranscriber {
+object SpanishPeninsularRuleBased: RuleBasedTranscriber() {
     override val completionStatus: CompletionStatus = CompletionStatus.COMPLETE
     val rules:List<Rule> = SpanishPanAmericanRuleBased.rules.map{
         when(it.unconsumedMatcher) {

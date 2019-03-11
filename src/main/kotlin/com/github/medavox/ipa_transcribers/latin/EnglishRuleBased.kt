@@ -11,7 +11,7 @@ import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
  * So here goes.
  * Based on [work by Mark Rosenfelder](http://zompist.com/spell.html)
  * See also more formal work by Edward Carney*/
-object EnglishRuleBased:RuleBasedTranscriber {
+object EnglishRuleBased:RuleBasedTranscriber() {
     override val completionStatus: CompletionStatus = CompletionStatus.IN_PROGRESS
     //todo:english: download Mellon Carnegie Uni pronouncing dictionary, check it has the 1000 most common english words
 //fallback system: try MCU (which includes exceptions), then try composable morphemes, then mark rosenfelder's rules

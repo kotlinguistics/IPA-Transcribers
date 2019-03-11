@@ -11,7 +11,7 @@ import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
  * So this may be as far as we can get for Russian.
  *
  * Also a static list of any exceptions.*/
-object RussianRuleBased:RuleBasedTranscriber {
+object RussianRuleBased:RuleBasedTranscriber() {
     override val completionStatus: CompletionStatus = CompletionStatus.IN_PROGRESS
     //todo: implement vowel reduction in unstressed vowels
     //TODO:voicing assimilation, and devoicing at end of word

@@ -7,10 +7,18 @@ package com.github.medavox.ipa_transcribers
  * Therefore, there is no state held by the Transcriber;
  * only simple substitutions matched by Regular expressions may be used.
  **/
-interface RuleBasedTranscriber:Transcriber, BaseRules {
-    val completionStatus:CompletionStatus
+abstract class RuleBasedTranscriber:Transcriber, BaseRules {
+    abstract val completionStatus:CompletionStatus
     data class UnmatchedOutput(val newWorkingInput:String, val output:(soFar:String) -> String) {
         constructor(newWorkingInput: String, output:String):this(newWorkingInput, {it+output})
+    }
+    var unhandledChars:String = ""
+    fun reportOnceAndCopy(it:String):RuleBasedTranscriber.UnmatchedOutput {
+        if(!unhandledChars.contains(it[0])) {
+            System.err.println("copying unknown char '${it[0]}' to output...")
+            unhandledChars += it[0]
+        }
+        return RuleBasedTranscriber.UnmatchedOutput(it.substring(1), it[0].toString())
     }
     val reportAndSkip:(String) -> UnmatchedOutput get() = {
         System.err.println("unknown char '${it[0]}'; skipping...")

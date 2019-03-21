@@ -274,6 +274,6 @@ object ArabicRuleBased : RuleBasedTranscriber() {
         //Rule("ۿ", "")//LETTER HEH WITH INVERTED V   Lo  Arabic
     )//+ comprehensiveArabic
     override fun transcribe(nativeText: String): String {
-        return nativeText.processWithRules(rules, reportAndCopy)
+        return nativeText.processWithRules(rules, ::reportOnceAndCopy)
     }
 }

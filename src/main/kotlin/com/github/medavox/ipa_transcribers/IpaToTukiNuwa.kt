@@ -9,13 +9,12 @@ object IpaToTukiNuwa: RuleBasedTranscriber() {
      * For consonant clusters, not sure yet.
      * Maybe a series of prioritised drop rules?
      * (drop this consonant, then this one, then this one, until it's a legal word)
-     *
+
      * with words that have too many syllables
      * AND whose stressed syllable is after the first,
      * drop the unstressed syllable(s) before the stressed one*/
     private val initialRules:List<Rule> = listOf(
         //simplifying consonant clusters
-        Rule(Regex("[sʃzʒʂʐɕʑθ]+t[sʃzʒʂʐɕʑθ]+"), "s"),
 
 
         Rule(Regex("[aɶäɒɑæɐɛəʌ]+"), "a"),
@@ -36,7 +35,8 @@ object IpaToTukiNuwa: RuleBasedTranscriber() {
     private val phonotacticsRules:List<Rule> = listOf(
         //tuki nuwa doesn't allow these combinations.
         Rule(Regex("ji"), "i"),
-        Rule(Regex("wu"), "u")
+        Rule(Regex("wu"), "u"),
+        Rule(Regex("s[ptk]s"), "s")
     )
 
     private val cleanupAfterPhonotacticsRules:List<Rule> = listOf(

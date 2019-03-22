@@ -79,6 +79,7 @@ object JapaneseRuleBasedKatakanaHiraganaOnly:RuleBasedTranscriber() {
         Rule("ヱ", "e"),
         Rule("ヲ", "o"),
 
+        //katakana with diacritics
         Rule("ギ", "ɡi"),
         Rule("グ", "ɡɯ"),
         Rule("ゲ", "ɡe"),
@@ -114,6 +115,14 @@ object JapaneseRuleBasedKatakanaHiraganaOnly:RuleBasedTranscriber() {
         Rule("ピャ", "pʲa"),
         Rule("ピュ", "pʲɯ"),
         Rule("ピョ", "pʲo"),
+
+        //todo: functional katakana
+        //ン n [n m ŋ] before stop consonants; [ɴ ɰ̃] elsewhere
+        //ッ (before geminate consonant)
+        //ー (after long vowel)
+        //ヽ (reduplicates and unvoices syllable)
+        //ヾ (reduplicates and voices syllable)
+
 
 //hiragana
         Rule("あ", "a"),
@@ -185,7 +194,54 @@ object JapaneseRuleBasedKatakanaHiraganaOnly:RuleBasedTranscriber() {
         Rule("ゑ", "e"),//we
         Rule("を", "o"),//wo
 
+        //hiaragana with diacritics
+        Rule("が", "ɡa"),
+        Rule("ぎ", "ɡi"),
+        Rule("ぐ", "ɡɯ"),
+        Rule("げ", "ɡe"),
+        Rule("ご", "ɡo"),
+        Rule("ぎゃ", "ɡʲa"),
+        Rule("ぎゅ", "ɡʲɯ"),
+        Rule("ぎょ", "ɡʲo"),
+        Rule("ざ", "(d)za"),
+        Rule("じ", "(d)ʑi"),
+        Rule("ず", "(d)zɯ"),
+        Rule("ぜ", "(d)ze"),
+        Rule("ぞ", "(d)zo"),
+        Rule("じゃ", "(d)ʑa"),
+        Rule("じゅ", "(d)ʑɯ"),
+        Rule("じょ", "(d)ʑo"),
+        Rule("だ", "da"),
+        Rule("ぢ", "(d)ʑi"),
+        Rule("づ", "(d)zɯ"),
+        Rule("で", "de"),
+        Rule("ど", "do"),
+        Rule("ぢゃ", "(d)ʑa"),
+        Rule("ぢゅ", "(d)ʑɯ"),
+        Rule("ぢょ", "(d)ʑo"),
+        Rule("ば", "ba"),
+        Rule("び", "bi"),
+        Rule("ぶ", "bɯ"),
+        Rule("べ", "be"),
+        Rule("ぼ", "bo"),
+        Rule("びゃ", "bʲa"),
+        Rule("びゅ", "bʲɯ"),
+        Rule("びょ", "bʲo"),
+        Rule("ぱ", "pa"),
+        Rule("ぴ", "pi"),
+        Rule("ぷ", "pɯ"),
+        Rule("ぺ", "pe"),
+        Rule("ぽ", "po"),
+        Rule("ぴゃ", "pʲa"),
+        Rule("ぴゅ", "pʲɯ"),
+        Rule("ぴょ", "pʲo"),
 
+
+        //todo: functional hiragana
+        //ん n [ɴ m n ɲ ŋ ɰ̃]
+        //っ (indicates a geminate consonant)
+        //ゝ(reduplicates and unvoices syllable)
+        //ゞ (reduplicates and voices syllable)
 
     )
     override fun transcribe(nativeText: String): String {

@@ -115,8 +115,79 @@ object JapaneseRuleBasedKatakanaHiraganaOnly:RuleBasedTranscriber() {
         Rule("ピュ", "pʲɯ"),
         Rule("ピョ", "pʲo"),
 
+//hiragana
+        Rule("あ", "a"),
+        Rule("い", "i"),
+        Rule("う", "ɯ"),
+        Rule("え", "e"),
+        Rule("お", "o"),
+        Rule("か", "ka"),
+        Rule("き", "ki"),
+        Rule("く", "kɯ"),
+        Rule("け", "ke"),
+        Rule("こ", "ko"),
+        Rule("きゃ", "kʲa"),
+        Rule("きゅ", "kʲɯ"),
+        Rule("きょ", "kʲo"),
+        Rule("さ", "sa"),
+        Rule("し", "ɕi"),
+        Rule("す", "sɯ"),
+        Rule("せ", "se"),
+        Rule("そ", "so"),
+        Rule("しゃ", "ɕa"),
+        Rule("しゅ", "ɕɯ"),
+        Rule("しょ", "ɕo"),
+        Rule("た", "ta"),
+        Rule("ち", "tɕi"),
+        Rule("つ", "tsɯ"),
+        Rule("て", "te"),
+        Rule("と", "to"),
+        Rule("ちゃ", "tɕa"),
+        Rule("ちゅ", "tɕɯ"),
+        Rule("ちょ", "tɕo"),
+        Rule("な", "na"),
+        Rule("に", "ɲi"),
+        Rule("ぬ", "nɯ"),
+        Rule("ね", "ne"),
+        Rule("の", "no"),
+        Rule("にゃ", "ɲa"),
+        Rule("にゅ", "ɲɯ"),
+        Rule("にょ", "ɲo"),
+        Rule("は", "ha"), //([ɰa] as particle)
+        Rule(" ひ", "çi"),
+        Rule("ふ", "ɸɯ"),
+        Rule("へ", "he"), //([e] as particle)
+        Rule(" ほ", "ho"),
+        Rule("ひゃ", "ça"),
+        Rule("ひゅ", "çɯ"),
+        Rule("ひょ", "ço"),
+        Rule("ま", "ma"),
+        Rule("み", "mi"),
+        Rule("む", "mɯ"),
+        Rule("め", "me"),
+        Rule("も", "mo"),
+        Rule("みゃ", "mʲa"),
+        Rule("みゅ", "mʲɯ"),
+        Rule("みょ", "mʲo"),
+        Rule("や", "ja"),
+        Rule("ゆ", "jɯ"),
+        Rule("よ", "jo"),
+        Rule("ら", "ɾa"),
+        Rule("り", "ɾi"),
+        Rule("る", "ɾɯ"),
+        Rule("れ", "ɾe"),
+        Rule("ろ", "ɾo"),
+        Rule("りゃ", "ɾʲa"),
+        Rule("りゅ", "ɾʲɯ"),
+        Rule("りょ", "ɾʲo"),
+        Rule("わ", "ɰa"),
+        Rule("ゐ", "i"),//wi
+        Rule("ゑ", "e"),//we
+        Rule("を", "o"),//wo
 
-        )
+
+
+    )
     override fun transcribe(nativeText: String): String {
         return nativeText.processWithRules(rules, reportAndCopy)
     }

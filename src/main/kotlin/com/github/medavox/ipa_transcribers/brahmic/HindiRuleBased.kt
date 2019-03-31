@@ -1,4 +1,4 @@
-package com.github.medavox.ipa_transcribers.indic
+package com.github.medavox.ipa_transcribers.brahmic
 
 import com.github.medavox.ipa_transcribers.CompletionStatus
 import com.github.medavox.ipa_transcribers.Rule

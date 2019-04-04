@@ -2,12 +2,13 @@ package com.github.medavox.ipa_transcribers
 
 /**Specifies one replacement rule, from a Regex matching native text,
  * to the IPA characters corresponding to them.
- * Required features:
-[ / ] optionally specify number of letters consumed, if different from match length
-[ / ] (per-rule) either a string or lambda. The lambba can access state persisting across whole word
-[ / ] lambda on no rule matched
-[ / ] support for multiple simultaneous output variants, eg british and american english
-[ / ] transcribe() function can return just a String for languages with only one variant
+ *
+ *  Features:
+ - optionally specify number of letters consumed, if different from match length
+ - (per-rule) either a string or lambda. The lambba can access state persisting across whole word
+ - lambda on no rule matched
+ - support for multiple simultaneous output variants, eg british and american english
+ - transcribe() function can return just a String for languages with only one variant
 
 In Russian, we need to know the previous consonant to check if it can be softened;
 but we also need to print out the following vowel so we don't reprocess it again as a word-initial.
@@ -22,15 +23,18 @@ instead of feeding the chopped-off string (with the characters consumed so far r
 we have to match regexes on two strings: the consumed-so-far characters AND the unconsumed characters.
 The regex for the consumed-so-far string is optional.
 
-@constructor primary constructor
+@Constructor
+primary constructor
  @property consumedMatcher
  */
 data class Rule(
-    /**If specified, BOTH matchers must match*/
+    /**Matches the consumed part of the input string,
+     * starting from the most recently consumed character - the end of the string.
+     * If not null, BOTH matchers must match.*/
     val consumedMatcher:Regex?,
     /**The native text that this rule operates on.*/
     val unconsumedMatcher: Regex,
-    /**A lambda which returns the text to append to the output string.
+    /**A lambda which returns the new output string, __replacing the whole of the old output string.__
      * Use this constructor if your rule has side effects, such as counting vowels so far.*/
     val outputString: (soFar:String) -> String,
     /**The number of letters of native/input text that have been 'consumed'.

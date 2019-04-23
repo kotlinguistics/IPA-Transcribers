@@ -15,7 +15,7 @@ abstract class RuleBasedTranscriber:Transcriber, BaseRules {
     var unhandledChars:String = ""
     fun reportOnceAndCopy(it:String):RuleBasedTranscriber.UnmatchedOutput {
         if(!unhandledChars.contains(it[0])) {
-            System.err.println("copying unknown char '${it[0]}' to output...")
+            System.err.println("copying unknown char '${it[0]}'/'${Character.getName(it[0].toInt())}' to output...")
             unhandledChars += it[0]
         }
         return RuleBasedTranscriber.UnmatchedOutput(it.substring(1), it[0].toString())

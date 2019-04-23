@@ -234,7 +234,7 @@ object JapaneseRuleBasedKatakanaHiraganaOnly:RuleBasedTranscriber() {
         Rule("ぽ", "po"),
         Rule("ぴゃ", "pʲa"),
         Rule("ぴゅ", "pʲɯ"),
-        Rule("ぴょ", "pʲo"),
+        Rule("ぴょ", "pʲo")
 
 
         //todo: functional hiragana

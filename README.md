@@ -3,7 +3,7 @@
 A collection of transcribers (strictly speaking, transliterators) which convert text in a language's native orthography into the International Phonetic Alphabet.
 
 Where possible, a rule-based approach has been taken. Otherwise, publically-available data and APIs have been used.
-Note that the orthography of some languages bear little or no resemblance to their 
+Note that the orthography of some languages bear little or no resemblance to their intended pronunciation. This is called [Orthographic Depth](https://en.wikipedia.org/wiki/Orthographic_depth).
 
 Also note that **stress information has not been transcribed** in the rule-based transcribers,
 due to the far higher complexity of writing syllabifiers.

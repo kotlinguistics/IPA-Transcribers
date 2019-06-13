@@ -5,7 +5,7 @@ A collection of transcribers (strictly speaking, transliterators) which convert 
 Where possible, a rule-based approach has been taken. Otherwise, publically-available data and APIs have been used.
 Note that the orthography of some languages bear little or no resemblance to their intended pronunciation. This is called [Orthographic Depth](https://en.wikipedia.org/wiki/Orthographic_depth).
 
-Also note that **stress information has not been transcribed** in the rule-based transcribers,
+Also note that **neither syllable nor stress information has been transcribed** in the rule-based transcribers,
 due to the far higher complexity of writing syllabifiers.
 
 The languages I aim to support, and their eligibility for rule-based transcribers:

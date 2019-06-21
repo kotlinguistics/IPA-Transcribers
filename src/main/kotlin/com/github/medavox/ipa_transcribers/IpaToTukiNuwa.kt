@@ -36,7 +36,8 @@ object IpaToTukiNuwa: RuleBasedTranscriber() {
         //tuki nuwa doesn't allow these combinations.
         Rule(Regex("ji"), "i"),
         Rule(Regex("wu"), "u"),
-        Rule(Regex("s[ptk]s"), "s")
+        Rule(Regex("s[ptk]s"), "s"),
+        Rule(Regex("ts"), "s")
     )
 
     private val cleanupAfterPhonotacticsRules:List<Rule> = listOf(

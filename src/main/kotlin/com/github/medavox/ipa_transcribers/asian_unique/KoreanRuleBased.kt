@@ -5,21 +5,19 @@ import com.github.medavox.ipa_transcribers.Rule
 import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
 import java.text.Normalizer
 
-/**Status:INCOMPLETE
- * All the 'basic' jamo with clear pronunciations on the releveant wikipedia articles have been transcribed.
+/**Status:COMPLETE
+ * All the 'modern' combining jamo have been transcribed.
  *
  * All Unicode combining-character syllable-initial consonants have been transcribed (unicode block U+1100 - U+1112).
  * All Unicode combining-character vowels have been transcribed (Unicode block U+1161 - U+1175).
  * For Unicode combining-character syllable-final consonants: the simple ones have been transcribed -
  * jamo which are only a single 'plain' letter.
  *
- * However, the jamo for syllable-final consonant clusters have not been transcribed,
- * as their pronunciation is unclear from wikipedia (as of 12 feb 2019).
+ * Jamo for syllable-final consonant clusters and their liaison (sandhi) rules have been transcribed,
+ * thanks to Duolingo (21 June 2019).
  *
- * There are also complex rules involving a syllable-final but not word-final consonant being pronounced as part of the
- * next syllable, if it starts with the null consonant 'ᄋ'.
- *
- * Overall, it looks like the rest of korean transcription will involve complex rules.
+ * The liaison: a syllable-final but not word-final consonant is pronounced as part of the
+ * next syllable, if the next syllable starts with the null consonant 'ᄋ'.
  *
  * Links:
  *
@@ -34,24 +32,30 @@ import java.text.Normalizer
  * [An independent reference wiki for the korean language](http://www.koreanwikiproject.com/wiki/index.php?title=IPA)
  * */
 object KoreanRuleBased: RuleBasedTranscriber() {
-    override val completionStatus: CompletionStatus = CompletionStatus.IN_PROGRESS
+    override val completionStatus: CompletionStatus = CompletionStatus.COMPLETE
+    private val vowels = "ᅡᅢᅣᅤᅥᅦᅧᅨᅩᅪᅫᅬᅭᅮᅯᅰᅱᅲᅳᅴᅵ"
     private val rules:List<Rule> = listOf(
 
         //syllable-initial (choseong) consonants
+        //basic
         Rule("ᄀ", "k"),
-        Rule("ᄁ", "k͈"),
         Rule("ᄂ", "n"),
         Rule("ᄃ", "t"),
-        Rule("ᄄ", "t͈"),
         Rule("ᄅ", "ɾ"),
         Rule("ᄆ", "m"),
         Rule("ᄇ", "p"),
-        Rule("ᄈ", "p͈"),
         Rule("ᄉ", "s"),
-        Rule("ᄊ", "s͈"),
         Rule("ᄋ", ""),//silent
         Rule("ᄌ", "tɕ"),
+
+        //tense
         Rule("ᄍ", "t͈ɕ"),
+        Rule("ᄄ", "t͈"),
+        Rule("ᄈ", "p͈"),
+        Rule("ᄊ", "s͈"),
+        Rule("ᄁ", "k͈"),
+
+        //aspirated
         Rule("ᄎ", "tɕʰ"),
         Rule("ᄏ", "kʰ"),
         Rule("ᄐ", "tʰ"),
@@ -59,17 +63,35 @@ object KoreanRuleBased: RuleBasedTranscriber() {
         Rule("ᄒ", "h"),
 
         // syllable-final (jongseong) consonants
-        Rule("[ᆨㄲ]", "k̚"),
+        Rule("[ᆨㄲᆿ]", "k̚"),
         //Rule("ᆪ", "gs"),
         Rule("ᆫ", "n"),
         //Rule("ᆬ", "nt̚"),
-        Rule("ᆮ", "t̚"),
         Rule("ᆯ", "l"),
         Rule("ᆷ", "m"),
         Rule("ᆸ", "p̚"),
-        Rule("[ᆺㅆ]", "t̚"),
+        Rule("[ᆮᇀᆾᇂᆺᆻᆽ]", "t̚"),
         Rule("ᆼ", "ŋ"),
-        Rule("ᆽ", "t̚"),
+
+        //Sandhi consonant clusters. These rules need to be applied before the normal consonant cluster rules
+        Rule("ᆪ ᄋ", "k s"),
+        Rule("ᆰ ᄋ", "l k"),
+        Rule("ᆬ ᄋ", "n tɕ"),
+        Rule("ᆭ ᄋ", "n h"),
+        Rule("ᆲ ᄋ", "l p"),
+        Rule("ᆳ ᄋ", "l s"),
+        Rule("ᆴ ᄋ", "l tʰ"),
+        Rule("ᆶ ᄋ", "l h"),
+        Rule("ᆱ ᄋ", "l m"),
+        Rule("ᆵ ᄋ", "l pʰ"),
+        Rule("ᆹ ᄋ", "p s"),
+
+        //consonant cluster rules, from Duolingo
+        Rule("[ᆪᆰ]", "k̚"),
+        Rule("[ᆬᆭ]", "n"),
+        Rule("[ᆲᆳᆴᆶ]", "l"),
+        Rule("[ᆱ]", "m"),
+        Rule("[ᆵᆹ]", "p"),
 
         //nice and simple vowel rules.
         //the same symbol appears twice,
@@ -98,7 +120,8 @@ object KoreanRuleBased: RuleBasedTranscriber() {
         Rule(Regex("[ᅵㅣ]"), "i")
     )
     override fun transcribe(nativeText: String): String {
+        //convert older hangul codepoints into their modern combining forms
         //thanks to https://stackoverflow.com/a/41311169
-        return Normalizer.normalize(nativeText, Normalizer.Form.NFD).processWithRules(rules, reportAndCopy)
+        return Normalizer.normalize(nativeText, Normalizer.Form.NFD).processWithRules(rules, ::reportOnceAndCopy)
     }
 }

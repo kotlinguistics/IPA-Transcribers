@@ -17,7 +17,7 @@ import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
  * The rules governing which schwas are dropped are fairly complex,
  * and haven't been implemented yet.*/
 object HindiRuleBased:RuleBasedTranscriber() {
-    override val completionStatus: CompletionStatus = CompletionStatus.INCOMPLETE
+    override val completionStatus: CompletionStatus = CompletionStatus.SURFACE_LEVEL_COMPLETE
     private val consonants = "बभदधजझडढफ़गघग़हयकखलमनणञङपफक़रढ़सषशतथचछटठवख़ज़झ़"
     private var lastWasConsonant:Boolean = false
     //todo:use these schwa-deletion rules (and the relevant paper!)

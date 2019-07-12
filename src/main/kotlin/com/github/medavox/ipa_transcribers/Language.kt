@@ -32,10 +32,6 @@ which likely has dictionary-lookup hints for common words.
 //IndonesianMalay -- according to wikipedia, "Most speakers of Javanese also speak Indonesian".
 //Javanese --  Uses the latin script
 
-//Korean --  IN PROGRESS rule-based. syllable-final consonants need finishing.
-//beautiful regular alphabet. Only issue is text support for hangul syllable-blocks was once bad,
-//so there are some grandfathered irregularities in computer support.
-
 /*
 French
 ------
@@ -70,4 +66,4 @@ prediction: fairly regular, but known to have lots of variants
 //Vietnamese
 //tamil -- Unique brahmic abugida
 //Italian
-//Persian/Farsi/Dari/Tajiki -- Perso-Arabic script
+//Persian/Farsi/Dari/Tajik(i) -- Perso-Arabic script

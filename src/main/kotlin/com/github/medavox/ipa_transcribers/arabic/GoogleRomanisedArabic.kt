@@ -22,7 +22,7 @@ object GoogleRomanisedArabic: RuleBasedTranscriber() {
         Rule("dh", "ð"),
         Rule("j", "ʒ"),
         Rule("h", "ħ"),
-        Rule("q", "q")//the same sound is repsented with a Q in arabic
+        Rule("q", "q")//the same sound is represented with a Q in arabic
 
     )+ latinBaseRules + westernPunctuation
     override fun transcribe(nativeText: String): String {

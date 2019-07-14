@@ -28,19 +28,19 @@ primary constructor
  @property consumedMatcher
  */
 data class Rule(
-    /**Matches the consumed part of the input string,
-     * starting from the most recently consumed character - the end of the string.
+    /**Matches the already-consumed part of the input string,
+     * starting from the most recently consumed character - the end of the used-up input-string.
      * If not null, BOTH matchers must match.*/
     val consumedMatcher:Regex?,
-    /**The native text that this rule operates on.*/
+    /**The incoming native text that this rule operates on.*/
     val unconsumedMatcher: Regex,
     /**A lambda which returns the new output string, __replacing the whole of the old output string.__
      * Use this constructor if your rule has side effects, such as counting vowels so far.*/
     val outputString: (soFar:String) -> String,
-    /**The number of letters of native/input text that have been 'consumed'.
+    /**The number of letters of native/input text that have been 'consumed' by this rule.
      * if not specified, defaults to the size of the Regex match.*/
     val lettersConsumed: Int? = null)
-{
+{//todo: turn the myriad constructors into companion functions with helpful names
     /**@param outputString The text to append to the output string*/
     constructor(matcher: Regex, outputString: String, lettersConsumed: Int? = null)
             :this(null, matcher, { it+outputString }, lettersConsumed)

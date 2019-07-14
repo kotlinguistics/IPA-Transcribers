@@ -127,7 +127,7 @@ interface BaseRules {
         Rule(" ", " ")
     )
 
-    /**Although persian letters have different repesentations whether they are initial, medial, or final --
+    /**Although persian letters have different representations whether they are initial, medial, or final --
      * all forms are represented by the same unicode character.*/
     val persoArabicBaseRules:List<Rule> get() = listOf(
         Rule("ا", "ɒ"),

@@ -41,48 +41,22 @@ data class Rule(
      * if not specified, defaults to the size of the Regex match.*/
     val lettersConsumed: Int? = null)
 {//todo: turn the myriad constructors into companion functions with helpful names
-    companion object {
-        /**@param outputString The text to append to the output string*/
-        fun simple(matcher:Regex, outputString: String, lettersConsumed: Int? = null):Rule {
-            return Rule(null, matcher, { it + outputString }, lettersConsumed)
-        }
+    /**@param outputString The text to append to the output string*/
+    constructor(matcher: Regex, outputString: String, lettersConsumed: Int? = null)
+            :this(null, matcher, { it+outputString }, lettersConsumed)
 
-        fun simple(matcherRegex:String, outputString:String, lettersConsumed:Int? = null):Rule {
-            return Rule(null, Regex(matcherRegex), { it + outputString }, lettersConsumed)
-        }
+    constructor(match:String, outputString:String, lettersUsed:Int? = null)
+            :this(null, Regex(match), {it+outputString}, lettersUsed)
 
-        fun complex(matcherRegex:String, outputString:(soFar:String) -> String, lettersConsumed:Int? = null):Rule {
-            return Rule(null, Regex(matcherRegex), outputString, lettersConsumed)
-        }
+    constructor(match:String, outputString:(soFar:String) -> String, lettersUsed:Int? = null)
+            :this(null, Regex(match), outputString, lettersUsed)
 
-        fun complex(consumedRegex:String, unconsumedRegex:String, output:String, lettersConsumed:Int?=null ):Rule {
-            return Rule(Regex(consumedRegex), Regex(unconsumedRegex), { it + output }, lettersConsumed)
-        }
-    }
+    constructor(consumedMatcher:Regex, unconsumedMatcher:Regex, output:String, lettersConsumed:Int?=null )
+            :this(consumedMatcher, unconsumedMatcher, {it+output}, lettersConsumed)
 
-    class Builder(private val unconsumedRegex:Regex,
-                  private val output:(soFar:String) -> String,
-                  private val lettersConsumed:Int?=null) {
-        private var consumedMatcher:Regex? = null
+    constructor(consumedMatcher:String, unconsumedMatcher:String, output:String, lettersConsumed:Int?=null )
+            :this(Regex(consumedMatcher), Regex(unconsumedMatcher), {it+output}, lettersConsumed)
 
-        constructor(unconsumedRegex:String, output:(soFar:String) -> String, lettersConsumed:Int?=null)
-                :this(Regex(unconsumedRegex), output, lettersConsumed)
-
-        constructor(unconsumedRegex:String, output:String, lettersConsumed:Int?=null)
-                :this(Regex(unconsumedRegex), {it+output}, lettersConsumed)
-
-        fun consumedMatcher(matcherRegex:String) {
-            consumedMatcher = Regex(matcherRegex)
-        }
-
-        fun consumedMatcher(matcherRegex:Regex) {
-            consumedMatcher = matcherRegex
-        }
-
-        fun build(): Rule{
-            return Rule(consumedMatcher, unconsumedRegex, output, lettersConsumed)
-        }
-    }
     fun asKotlin():String {
         return "Rule("+
                 (if(consumedMatcher==null) "" else "\"$consumedMatcher\", ")+
@@ -92,3 +66,4 @@ data class Rule(
                 ")"
     }
 }
+//private val anything = Regex("[\\s\\S]*")

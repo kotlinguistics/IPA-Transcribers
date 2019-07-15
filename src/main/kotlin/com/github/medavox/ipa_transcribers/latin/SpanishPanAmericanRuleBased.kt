@@ -108,7 +108,7 @@ object SpanishPanAmericanRuleBased: RuleBasedTranscriber() {
         //⟨b⟩ or ⟨v⟩ word-initial after a pause, or after ⟨m⟩ or ⟨n⟩ = [b] (bestia; embuste; vaca; envidia)
         //⟨n⟩  i**n**vierno = [m]
         //(barco/′barko/, vaca/′baka/, ambos /′ambos/, en vano /em′bano/)
-        Rule(Regex("(mb|mv|nb|nv)"), "mb"),
+        Rule(Regex("[nm][bv]"), "mb"),
         Rule(Regex("^$"), Regex("[bv]"), "b"),
         //⟨b⟩ or ⟨v⟩ elsewhere (i.e. after a vowel, even across a word boundary,
         // or after any consonant other than ⟨m⟩ or ⟨n⟩) = [β]
@@ -226,7 +226,7 @@ object SpanishPanAmericanRuleBased: RuleBasedTranscriber() {
         //      * e**x**acto*; * ta**x**i*; * rela**x***
         Rule(Regex("x$"), "ks"),
 
-        Rule(Regex("[aeiou]x[aeiou]"), "ks", 1),//FIXME: broken rule. Look-backs are prohibited!
+        Rule("[aeiou]", "x[aeiou]", "ks", 1),//FIXED? broken rule. Look-backs are prohibited!
         //⟨x⟩  word-initially = [s]
         //      ***x**enofobia*
         Rule(Regex("^$"), Regex("x"), "s"),

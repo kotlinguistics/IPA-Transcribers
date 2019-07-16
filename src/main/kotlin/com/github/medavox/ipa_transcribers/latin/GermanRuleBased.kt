@@ -37,71 +37,94 @@ object GermanRuleBased: RuleBasedTranscriber() {
         Rule("u", "ʊ"),
         Rule("i", "ɪ"),
 
-        //velar fricative
-        Rule("i", "ch", "ç"),
-        Rule("ch", "x"),
-
-        Rule("d(^| )", "t", 1),
-        Rule("t?z", "ts"),
-
+        Rule("eer", "iɐ"),
         Rule("er", "ɐ"),
-        //sibilants
-        Rule("sch", "ʃ"),
-        Rule("s[pt][$vowels]", "ʃ", 1),
-        Rule("s[ptk]", "s", 1),
-        Rule("s(^| )", "s", 1),
-        Rule("s", "z"),
+        //consonants
 
-        Rule("v", "f"),
         Rule("sch", "w", "f"),
         Rule("w", "v"),
-        Rule("ng", "ŋ"),
         Rule("r[$vowels]", "ʁ", 1),
         Rule("r(^| )", "ɐ", 1),
         //todo:Double consonants are pronounced as single consonants, except in compound words.
 
         //b: at end of syllable: [p]; otherwise: [b] or [b̥]
+        Rule("b(^| )", "p", 1),
         //c: before ä, e, and i: [ts]; otherwise: [k]
-        //ch: after a, o, and u: [x]; after other vowels or consonants or initially: [ç] or [k] (word-initially in Southern Germany); the suffix -chen always [ç]. In Austro-Bavarian, especially in Austria, [ç] may always be substituted by [x].
-        //chs: [ks] within a morpheme (e.g. Dachs [daks] "badger"); [çs] or [xs] across a morpheme boundary (e.g. Dachs [daxs] "roof (genitive)")
-        //
+        Rule("c[äei]", "ts", 1),
+        Rule("c", "k"),
+        //TODO ch: after a, o, and u: [x]; after other vowels or consonants or initially: [ç] or [k] (word-initially in Southern Germany);
+            //the suffix -chen always [ç]. In Austro-Bavarian, especially in Austria, [ç] may always be substituted by [x].
+        Rule("i", "ch", "ç"),
+        Rule("ch", "x"),
+        //chs: [ks] within a morpheme (e.g. Dachs [daks] "badger"); [çs] or [xs] across a morpheme boundary (e.g.
+        // Dachs [daxs] "roof (genitive)")
+        Rule("chs", "ks"),
         //ck: [k], follows short vowels
+        Rule("ck", "k"),
         //d: at end of syllable: [t]; otherwise: [d] or [d̥]
-        //dsch: [dʒ] or [d̥ʒ̊], used in loanwords and transliterations only. Words borrowed from English can alternatively retain the original ⟨j⟩. Many speakers pronounce ⟨dsch⟩ as [t͡ʃ] (= ⟨tsch⟩), because [dʒ] is not native to German.
+        Rule("d(^| )", "t", 1),
+        //dsch: [dʒ] or [d̥ʒ̊], used in loanwords and transliterations only.
+            //Words borrowed from English can alternatively retain the original ⟨j⟩.
+            //Many speakers pronounce ⟨dsch⟩ as [t͡ʃ] (= ⟨tsch⟩), because [dʒ] is not native to German.
         //dt: [t]
+        Rule("dt", "t"),
         //g: when part of word-final -ig: [ç] or [k] (Southern German); at the end of a syllable: [k]; otherwise: [ɡ] or [ɡ̊]
+        Rule("ig( |$)", "ɪç"),
         //h: before a vowel: [h]; when lengthening a vowel: silent
+        Rule("h[$vowels]", "h", 1),
         //j: [j] in most words; [ʒ] in loanwords from French (as in jardin, French for garden)
+        Rule("j", "j"),
         //ng: usually: [ŋ]; in compound words where the first element ends in "n" and the second element begins with "g" (-n·g-): [nɡ] or [nɡ̊]
+        Rule("ng", "ŋ"),
         //nk: [ŋk]
+        Rule("nk", "ŋk"),
         //pf: [pf] in all cases with some speakers;
+        Rule("pf", "pf"),
             //with other speakers [f] at the beginning of words (or at the beginning of compound words' elements)
             // and [pf] in all other cases
+
         //ph: [f]
+        Rule("ph", "f"),
         //qu: [kv] or [kw] (in a few regions)
+        Rule("qu", "kv"),
 
         //r: the pronunciation of r varies regionally:
-        //
-        //    [ʁ] before vowels, [ɐ] otherwise; or
-        //    [ɐ] after long vowels (except [aː]), [ʁ] otherwise;[17] or
-        //    [r] or [ɾ] before vowels, [ɐ] otherwise (Austro-Bavarian); or
-        //    [r] in all cases (Swiss Standard German)
-        //
-        //s: before and between vowels: [z] or [z̥]; before consonants or when final: [s]; before p or t at the beginning of a word or syllable: [ʃ]
+        //[ʁ] before vowels, [ɐ] otherwise; or
+        Rule("r[$vowels]", "ʁ", 1),
+        Rule("r", "ɐ", 1),
+        //[ɐ] after long vowels (except [aː]), [ʁ] otherwise;[17] or
+        //[r] or [ɾ] before vowels, [ɐ] otherwise (Austro-Bavarian); or
+        //[r] in all cases (Swiss Standard German)
+
+        //s: before and between vowels: [z] or [z̥]; before consonants or when final: [s];
+        // before p or t at the beginning of a word or syllable: [ʃ]
+        Rule("s[pt][$vowels]", "ʃ", 1),
+        Rule("s[ptk]", "s", 1),
+        Rule("s(^| )", "s", 1),
+        Rule("[$vowels]?", "s[$vowels]", "z", 1),
+
         //sch: [ʃ]; however, [sç] when part of the -chen diminutive of a word ending on "s", (e.g. Mäuschen "little mouse")
-        //ss: [s]
-        //ß: [s]
+        Rule("chen", "ç", 2),
+        Rule("sch", "ʃ"),
+
+        //ss, ß: [s]
+        Rule("(ss|ß)", "s"),
         //th: [t]
+        Rule("th", "t"),
         //ti: in -tion, -tiär, -tial, -tiell: [tsɪ̯]; otherwise: [ti]
         //tsch: [tʃ]
-        //tz: [ts], follows short vowels
         //tzsch: [tʃ]
-        //v: in foreign borrowings not at the end of a word: [v]; otherwise: [f]
-        //w: [v]
-        //x: [ks]
-        //z: [ts]
-        //zsch: [tʃ]
+        Rule("tz?sch", "tʃ"),
+        //tz: [ts], follows short vowels. also //z: [ts]
+        Rule("t?z", "ts"),
 
+        //v: in foreign borrowings not at the end of a word: [v]; otherwise: [f]
+        Rule("v", "f"),
+        //x: [ks]
+        Rule("x", "ks"),
+
+        //zsch: [tʃ]
+        Rule("zsch", "tʃ"),
         Rule("","")
     ) + westernPunctuation + latinBaseRules.filter { with(it.unconsumedMatcher) {
         //german handles these letters differently than the base latin rules

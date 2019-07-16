@@ -20,7 +20,6 @@ abstract class CoverageTest {
         System.setErr(PrintStream(errOut))
     }
 
-    @Test
     fun codePointTest(codePoint:Int, transcribe:(String)->String) {
         val c = codePoint.toChar().toString()
         val hexName = codePoint.toString(16)

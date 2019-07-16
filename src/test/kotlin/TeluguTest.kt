@@ -3,8 +3,8 @@ import com.ibm.icu.lang.UCharacter
 import org.junit.Test
 
 class TeluguTest :CoverageTest() {
-    override val unicodeBlock =0x0C00..0x0C7F
-    override val excluded:Array<Int> = arrayOf(
+    private val unicodeBlock:Array<Int> =a(0x0C00..0x0C7F)
+    private val excluded:Array<Int> = arrayOf(
         0x0c0D,
         0x0C11,
         0x0C29,
@@ -22,6 +22,10 @@ class TeluguTest :CoverageTest() {
 
     @Test
     fun characterCoverageTest() {
-        characterCoverageTest(TeluguRuleBased::transcribe)
+        for(i in unicodeBlock) {
+            if (i !in excluded) {
+                codePointTest(i, TeluguRuleBased::transcribe)
+            }
+        }
     }
 }

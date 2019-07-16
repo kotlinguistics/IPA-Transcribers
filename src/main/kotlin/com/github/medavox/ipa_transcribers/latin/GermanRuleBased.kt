@@ -4,8 +4,9 @@ import com.github.medavox.ipa_transcribers.CompletionStatus
 import com.github.medavox.ipa_transcribers.Rule
 import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
 
+/**This transcriber follows pronunciation in Standard German, as spoken in Germany.*/
 object GermanRuleBased: RuleBasedTranscriber() {
-    override val completionStatus: CompletionStatus = CompletionStatus.INCOMPLETE
+    override val completionStatus: CompletionStatus = CompletionStatus.IN_PROGRESS
 
     val vowels = "aeiouäöü"
     val rules:List<Rule> = listOf(

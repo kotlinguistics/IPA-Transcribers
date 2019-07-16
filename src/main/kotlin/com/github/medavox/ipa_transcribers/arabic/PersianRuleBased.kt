@@ -4,7 +4,12 @@ import com.github.medavox.ipa_transcribers.CompletionStatus
 import com.github.medavox.ipa_transcribers.Rule
 import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
 
-/**Persian, like Modern Standard Arabic, does not write short vowels.
+/**The language known by the following names:
+ * * Persian
+ * * Farsi
+ * * Tajik
+ * * Dari
+ * like Modern Standard Arabic, Persian does not write short vowels.
  * This means that any transcription system that relies solely on the orthography (such as this one)
  * *cannot* produce a complete transcription.
  *

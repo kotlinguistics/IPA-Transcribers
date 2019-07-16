@@ -5,9 +5,13 @@ import com.github.medavox.ipa_transcribers.Rule
 import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
 
 /**We can't process Japanese's primary writing system, Kanji, with a rule-based transcriber.
- * But we can process its more regular supplementary syllabaries, Katakana and Hiragana.*/
+ * But we can process its more regular supplementary syllabaries, Katakana and Hiragana.
+ *
+ * Completion status: all purely sound-based characters have been added;
+ * however, there are a small number of 'functional' Hiragana & Katakana, which require more complex rules,
+ * that are yet to be done.*/
 object JapaneseRuleBasedKatakanaHiraganaOnly:RuleBasedTranscriber() {
-    override val completionStatus: CompletionStatus = CompletionStatus.UNSTARTED
+    override val completionStatus: CompletionStatus = CompletionStatus.INCOMPLETE
     private val rules:List<Rule> = listOf(
         //katakana
         Rule("ア", "a"),

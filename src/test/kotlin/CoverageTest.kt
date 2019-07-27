@@ -1,9 +1,9 @@
 import com.ibm.icu.lang.UCharacter
 import org.junit.Before
-import org.junit.Test
 import java.io.ByteArrayOutputStream
 import java.io.PrintStream
 
+/**Common functionality when testing that a transcriber covers all possible codepoints in a language's unicode block.*/
 abstract class CoverageTest {
     protected val errOut:ByteArrayOutputStream = ByteArrayOutputStream()
 
@@ -20,6 +20,8 @@ abstract class CoverageTest {
         System.setErr(PrintStream(errOut))
     }
 
+    /**Checks whether an individual Unicode codepoint is handled by the given transcribe() function.
+     * If it's not, it should print something to System.err, which this test function checks for.*/
     fun codePointTest(codePoint:Int, transcribe:(String)->String) {
         val c = codePoint.toChar().toString()
         val hexName = codePoint.toString(16)

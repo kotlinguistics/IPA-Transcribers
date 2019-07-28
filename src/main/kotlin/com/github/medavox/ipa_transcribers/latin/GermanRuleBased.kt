@@ -9,9 +9,114 @@ object GermanRuleBased: RuleBasedTranscriber() {
     override val completionStatus: CompletionStatus = CompletionStatus.IN_PROGRESS
 
     val vowels = "aeiouäöü"
+    val consonants = "bcdfghjklmnpqrstvwxyz"
     val rules:List<Rule> = listOf(
 
-        Rule("wird", "ɪɐ̯"),
+        //vowels, second attempt
+
+        //Vowel Length
+
+        //Even though vowel length is phonemic in German, it is not consistently represented.
+        // However, there are different ways of identifying long vowels:
+
+        //A vowel in an open syllable (a free vowel) is long, for instance in ge-ben ('to give'), sa-gen ('to say').
+        //It is rare to see a bare i used to indicate a long vowel /iː/.
+        //Instead, the digraph ie is used, for instance in Liebe ('love'), hier ('here').
+        //This use is a historical spelling based on the Middle High German diphthong /iə/
+        //which was monophthongized in Early New High German.
+        //It has been generalized to words that etymologically never had that diphthong,
+        //for instance viel ('much'), Friede ('peace') (Middle High German vil, vride).
+        //Occasionally – typically in word-final position – this digraph represents /iː.ə/
+        //as in the plural noun Knie /kniː.ə/ ('knees') (cf. singular Knie /kniː/).
+        //In Fraktur, where capital I and J are identical or near-identical J {\displaystyle {\mathfrak {J}}}
+        //{\displaystyle {\mathfrak {J}}}, the combinations Ie and Je are confusable;
+        //hence the combination Ie is not used at the start of a word, for example Igel ('hedgehog'), Ire ('Irishman').
+
+        //A silent h indicates the vowel length in certain cases. That h derives from an old /x/ in some words,
+        //for instance sehen ('to see') zehn ('ten'), but in other words it has no etymological justification,
+        //for instance gehen ('to go') or mahlen ('to mill'). Occasionally a digraph can be redundantly followed by h,
+        //either due to analogy, such as sieht ('sees', from sehen) or etymology, such as Vieh ('cattle', MHG vihe),
+        //rauh ('rough', pre-1996 spelling, now written rau, MHG ruh).
+
+        //The letters a, e, o are doubled in a few words that have long vowels, for instance Saat ('seed'),
+        //See ('sea'/'lake'), Moor ('moor').
+
+        //A doubled consonant after a vowel indicates that the vowel is short,
+        //while a single consonant often indicates the vowel is long, e.g. Kamm ('comb') has a short vowel /kam/,
+        //while kam ('came') has a long vowel /kaːm/. Two consonants are not doubled: k, which is replaced by ck
+        // (until the spelling reform of 1996, however, ck was divided across a line break as k-k),
+        //and z, which is replaced by tz.
+        //In loanwords, kk (which may correspond with cc in the original spelling) and zz can occur.
+
+        //For different consonants and for sounds represented by more than one letter (ch and sch) after a vowel,
+        //no clear rule can be given, because they can appear after long vowels,
+        // yet are not redoubled if belonging to the same stem, e.g. Mond /moːnt/ 'moon', Hand /hant/ 'hand'.
+        //On a stem boundary, reduplication usually takes place, e.g., nimm-t 'takes'; however, in fixed,
+        //no longer productive derivatives, this too can be lost, e.g.,
+        // Geschäft /ɡəˈʃɛft/ 'business' despite schaffen 'to get something done'.
+
+        //ß indicates that the preceding vowel is long, e.g. Straße 'street' vs. Masse 'amount'.
+        //In addition to that, texts written before the 1996 spelling reform also use ß at the ends of words and before
+        //consonants, e.g. naß 'wet' and mußte 'had to' (after the reform spelled nass and musste),
+        //so vowel length in these positions could not be detected by the ß, cf. Maß 'measure' and fußte 'was based'
+        // (after the reform still spelled Maß and fußte).
+
+        //Short vowels
+
+        //Consonants are sometimes doubled in writing to indicate the preceding vowel is to be pronounced as a short vowel.
+        //todo Rule("[$consonants]\\1"),
+
+        // Most one-syllable words that end in a single consonant are pronounced with long vowels,
+        // but there are some exceptions such as an, das, es, in, mit, and von.
+        // The e in the ending -en is often silent, as in bitten "to ask, request".
+        Rule("[^ ]", "en( |^)", "", 2),
+        // The ending -er is often pronounced [ɐ], but in some regions, people say [ʀ̩] or [r̩].
+        Rule("[^ ]", "er( |^)", "ɐ", 2),
+        Rule("[^ ]", "e( |^)", "ə"),
+        // The e in the ending -el ([əl ~ l̩], e.g. Tunnel, Mörtel "mortar") is pronounced short despite having just a
+        // single consonant on the end.
+        //
+        //    a: [a] as in Wasser "water"
+        //    ä: [ɛ] as in Männer "men"
+        //    e: [ɛ] as in Bett "bed"; unstressed [ə] as in Ochse "ox"
+        //    i: [ɪ] as in Mittel "means"
+        //    o: [ɔ] as in kommen "to come"
+        //    ö: [œ] as in Göttin "goddess"
+        //    u: [ʊ] as in Mutter "mother"
+        //    ü: [ʏ] as in Müller "miller"
+        //    y: [ʏ] as in Dystrophie "dystrophy"
+        //
+        //Long vowels
+        //
+        //A vowel usually represents a long sound if the vowel in question occurs:
+        //
+        //    as the final letter (except for e)
+        //    followed by a single consonant as in bot "offered"
+        //    before a single consonant followed by a vowel as in Wagen "car"
+        //    doubled as in Boot "boat"
+        //    followed by an h as in Weh "pain"
+        //
+        //Long vowels are generally pronounced with greater tenseness than short vowels.
+        //
+        //The long vowels map as follows:
+        //
+        //    a, ah, and aa: [aː]
+        //    ä, äh: [ɛː] or [eː]
+        //    e, eh, and ee: [eː]
+        //    i, ie, ih, and ieh: [iː]
+        //    o, oh, and oo: [oː]
+        //    ö, öh: [øː]
+        //    u and uh: [uː]
+        //    ü and üh: [yː]
+        //    y: [yː]
+
+        //Diphthongs
+        Rule("au", "aʊ"),
+        Rule("(eu|äu)", "ɔʏ"),
+        Rule("(ei|ai|ey|ay)", "aɪ"),
+
+       //old
+/*        Rule("wird", "ɪɐ̯"),
         Rule("wir", "iːɐ̯"),
         Rule("Würde", "ʏɐ̯"),
         Rule("für", "yːɐ̯"),
@@ -37,9 +142,7 @@ object GermanRuleBased: RuleBasedTranscriber() {
         Rule("ü", "y"),
         Rule("u", "ʊ"),
         Rule("i", "ɪ"),
-
-        Rule("eer", "iɐ"),
-        Rule("er", "ɐ"),
+        */
         //consonants
 
         Rule("sch", "w", "f"),

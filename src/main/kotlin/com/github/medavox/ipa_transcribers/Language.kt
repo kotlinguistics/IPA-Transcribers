@@ -1,5 +1,10 @@
 package com.github.medavox.ipa_transcribers
 
+import com.github.medavox.ipa_transcribers.arabic.*
+import com.github.medavox.ipa_transcribers.asian_unique.*
+import com.github.medavox.ipa_transcribers.brahmic.*
+import com.github.medavox.ipa_transcribers.latin.*
+
 //UNSTARTED LANGUAGES
 
 //MandarinChinese
@@ -67,3 +72,26 @@ prediction: fairly regular, but known to have lots of variants
 //tamil -- Unique brahmic abugida
 //Italian
 //Persian/Farsi/Dari/Tajik(i) -- Perso-Arabic script
+
+enum class Language(val neim:String, val transcriber: Transcriber) {
+    ARABIC("Arabic", ArabicRuleBased),
+    BENGALI("Bengali", BengaliRuleBased),
+    ENGLISH("English", EnglishRuleBased),
+    GERMAN("German", GermanRuleBased),
+    HINDI("Hindi", HindiRuleBased),
+    ITALIAN("Italian", ItalianRuleBased),
+    JAPANESE_JSOUP("Japanese/Web Based", JapaneseJsoupEasyPronunciation),
+    JAPANESE_LIMITED("Japanese/Katakana & Hiragana Only", JapaneseRuleBasedKatakanaHiraganaOnly),
+    KOREAN("Korean", KoreanRuleBased),
+    MARATHI("Marathi", MarathiRuleBased),
+    MALAY("Malay", MalayRuleBased),
+    PERSIAN("Persian", PersianRuleBased),
+    PORTUGUESE_JSOUP("Portuguese/European, Web-Based", PortugueseEuropeanJsoupEasyPronunciation),
+    RUSSIAN_JSOUP("Russian/Web-Based", RussianJsoupEasyPronunciation),
+    RUSSIAN("Russian",RussianRuleBased),
+    SPANISH_EUROPEAN("Spanish/European", SpanishPeninsularRuleBased),
+    SPANISH_AMERICAN("Spanish/PanAmerican", SpanishPanAmericanRuleBased),
+    SWAHILI("Swahili", SwahiliRuleBased),
+    TELUGU("Telugu", TeluguRuleBased),
+    TURKISH("Turkish", TurkishRuleBased)
+}

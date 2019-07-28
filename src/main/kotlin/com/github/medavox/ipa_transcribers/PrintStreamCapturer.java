@@ -2,7 +2,6 @@ package com.github.medavox.ipa_transcribers;
 
 import javafx.scene.control.TextArea;
 
-import javax.swing.*;
 import java.io.PrintStream;
 
 public class PrintStreamCapturer extends PrintStream {

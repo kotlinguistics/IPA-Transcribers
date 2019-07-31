@@ -239,6 +239,27 @@ object GermanRuleBased: RuleBasedTranscriber() {
             this != Regex("z")
         } }
     override fun transcribe(nativeText: String): String {
-        return nativeText.toLowerCase().processWithRules(rules, ::reportOnceAndCopy)
+        return nativeText.toLowerCase().normaliseUmlauts().processWithRules(rules, ::reportOnceAndCopy)
+    }
+
+    /**Converts umlauted vowels in all their possible representations into
+     *  the same integrated characters used in all Rules.*/
+    private fun String.normaliseUmlauts():String {
+        return if(contains("ä") || contains("ö") || contains("ü") ) {
+            this
+        }else {
+            this
+                .replace("ä", "ä")//a-thn-umlaut
+                .replace("̈a", "ä")//umlaut-then-a
+                .replace("ae", "ä")
+
+                .replace("ö", "ö")//o-umlaut
+                .replace("̈o", "ö")//umlaut-o
+                .replace("oe", "ö")//umlaut-o
+
+                .replace("ü", "ü")//u-umlaut
+                .replace("̈u", "ü")//umlaut-u
+                .replace("ue", "ü")//umlaut-u
+        }
     }
 }

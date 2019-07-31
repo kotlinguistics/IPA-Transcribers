@@ -25,14 +25,9 @@ which likely has dictionary-lookup hints for common words.
 //EuropeanPortuguese --  unknown. Probably fairly regular spelling, given a near-creolisation event
 //BrazilianPortuguese --  unknown. Probably fairly regular spelling, given a near-creolisation event
 //and the relatively large number of uneducated speakers in the language's past.
-//Japanese --  DONE scraper. Ineligible for rule-based:
-//KatakanaJapanese
-//HiraganaJapanese
 
 //ShahmukhiPunjabi --  listed on Ethnologue as Lahnda with related dialects
 //GurmukhiPunjabi --  listed on Ethnologue as Lahnda with related dialects
-
-//Swahili
 
 //IndonesianMalay -- according to wikipedia, "Most speakers of Javanese also speak Indonesian".
 //Javanese --  Uses the latin script
@@ -70,8 +65,6 @@ prediction: fairly regular, but known to have lots of variants
 //Urdu -- Perso-Arabic
 //Vietnamese
 //tamil -- Unique brahmic abugida
-//Italian
-//Persian/Farsi/Dari/Tajik(i) -- Perso-Arabic script
 
 enum class Language(val neim:String, val transcriber: Transcriber) {
     ARABIC("Arabic", ArabicRuleBased),

@@ -151,11 +151,10 @@ object ItalianRuleBased: RuleBasedTranscriber() {
         //U, u 	u [ˈu] 	/u/ or /w/ 	ù, ú
 
         // If consonants are doubled after a vowel, they are geminated: all consonants may be geminated except for /z/.
-        // In IPA, gemination is represented by doubling the consonant (fatto [ˈfatto], mezzo [ˈmɛddzo])
-        // or by using the length marker ⟨ː⟩. <we are using doubling here>
+        // In IPA, gemination is represented by doubling the consonant (fatto [ˈfatto], mezzo [ˈmɛddzo]).
         // There is also the sandhi of syntactic gemination: va via [ˌva vˈviːa]).
 
-        //[3] /dz/, /ts/, /ʎ/, /ɲ/ and /ʃ/ are always geminated after a vowel.
+        //todo: /dz/, /ts/, /ʎ/, /ɲ/ and /ʃ/ are always geminated after a vowel.
 
         //In Tuscany [h], [ɸ], [θ], [ʃ] and [ʒ] are the common allophones of vowel-following single /k/, /p/, /t/, /tʃ/ and /dʒ/.
 

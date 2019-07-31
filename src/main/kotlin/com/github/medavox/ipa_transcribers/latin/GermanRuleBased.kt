@@ -153,18 +153,18 @@ object GermanRuleBased: RuleBasedTranscriber() {
 
         //b: at end of syllable: [p]; otherwise: [b] or [b̥]
         Rule("b(^| )", "p", 1),
-        //c: before ä, e, and i: [ts]; otherwise: [k]
-        Rule("c[äei]", "ts", 1),
-        Rule("c", "k"),
         //TODO ch: after a, o, and u: [x]; after other vowels or consonants or initially: [ç] or [k] (word-initially in Southern Germany);
             //the suffix -chen always [ç]. In Austro-Bavarian, especially in Austria, [ç] may always be substituted by [x].
-        Rule("i", "ch", "ç"),
-        Rule("ch", "x"),
         //chs: [ks] within a morpheme (e.g. Dachs [daks] "badger"); [çs] or [xs] across a morpheme boundary (e.g.
         // Dachs [daxs] "roof (genitive)")
         Rule("chs", "ks"),
+        Rule("i", "ch", "ç"),
+        Rule("ch", "x"),
         //ck: [k], follows short vowels
         Rule("ck", "k"),
+        //c: before ä, e, and i: [ts]; otherwise: [k]
+        Rule("c[äei]", "ts", 1),
+        Rule("c", "k"),
         //d: at end of syllable: [t]; otherwise: [d] or [d̥]
         Rule("d(^| )", "t", 1),
         //dsch: [dʒ] or [d̥ʒ̊], used in loanwords and transliterations only.

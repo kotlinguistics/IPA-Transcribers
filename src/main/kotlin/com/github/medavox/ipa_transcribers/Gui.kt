@@ -8,6 +8,7 @@ import javafx.scene.Scene
 import javafx.scene.control.*
 import javafx.scene.layout.GridPane
 import javafx.stage.Stage
+import java.util.*
 
 class Gui : Application() {
     //input = multi-line text input field
@@ -42,10 +43,13 @@ class Gui : Application() {
         val languagesMenuItems:Array<MenuItem> = Language.values().
             map{
                 val m = MenuItem(it.neim)
-                m.setOnAction { event -> menuButton.text = it.neim }
-                selection = it
+                m.setOnAction {
+                        event -> menuButton.text = it.neim
+                    selection = it
+                }
                 m
             }.toTypedArray()
+        println("menu items:"+ Arrays.toString(languagesMenuItems))
         menuButton.items.addAll(*languagesMenuItems)
 
         //val out = PrintStreamCapturer(output, System.out)
@@ -56,6 +60,7 @@ class Gui : Application() {
         btn.setText("Transliterate");
         btn.alignment = Pos.CENTER_RIGHT
         btn.setOnAction { event:ActionEvent ->
+            System.out.println("transcribing with $selection")
             output.text = selection.transcriber.transcribe(input.text)
             //err.println("error text")
             //out.println("output text")

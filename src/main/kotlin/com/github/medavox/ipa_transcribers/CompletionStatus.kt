@@ -19,7 +19,7 @@ enum class CompletionStatus {
 
     /**This transcriber completely transliterates the information available in the native orthography.
      * However this is not a complete rendering of how the word is pronounced,
-     * due to the nature of the orthography (eg Arabic does not record short vowels).
+     * due to the nature of the orthography (eg Arabic without extended diacritics does not record short vowels).
      * */
     COMPLETE_PARTIAL,
     /**The transcriber is considered complete, and should produce IPA transliterations that are as accurate*/

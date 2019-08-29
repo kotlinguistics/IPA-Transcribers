@@ -128,7 +128,7 @@ object JapaneseRuleBasedKatakanaHiraganaOnly:RuleBasedTranscriber() {
         //ヾ (reduplicates and voices syllable)
 
 
-//hiragana
+        //hiragana
         Rule("あ", "a"),
         Rule("い", "i"),
         Rule("う", "ɯ"),

@@ -8,8 +8,15 @@ import javafx.scene.Scene
 import javafx.scene.control.*
 import javafx.scene.layout.GridPane
 import javafx.stage.Stage
-import java.util.*
 
+//some more tutorial & learning resources;
+//https://docs.oracle.com/javase/8/javafx/get-started-tutorial/form.htm#CFHEAHGB
+//https://docs.oracle.com/javase/8/javafx/get-started-tutorial/hello_world.htm
+//
+/**Provides a Desktop GUI for the library.
+ * Implemented with JavaFX, available as part of Java 8's language API.
+ * Note that after Java 8, JavaFX was made an external library.
+ * @see [https://docs.oracle.com/javase/8/javafx/api](JavaFX javadoc)*/
 class Gui : Application() {
     //input = multi-line text input field
     //language choice = dropdown list
@@ -49,7 +56,6 @@ class Gui : Application() {
                 }
                 m
             }.toTypedArray()
-        println("menu items:"+ Arrays.toString(languagesMenuItems))
         menuButton.items.addAll(*languagesMenuItems)
 
         //val out = PrintStreamCapturer(output, System.out)
@@ -61,6 +67,7 @@ class Gui : Application() {
         btn.alignment = Pos.CENTER_RIGHT
         btn.setOnAction { event:ActionEvent ->
             System.out.println("transcribing with $selection")
+            errors.text = ""
             output.text = selection.transcriber.transcribe(input.text)
             //err.println("error text")
             //out.println("output text")
@@ -75,8 +82,8 @@ class Gui : Application() {
 
         val scene = Scene(root, 400.0, 400.0)
 
-        primaryStage.setTitle("Hello World!");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        primaryStage.setTitle("IPA Transliterator")
+        primaryStage.setScene(scene)
+        primaryStage.show()
     }
 }

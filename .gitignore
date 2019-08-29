@@ -72,3 +72,8 @@ fabric.properties
 modules.xml
 .idea/misc.xml
 *.ipr
+
+local.properties
+/.gradle/
+META-INF
+*_files/

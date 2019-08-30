@@ -141,11 +141,14 @@ However, even between languages with Latin writing systems,
 differences in the spelling system caused my text-only approach to miss words that were 
 *spelled differently, but pronounced the same*.
 
-So I decided to write this software, which can produce an approximate, "standard" pronunciation of a word, 
-given how it is natively spelled.
+So I created this software to allow direct, equivalent comparisons between languages --
+regardless of orthography or spelling system used.
 
 I'm sure, however, that this software can be put to other uses.
 
+<a name="numlangs">1</a>: Cantonese and other Chinese languages that aren't Mandarin haven't been counted, 
+             due to the lack of good resources for these languages on the English internet. Sorry!
+             
 ## DISCLAIMER
 
 Language and its use is a deeply personal experience, and has often been politicised.
@@ -159,6 +162,3 @@ given the large scope of this project.
 
 If you take issue with any inaccuracies in this software,
 please submit an issue or pull request, either detailing your grievances, or fixing the problem.
-
-<a name="numlangs">1</a>: Cantonese and other Chinese languages that aren't Mandarin haven't been counted, 
-             due to the lack of good resources for these languages on the English internet. Sorry!

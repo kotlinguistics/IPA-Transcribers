@@ -5,14 +5,6 @@ which convert text in a language's native orthography into the International Pho
 
 Where possible, a rule-based approach has been taken. Otherwise, publicly-available data and APIs have been used.
 
-## Limitations
-The orthography of some languages bear little or no resemblance to their intended pronunciation --
-This is called [Orthographic Depth](https://en.wikipedia.org/wiki/Orthographic_depth) -- 
-and are therefore ineligible for rule-based transliteration. 
-
-Also note that **neither syllable nor stress information has been transcribed** in the rule-based transcribers,
-due to the far higher complexity of writing syllabifiers.
-
 ## Language Support
 
 The languages I aim to support, and their eligibility for rule-based transcribers:
@@ -63,41 +55,74 @@ for information on the completion status for each language, look in the `project
 
 If:-
 
-* you have insight into *how* a particular system in a language's orthography works,
+* you have insight into *how* a system works in a particular language's orthography,
 * you want to add support for a language I've not included here,
 * or if you spot a mistake in the IPA output,
 
 please do one of the following (Most preferred first):
 
-1. Submit a pull request with the relevant work implemented (provide code)
-2. Open an issue, describing *how* a language feature works (provide the language-specific knowledge),
-    - or just tell me that for input *x*, output *y* is wrong and should instead be *z*
-3. request a feature and I will record your interest.
+1. Submit a pull request with the relevant work implemented (*provide code*)
+2. Open an issue, describing *how* a language feature works (*provide language-specific knowledge*),
+3. Just tell me that for input *x*, output *y* is wrong and should instead be *z* (*provide correct example(s)*)
+4. request a feature and I will record your interest.
     - given enough interest, I may still try to implement other languages or features.
  
 As of writing this (March 2019), I'm still working on implementing the basic rule-based transcribers
-for all the languages which support such an approach.
+for all the eligible languages I'll be covering.
 
 Please bear in mind that this project is a massive undertaking for one person;
 It isn't possible for me (or arguably, any *one* person) 
 to have sufficient knowledge of *every* language here to cover it perfectly.
 
 As a result, without external help from **users like you**:
+
 * the transcriptions will remain quite "broad",
 * syllable stress will not be transcribed
-* and any other syllable-level pronunciation systems 
-(such as [vowel reduction](https://en.wikipedia.org/wiki/Vowel_reduction), 
-in [English](https://en.wikipedia.org/wiki/Stress_and_vowel_reduction_in_English), 
-[Russian](https://en.wikipedia.org/wiki/Vowel_reduction_in_Russian) and probably others ) won't be covered.
+* and any other syllable-level pronunciation systems won't be covered.
+
+## Limitations
+
+### Languages with High Orthographic Depth (Spelling doesn't relate to pronunciation)
+
+The orthography of some languages bears little or no resemblance to its intended pronunciation.
+
+This is called [Orthographic Depth](https://en.wikipedia.org/wiki/Orthographic_depth).
+Languages with high orthographic depth cannot be transliterated (or entirely transliterated) in a purely rule-based way,
+using only the native orthography. 
+
+Examples of prominent languages with high orthographic depth are
+* Chinese (whose writing system is a modified ideography, 
+  containing little to no pronunciation information beyond rhyming hints), 
+* Arabic (whose writing system doesn't normally record short vowels), and
+* Japanese (it's complicated, but in short the roots of words in normal text are written down with modified versions of Chinese characters called Kanji)
+
+I have withheld some web-scraper-based transliterators for languages like these.
+
+That work to transliterate those languages is not mine,
+and as such it would be wrong for me to provide a means for placing an undue burden on these public online services.
+
+(If these online transliterators were run by some huge tech corporation I might feel differently, but they're not.)
+
+### Syllable and Stress-Level Systems
+
+* Neither syllable nor stress information has been transcribed in the rule-based transcribers,
+  due to the higher difficulty of writing syllabifiers.
+   - syllabification rules (what constitutes a syllable, and where syllable boundaries lie) vary across languages,
+     and are often complex.
+  - Syllabification is not impossible however, and may be attempted later.
+* [Vowel reduction](https://en.wikipedia.org/wiki/Vowel_reduction), such as in
+  [English](https://en.wikipedia.org/wiki/Stress_and_vowel_reduction_in_English) 
+  and [Russian](https://en.wikipedia.org/wiki/Vowel_reduction_in_Russian) has accordingly been ignored.
 
 ## Why?
 
 (AKA Motivation)
 
-A few years ago, I decided to make my own attempt at creating an 
+A few years ago, I began my own attempt at creating an 
 [International Auxiliary Language](https://en.wikipedia.org/wiki/International_auxiliary_language).
 
-One goal of the language was to maximise the familiarity of each word to as many people as possible.
+One goal of the language was to maximise the verbal familiarity of each word to as many people as possible
+(Orthographic familiarity is already a lost cause, due to the aforementioned different writing systems).
 
 For instance, the word for 'bridge' in French is *ponte*, and in Italian is *puente*. 
 There is also a more obscure English word 'pont', which is a type of ferry boat.
@@ -105,8 +130,8 @@ Although the definition is not related, it is related.
 So by choosing a word in my language for bridge that sounded similar (say, 'pont'),
 I could reduce the difficulty in remembering the words of the language for more people.
 
-In practice, there are more languages than just French, Italian and English. 
-I decided to compare words in the top 25* most widely spoken languages on the planet,
+In practice, there need to be comparisons between more languages than just French, Italian and English. 
+I decided to compare words in the top 25[^numlangs] most widely spoken languages on the planet,
 and prioritise that language based on its number of speakers (both L1 and L2).
 
 Originally, I simply compared the spelling of each word to its equivalent in other languages, 
@@ -119,10 +144,7 @@ differences in the spelling system caused my text-only approach to miss words th
 So I decided to write this software, which can produce an approximate, "standard" pronunciation of a word, 
 given how it is natively spelled.
 
-I'm sure, however, that this software can be put to other uses.  
-
-*Cantonese and other Chinese languages that aren't Mandarin haven't been included, 
-due to the lack of good resources for these languages on the English internet.
+I'm sure, however, that this software can be put to other uses.
 
 ## DISCLAIMER
 
@@ -137,3 +159,6 @@ given the large scope of this project.
 
 If you take issue with any inaccuracies in this software,
 please submit an issue or pull request, either detailing your grievances, or fixing the problem.
+
+[^numlangs]: Cantonese and other Chinese languages that aren't Mandarin haven't been counted, 
+             due to the lack of good resources for these languages on the English internet. Sorry!

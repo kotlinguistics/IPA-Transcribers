@@ -34,12 +34,12 @@ class Gui : Application() {
         input.setWrapText(true)
 
         val output = TextArea()
-        output.promptText = "transliteration goes here"
+        output.promptText = "transliteration appears here"
         output.setEditable(false)
         output.setWrapText(true)
 
         val errors = TextArea()
-        errors.promptText = "errors go here"
+        errors.promptText = "errors appear here"
         errors.setEditable(false)
         errors.setWrapText(true)
         errors.text

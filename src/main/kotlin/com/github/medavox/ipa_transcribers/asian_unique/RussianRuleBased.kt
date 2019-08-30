@@ -24,6 +24,25 @@ object RussianRuleBased:RuleBasedTranscriber() {
     // the soft/hard quality of the consonant depends on whether the vowel is meant to follow
     // "hard" consonants ⟨а, о, э, у, ы⟩ or
     // "soft" consonants ⟨я, ё, е, ю, и⟩
+
+    //for when you want to write fake cyrillic, but aren't Russian
+    private val fakeLatinCyrillic:List<Rule> = listOf(
+        Rule("A", "а"),
+        Rule("B", "в"),
+        Rule("E", "е"),
+        Rule("S", "ѕ"),
+        Rule("I", "і"),
+        Rule("J", "ј"),
+        Rule("K", "к"),
+        Rule("M", "м"),
+        Rule("H", "н"),
+        Rule("O", "о"),
+        Rule("P", "р"),
+        Rule("C", "с"),
+        Rule("T", "т"),
+        Rule("Y", "у"),
+        Rule("X", "х")
+    )
     val rules:List<Rule> = listOf(
         Rule("а", "a"),
         Rule("б", "b"), //  or /bʲ/
@@ -65,6 +84,6 @@ object RussianRuleBased:RuleBasedTranscriber() {
         Rule("я", "ja") // ja or / ʲa/
     )+westernPunctuation
     override fun transcribe(nativeText: String): String {
-        return nativeText.toLowerCase().processWithRules(rules, reportAndCopy)
+        return nativeText.processWithRules(fakeLatinCyrillic, copy).toLowerCase().processWithRules(rules, reportAndCopy)
     }
 }

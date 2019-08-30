@@ -1,12 +1,19 @@
 # IPA Transcribers
 
-A collection of transcribers (strictly speaking, transliterators) which convert text in a language's native orthography into the International Phonetic Alphabet.
+A collection of transcribers (strictly speaking, transliterators) 
+which convert text in a language's native orthography into the International Phonetic Alphabet.
 
-Where possible, a rule-based approach has been taken. Otherwise, publically-available data and APIs have been used.
-Note that the orthography of some languages bear little or no resemblance to their intended pronunciation. This is called [Orthographic Depth](https://en.wikipedia.org/wiki/Orthographic_depth).
+Where possible, a rule-based approach has been taken. Otherwise, publicly-available data and APIs have been used.
+
+## Limitations
+The orthography of some languages bear little or no resemblance to their intended pronunciation --
+This is called [Orthographic Depth](https://en.wikipedia.org/wiki/Orthographic_depth) -- 
+and are therefore ineligible for rule-based transliteration. 
 
 Also note that **neither syllable nor stress information has been transcribed** in the rule-based transcribers,
 due to the far higher complexity of writing syllabifiers.
+
+## Language Support
 
 The languages I aim to support, and their eligibility for rule-based transcribers:
 
@@ -40,12 +47,14 @@ Persian/Dari            | partially
 Vietnamese              | signs point to no
 Italian                 | probably
 
-Probably means that it uses the latin alphabet (which means it probably can),
-but has used it for a long time (around 1000 years), so may be too irregular for rule-based -- further research is required.
 
-Partially means that this language uses the Arabic script, which only records some vowels. 
+**"Probably"**: this language uses the latin alphabet (which means it probably can be transliterated),
+but has used it for a long time (say, at least 1000 years),
+so may be too irregular for rule-based -- further research is required.
+
+**"Partially"**: this language uses the Arabic script, which only records some vowels. 
 There isn't enough information present in the orthography to make a complete transcription of all the phonemes,
-without resorting to lookup-tables and a context-sensitive approach.
+without resorting to lookup-tables, and/or a context-sensitive approach.
 
 for information on the completion status for each language, look in the `project boards` section of this repo's GitHub page.
 
@@ -66,25 +75,63 @@ please do one of the following (Most preferred first):
 3. request a feature and I will record your interest.
     - given enough interest, I may still try to implement other languages or features.
  
-As of writing this (March 2019), I'm still working on implementing the basic rule-based transcribers for all the languages which
-support such an approach.
+As of writing this (March 2019), I'm still working on implementing the basic rule-based transcribers
+for all the languages which support such an approach.
 
 Please bear in mind that this project is a massive undertaking for one person;
-It isn't possible for me (or arguably, any one person) to have sufficiently specialised knowledge of every language here to cover it perfectly.
+It isn't possible for me (or arguably, any *one* person) 
+to have sufficient knowledge of *every* language here to cover it perfectly.
 
 As a result, without external help from **users like you**:
-* the transcriptions will remain quite broad,
+* the transcriptions will remain quite "broad",
 * syllable stress will not be transcribed
-* and any other syllable-level language systems won't be covered (such as vowel reduction).
+* and any other syllable-level pronunciation systems 
+(such as [vowel reduction](https://en.wikipedia.org/wiki/Vowel_reduction), 
+in [English](https://en.wikipedia.org/wiki/Stress_and_vowel_reduction_in_English), 
+[Russian](https://en.wikipedia.org/wiki/Vowel_reduction_in_Russian) and probably others ) won't be covered.
 
-## DISCLAIMERS
+## Why?
+
+(AKA Motivation)
+
+A few years ago, I decided to make my own attempt at creating an 
+[International Auxiliary Language](https://en.wikipedia.org/wiki/International_auxiliary_language).
+
+One goal of the language was to maximise the familiarity of each word to as many people as possible.
+
+For instance, the word for 'bridge' in French is *ponte*, and in Italian is *puente*. 
+There is also a more obscure English word 'pont', which is a type of ferry boat.
+Although the definition is not related, it is related. 
+So by choosing a word in my language for bridge that sounded similar (say, 'pont'),
+I could reduce the difficulty in remembering the words of the language for more people.
+
+In practice, there are more languages than just French, Italian and English. 
+I decided to compare words in the top 25* most widely spoken languages on the planet,
+and prioritise that language based on its number of speakers (both L1 and L2).
+
+Originally, I simply compared the spelling of each word to its equivalent in other languages, 
+transliterating where necessary.
+
+However, even between languages with Latin writing systems,
+differences in the spelling system caused my text-only approach to miss words that were 
+*spelled differently, but pronounced the same*.
+
+So I decided to write this software, which can produce an approximate, "standard" pronunciation of a word, 
+given how it is natively spelled.
+
+I'm sure, however, that this software can be put to other uses.  
+
+*Cantonese and other Chinese languages that aren't Mandarin haven't been included, 
+due to the lack of good resources for these languages on the English internet.
+
+## DISCLAIMER
 
 Language and its use is a deeply personal experience, and has often been politicised.
 
 I do not intend to make any judgment or create any offense with this software,
 or to take any political stance whatsoever, towards or against any language or culture.
 
-I have used the best information available to me at the time of writing, 
+I have used the best information available to me at the time of writing,
 in order to provide the best support possible for each language chosen,
 given the large scope of this project.
 

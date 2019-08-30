@@ -131,7 +131,7 @@ So by choosing a word in my language for bridge that sounded similar (say, 'pont
 I could reduce the difficulty in remembering the words of the language for more people.
 
 In practice, there need to be comparisons between more languages than just French, Italian and English. 
-I decided to compare words in the top 25[^numlangs] most widely spoken languages on the planet,
+I decided to compare words in the top 25<sup>[1](#numlangs)</sup> most widely spoken languages on the planet,
 and prioritise that language based on its number of speakers (both L1 and L2).
 
 Originally, I simply compared the spelling of each word to its equivalent in other languages, 
@@ -160,5 +160,5 @@ given the large scope of this project.
 If you take issue with any inaccuracies in this software,
 please submit an issue or pull request, either detailing your grievances, or fixing the problem.
 
-[^numlangs]: Cantonese and other Chinese languages that aren't Mandarin haven't been counted, 
+<a name="numlangs">1</a>: Cantonese and other Chinese languages that aren't Mandarin haven't been counted, 
              due to the lack of good resources for these languages on the English internet. Sorry!

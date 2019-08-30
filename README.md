@@ -82,7 +82,7 @@ As a result, without external help from **users like you**:
 
 ## Limitations
 
-### Languages with High Orthographic Depth (Spelling doesn't relate to pronunciation)
+### Languages with High Orthographic Depth (Spelling doesn't convey pronunciation)
 
 The orthography of some languages bears little or no resemblance to its intended pronunciation.
 
@@ -96,7 +96,7 @@ Examples of prominent languages with high orthographic depth are
 * Arabic (whose writing system doesn't normally record short vowels), and
 * Japanese (it's complicated, but in short the roots of words in normal text are written down with modified versions of Chinese characters called Kanji)
 
-I have withheld some web-scraper-based transliterators for languages like these.
+I have withheld web-scraper-based transliterators for languages like these.
 
 That work to transliterate those languages is not mine,
 and as such it would be wrong for me to provide a means for placing an undue burden on these public online services.

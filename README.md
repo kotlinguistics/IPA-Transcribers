@@ -11,7 +11,7 @@ below](#depth).
 
 ## How To Install
 
-First, add the jitpack repository if youhaven't already:
+First, add the jitpack repository if you haven't already:
 
 `gradle`
 ``` gradle

@@ -3,7 +3,11 @@
 A collection of transcribers (strictly speaking, transliterators) 
 which convert text in a language's native orthography into the International Phonetic Alphabet.
 
-Where possible, a rule-based approach has been taken. Otherwise, publicly-available data and APIs have been used.
+This library uses a replacement-rule based approach, 
+which is capable of transcribing most orthographical information present in a language's writing system.
+
+Some languages are partially or completely incompatible with this approach; [details are 
+below](#depth).
 
 ## Language Support
 
@@ -63,15 +67,14 @@ please do one of the following (Most preferred first):
 
 1. Submit a pull request with the relevant work implemented (*provide code*)
 2. Open an issue, describing *how* a language feature works (*provide language-specific knowledge*),
-3. Just tell me that for input *x*, output *y* is wrong and should instead be *z* (*provide correct example(s)*)
-4. request a feature and I will record your interest.
-    - given enough interest, I may still try to implement other languages or features.
+3. Tell me that for input *x*, output *y* is wrong and should instead be *z* (*provide correct example(s)*)
+4. Request a feature and I will record your interest. Given enough interest, I *may* still try to implement other languages or features.
  
 As of writing this (March 2019), I'm still working on implementing the basic rule-based transcribers
 for all the eligible languages I'll be covering.
 
 Please bear in mind that this project is a massive undertaking for one person;
-It isn't possible for me (or arguably, any *one* person) 
+It isn't possible for me (or arguably, any one person) 
 to have sufficient knowledge of *every* language here to cover it perfectly.
 
 As a result, without external help from **users like you**:
@@ -82,15 +85,16 @@ As a result, without external help from **users like you**:
 
 ## Limitations
 
-### Languages with High Orthographic Depth (Spelling doesn't convey pronunciation)
+### <a name="depth"> Languages with High Orthographic Depth (Spelling doesn't convey pronunciation)</a>
 
-The orthography of some languages bears little or no resemblance to its intended pronunciation.
+The orthography of some languages contains little or no information about its intended pronunciation.
 
 This is called [Orthographic Depth](https://en.wikipedia.org/wiki/Orthographic_depth).
-Languages with high orthographic depth cannot be transliterated (or entirely transliterated) in a purely rule-based way,
+Languages with high orthographic depth cannot be transliterated (or fully transliterated) in a purely rule-based way,
 using only the native orthography. 
 
 Examples of prominent languages with high orthographic depth are
+
 * Chinese (whose writing system is a modified ideography, 
   containing little to no pronunciation information beyond rhyming hints), 
 * Arabic (whose writing system doesn't normally record short vowels), and

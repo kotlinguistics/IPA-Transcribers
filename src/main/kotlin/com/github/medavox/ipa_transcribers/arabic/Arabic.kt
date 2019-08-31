@@ -13,7 +13,7 @@ import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
  * given its standard spelling.
  *
  * But we can at least transcribe the information that arabic DOES provide.*/
-object ArabicRuleBased : RuleBasedTranscriber() {
+object Arabic : RuleBasedTranscriber() {
     override val completionStatus: CompletionStatus = CompletionStatus.IN_PROGRESS
     val rules:List<Rule> = listOf<Rule>(
         Rule("؀", "№"),//NUMBER SIGN

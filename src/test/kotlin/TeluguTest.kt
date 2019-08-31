@@ -1,5 +1,4 @@
-import com.github.medavox.ipa_transcribers.brahmic.TeluguRuleBased
-import com.ibm.icu.lang.UCharacter
+import com.github.medavox.ipa_transcribers.brahmic.Telugu
 import org.junit.Test
 
 class TeluguTest :CoverageTest() {
@@ -24,7 +23,7 @@ class TeluguTest :CoverageTest() {
     fun characterCoverageTest() {
         for(i in unicodeBlock) {
             if (i !in excluded) {
-                codePointTest(i, TeluguRuleBased::transcribe)
+                codePointTest(i, Telugu::transcribe)
             }
         }
     }

@@ -1,4 +1,4 @@
-import com.github.medavox.ipa_transcribers.brahmic.BengaliRuleBased
+import com.github.medavox.ipa_transcribers.brahmic.Bengali
 import org.junit.Test
 
 class BengaliTest : CoverageTest() {
@@ -32,7 +32,7 @@ class BengaliTest : CoverageTest() {
     fun characterCoverageTest() {
         for(i in unicodeBlock) {
             if(i !in excluded) {
-                codePointTest(i, BengaliRuleBased::transcribe)
+                codePointTest(i, Bengali::transcribe)
             }
         }
     }

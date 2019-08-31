@@ -4,7 +4,7 @@ import com.github.medavox.ipa_transcribers.CompletionStatus
 import com.github.medavox.ipa_transcribers.Rule
 import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
 
-object SwahiliRuleBased :RuleBasedTranscriber() {
+object Swahili :RuleBasedTranscriber() {
     override val completionStatus: CompletionStatus = CompletionStatus.SURFACE_LEVEL_COMPLETE
     val rules:List<Rule> = listOf(
 

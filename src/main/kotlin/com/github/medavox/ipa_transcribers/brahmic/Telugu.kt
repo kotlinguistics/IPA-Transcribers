@@ -4,7 +4,7 @@ import com.github.medavox.ipa_transcribers.CompletionStatus
 import com.github.medavox.ipa_transcribers.Rule
 import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
 
-object TeluguRuleBased:RuleBasedTranscriber() {
+object Telugu:RuleBasedTranscriber() {
     override val completionStatus: CompletionStatus = CompletionStatus.INCOMPLETE
 
     private fun l(it:String):String{

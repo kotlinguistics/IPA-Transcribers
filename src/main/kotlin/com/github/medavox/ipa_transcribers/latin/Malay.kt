@@ -4,7 +4,7 @@ import com.github.medavox.ipa_transcribers.CompletionStatus
 import com.github.medavox.ipa_transcribers.Rule
 import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
 
-object MalayRuleBased:RuleBasedTranscriber() {
+object Malay:RuleBasedTranscriber() {
     override val completionStatus: CompletionStatus = CompletionStatus.IN_PROGRESS
     val rules:List<Rule> = listOf(
         Rule("c", "t͡ʃ"),

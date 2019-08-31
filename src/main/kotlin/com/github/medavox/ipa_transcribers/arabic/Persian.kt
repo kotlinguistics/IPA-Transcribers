@@ -24,7 +24,7 @@ import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
  *
  * Even so, this transcriber does the best job possible,
  * given the information that *has* been recorded in the orthography.*/
-object PersianRuleBased:RuleBasedTranscriber() {
+object Persian:RuleBasedTranscriber() {
     override val completionStatus: CompletionStatus = CompletionStatus.IN_PROGRESS
 
     /**Although persian letters have different representations whether they are initial, medial, or final --

@@ -9,7 +9,7 @@ import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
  * meaning that pronunciation rules for single letters and simple digraphs have been implemented,
  * but more complex linguistic rules not directly represented in the orthography are as-yet unimplemented.
  **/
-object BengaliRuleBased : RuleBasedTranscriber() {
+object Bengali : RuleBasedTranscriber() {
     override val completionStatus: CompletionStatus = CompletionStatus.SURFACE_LEVEL_COMPLETE
 
     fun l(it:String):String{

@@ -10,7 +10,7 @@ import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
  *
  * According to Wikipedia, Northern Italy is more densely populated than Southern Italy;
  * therefore this transcriber will favour Northern pronunciations.*/
-object ItalianRuleBased: RuleBasedTranscriber() {
+object Italian: RuleBasedTranscriber() {
     val alphabet = "abcdefghilmnopqrstuvz"
     val vowels = "aeiou"
     val voicedConsonants = "bdglmnrvz"

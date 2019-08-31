@@ -10,7 +10,7 @@ import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
  * Completion status: all purely sound-based characters have been added;
  * however, there are a small number of 'functional' Hiragana & Katakana, which require more complex rules,
  * that are yet to be done.*/
-object JapaneseRuleBasedKatakanaHiraganaOnly:RuleBasedTranscriber() {
+object JapaneseOnlyKatakanaHiragana:RuleBasedTranscriber() {
     override val completionStatus: CompletionStatus = CompletionStatus.INCOMPLETE
     private val rules:List<Rule> = listOf(
         //katakana

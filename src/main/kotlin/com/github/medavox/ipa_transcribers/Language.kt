@@ -67,21 +67,21 @@ prediction: fairly regular, but known to have lots of variants
 //tamil -- Unique brahmic abugida
 
 enum class Language(val neim:String, val transcriber: Transcriber) {
-    ARABIC("Arabic", ArabicRuleBased),
-    BENGALI("Bengali", BengaliRuleBased),
-    ENGLISH("English", EnglishRuleBased),
-    GERMAN("German", GermanRuleBased),
-    HINDI("Hindi", HindiRuleBased),
-    ITALIAN("Italian", ItalianRuleBased),
-    JAPANESE_LIMITED("Japanese/Katakana & Hiragana Only", JapaneseRuleBasedKatakanaHiraganaOnly),
-    KOREAN("Korean", KoreanRuleBased),
-    MARATHI("Marathi", MarathiRuleBased),
-    MALAY("Malay", MalayRuleBased),
-    PERSIAN("Persian", PersianRuleBased),
-    RUSSIAN("Russian",RussianRuleBased),
-    SPANISH_EUROPEAN("Spanish/European", SpanishPeninsularRuleBased),
-    SPANISH_AMERICAN("Spanish/PanAmerican", SpanishPanAmericanRuleBased),
-    SWAHILI("Swahili", SwahiliRuleBased),
-    TELUGU("Telugu", TeluguRuleBased),
-    TURKISH("Turkish", TurkishRuleBased)
+    ARABIC("Arabic", Arabic),
+    BENGALI("Bengali", Bengali),
+    ENGLISH("English", English),
+    GERMAN("German", German),
+    HINDI("Hindi", Hindi),
+    ITALIAN("Italian", Italian),
+    JAPANESE_LIMITED("Japanese/Katakana & Hiragana Only", JapaneseOnlyKatakanaHiragana),
+    KOREAN("Korean", Korean),
+    MARATHI("Marathi", Marathi),
+    MALAY("Malay", Malay),
+    PERSIAN("Persian", Persian),
+    RUSSIAN("Russian",Russian),
+    SPANISH_EUROPEAN("Spanish/European", SpanishPeninsular),
+    SPANISH_AMERICAN("Spanish/PanAmerican", SpanishPanAmerican),
+    SWAHILI("Swahili", Swahili),
+    TELUGU("Telugu", Telugu),
+    TURKISH("Turkish", Turkish)
 }

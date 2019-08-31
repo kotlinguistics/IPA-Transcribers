@@ -3,13 +3,13 @@ package com.github.medavox.ipa_transcribers.latin
 import com.github.medavox.ipa_transcribers.CompletionStatus
 import com.github.medavox.ipa_transcribers.Rule
 import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
-import com.github.medavox.ipa_transcribers.latin.SpanishPanAmericanRuleBased.voicedConsonants
-import com.github.medavox.ipa_transcribers.latin.SpanishPanAmericanRuleBased.normaliseAccents
-import com.github.medavox.ipa_transcribers.latin.SpanishPanAmericanRuleBased.removeStressAccents
+import com.github.medavox.ipa_transcribers.latin.SpanishPanAmerican.voicedConsonants
+import com.github.medavox.ipa_transcribers.latin.SpanishPanAmerican.normaliseAccents
+import com.github.medavox.ipa_transcribers.latin.SpanishPanAmerican.removeStressAccents
 
-object SpanishPeninsularRuleBased: RuleBasedTranscriber() {
+object SpanishPeninsular: RuleBasedTranscriber() {
     override val completionStatus: CompletionStatus = CompletionStatus.COMPLETE
-    val rules:List<Rule> = SpanishPanAmericanRuleBased.rules.map{
+    val rules:List<Rule> = SpanishPanAmerican.rules.map{
         when(it.unconsumedMatcher) {
             Regex("c[ie]") -> it.copy(outputString = {"θ"})
             Regex("z$voicedConsonants") -> it.copy(outputString = {"ð"})

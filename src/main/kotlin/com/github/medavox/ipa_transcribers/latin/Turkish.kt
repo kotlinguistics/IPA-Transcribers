@@ -9,7 +9,7 @@ import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
  *
  * Turkish spelling is extremely regular, because it systematically adopted the latin alphabet in 1929.
  * thanks Atatürk!*/
-object TurkishRuleBased: RuleBasedTranscriber() {
+object Turkish: RuleBasedTranscriber() {
     override val completionStatus: CompletionStatus = CompletionStatus.COMPLETE
     val frontVowels = "eiöü"
     val backVowels = "aâıouû"

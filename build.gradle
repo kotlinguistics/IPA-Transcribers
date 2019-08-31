@@ -28,12 +28,12 @@ compileKotlin {
 compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
 }
-jar {
+
+task fatJar(type: Jar) {
     manifest {
         attributes "Main-Class": "com.github.medavox.ipa_transcribers.Launcher"
     }
-
-    from {
-        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
-    }
+    baseName = rootProject.name+"-standalone"
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
 }

@@ -7,6 +7,8 @@ import com.github.medavox.ipa_transcribers.latin.SpanishPanAmerican.voicedConson
 import com.github.medavox.ipa_transcribers.latin.SpanishPanAmerican.normaliseAccents
 import com.github.medavox.ipa_transcribers.latin.SpanishPanAmerican.removeStressAccents
 
+/**Transcriber for Castillian Spanish,
+ * the official variety spoken in the Iberian Peninsula*/
 object SpanishPeninsular: RuleBasedTranscriber() {
     override val completionStatus: CompletionStatus = CompletionStatus.COMPLETE
     val rules:List<Rule> = SpanishPanAmerican.rules.map{

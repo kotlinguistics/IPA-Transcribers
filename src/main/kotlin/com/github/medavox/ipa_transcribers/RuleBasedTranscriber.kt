@@ -12,14 +12,15 @@ abstract class RuleBasedTranscriber:Transcriber, BaseRules {
     data class UnmatchedOutput(val newWorkingInput:String, val output:(soFar:String) -> String) {
         constructor(newWorkingInput: String, output:String):this(newWorkingInput, {it+output})
     }
-    var unhandledChars:String = ""
-    fun reportOnceAndCopy(it:String):RuleBasedTranscriber.UnmatchedOutput {
-        if(!unhandledChars.contains(it[0])) {
+    private var reportedChars:String = ""
+    fun reportOnceAndCopy(it:String):UnmatchedOutput {
+        if(!reportedChars.contains(it[0])) {
             System.err.println("copying unknown char '${it[0]}'/'${Character.getName(it[0].toInt())}' to output...")
-            unhandledChars += it[0]
+            reportedChars += it[0]
         }
-        return RuleBasedTranscriber.UnmatchedOutput(it.substring(1), it[0].toString())
+        return UnmatchedOutput(it.substring(1), it[0].toString())
     }
+
     val reportAndSkip:(String) -> UnmatchedOutput get() = {
         System.err.println("unknown char '${it[0]}'; skipping...")
         UnmatchedOutput(it.substring(1), "")

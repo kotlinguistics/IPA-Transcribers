@@ -18,6 +18,7 @@ group ="com.github.medavox"
 version = "0.2"
 
 java {
+    targetCompatibility = JavaVersion.VERSION_1_8
     sourceCompatibility = JavaVersion.VERSION_1_8
 }
 //sourceCompatibility = JavaVersion.VERSION_1_8

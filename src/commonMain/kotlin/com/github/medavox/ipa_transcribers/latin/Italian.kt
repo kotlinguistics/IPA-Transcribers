@@ -76,9 +76,9 @@ object Italian: RuleBasedTranscriber() {
         Rule("[$consonants]", "s", "s"),
         //    Before a voiceless consonant (e.g. raspa /ˈraspa/)
         Rule("s[$unvoicedConsonants]", "s", 1),
-        //todo:At the start of the second part of a compound word (e.g.
-        //      affittasi, disotto, girasole, prosegue, risaputo, unisono, preservare, riservare, reggiseno).
-        //      These words are formed by adding a prefix to a word beginning with /s/
+        //todo:At the start of the second part of a compound word
+        //    (e.g. affittasi, disotto, girasole, prosegue, risaputo, unisono, preservare, riservare, reggiseno).
+        //    These words are formed by adding a prefix to a word beginning with /s/
 
         //The voiced /z/ occurs before voiced consonants (e.g. sbranare /zbraˈnare/).
         Rule("s[$voicedConsonants]", "z", 1),

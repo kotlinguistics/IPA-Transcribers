@@ -10,7 +10,7 @@ generated/
 .idea/**/tasks.xml
 .idea/dictionaries
 
-*.html
+readme.html
 .DS_Store
 
 # Sensitive or high-churn files:

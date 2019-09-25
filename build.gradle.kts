@@ -29,15 +29,33 @@ repositories {
 
 kotlin {
     jvm()
+    js {
+        browser()
+    }
 }
 
 kotlin.sourceSets["jvmMain"].dependencies {
     implementation(kotlin("stdlib", KotlinCompilerVersion.VERSION))
-    //testImplementation(group = "junit", name = "junit", version = "4.12")
-    //testImplementation(("com.ibm.icu:icu4j:62.1"))//for getting the most up-to-date list of names for unicode characters
     //implementation("commons-cli:commons-cli:1.4")
     implementation("info.picocli:picocli:4.0.1")
 }
+
+kotlin.sourceSets["jsMain"].dependencies {
+    implementation(kotlin("stdlib-js"))
+    implementation("org.jetbrains.kotlinx:kotlinx-html-js:0.6.12")
+}
+
+kotlin.sourceSets["commonMain"].dependencies {
+    implementation(kotlin("stdlib-common"))
+    implementation("org.jetbrains.kotlinx:kotlinx-html-common:0.6.12")
+}
+
+kotlin.sourceSets["commonTest"].dependencies {
+    implementation("junit:junit:4.12")
+    implementation(("com.ibm.icu:icu4j:62.1"))//for getting the most up-to-date list of names for unicode characters
+}
+
+//kotlin.sourceSets["androidMain"]
 
 //compileKotlin.kotlinOptions.jvmTarget = "1.8"
 

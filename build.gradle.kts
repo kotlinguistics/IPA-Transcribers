@@ -4,12 +4,14 @@ import org.jetbrains.kotlin.config.KotlinCompilerVersion
 //import org.gradle.jvm.tasks.Jar
 
 plugins {
-    `kotlin-dsl`
+    kotlin("multiplatform") version "1.3.40"
     java
+    //`kotlin-dsl`
     //id("java")
     //id ("org.jetbrains.kotlin.jvm") version "1.3.10"
     id ("org.jetbrains.dokka") version "0.9.18"
-    kotlin("jvm") version "1.3.40"
+    //kotlin("jvm") version "1.3.40"
+
 }
 
 group ="com.github.medavox"
@@ -25,10 +27,14 @@ repositories {
     jcenter()
 }
 
-dependencies {
+kotlin {
+    jvm()
+}
+
+kotlin.sourceSets["jvmMain"].dependencies {
     implementation(kotlin("stdlib", KotlinCompilerVersion.VERSION))
-    testImplementation(group = "junit", name = "junit", version = "4.12")
-    testImplementation(("com.ibm.icu:icu4j:62.1"))//for getting the most up-to-date list of names for unicode characters
+    //testImplementation(group = "junit", name = "junit", version = "4.12")
+    //testImplementation(("com.ibm.icu:icu4j:62.1"))//for getting the most up-to-date list of names for unicode characters
     //implementation("commons-cli:commons-cli:1.4")
     implementation("info.picocli:picocli:4.0.1")
 }
@@ -37,6 +43,21 @@ dependencies {
 
 //compileTestKotlin.kotlinOptions.jvmTarget = "1.8"
 
+val run by tasks.creating(JavaExec::class) {
+    group = "application"
+    main = "com.jetbrains.handson.introMpp.MainKt"
+    kotlin {
+        val main = targets["jvm"].compilations["main"]
+        dependsOn(main.compileAllTaskName)
+        classpath(
+            { main.output.allOutputs.files },
+            { configurations["jvmRuntimeClasspath"] }
+        )
+    }
+    ///disable app icon on macOS
+    systemProperty("java.awt.headless", "true")
+}
+/*
 val fatJar = task("fatJar", type = Jar::class) {
 //task fatJar(type: Jar) {
     manifest {
@@ -50,4 +71,4 @@ val fatJar = task("fatJar", type = Jar::class) {
     //with jar
     from(configurations.runtimeClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
     with(tasks.jar.get() as CopySpec)
-}
+}*/

@@ -76,7 +76,7 @@ val run by tasks.creating(JavaExec::class) {
     ///disable app icon on macOS
     systemProperty("java.awt.headless", "true")
 }
-/*
+
 val fatJar = task("fatJar", type = Jar::class) {
 //task fatJar(type: Jar) {
     manifest {
@@ -90,4 +90,4 @@ val fatJar = task("fatJar", type = Jar::class) {
     //with jar
     from(configurations.runtimeClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
     with(tasks.jar.get() as CopySpec)
-}*/
+}

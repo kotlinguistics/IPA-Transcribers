@@ -45,8 +45,7 @@ class Gui : Application() {
         errors.text
 
         val menuButton = MenuButton()
-        var selection: Language =
-            Language.ENGLISH
+        var selection: Language = Language.ENGLISH
         val languagesMenuItems:Array<MenuItem> = Language.values().
             map{
                 val m = MenuItem(it.neim)

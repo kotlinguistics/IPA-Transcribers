@@ -1,5 +1,8 @@
 package com.github.medavox.ipa_transcribers
 
+import com.github.medavox.err
+import com.github.medavox.unicodeName
+
 /***This API takes a context-free approach:
  * Regex is matched to the start of the string only,
  * and the output String is not interpreted as Regex.
@@ -15,19 +18,19 @@ abstract class RuleBasedTranscriber:Transcriber, BaseRules {
     private var reportedChars:String = ""
     fun reportOnceAndCopy(it:String):UnmatchedOutput {
         if(!reportedChars.contains(it[0])) {
-            System.err.println("copying unknown char '${it[0]}'/'${Character.getName(it[0].toInt())}' to output...")
+            err.println("copying unknown char '${it[0]}'/'${it[0].toInt().unicodeName}' to output...")
             reportedChars += it[0]
         }
         return UnmatchedOutput(it.substring(1), it[0].toString())
     }
 
     val reportAndSkip:(String) -> UnmatchedOutput get() = {
-        System.err.println("unknown char '${it[0]}'; skipping...")
+        err.println("unknown char '${it[0]}'; skipping...")
         UnmatchedOutput(it.substring(1), "")
     }
 
     val reportAndCopy:(String) -> UnmatchedOutput get() = {
-        System.err.println("copying unknown char '${it[0]}' to output...")
+        err.println("copying unknown char '${it[0]}' to output...")
         UnmatchedOutput(it.substring(1), it[0].toString())
     }
 

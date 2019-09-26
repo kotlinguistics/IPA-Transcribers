@@ -3,7 +3,7 @@ package com.github.medavox.ipa_transcribers.asian_unique
 import com.github.medavox.ipa_transcribers.CompletionStatus
 import com.github.medavox.ipa_transcribers.Rule
 import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
-import java.text.Normalizer
+import com.github.medavox.normaliseNfd
 
 /**Status:COMPLETE
  * All the 'modern' combining jamo have been transcribed.
@@ -122,6 +122,6 @@ object KoreanHangeul: RuleBasedTranscriber() {
     override fun transcribe(nativeText: String): String {
         //convert older hangul codepoints into their modern combining forms
         //thanks to https://stackoverflow.com/a/41311169
-        return Normalizer.normalize(nativeText, Normalizer.Form.NFD).processWithRules(rules, ::reportOnceAndCopy)
+        return nativeText.normaliseNfd().processWithRules(rules, ::reportOnceAndCopy)
     }
 }

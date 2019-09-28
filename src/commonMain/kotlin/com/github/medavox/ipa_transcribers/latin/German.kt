@@ -1,6 +1,7 @@
 package com.github.medavox.ipa_transcribers.latin
 
 import com.github.medavox.ipa_transcribers.*
+import com.github.medavox.ipa_transcribers.latin.German.Vowels.*
 
 /**This transcriber follows pronunciation in Standard German, as spoken in Germany.*/
 object German: RuleBasedTranscriber() {
@@ -8,69 +9,76 @@ object German: RuleBasedTranscriber() {
 
     val vowels = "aeiouäöü"
     val consonants = "bcdfghjklmnpqrstvwxyz"
-    val rules:List<Rule> = listOf(
 
-        //vowels, second attempt
+    //A doubled consonant after a vowel indicates that the vowel is short,
+    //while a single consonant often indicates the vowel is long, e.g. Kamm ('comb') has a short vowel /kam/,
+    //while kam ('came') has a long vowel /kaːm/. Two consonants are not doubled: k, which is replaced by ck
+    // (until the spelling reform of 1996, however, ck was divided across a line break as k-k),
+    //and z, which is replaced by tz.
+    //In loanwords, kk (which may correspond with cc in the original spelling) and zz can occur.
+    val vowelShorteningConsonantPairs:String = "(ck|ff|ll|mm|nn|pp|rr|ss|tt|tz)"
+    /**
+     * Short Vowels
+    a: [a] as in Wasser "water"
+    ä: [ɛ] as in Männer "men"
+    e: [ɛ] as in Bett "bed"; unstressed [ə] as in Ochse "ox"
+    i: [ɪ] as in Mittel "means"
+    o: [ɔ] as in kommen "to come"
+    ö: [œ] as in Göttin "goddess"
+    u: [ʊ] as in Mutter "mother"
+    ü: [ʏ] as in Müller "miller"
+    y: [ʏ] as in Dystrophie "dystrophy"
 
-        //Vowel Length
+    Long vowels
 
-        //Even though vowel length is phonemic in German, it is not consistently represented.
-        // However, there are different ways of identifying long vowels:
+    generally pronounced with greater tenseness than short vowels.
+    a, ah, and aa: [aː]
+    ä, äh: [ɛː] or [eː]
+    e, eh, and ee: [eː]
+    i, ie, ih, and ieh: [iː]
+    o, oh, and oo: [oː]
+    ö, öh: [øː]
+    u and uh: [uː]
+    ü and üh: [yː]
+    y: [yː]
+     * */
+    private enum class Vowels(val short:String, val long:String) {
+        A("a", "aː"),
+        Ä("ɛ", "ɛː"),
+        E("ɛ", "eː"),
+        I("ɪ", "iː"),
+        O("ɔ", "oː"),
+        Ö("œ", "øː"),
+        U("ʊ", "uː"),
+        Ü_Y("ʏ", "yː");
 
-        //A vowel in an open syllable (a free vowel) is long, for instance in ge-ben ('to give'), sa-gen ('to say').
-        //It is rare to see a bare i used to indicate a long vowel /iː/.
-        //Instead, the digraph ie is used, for instance in Liebe ('love'), hier ('here').
-        Rule("ie", "iː"),
-        //Occasionally – typically in word-final position – this digraph <ie> represents /iː.ə/
-        //as in the plural noun Knie /kniː.ə/ ('knees') (cf. singular Knie /kniː/).
-        //In Fraktur, where capital I and J are identical or near-identical J {\displaystyle {\mathfrak {J}}}
-        //{\displaystyle {\mathfrak {J}}}, the combinations Ie and Je are confusable;
-        //hence the combination Ie is not used at the start of a word, for example Igel ('hedgehog'), Ire ('Irishman').
-
-        //A silent h indicates a long vowel in certain cases. That h derives from an old /x/ in some words,
-        //for instance sehen ('to see') zehn ('ten'), but in other words it has no etymological justification,
-        //for instance gehen ('to go') or mahlen ('to mill'). Occasionally a digraph can be redundantly followed by h,
-        //either due to analogy, such as sieht ('sees', from sehen) or etymology, such as Vieh ('cattle', MHG vihe),
-        //rauh ('rough', pre-1996 spelling, now written rau, MHG ruh).
-
-        //The letters a, e, o are doubled in a few words that have long vowels, for instance Saat ('seed'),
-        //See ('sea'/'lake'), Moor ('moor').
-        Rule("aa", "aː"),
-        Rule("ee", "eː"),
-        Rule("oo", "oː"),
-
-        //A doubled consonant after a vowel indicates that the vowel is short,
-        //while a single consonant often indicates the vowel is long, e.g. Kamm ('comb') has a short vowel /kam/,
-        //while kam ('came') has a long vowel /kaːm/. Two consonants are not doubled: k, which is replaced by ck
-        // (until the spelling reform of 1996, however, ck was divided across a line break as k-k),
-        //and z, which is replaced by tz.
-        //In loanwords, kk (which may correspond with cc in the original spelling) and zz can occur.
-        //Consonants are sometimes doubled in writing to indicate the preceding vowel is to be pronounced as a short vowel.
-        //todo Rule("[$consonants]\\1"),
-
-        //For different consonants and for sounds represented by more than one letter (ch and sch) after a vowel,
-        //no clear rule can be given, because they can appear after long vowels,
-        // yet are not redoubled if belonging to the same stem, e.g. Mond /moːnt/ 'moon', Hand /hant/ 'hand'.
-        LookbackRule(" ", "mond( |$)", "moːnt", 4),
-        LookbackRule("( |^)", "hand( |$)", "hant", 4),
-        //On a stem boundary, reduplication usually takes place, e.g., nimm-t 'takes';
-        // however in fixed, no longer productive derivatives this too can be lost,
-        // e.g., Geschäft /ɡəˈʃɛft/ 'business' despite schaffen 'to get something done'.
-
-        //ß indicates that the preceding vowel is long, e.g. Straße 'street' vs. Masse 'amount'.
-        //In addition to that, texts written before the 1996 spelling reform also use ß at the ends of words and before
-        //consonants, e.g. naß 'wet' and mußte 'had to' (after the reform spelled nass and musste),
-        //so vowel length in these positions could not be detected by the ß, cf. Maß 'measure' and fußte 'was based'
-        // (after the reform still spelled Maß and fußte).
-
-        //A vowel usually represents a long sound if the vowel in question occurs:
-        //    as the final letter (except for e)
-        //    followed by a single consonant as in bot "offered"
-        //    before a single consonant followed by a vowel as in Wagen "car"
+        companion object {
+            fun from(vowel: String): Vowels = when (vowel) {
+                "a" -> A
+                "e" -> E
+                "i" -> I
+                "o" -> O
+                "u" -> U
+                "ä" -> Ä
+                "ö" -> Ö
+                "ü", "y" -> Ü_Y
+                else -> throw IllegalArgumentException(
+                    "only the following Strings of length 1 are valid input to this method:" +
+                            "aeiouäöü"
+                )
+            }
+        }
+    }
+    val rules:List<IRule> = listOf(
 
         // Most one-syllable words that end in a single consonant are pronounced with long vowels,
         // but there are some exceptions such as an, das, es, in, mit, and von.
         LookbackRule(" ", "an ", "an", 2),
+        LookbackRule(" ", "das ", "das", 3),
+        LookbackRule(" ", "es ", "ɛs", 2),
+        LookbackRule(" ", "in ", "ɪn", 2),
+        LookbackRule(" ", "mit ", "mɪt", 3),
+        LookbackRule(" ", "von ", "fɔn", 3),
 
         // The e in the ending -en is often silent, as in bitten "to ask, request".
         LookbackRule("[^ ]", "en( |$)", "̩n", 2),//the syllabic n is not silent
@@ -81,7 +89,8 @@ object German: RuleBasedTranscriber() {
         // despite having just a single consonant on the end.
         LookbackRule("[^ ]", "el( |$)", "el", 2),
 
-        Rule(Regex("([$vowels])h"), "$1"),
+        //VOWELS, second attempt
+        //=====================
 
         //Short Vowels
         //    a: [a] as in Wasser "water"
@@ -106,6 +115,91 @@ object German: RuleBasedTranscriber() {
         //    u and uh: [uː]
         //    ü and üh: [yː]
         //    y: [yː]
+
+        //Even though vowel length is phonemic in German, it is not consistently represented.
+        // However, there are different ways of identifying long vowels:
+
+        //It is rare to see a bare i used to indicate a long vowel /iː/.
+        //Instead, the digraph ie is used, for instance in Liebe ('love'), hier ('here').
+        Rule("ie", "iː"),
+        //Occasionally – typically in word-final position – this digraph <ie> represents /iː.ə/
+        //as in the plural noun Knie /kniː.ə/ ('knees') (cf. singular Knie /kniː/).
+        //In Fraktur, where capital I and J are identical or near-identical J {\displaystyle {\mathfrak {J}}}
+        //{\displaystyle {\mathfrak {J}}}, the combinations Ie and Je are confusable;
+        //hence the combination Ie is not used at the start of a word, for example Igel ('hedgehog'), Ire ('Irishman').
+
+        //The letters a, e, o are doubled in a few words that have long vowels, for instance Saat ('seed'),
+        //See ('sea'/'lake'), Moor ('moor').
+        Rule("aa", A.long),
+        Rule("ee", E.long),
+        Rule("oo", O.long),
+
+        //A doubled consonant after a vowel indicates that the vowel is short,
+        //while a single consonant often indicates the vowel is long, e.g. Kamm ('comb') has a short vowel /kam/,
+        //while kam ('came') has a long vowel /kaːm/. Two consonants are not doubled: k, which is replaced by ck
+        // (until the spelling reform of 1996, however, ck was divided across a line break as k-k),
+        //and z, which is replaced by tz.
+        //In loanwords, kk (which may correspond with cc in the original spelling) and zz can occur.
+        //Consonants are sometimes doubled in writing to indicate the preceding vowel is to be pronounced as a short vowel.
+        Rule("a$vowelShorteningConsonantPairs", A.short, 1),
+        Rule("ä$vowelShorteningConsonantPairs", Ä.short, 1),
+        Rule("e$vowelShorteningConsonantPairs", E.short, 1),
+        Rule("i$vowelShorteningConsonantPairs", I.short, 1),
+        Rule("o$vowelShorteningConsonantPairs", O.short, 1),
+        Rule("ö$vowelShorteningConsonantPairs", Ö.short, 1),
+        Rule("u$vowelShorteningConsonantPairs", U.short, 1),
+        Rule("ü$vowelShorteningConsonantPairs", Ü_Y.short, 1),
+        Rule("y$vowelShorteningConsonantPairs", Ü_Y.short, 1),
+
+        //For different consonants and for sounds represented by more than one letter (ch and sch) after a vowel,
+        //no clear rule can be given, because they can appear after long vowels,
+        // yet are not redoubled if belonging to the same stem, e.g. Mond /moːnt/ 'moon', Hand /hant/ 'hand'.
+        LookbackRule(" ", "mond( |$)", "moːnt", 4),
+        LookbackRule("( |^)", "hand( |$)", "hant", 4),
+        //On a stem boundary, reduplication usually takes place, e.g., nimm-t 'takes';
+        // however in fixed, no longer productive derivatives this too can be lost,
+        // e.g., Geschäft /ɡəˈʃɛft/ 'business' despite schaffen 'to get something done'.
+
+        //ß indicates that the preceding vowel is long, e.g. Straße 'street' vs. Masse 'amount'.
+        //In addition to that, texts written before the 1996 spelling reform also use ß at the ends of words and before
+        //consonants, e.g. naß 'wet' and mußte 'had to' (after the reform spelled nass and musste),
+        //so vowel length in these positions could not be detected by the ß, cf. Maß 'measure' and fußte 'was based'
+        // (after the reform still spelled Maß and fußte).
+
+        //A vowel usually represents a long sound if the vowel in question occurs:
+        //=======================================================================
+        //as the final letter (except for e)
+        Rule("a(^| )", A.long),
+        Rule("ä(^| )", Ä.long),
+        Rule("i(^| )", I.long),
+        Rule("o(^| )", O.long),
+        Rule("ö(^| )", Ö.long),
+        Rule("u(^| )", U.long),
+        Rule("ü(^| )", Ü_Y.long),
+
+        //e at the end of a word is pronounced as a schwa
+        Rule("e(^| )", "ə"),
+
+        //    followed by a single consonant as in bot "offered"
+        //    before a single consonant followed by a vowel as in Wagen "car"
+        Rule("a[$consonants]{1}(^| |[$vowels])", A.long),
+        Rule("ä[$consonants]{1}(^| |[$vowels])", Ä.long),
+        Rule("e[$consonants]{1}(^| |[$vowels])", E.long),
+        Rule("i[$consonants]{1}(^| |[$vowels])", I.long),
+        Rule("o[$consonants]{1}(^| |[$vowels])", O.long),
+        Rule("ö[$consonants]{1}(^| |[$vowels])", Ö.long),
+        Rule("u[$consonants]{1}(^| |[$vowels])", U.long),
+        Rule("ü[$consonants]{1}(^| |[$vowels])", Ü_Y.long),
+
+        //A silent h indicates a long vowel in certain cases. That h derives from an old /x/ in some words,
+        //for instance sehen ('to see') zehn ('ten'), but in other words it has no etymological justification,
+        //for instance gehen ('to go') or mahlen ('to mill'). Occasionally a digraph can be redundantly followed by h,
+        //either due to analogy, such as sieht ('sees', from sehen) or etymology, such as Vieh ('cattle', MHG vihe),
+        //rauh ('rough', pre-1996 spelling, now written rau, MHG ruh).
+        CapturingRule(Regex("([$vowels])h"), {soFar, groups -> soFar+Vowels.from(groups[1]!!.value).long}, 2),
+
+        //DIPHTHONGS
+        //==========
         Rule("au", "aʊ"),
         Rule("(eu|äu)", "ɔʏ"),
         Rule("(ei|ai|ey|ay)", "aɪ"),
@@ -132,13 +226,10 @@ object German: RuleBasedTranscriber() {
         Rule("ee", "iː"),
         Rule("ei", "a̯ɪ"),
         Rule("or", "ɔː"),
-        Rule("ä", "ɛ"),
-        Rule("ö", "?????"),
-        Rule("ü", "y"),
-        Rule("u", "ʊ"),
-        Rule("i", "ɪ"),
         */
-        //consonants
+
+        //CONSONANTS
+        //==========
 
         LookbackRule("sch", "w", "f"),
         Rule("w", "v"),
@@ -237,14 +328,17 @@ object German: RuleBasedTranscriber() {
         return nativeText.toLowerCase().normaliseUmlauts().processWithRules(rules, ::reportOnceAndCopy)
     }
 
-    /**Converts umlauted vowels in all their possible representations into
-     *  the same integrated characters used in all Rules.*/
+    /**Converts umlaut vowels in all their possible representations into
+     *  the same integrated characters used in all Rules.
+     *
+     *  Umlauts in German don't function as accents; they mark entirely different letters.
+     *  Therefore, we normalise to treating (a / ä, o / ö, u / ü) as separate letters.*/
     private fun String.normaliseUmlauts():String {
         return if(contains("ä") || contains("ö") || contains("ü") ) {
             this
         }else {
             this
-                .replace("ä", "ä")//a-thn-umlaut
+                .replace("ä", "ä")//a-then-umlaut
                 .replace("̈a", "ä")//umlaut-then-a
                 .replace("ae", "ä")
 

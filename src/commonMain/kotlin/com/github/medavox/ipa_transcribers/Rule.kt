@@ -127,8 +127,17 @@ class EverythingRule(consumedMatcher:Regex?, unconsumedMatcher: Regex,
 /**Modify (revise) the output string so far.
  * Useful when a later character modifies the pronunciation of an earlier one.
  * */
-class RevisingRule(match:String, outputString:(soFar:String) -> String, lettersUsed:Int? = null)
-    :IRule(null, Regex(match), { s, _ -> outputString(s) }, lettersUsed)
+class RevisingRule(match:Regex, outputString:(soFar:String) -> String, lettersUsed:Int? = null)
+    :IRule(null, match, { s, _ -> outputString(s) }, lettersUsed) {
+    constructor(match:String, outputString:(soFar:String) -> String, lettersUsed:Int? = null)
+    :this(Regex(match), outputString, lettersUsed)
+}
+
+class CapturingRule(match:Regex, outputString: (soFar:String, theMatches:MatchGroupCollection) -> String,
+                    lettersConsumed: Int?=null):IRule(null, match, outputString, lettersConsumed) {
+    constructor(match: String, outputString: (soFar:String, theMatches:MatchGroupCollection) -> String,
+                lettersConsumed: Int?=null):this(Regex(match), outputString, lettersConsumed)
+}
 
 /**Match against BOTH the start of the input string,
  * AND the end of the already-consumed string - the input characters that have already been matched so far.*/

@@ -1,8 +1,6 @@
 package com.github.medavox.ipa_transcribers.brahmic
 
-import com.github.medavox.ipa_transcribers.CompletionStatus
-import com.github.medavox.ipa_transcribers.Rule
-import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
+import com.github.medavox.ipa_transcribers.*
 
 /**Completion Status: SURFACE-LEVEL COMPLETE
  *
@@ -21,7 +19,7 @@ object Bengali : RuleBasedTranscriber() {
     // meaning we don't need any complex stack-based parsing; at least not for this.
     //todo: conjunct consonants (consonant cluster letters)
     //todo: inherent vowel dropping
-    val rules:List<Rule> = listOf(
+    val rules:List<IRule> = listOf(
         //post-reform consonants -
         //from a character standpoint they are digraphs, using a nuqta ় ,
         //so apply them first
@@ -61,43 +59,43 @@ object Bengali : RuleBasedTranscriber() {
 
         //special letters
         Rule("ৎ", "̪t"), //final T
-        Rule("্", {l(it)}), //suppresses inherent vowel
+        RevisingRule("্", {l(it)}), //suppresses inherent vowel
 
         //Vowels
         Rule("অ", "ɔ"),
 
         Rule("[ইঈ]", "i"),
-        Rule("(ি|ী)", {l(it)+"i"}),
+        RevisingRule("(ি|ী)", {l(it)+"i"}),
 
         Rule("[ঊউ]", "u"),
-        Rule("(ু|ূ)", {l(it)+"u"}),
+        RevisingRule("(ু|ূ)", {l(it)+"u"}),
 
         Rule("ঋ", "ri"),
-        Rule("ৃ", {l(it)+"ri"}),
+        RevisingRule("ৃ", {l(it)+"ri"}),
 
 
         Rule("আ", "a"),
-        Rule("া", {l(it)+"ri"}),
+        RevisingRule("া", {l(it)+"ri"}),
 
         //complex vowels
         Rule("ঐ", "oi"),
-        Rule("ৈ", {l(it)+"oi"}),
+        RevisingRule("ৈ", {l(it)+"oi"}),
 
         Rule("ঔ", "ou"),
-        Rule("ৌ", {l(it)+"ou"}),
+        RevisingRule("ৌ", {l(it)+"ou"}),
 
         Rule("এ", "e"),
-        Rule("ে", {l(it)+"e"}),
+        RevisingRule("ে", {l(it)+"e"}),
 
         Rule("ও", "ʊ"),
-        Rule("ো", {l(it)+"ʊ"}),
+        RevisingRule("ো", {l(it)+"ʊ"}),
 
         //"deprecated" vowels
         Rule("ঌ", "li"),//supposed to have been removed from the abugida, but you never know...
-        Rule("ৢ", {l(it)+"li"}),
+        RevisingRule("ৢ", {l(it)+"li"}),
 
         Rule("ৡ", "lːi"),//supposed to have been removed from the abugida, but you never know...
-        Rule("ৣ", {l(it)+"lːi"}),
+        RevisingRule("ৣ", {l(it)+"lːi"}),
 
         Rule("ৠ", "rːi"),//supposed to have been removed from the abugida, but you never know...
 

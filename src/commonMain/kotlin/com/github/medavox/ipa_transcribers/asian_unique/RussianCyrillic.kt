@@ -1,8 +1,6 @@
 package com.github.medavox.ipa_transcribers.asian_unique
 
-import com.github.medavox.ipa_transcribers.CompletionStatus
-import com.github.medavox.ipa_transcribers.Rule
-import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
+import com.github.medavox.ipa_transcribers.*
 
 /**Completion state: vowel reduction in unstressed syllables not handled yet.
  * However, these require stress info, and by all accounts,
@@ -43,19 +41,19 @@ object RussianCyrillic:RuleBasedTranscriber() {
         Rule("Y", "у"),
         Rule("X", "х")
     )
-    val rules:List<Rule> = listOf(
+    val rules:List<IRule> = listOf(
         Rule("а", "a"),
         Rule("б", "b"), //  or /bʲ/
         Rule("в", "v"), //  or /vʲ/
         Rule("г", "ɡ"), //  or /gʲ/
         Rule("д", "d"), //  or /dʲ/
-        Rule("[$softenableConsonants]", "е", "ʲe"), //, / ʲe/ or /e/
+        LookbackRule("[$softenableConsonants]", "е", "ʲe"), //, / ʲe/ or /e/
         Rule("е", "je"), //, / ʲe/ or /e/
-        Rule("[$softenableConsonants]", "ё", "ʲo"),
+        LookbackRule("[$softenableConsonants]", "ё", "ʲo"),
         Rule("ё", "jo"),
         Rule("ж", "ʐ"),
         Rule("з", "z"), // or /zʲ/
-        Rule("[$softenableConsonants]", "и", "ʲi"), //, / ʲi/, or /ɨ/
+        LookbackRule("[$softenableConsonants]", "и", "ʲi"), //, / ʲi/, or /ɨ/
         Rule("и", "i"), //, / ʲi/, or /ɨ/
         Rule("й", "j"),
         Rule("к", "k"), //  or /kʲ/
@@ -76,11 +74,11 @@ object RussianCyrillic:RuleBasedTranscriber() {
         Rule("щ", "ɕɕ"),
         Rule("ъ", ""), //"hard sign" silent, prevents palatalization of the preceding consonant
         Rule("ы", "ɨ"),
-        Rule("[$softenableConsonants]", "ь", "ʲ"),//"soft sign" silent, palatalizes the preceding consonant
+        LookbackRule("[$softenableConsonants]", "ь", "ʲ"),//"soft sign" silent, palatalizes the preceding consonant
         Rule("э", "e"), //
-        Rule("[$softenableConsonants]", "ю", "ʲu"), //  or / ʲu/
+        LookbackRule("[$softenableConsonants]", "ю", "ʲu"), //  or / ʲu/
         Rule("ю", "ju"), //  or / ʲu/
-        Rule("[$softenableConsonants]", "я", "ʲa"), // ja or / ʲa/
+        LookbackRule("[$softenableConsonants]", "я", "ʲa"), // ja or / ʲa/
         Rule("я", "ja") // ja or / ʲa/
     )+westernPunctuation
     override fun transcribe(nativeText: String): String {

@@ -1,7 +1,7 @@
 package com.github.medavox.ipa_transcribers.brahmic
 
 import com.github.medavox.ipa_transcribers.CompletionStatus
-import com.github.medavox.ipa_transcribers.Rule
+import com.github.medavox.ipa_transcribers.IRule
 import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
 
 /**Status: surface-level complete
@@ -60,7 +60,7 @@ object Hindi:RuleBasedTranscriber() {
     //In case of four letter words, schwa deletion occurs at the second letter and at the word end.
     //
     //Ex. Bartan, Salman, hardam, barsaat.
-    val rules:List<Rule> = /*listOf(
+    val rules:List<IRule> = /*listOf(
         //schwa deletion 
             Rule(Regex("[$consonants]"), {lastWasConsonant = true; it}, 0)
 

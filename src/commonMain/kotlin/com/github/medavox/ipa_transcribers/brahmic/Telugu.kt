@@ -1,8 +1,6 @@
 package com.github.medavox.ipa_transcribers.brahmic
 
-import com.github.medavox.ipa_transcribers.CompletionStatus
-import com.github.medavox.ipa_transcribers.Rule
-import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
+import com.github.medavox.ipa_transcribers.*
 
 object Telugu:RuleBasedTranscriber() {
     override val completionStatus: CompletionStatus = CompletionStatus.INCOMPLETE
@@ -11,7 +9,7 @@ object Telugu:RuleBasedTranscriber() {
         return if(it.endsWith("a")) it.substring(0, it.length-1) else it
     }
 
-    private val rules:List<Rule> = listOf(
+    private val rules:List<IRule> = listOf(
         //consonants
         Rule("క", "ka"),
         Rule("ఖ", "kʰa"),
@@ -50,24 +48,24 @@ object Telugu:RuleBasedTranscriber() {
         Rule("ఱ", "ɽa"),
 
         //vowels
-        Rule("[అ]", {l(it)+"a"}),
-        Rule("[ఆా]", {l(it)+"aː"}),
-        Rule("[ఇి]", {l(it)+"i"}),
-        Rule("[ఈీ]", {l(it)+"iː"}),
-        Rule("[ఉు]", {l(it)+"u"}),
-        Rule("[ఊూ]", {l(it)+"uː"}),
-        Rule("[ఋృ]", {l(it)+"ru"}),
-        Rule("[ౠౄ]", {l(it)+"ruː"}),
-        Rule("[ఌౢ]", {l(it)+"alu"}),
-        Rule("[ౡౣ]", {l(it)+"alu:"}),
-        Rule("[ఎె]", {l(it)+"e"}),
-        Rule("[ఏే]", {l(it)+"eː"}),
-        Rule("[ఐై]", {l(it)+"aj"}),
-        Rule("[ఒొ]", {l(it)+"o"}),
-        Rule("[ఓో]", {l(it)+"oː"}),
-        Rule("[ఔౌ]", {l(it)+"aw"}),
+        RevisingRule("[అ]", {l(it)+"a"}),
+        RevisingRule("[ఆా]", {l(it)+"aː"}),
+        RevisingRule("[ఇి]", {l(it)+"i"}),
+        RevisingRule("[ఈీ]", {l(it)+"iː"}),
+        RevisingRule("[ఉు]", {l(it)+"u"}),
+        RevisingRule("[ఊూ]", {l(it)+"uː"}),
+        RevisingRule("[ఋృ]", {l(it)+"ru"}),
+        RevisingRule("[ౠౄ]", {l(it)+"ruː"}),
+        RevisingRule("[ఌౢ]", {l(it)+"alu"}),
+        RevisingRule("[ౡౣ]", {l(it)+"alu:"}),
+        RevisingRule("[ఎె]", {l(it)+"e"}),
+        RevisingRule("[ఏే]", {l(it)+"eː"}),
+        RevisingRule("[ఐై]", {l(it)+"aj"}),
+        RevisingRule("[ఒొ]", {l(it)+"o"}),
+        RevisingRule("[ఓో]", {l(it)+"oː"}),
+        RevisingRule("[ఔౌ]", {l(it)+"aw"}),
 
-        Rule("్", {l(it)}),
+        RevisingRule("్", {l(it)}),
 
         Rule("","")
     )

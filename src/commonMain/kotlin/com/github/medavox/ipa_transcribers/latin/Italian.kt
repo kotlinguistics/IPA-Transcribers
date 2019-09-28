@@ -1,8 +1,6 @@
 package com.github.medavox.ipa_transcribers.latin
 
-import com.github.medavox.ipa_transcribers.CompletionStatus
-import com.github.medavox.ipa_transcribers.Rule
-import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
+import com.github.medavox.ipa_transcribers.*
 
 /**Italian has something called Syntactic gemination, which is a grammar-dependent doubling of a consonant.
  * Therefore, this transcriber cannot achieve perfect results with an only regular expression-based approach.
@@ -20,7 +18,7 @@ object Italian: RuleBasedTranscriber() {
     val frontVowels = "ie"
     val nonFrontVowels = "aou"
     override val completionStatus: CompletionStatus = CompletionStatus.IN_PROGRESS
-    val rules = listOf<Rule>(
+    val rules = listOf<IRule>(
         //c & g rules
         Rule("ch[$frontVowels]", "k", 2),
         Rule("cc[$frontVowels]", "ttʃ", 2),
@@ -71,9 +69,9 @@ object Italian: RuleBasedTranscriber() {
         //
         //The voiceless /s/ occurs:
         //    At the start of a word before a vowel (e.g. Sara /ˈsara/) or a voiceless consonant (e.g. spuntare /spunˈtare/)
-        Rule("(| )", "s([$vowels]|$unvoicedConsonants)", "s", 1),
+        LookbackRule("(| )", "s([$vowels]|$unvoicedConsonants)", "s", 1),
         //    After any consonant (e.g. transitare /transiˈtare/)
-        Rule("[$consonants]", "s", "s"),
+        LookbackRule("[$consonants]", "s", "s"),
         //    Before a voiceless consonant (e.g. raspa /ˈraspa/)
         Rule("s[$unvoicedConsonants]", "s", 1),
         //todo:At the start of the second part of a compound word
@@ -86,7 +84,7 @@ object Italian: RuleBasedTranscriber() {
         //in standard Tuscany-based pronunciation some words are pronounced with /s/ between vowels
         //(e.g. casa, cosa, così, mese, naso, peso, cinese, piemontese, goloso);
         //in Northern Italy (and also increasingly in Tuscany) ⟨s⟩ between vowels is always pronounced with /z/
-        Rule("[$vowels]", "s[$vowels]", "z", 1),
+        LookbackRule("[$vowels]", "s[$vowels]", "z", 1),
         //(with some exceptions[example needed]) whereas in Southern Italy ⟨s⟩ between vowels is always pronounced /s/.
 
         //⟨ss⟩ always represents voiceless /ss/: grosso /ˈɡrɔsso/, successo /sutˈtʃɛsso/, passato /pasˈsato/, etc.
@@ -106,7 +104,7 @@ object Italian: RuleBasedTranscriber() {
         //        Exceptions: azienda /adˈdzjɛnda/, all words derived from words obeying other rules (e.g.
         //        romanziere /romanˈdzjɛre/, which is derived from romanzo)
         //    After the letter ⟨l⟩ (e.g. alzare /alˈtsare/)
-        Rule("l", "z", "ts"),
+        LookbackRule("l", "z", "ts"),
         //        Exceptions: elzeviro /eldzeˈviro/ and Belzebù /beldzeˈbu/
         //    In the suffixes -anza, -enza and -onzolo (e.g. usanza /uˈzantsa/, credenza /kreˈdɛntsa/, ballonzolo /balˈlontsolo/)
         Rule("anza", "antsa"),

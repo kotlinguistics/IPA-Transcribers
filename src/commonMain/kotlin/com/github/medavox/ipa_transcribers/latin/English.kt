@@ -1,8 +1,6 @@
 package com.github.medavox.ipa_transcribers.latin
 
-import com.github.medavox.ipa_transcribers.CompletionStatus
-import com.github.medavox.ipa_transcribers.Rule
-import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
+import com.github.medavox.ipa_transcribers.*
 
 /**I'm not hopeful that this will work well enough to use,
  * but Mark Rosenfelder seems fairly confident that he's compiled a list of English spelling rules
@@ -369,7 +367,7 @@ Rule 56 goes with rule 16, which changed s to $ before some instances of u. */
     const val consonants = "bcdfghjklmnpqrstvwxz"
     const val longI = "aɪ"
     //const val longO = "oʊ"//might not actually be what he means by long o
-    val rules:List<Rule> = listOf(
+    val rules:List<IRule> = listOf(
         //1. Make the following unconditional replacements:
         Rule("t?ch", "tʃ"),
         Rule("sc?h", "ʃ"),
@@ -382,9 +380,9 @@ Rule 56 goes with rule 16, which changed s to $ before some instances of u. */
         Rule("wh", "w"),
         //2. Replace x with ks; but after e and before another vowel, use gz instead.
         // (This is not an allophonic rule: compare the near-minimal pair exist and excite.)
-        Rule("e", "xh[$vowels]", "gz", 2),
+        LookbackRule("e", "xh[$vowels]", "gz", 2),
         Rule("xh", "ks"),
-        Rule("e", "x[$vowels]", "gz", 1),
+        LookbackRule("e", "x[$vowels]", "gz", 1),
         Rule("x", "ks"),
 
         Rule("rh", "r"),
@@ -408,14 +406,14 @@ Rule 56 goes with rule 16, which changed s to $ before some instances of u. */
         Rule("gh", ""),
 
         //9. In initial gn, kn, mn, pt, ps, tm, pronounce the second letter only: gnostic = nôstîk, psycho = sïkö, knight = nït.
-        Rule("( |^)", "gn", "n"),
-        Rule("( |^)", "kn", "n"),
-        Rule("( |^)", "mn", "n"),
-        Rule("( |^)", "pt", "t"),
-        Rule("( |^)", "tm", "m"),
+        LookbackRule("( |^)", "gn", "n"),
+        LookbackRule("( |^)", "kn", "n"),
+        LookbackRule("( |^)", "mn", "n"),
+        LookbackRule("( |^)", "pt", "t"),
+        LookbackRule("( |^)", "tm", "m"),
 
         // 10. Replace y with ï if it ends a one-syllable word: ply = plï.
-        Rule("(^|\\s)[^$vowels]+", "y(\\s|$)", "aɪ", 1),
+        LookbackRule("(^|\\s)[^$vowels]+", "y(\\s|$)", "aɪ", 1),
 
         //11. ey is pronounced ë;
         Rule("ey", "i"),
@@ -431,7 +429,7 @@ Rule 56 goes with rule 16, which changed s to $ before some instances of u. */
         Rule(Regex("al([lrsmtd]|th)"), "ɔɫ", 2),
 
         //19. alk becomes òk, except initially: walk = wòk.
-        Rule("[^\\s]", "alk", "ɔk"),
+        LookbackRule("[^\\s]", "alk", "ɔk"),
 
         //20. c becomes s before a front vowel, k elsewhere: cell = sêl, acid = âsîd,
         // but cow = kôw, backer = bâk@r, clear = klër.
@@ -445,7 +443,7 @@ Rule 56 goes with rule 16, which changed s to $ before some instances of u. */
         Rule("g[iey]", "dʒ", 1),
         Rule("g", "g"),
         //23. Initial gu or final gue is pronounced g: guest = gêst, plague = pläg.
-        Rule("(^$|\\s)", "gu", "g"),
+        LookbackRule("(^$|\\s)", "gu", "g"),
         Rule("gue($|\\s)", "g"),
         // (Medially, it tends to be gw instead: language, anguish.)
         Rule("gu", "gw"),
@@ -454,8 +452,8 @@ Rule 56 goes with rule 16, which changed s to $ before some instances of u. */
         //To be precise, they become syllabic consonants: the final sound in bottle is a prolonged dark l.
         //I think this is an allophonic detail, however:
         // if you like, just add a rule at the end to turn all instances of @r into syllabic r.
-        Rule("[$consonants]", "le(\\s|$)", "əɫ", 2),
-        Rule("[$consonants]", "re(\\s|$)", "ər", 2),
+        LookbackRule("[$consonants]", "le(\\s|$)", "əɫ", 2),
+        LookbackRule("[$consonants]", "re(\\s|$)", "ər", 2),
 
         //these are the two most important rules of English spelling.
         //25. Vowels are pronounced long before an intervocalic consonant
@@ -480,7 +478,7 @@ Rule 56 goes with rule 16, which changed s to $ before some instances of u. */
         Rule("ous", "əs"),
 
         //33. Remove final e: rate mike cute = rät mïk küt (unless it's the only vowel in the word, as in he).
-        Rule("[$vowels][$consonants]{1,2}", "e", ""),
+        LookbackRule("[$vowels][$consonants]{1,2}", "e", ""),
         //This and rules 25 and 26 (on long and short vowels) are the guts of the English spelling system. They allow the five vowel symbols to represent ten vowel phonemes.
 
         //English orthography tends to preserve the spelling of morphemes in derived words, including their final e.
@@ -490,7 +488,7 @@ Rule 56 goes with rule 16, which changed s to $ before some instances of u. */
         // the e in the first morpheme should be deleted by this rule.
 
         //35. <i> before another vowel becomes ï@ [ajə] in the initial syllable: bias, diagram = bï@s, dï@grâm.
-        Rule("(^|\\s)[^$vowels]+","[iy][$vowels]", "ajə"),
+        LookbackRule("(^|\\s)[^$vowels]+","[iy][$vowels]", "ajə"),
 
         //38. Any vowel reduces to @ before final l: battle, final, hovel, evil, symbol.
         Rule("[$vowels]l", "əɫ"),

@@ -65,11 +65,11 @@ abstract class RuleBasedTranscriber:Transcriber, BaseRules {
         return out
     }*/
 
-    fun String.processWithRules(rules:List<Rule>,
+    fun String.processWithRules(rules:List<IRule>,
                                 onNoRuleMatch:(unmatched:String) -> UnmatchedOutput
     ) : String {
         var out:String = ""
-        var processingWord = this
+        var processingWord:String = this
         var consumed = ""
         loop@ while(processingWord.isNotEmpty()) {
             for (rule in rules) {

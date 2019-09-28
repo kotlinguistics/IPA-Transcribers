@@ -1,6 +1,7 @@
 package com.github.medavox.ipa_transcribers.latin
 
 import com.github.medavox.ipa_transcribers.CompletionStatus
+import com.github.medavox.ipa_transcribers.IRule
 import com.github.medavox.ipa_transcribers.Rule
 import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
 //write google -> IPA arabic transcriber
@@ -13,7 +14,7 @@ import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
  * despite these being distinguished in Arabic.*/
 object ArabicGoogleRomanised: RuleBasedTranscriber() {
     override val completionStatus: CompletionStatus = CompletionStatus.COMPLETE_PARTIAL
-    val rules:List<Rule> = listOf<Rule>(
+    val rules:List<IRule> = listOf<Rule>(
         Rule("'", "ʕ"),
         Rule("gh", "ɣ"),
         Rule("sh", "ʃ"),

@@ -1,8 +1,6 @@
 package com.github.medavox.ipa_transcribers.latin
 
-import com.github.medavox.ipa_transcribers.CompletionStatus
-import com.github.medavox.ipa_transcribers.Rule
-import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
+import com.github.medavox.ipa_transcribers.*
 
 /**Status:COMPLETE
  * barring any major irregularities.
@@ -15,7 +13,7 @@ object Turkish: RuleBasedTranscriber() {
     val backVowels = "aâıouû"
     val allVowels = "aâeiıoöuüû"
 
-    private val rules:List<Rule> = listOf(
+    private val rules:List<IRule> = listOf(
         Rule("â", "a"),
         Rule("c", "d͡ʒ"),
         Rule("c[$allVowels]", "d͡ʒʰ", 1),
@@ -35,24 +33,24 @@ object Turkish: RuleBasedTranscriber() {
         // Between front vowels, it is either silent or realized as [j] (e.g. düğün 'marriage',
         // where the [j] is even mandatory in fast speech to distinguish it from dün 'yesterday'),
         // depending on the preceding and following vowels.
-        Rule("[$frontVowels]", "ğ[$frontVowels]", "j", 1),//, /‿/, /j/   —[c]
+        LookbackRule("[$frontVowels]", "ğ[$frontVowels]", "j", 1),//, /‿/, /j/   —[c]
 
         //Between back vowels, it may be silent or sound like a bilabial glide.
-        Rule("[$backVowels]", "ğ[$backVowels]", "ɰ̟", 1),//, /‿/, /j/   —[c]
+        LookbackRule("[$backVowels]", "ğ[$backVowels]", "ɰ̟", 1),//, /‿/, /j/   —[c]
 
         // (1) Syllable initially: Silent, indicates a syllable break.
         // That is Erdoğan /ˈeɾ.do.an/ (the English equivalent is approximately a W, i.e. "Erdowan")
         // and değil [ˈde.il] (the English equivalent is approximately a Y, i.e. "deyil").
-        Rule("[$allVowels]", "ğ[$allVowels]", "", 1),//, /‿/, /j/   —[c]
+        LookbackRule("[$allVowels]", "ğ[$allVowels]", "", 1),//, /‿/, /j/   —[c]
 
         // (2) Syllable finally after /e/: [j]. E.g. eğri [ej.ˈɾi].
-        Rule("[e]", "ğ[^$allVowels]", "j", 1),//, /‿/, /j/   —[c]
+        LookbackRule("[e]", "ğ[^$allVowels]", "j", 1),//, /‿/, /j/   —[c]
 
         //Word-finally and preconsonantally, it lengthens the preceding vowel.
         // When not between vowels (that is, word finally and before a consonant),
         // it is generally realized as vowel length, lengthening the preceding vowel,
         // or as a slight [j] if preceded by a front vowel.[4]
-        Rule("[$allVowels]", "ğ", "ː"),//, /‿/, /j/   —[c]
+        LookbackRule("[$allVowels]", "ğ", "ː"),//, /‿/, /j/   —[c]
 
         Rule("ı", "ɯ"),
         //The phonemes /ʒ/ and /f/ only occur in loanwords and interjections.
@@ -74,19 +72,19 @@ object Turkish: RuleBasedTranscriber() {
         // mahkûm ('condemned'), lâzım ('necessary'),
         // although the use of this diacritic has become increasingly archaic.[2]
         // An example of a minimal pair is kar ('snow') vs. kâr (with palatalized [c]) ('profit').
-        Rule("[$frontVowels]","k", "c"),
+        LookbackRule("[$frontVowels]","k", "c"),
         Rule("k[$frontVowels]", "c", 1),
         Rule("k[âû]", "c", 1),
         //Syllable-initial /p, t, c, k/ are usually aspirated.
-        Rule("", "k[$backVowels]", "kʰ"),
+        LookbackRule("", "k[$backVowels]", "kʰ"),
         Rule("k", "k"),
 
-        Rule("[$frontVowels]", "g", "ɟ"),
+        LookbackRule("[$frontVowels]", "g", "ɟ"),
         Rule("g[$frontVowels]", "ɟ", 1),
         Rule("g[âû]", "ɟ", 1),
         Rule("g", "ɡ"),
 
-        Rule("[$frontVowels]", "l", "l"),
+        LookbackRule("[$frontVowels]", "l", "l"),
         Rule("l[$frontVowels]", "l", 1),
         Rule("l[âû]", "l", 1),
         Rule("l", "ɫ"),
@@ -103,7 +101,7 @@ object Turkish: RuleBasedTranscriber() {
 
         //Final /h/ may be fronted to a voiceless velar fricative [x].[5]
         // It may be fronted even further after front vowels, then tending towards a voiceless palatal fricative [ç].
-        Rule("[$frontVowels]", "h", "ç"),
+        LookbackRule("[$frontVowels]", "h", "ç"),
         ///h/ is realised [x] in most dialects, including standard Turkish Radio & Television speech.
         Rule("h", "x")
     ) + latinBaseRules

@@ -13,7 +13,7 @@ object IpaToTukiNuwa: RuleBasedTranscriber() {
      * with words that have too many syllables
      * AND whose stressed syllable is after the first,
      * drop the unstressed syllable(s) before the stressed one*/
-    private val initialRules:List<Rule> = listOf(
+    private val initialRules:List<IRule> = listOf(
         //simplifying consonant clusters
 
 
@@ -32,7 +32,7 @@ object IpaToTukiNuwa: RuleBasedTranscriber() {
         Rule(Regex("[ʋwvʍɹ]+"), "w")
     ) + westernPunctuation
 
-    private val phonotacticsRules:List<Rule> = listOf(
+    private val phonotacticsRules:List<IRule> = listOf(
         //tuki nuwa doesn't allow these combinations.
         Rule(Regex("ji"), "i"),
         Rule(Regex("wu"), "u"),
@@ -57,7 +57,7 @@ object IpaToTukiNuwa: RuleBasedTranscriber() {
         Rule("w+", "w")
     )
 
-    private val breakUpConsonantClustersAndDiphthongs:List<Rule> = listOf(
+    private val breakUpConsonantClustersAndDiphthongs:List<IRule> = listOf(
         Rule(Regex("au"), "aju"),
         Rule(Regex("ai"), "awi"),
         Rule(Regex("h[^aiu]"), "hi", 1),

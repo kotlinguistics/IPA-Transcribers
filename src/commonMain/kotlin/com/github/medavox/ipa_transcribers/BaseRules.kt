@@ -2,7 +2,7 @@ package com.github.medavox.ipa_transcribers
 
 interface BaseRules {
 
-    val westernPunctuation:List<Rule> get() = listOf(
+    val westernPunctuation:List<IRule> get() = listOf(
         Rule(" ", " "),
         Rule(",", ","),
         Rule(Regex("\\."), ".")
@@ -11,7 +11,7 @@ interface BaseRules {
     private fun l(it:String):String{
         return if(it.endsWith("ə")) it.substring(0, it.length-1) else it
     }
-    val devanagariBaseRules:List<Rule> get() = listOf(
+    val devanagariBaseRules:List<IRule> get() = listOf(
 
         //consonants.
         // These have an inherent schwa (which is often romanised as 'a'),
@@ -62,20 +62,20 @@ interface BaseRules {
         //Much kudos to Unicode's Devanagari support;
         // the vowels act like separate characters on a character level,
         // but combine with their previous consonant to form the right character visually.
-        //this means we use the minimum number of code points possible to represent Devanagari.
-        Rule("[आा]", {l(it)+"aː"}),
-        Rule("[एे]", {l(it)+"eː"}),
-        Rule("[ऐै]", {l(it)+"ɛː"}),
-        Rule("[अ]", {l(it)+"ə"}),
-        Rule("[ईी]", {l(it)+"iː"}),
-        Rule("[इि]", {l(it)+"ɪ"}),
-        Rule("[ओो]", {l(it)+"oː"}),
-        Rule("[औौ]", {l(it)+"ɔː"}),
-        Rule("[ऊू]", {l(it)+"uː"}),
-        Rule("[उु]", {l(it)+"ʊ"}),
-        Rule("[ऋृ]", {l(it)+"ɾɪ"}),
-        Rule("्", {l(it)}),// ् "virama" is a diacritic which suppresses the inherent vowel
-        Rule("ं", {l(it)}),// "anusvara" diacritic nasalises the preceding consonant*
+        //this means the minimum possible number of code points is used to represent Devanagari.
+        RevisingRule("[आा]", {l(it)+"aː"}),
+        RevisingRule("[एे]", {l(it)+"eː"}),
+        RevisingRule("[ऐै]", {l(it)+"ɛː"}),
+        RevisingRule("[अ]", {l(it)+"ə"}),
+        RevisingRule("[ईी]", {l(it)+"iː"}),
+        RevisingRule("[इि]", {l(it)+"ɪ"}),
+        RevisingRule("[ओो]", {l(it)+"oː"}),
+        RevisingRule("[औौ]", {l(it)+"ɔː"}),
+        RevisingRule("[ऊू]", {l(it)+"uː"}),
+        RevisingRule("[उु]", {l(it)+"ʊ"}),
+        RevisingRule("[ऋृ]", {l(it)+"ɾɪ"}),
+        RevisingRule("्", {l(it)}),// ् "virama" is a diacritic which suppresses the inherent vowel
+        RevisingRule("ं", {l(it)}),// "anusvara" diacritic nasalises the preceding consonant*
         //or in modern hindi and marathi, sometimes its vowel as well. It's comlicated.
 
         Rule("ँ", "̃"), //nasalised vowel diacritic. Presumably can go over any (or some) other vowels

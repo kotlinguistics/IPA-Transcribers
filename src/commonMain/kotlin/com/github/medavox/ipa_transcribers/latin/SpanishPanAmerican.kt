@@ -1,8 +1,6 @@
 package com.github.medavox.ipa_transcribers.latin
 
-import com.github.medavox.ipa_transcribers.CompletionStatus
-import com.github.medavox.ipa_transcribers.Rule
-import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
+import com.github.medavox.ipa_transcribers.*
 
 /**Spanish spelling is largely considered phonetic.
  * I'm not sure how true that is in practice
@@ -89,7 +87,7 @@ object SpanishPanAmerican: RuleBasedTranscriber() {
 */
     //NOTE:rule order matters!
     internal val voicedConsonants = "([bdglmnñvwy]|hu|hi)"
-    internal val rules:List<Rule> = listOf(
+    internal val rules:List<IRule> = listOf(
         //⟨ñ⟩ = [ɲ] (ñandú; cabaña)
         Rule(Regex("ñ"), "ɲ"),
 
@@ -109,7 +107,7 @@ object SpanishPanAmerican: RuleBasedTranscriber() {
         //⟨n⟩  i**n**vierno = [m]
         //(barco/′barko/, vaca/′baka/, ambos /′ambos/, en vano /em′bano/)
         Rule(Regex("[nm][bv]"), "mb"),
-        Rule(Regex("^$"), Regex("[bv]"), "b"),
+        LookbackRule(Regex("^$"), Regex("[bv]"), "b"),
         //⟨b⟩ or ⟨v⟩ elsewhere (i.e. after a vowel, even across a word boundary,
         // or after any consonant other than ⟨m⟩ or ⟨n⟩) = [β]
         //(rabo /′rraβo/, ave /′aβe/, árbol /′arβol/, Elvira /el′βira/)
@@ -158,7 +156,7 @@ object SpanishPanAmerican: RuleBasedTranscriber() {
         //⟨d⟩ word-initial after a pause, or after ⟨l⟩ or ⟨n⟩ = [d]
         //(digo /′diƔo/, anda /′anda/, el dueño /el′dweɲo/)
         //     dá_d_iva; ar_d_er; a_d_mirar; mi _d_e_d_o; ver_d_a_d_
-        Rule(Regex("^$"), Regex("d"), "d"),
+        LookbackRule(Regex("^$"), Regex("d"), "d"),
         Rule(Regex("ld"), "ld"),
         Rule(Regex("nd"), "nd"),
         //todo: match this rule across word boundaries
@@ -174,14 +172,14 @@ object SpanishPanAmerican: RuleBasedTranscriber() {
         //⟨gu⟩ before ⟨a⟩ or ⟨o⟩, and either word-initial after a pause, or after ⟨n⟩; but only in some dialects
         //      = [ɡw]
         //      ***gu**ante*; * len**gu**a*
-        Rule(Regex("^$"), Regex("gu[ao]"), "gw", 2),
-        Rule(Regex("^$"), Regex("ngu[ao]"), "ŋgw", 3),
+        LookbackRule(Regex("^$"), Regex("gu[ao]"), "gw", 2),
+        LookbackRule(Regex("^$"), Regex("ngu[ao]"), "ŋgw", 3),
         //⟨gu⟩ before ⟨a⟩ or ⟨o⟩, and not in the above contexts = [ɣw]
         //     a**gu**a; averi**gu**ar
         Rule(Regex("gu[ao]"), "ɣw", 2),
         //⟨gu⟩ before ⟨e⟩ or ⟨i⟩, and either word-initial after a pause, or after ⟨n⟩ = [ɡ]
         //      ***gu**erra*
-        Rule(Regex("^$"), Regex("gu[ie]"), "g", 2),
+        LookbackRule(Regex("^$"), Regex("gu[ie]"), "g", 2),
         //⟨gu⟩ before ⟨e⟩ or ⟨i⟩, and not in the above contexts = [ɣ]
         //     si**gu**e
         Rule(Regex("gu[ie]"), "ɣ", 2),
@@ -192,7 +190,7 @@ object SpanishPanAmerican: RuleBasedTranscriber() {
         //⟨g⟩ not before ⟨e⟩ or ⟨i⟩, and either word-initial after a pause, or after ⟨n⟩ = [ɡ]
         //      ***g**ato*; ***g**rande*; * ven**g**o*
         Rule(Regex("ng[^ie]"), "ŋg", 2),
-        Rule(Regex("^$"), Regex("g[^ie]"), "g", 1),
+        LookbackRule(Regex("^$"), Regex("g[^ie]"), "g", 1),
         //⟨g⟩  not before ⟨e⟩ or ⟨i⟩, and not in the above contexts = [ɣ]
         //     tri**g**o; amar**g**o*; si**g**no*; mi **g**ato
         //(hago /′aƔo/, trague /′traƔe/, alga /′alƔa/, águila /′aƔila/).
@@ -205,9 +203,9 @@ object SpanishPanAmerican: RuleBasedTranscriber() {
         //     before ⟨e⟩ or ⟨i⟩, and not in the above contexts = [ɣw]
         //      averi**gü**e
         //fixme:because we work on the chopped string, it's ALWAYS at the beginning
-        Rule(Regex("^$"), Regex("güi"), "gwi"),
+        LookbackRule(Regex("^$"), Regex("güi"), "gwi"),
         Rule(Regex("güi"), "Ɣwi"),
-        Rule(Regex("^$"), Regex("güe"), "gwe"),
+        LookbackRule(Regex("^$"), Regex("güe"), "gwe"),
         Rule(Regex("güe"), "Ɣwe"),
 
         //⟨rr⟩ only occurs between vowels = [r]
@@ -226,10 +224,10 @@ object SpanishPanAmerican: RuleBasedTranscriber() {
         //      * e**x**acto*; * ta**x**i*; * rela**x***
         Rule(Regex("x$"), "ks"),
 
-        Rule("[aeiou]", "x[aeiou]", "ks", 1),//FIXED? broken rule. Look-backs are prohibited!
+        LookbackRule("[aeiou]", "x[aeiou]", "ks", 1),//FIXED? broken rule. Look-backs are prohibited!
         //⟨x⟩  word-initially = [s]
         //      ***x**enofobia*
-        Rule(Regex("^$"), Regex("x"), "s"),
+        LookbackRule(Regex("^$"), Regex("x"), "s"),
 
         //7. The pronunciation of ll varies greatly throughout the Spanish-speaking world.
 

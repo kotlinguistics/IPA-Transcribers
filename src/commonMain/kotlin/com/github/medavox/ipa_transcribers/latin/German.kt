@@ -1,8 +1,6 @@
 package com.github.medavox.ipa_transcribers.latin
 
-import com.github.medavox.ipa_transcribers.CompletionStatus
-import com.github.medavox.ipa_transcribers.Rule
-import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
+import com.github.medavox.ipa_transcribers.*
 
 /**This transcriber follows pronunciation in Standard German, as spoken in Germany.*/
 object German: RuleBasedTranscriber() {
@@ -53,8 +51,8 @@ object German: RuleBasedTranscriber() {
         //For different consonants and for sounds represented by more than one letter (ch and sch) after a vowel,
         //no clear rule can be given, because they can appear after long vowels,
         // yet are not redoubled if belonging to the same stem, e.g. Mond /moːnt/ 'moon', Hand /hant/ 'hand'.
-        Rule(" ", "mond( |$)", "moːnt", 4),
-        Rule("( |^)", "hand( |$)", "hant", 4),
+        LookbackRule(" ", "mond( |$)", "moːnt", 4),
+        LookbackRule("( |^)", "hand( |$)", "hant", 4),
         //On a stem boundary, reduplication usually takes place, e.g., nimm-t 'takes';
         // however in fixed, no longer productive derivatives this too can be lost,
         // e.g., Geschäft /ɡəˈʃɛft/ 'business' despite schaffen 'to get something done'.
@@ -72,16 +70,18 @@ object German: RuleBasedTranscriber() {
 
         // Most one-syllable words that end in a single consonant are pronounced with long vowels,
         // but there are some exceptions such as an, das, es, in, mit, and von.
-        Rule(" ", "an ", "an", 2),
+        LookbackRule(" ", "an ", "an", 2),
 
         // The e in the ending -en is often silent, as in bitten "to ask, request".
-        Rule("[^ ]", "en( |$)", "̩n", 2),//the syllabic n is not silent
+        LookbackRule("[^ ]", "en( |$)", "̩n", 2),//the syllabic n is not silent
         // The ending -er is often pronounced [ɐ], but in some regions, people say [ʀ̩] or [r̩].
-        Rule("[^ ]", "er( |$)", "ɐ", 2),
-        Rule("[^ ]", "e( |$)", "ə"),
-        // The e in the ending -el ([əl ~ l̩], e.g. Tunnel, Mörtel "mortar") is pronounced short despite having just a
-        // single consonant on the end.
-        Rule("[^ ]", "el( |$)", "el", 2),
+        LookbackRule("[^ ]", "er( |$)", "ɐ", 2),
+        LookbackRule("[^ ]", "e( |$)", "ə"),
+        // The e in the ending -el ([əl ~ l̩], e.g. Tunnel, Mörtel "mortar") is pronounced short,
+        // despite having just a single consonant on the end.
+        LookbackRule("[^ ]", "el( |$)", "el", 2),
+
+        Rule(Regex("([$vowels])h"), "$1"),
 
         //Short Vowels
         //    a: [a] as in Wasser "water"
@@ -140,7 +140,7 @@ object German: RuleBasedTranscriber() {
         */
         //consonants
 
-        Rule("sch", "w", "f"),
+        LookbackRule("sch", "w", "f"),
         Rule("w", "v"),
         Rule("r[$vowels]", "ʁ", 1),
         Rule("r($| )", "ɐ", 1),
@@ -149,11 +149,10 @@ object German: RuleBasedTranscriber() {
         //b: at end of syllable: [p]; otherwise: [b] or [b̥]
         Rule("b(^| )", "p", 1),
         //TODO ch: after a, o, and u: [x]; after other vowels or consonants or initially: [ç] or [k] (word-initially in Southern Germany);
-            //the suffix -chen always [ç]. In Austro-Bavarian, especially in Austria, [ç] may always be substituted by [x].
         //chs: [ks] within a morpheme (e.g. Dachs [daks] "badger"); [çs] or [xs] across a morpheme boundary (e.g.
         // Dachs [daxs] "roof (genitive)")
         Rule("chs", "ks"),
-        Rule("i", "ch", "ç"),
+        LookbackRule("i", "ch", "ç"),
         Rule("ch", "x"),
         //ck: [k], follows short vowels
         Rule("ck", "k"),
@@ -200,8 +199,9 @@ object German: RuleBasedTranscriber() {
         Rule("s[pt][$vowels]", "ʃ", 1),
         Rule("s[ptk]", "s", 1),
         Rule("s($| )", "s", 1),
-        Rule("[$vowels]?", "s[$vowels]", "z", 1),
+        LookbackRule("[$vowels]?", "s[$vowels]", "z", 1),
 
+        //the suffix -chen always [ç]. In Austro-Bavarian, especially in Austria, [ç] may always be substituted by [x].
         //sch: [ʃ]; however, [sç] when part of the -chen diminutive of a word ending on "s", (e.g. Mäuschen "little mouse")
         Rule("chen", "ç", 2),
         Rule("sch", "ʃ"),

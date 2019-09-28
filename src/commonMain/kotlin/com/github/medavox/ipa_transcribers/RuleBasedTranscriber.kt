@@ -83,7 +83,11 @@ abstract class RuleBasedTranscriber:Transcriber, BaseRules {
                 //if the rule matches the start of the remaining string, and the end of the consumed string
                 if(consumedMatches && unconsumedMatch?.range?.start == 0) {
                     //System.out.println("rule '$rule' matches '$processingWord'")
-                    out = rule.outputString(out)
+                    //out = rule.outputString(out)
+                    out = processingWord.replaceFirst(
+                        rule.unconsumedMatcher,
+                        rule.outputString.invoke(out, unconsumedMatch.groups)
+                    )
                     //System.out.println("matched rule:$rule")
                     //number of letters consumed is the match length, unless explicitly specified
                     val actualLettersConsumed = rule.lettersConsumed ?: unconsumedMatch.value.length

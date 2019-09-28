@@ -125,7 +125,6 @@ object Bengali : RuleBasedTranscriber() {
 
     )
     override fun transcribe(nativeText: String): String {
-        unhandledChars = ""
         return nativeText.processWithRules(rules, ::reportOnceAndCopy)
     }
 }

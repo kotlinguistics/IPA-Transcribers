@@ -1,3 +1,5 @@
+@file:Suppress("NonAsciiCharacters")
+
 package com.github.medavox.ipa_transcribers.latin
 
 import com.github.medavox.ipa_transcribers.*
@@ -73,21 +75,32 @@ object German: RuleBasedTranscriber() {
 
         // Most one-syllable words that end in a single consonant are pronounced with long vowels,
         // but there are some exceptions such as an, das, es, in, mit, and von.
-        LookbackRule(" ", "an ", "an", 2),
-        LookbackRule(" ", "das ", "das", 3),
-        LookbackRule(" ", "es ", "ɛs", 2),
-        LookbackRule(" ", "in ", "ɪn", 2),
-        LookbackRule(" ", "mit ", "mɪt", 3),
-        LookbackRule(" ", "von ", "fɔn", 3),
+        LookbackRule("( |^)", "an ", "an", 2),
+        LookbackRule("( |^)", "das ", "das", 3),
+        LookbackRule("( |^)", "der ", "dɛɐ", 3),
+        LookbackRule("( |^)", "es ", "ɛs", 2),
+        LookbackRule("( |^)", "in ", "ɪn", 2),
+        LookbackRule("( |^)", "mit ", "mɪt", 3),
+        LookbackRule("( |^)", "von ", "fɔn", 3),
 
         // The e in the ending -en is often silent, as in bitten "to ask, request".
-        LookbackRule("[^ ]", "en( |$)", "̩n", 2),//the syllabic n is not silent
+        LookbackRule("[ptk]", "en( |$)", "n̩", 2),//the syllabic n is not silent
         // The ending -er is often pronounced [ɐ], but in some regions, people say [ʀ̩] or [r̩].
         LookbackRule("[^ ]", "er( |$)", "ɐ", 2),
         LookbackRule("[^ ]", "e( |$)", "ə"),
         // The e in the ending -el ([əl ~ l̩], e.g. Tunnel, Mörtel "mortar") is pronounced short,
         // despite having just a single consonant on the end.
         LookbackRule("[^ ]", "el( |$)", "el", 2),
+
+        //other irregular words & elements transcribed manually
+        Rule("system", "zʏzteːm"),
+        LookbackRule("([^ ]|^)", "net ", "nət", 3),
+
+        //DIPHTHONGS
+        //==========
+        Rule("au", "aʊ"),
+        Rule("(eu|äu)", "ɔʏ"),
+        Rule("(ei|ai|ey|ay)", "aɪ"),
 
         //VOWELS, second attempt
         //=====================
@@ -151,6 +164,9 @@ object German: RuleBasedTranscriber() {
         Rule("ü$vowelShorteningConsonantPairs", Ü_Y.short, 1),
         Rule("y$vowelShorteningConsonantPairs", Ü_Y.short, 1),
 
+        Rule("ä", "Ä"),
+        Rule("ö", "Ö"),
+
         //For different consonants and for sounds represented by more than one letter (ch and sch) after a vowel,
         //no clear rule can be given, because they can appear after long vowels,
         // yet are not redoubled if belonging to the same stem, e.g. Mond /moːnt/ 'moon', Hand /hant/ 'hand'.
@@ -169,27 +185,27 @@ object German: RuleBasedTranscriber() {
         //A vowel usually represents a long sound if the vowel in question occurs:
         //=======================================================================
         //as the final letter (except for e)
-        Rule("a(^| )", A.long),
-        Rule("ä(^| )", Ä.long),
-        Rule("i(^| )", I.long),
-        Rule("o(^| )", O.long),
-        Rule("ö(^| )", Ö.long),
-        Rule("u(^| )", U.long),
-        Rule("ü(^| )", Ü_Y.long),
+        Rule("a($| )", A.long, 1),
+        Rule("ä($| )", Ä.long, 1),
+        Rule("i($| )", I.long, 1),
+        Rule("o($| )", O.long, 1),
+        Rule("ö($| )", Ö.long, 1),
+        Rule("u($| )", U.long, 1),
+        Rule("ü($| )", Ü_Y.long, 1),
 
         //e at the end of a word is pronounced as a schwa
-        Rule("e(^| )", "ə"),
+        Rule("e($| )", "ə", 1),
 
         //    followed by a single consonant as in bot "offered"
         //    before a single consonant followed by a vowel as in Wagen "car"
-        Rule("a[$consonants]{1}(^| |[$vowels])", A.long),
-        Rule("ä[$consonants]{1}(^| |[$vowels])", Ä.long),
-        Rule("e[$consonants]{1}(^| |[$vowels])", E.long),
-        Rule("i[$consonants]{1}(^| |[$vowels])", I.long),
-        Rule("o[$consonants]{1}(^| |[$vowels])", O.long),
-        Rule("ö[$consonants]{1}(^| |[$vowels])", Ö.long),
-        Rule("u[$consonants]{1}(^| |[$vowels])", U.long),
-        Rule("ü[$consonants]{1}(^| |[$vowels])", Ü_Y.long),
+        Rule("a[$consonants]{1}($| |[$vowels])", A.long, 1),
+        Rule("ä[$consonants]{1}($| |[$vowels])", Ä.long, 1),
+        Rule("e[$consonants]{1}($| |[$vowels])", E.long, 1),
+        Rule("i[$consonants]{1}($| |[$vowels])", I.long, 1),
+        Rule("o[$consonants]{1}($| |[$vowels])", O.long, 1),
+        Rule("ö[$consonants]{1}($| |[$vowels])", Ö.long, 1),
+        Rule("u[$consonants]{1}($| |[$vowels])", U.long, 1),
+        Rule("ü[$consonants]{1}($| |[$vowels])", Ü_Y.long, 1),
 
         //A silent h indicates a long vowel in certain cases. That h derives from an old /x/ in some words,
         //for instance sehen ('to see') zehn ('ten'), but in other words it has no etymological justification,
@@ -197,12 +213,6 @@ object German: RuleBasedTranscriber() {
         //either due to analogy, such as sieht ('sees', from sehen) or etymology, such as Vieh ('cattle', MHG vihe),
         //rauh ('rough', pre-1996 spelling, now written rau, MHG ruh).
         CapturingRule(Regex("([$vowels])h"), {soFar, groups -> soFar+Vowels.from(groups[1]!!.value).long}, 2),
-
-        //DIPHTHONGS
-        //==========
-        Rule("au", "aʊ"),
-        Rule("(eu|äu)", "ɔʏ"),
-        Rule("(ei|ai|ey|ay)", "aɪ"),
 
        //old -- use these to double-check the new vowel rules, when they're done
 /*        Rule("wird", "ɪɐ̯"),
@@ -224,7 +234,6 @@ object German: RuleBasedTranscriber() {
         Rule("eer", "iɐ"),
         Rule("ehe", "eɐ"),
         Rule("ee", "iː"),
-        Rule("ei", "a̯ɪ"),
         Rule("or", "ɔː"),
         */
 
@@ -275,7 +284,7 @@ object German: RuleBasedTranscriber() {
         //ph: [f]
         Rule("ph", "f"),
         //qu: [kv] or [kw] (in a few regions)
-        Rule("qu", "kv"),
+        Rule("qu", "kf"),
 
         //r: the pronunciation of r varies regionally:
         //[ʁ] before vowels, [ɐ] otherwise; or
@@ -287,7 +296,7 @@ object German: RuleBasedTranscriber() {
 
         //s: before and between vowels: [z] or [z̥]; before consonants or when final: [s];
         // before p or t at the beginning of a word or syllable: [ʃ]
-        Rule("s[pt][$vowels]", "ʃ", 1),
+        LookbackRule("(^| |[^s])", "s[pt][$vowels]", "ʃ", 1),
         Rule("s[ptk]", "s", 1),
         Rule("s($| )", "s", 1),
         LookbackRule("[$vowels]?", "s[$vowels]", "z", 1),
@@ -302,6 +311,7 @@ object German: RuleBasedTranscriber() {
         //th: [t]
         Rule("th", "t"),
         //ti: in -tion, -tiär, -tial, -tiell: [tsɪ̯]; otherwise: [ti]
+        Rule("ti(on|är|al|ell)", "tsɪ̯", 2),
         //tsch: [tʃ]
         //tzsch: [tʃ]
         Rule("tz?sch", "tʃ"),

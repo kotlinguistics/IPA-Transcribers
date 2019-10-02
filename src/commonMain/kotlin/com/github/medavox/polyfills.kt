@@ -5,6 +5,6 @@ expect object err {
     fun println(err:String)
 }
 
-/**Get the unicode name of the Unicode character with this codepoint.*/
+/**Get the unicode name of the character with this codepoint.*/
 expect val Int.unicodeName:String
 expect fun String.normaliseNfd():String

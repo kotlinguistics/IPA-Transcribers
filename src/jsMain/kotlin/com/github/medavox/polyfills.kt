@@ -2,16 +2,21 @@ package com.github.medavox
 
 actual object err {
     actual fun print(err: String) {
+        TODO()
     }
 
     actual fun println(err: String) {
+        TODO()
     }
 }
 
 actual val Int.unicodeName: String
-    get() = TODO("not implemented") //To change initializer of created properties use File | Settings | File Templates.
+    get() {
+        TODO()
+    }
 actual fun String.normaliseNfd():String {
     //intended javascript:
     //return this.normalize('NFD')
-    TODO()
+    val s = this
+    return js("s.normalize('NFD')") as String
 }

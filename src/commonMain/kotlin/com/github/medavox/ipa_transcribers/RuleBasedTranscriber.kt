@@ -72,6 +72,7 @@ abstract class RuleBasedTranscriber:Transcriber, BaseRules {
         var processingWord:String = this
         var consumed = ""
         loop@ while(processingWord.isNotEmpty()) {
+            //uses the first rule which matches -- so rule order matters
             for (rule in rules) {
                 val unconsumedMatch:MatchResult? = rule.unconsumedMatcher.find(processingWord)
 
@@ -82,12 +83,14 @@ abstract class RuleBasedTranscriber:Transcriber, BaseRules {
 
                 //if the rule matches the start of the remaining string, and the end of the consumed string
                 if(consumedMatches && unconsumedMatch?.range?.start == 0) {
-                    //System.out.println("rule '$rule' matches '$processingWord'")
+                    //println("rule '$rule' matches '$processingWord'")
                     //out = rule.outputString(out)
-                    out = processingWord.replaceFirst(
-                        rule.unconsumedMatcher,
-                        rule.outputString.invoke(out, unconsumedMatch.groups)
-                    )
+                    /*out = rule.unconsumedMatcher.replaceFirst(
+                        processingWord,
+                        //rule.outputString(out, unconsumedMatch.groups)
+                        processingWord+callTimes
+                    )*/
+                    out = rule.outputString(out, unconsumedMatch.groups)
                     //System.out.println("matched rule:$rule")
                     //number of letters consumed is the match length, unless explicitly specified
                     val actualLettersConsumed = rule.lettersConsumed ?: unconsumedMatch.value.length

@@ -177,21 +177,23 @@ object ChinesePinyin: RuleBasedTranscriber() {
         Rule("wang", "waŋ"),
 
         //medial = /y/, no coda
-        Rule("ü", "y"),//todo: ü is written as u after j, q, or x
+        Rule("ü", "y"),//todo: ü is written as u after j, q, or x (and technically y, but that is handled here)
         Rule("üe", "ɥe"),//todo: ü is written as u after j, q, or x
 
         //medial = /y/, coda = /n/
         Rule("ün", "yn"),//todo: ü is written as u after j, q, or x
         Rule("üan", "ɥɛn")//todo: ü is written as u after j, q, or x
     )
+
+    //this is a Finite State Machine which greedily applies the rule which matches the most characters
     fun String.processPinyin(onNoRuleMatch:(unmatched:String) -> UnmatchedOutput) : String {
         var out:String = ""
         var processingWord:String = this
         var consumed = ""
 
-        //todo: when in Mode.FINALS_NO_INITAL, try the finalRulesNoInitials first,
-        // and if nothing matches, try the normal finalRules list.
-        // that way, we can omit rules from finalRulesNoInitials whose output is the same as the equivalent finalRules
+        //when in Mode.FINALS_NO_INITAL, try the finalRulesNoInitials first,
+        //and if nothing matches, try the normal finalRules list.
+        //that way, we can omit rules from finalRulesNoInitials whose output is the same as the equivalent finalRules
         loop@ while(processingWord.isNotEmpty()) {
             //uses the first rule which matches -- so rule order matters
 
@@ -201,13 +203,16 @@ object ChinesePinyin: RuleBasedTranscriber() {
                 FINALS_NO_INITIAL -> finalRulesNoInitial
             }
             //get the first rule (if any) where the following conditions are met:
-            val rule = rules.firstOrNull{
+            val rule = rules.filter{
                 //the unconsumed matcher must match at the start, and
                 it.unconsumedMatcher.find(processingWord)?.range?.start == 0 &&
                     //the consumed matcher must either be null (unspecified), or
                     (it.consumedMatcher == null ||
                     //it must match at the end of the "already-consumed input" string
                     it.consumedMatcher.findAll(consumed).lastOrNull()?.range?.endInclusive == consumed.length-1)
+            }.maxBy {
+                it.lettersConsumed ?: it.unconsumedMatcher.find(processingWord)!!.value.length//shouldn't be null,
+                //because we've already filtered out the null ones in the above filter{} block
             }
 
             if(rule != null) {
@@ -232,7 +237,8 @@ object ChinesePinyin: RuleBasedTranscriber() {
                     }
                     FINALS, FINALS_NO_INITIAL -> {
                         //but if we're in Mode.FINALS or Mode.FINALS_NO_INITIAL,
-                        // this really does mean no rule matched. So call the lambda!
+                        // this really does mean no rule matched.
+                        // So call the passed function for onNoRuleMatch
                         val unmatchedOutput = onNoRuleMatch(processingWord)
                         processingWord = unmatchedOutput.newWorkingInput
                         out = unmatchedOutput.output(out)

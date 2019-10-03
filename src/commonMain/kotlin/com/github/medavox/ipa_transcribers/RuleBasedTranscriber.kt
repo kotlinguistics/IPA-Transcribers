@@ -67,37 +67,60 @@ abstract class RuleBasedTranscriber:Transcriber, BaseRules {
 
     /**Applies the rule which consumes the most characters.
      *
-     * Attempt 2*/
+     * Attempt 2
+     * This greedy matcher matches against the most specific rule,
+     *  not the one that consumes the most characters.
+
+        Given the example:
+        Rule ("abc", "def", 1),
+        Rule("ab", "xy")
+
+        The first rule will match, even though the second one consumes more characters.
+
+        Includes the consumed match (if any) in the specificity metric.
+     */
     fun String.processGreedily(rules:List<IRule>, onNoRuleMatch:(unmatched:String) -> UnmatchedOutput) : String {
         var out:String = ""
         var processingWord:String = this
         var consumed = ""
         loop@ while(processingWord.isNotEmpty()) {
-            val candidateRules = rules.filter {
+            //get the regex result of the unconsumedInput and alreadyConsumed matchers,
+            //because we'll be using them a lot.
+            //using a triple makes it easier to keep the IRule together with its MatchResults
+            val candidateRules = rules.map {
+                Triple<IRule, MatchResult?, MatchResult?>(it,
+                    it.unconsumedMatcher.find(processingWord),
+                    it.consumedMatcher?.findAll(consumed)?.lastOrNull())
+            }.filter {(_, unconsumed, consumedMatch) -> //filter out rules that don't match:
                 //the unconsumed matcher must match at the start, and
-                it.unconsumedMatcher.find(processingWord)?.range?.start == 0 &&
-                    //the consumed matcher must either be null (unspecified), or
-                    (it.consumedMatcher == null ||
-                    //it must match at the end of the "already-consumed input" string
-                    it.consumedMatcher.findAll(consumed).lastOrNull()?.range?.endInclusive == consumed.length-1)
+                unconsumed?.range?.start == 0 &&
+                //the consumed matcher must either be null (unspecified), or
+                (consumedMatch == null ||
+                //it must match at the end of the "already-consumed input" string
+                consumedMatch.range.endInclusive == consumed.length-1)
+            }.map { (rule, uncon, con) -> //make the unconsumed MatchResult non-null
+                Triple<IRule, MatchResult, MatchResult?>(rule, uncon!!, con)
             }
-            if(candidateRules.isEmpty()) {//no rule matched
-                continue@loop
+
+            if(candidateRules.isEmpty()) {//no rule matched; call the lambda!
+                val unmatchedOutput = onNoRuleMatch(processingWord)
+                processingWord = unmatchedOutput.newWorkingInput
+                out = unmatchedOutput.output(out)
+            }else {
+                //find the rule that matches (but does not necessarily consume) the most characters
+                val (rule, unconsumedMatch) = candidateRules.maxBy { (_, uncon, con) ->
+                    uncon.value.length + (con?.value?.length ?: 0)
+                }!!
+                //println("rule '$rule' matches '$processingWord'")
+                out = rule.outputString(out, unconsumedMatch.groups)
+                //number of letters consumed is the match length, unless explicitly specified
+                val actualLettersConsumed = rule.lettersConsumed ?: unconsumedMatch.value.length
+                if (actualLettersConsumed > 0) {
+                    consumed += processingWord.substring(0, actualLettersConsumed)
+                    processingWord = processingWord.substring(actualLettersConsumed)
+                    continue@loop
+                }//else keep going through the rule list, staying at the same position  in the input
             }
-            val rule = candidateRules.maxBy {
-                it.lettersConsumed ?: it.unconsumedMatcher.find(processingWord)!!.value.length//shouldn't be null,
-                //because we've already filtered out the null ones in the above filter{} block
-            }!!
-            val unconsumedMatch = rule.unconsumedMatcher.find(processingWord)!!
-            //println("rule '$rule' matches '$processingWord'")
-            out = rule.outputString(out, unconsumedMatch.groups)
-            //number of letters consumed is the match length, unless explicitly specified
-            val actualLettersConsumed = rule.lettersConsumed ?: unconsumedMatch.value.length
-            if(actualLettersConsumed > 0) {
-                consumed += processingWord.substring(0, actualLettersConsumed)
-                processingWord = processingWord.substring(actualLettersConsumed)
-                continue@loop
-            }//else keep going through the rule list
         }
         return out
     }

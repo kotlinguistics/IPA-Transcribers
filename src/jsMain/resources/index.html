@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Kotlin fractals</title>
+  <title>IPA Transcribers</title>
   <style>
     body {
       margin: 0;
@@ -10,11 +10,21 @@
       font-size: 13px;
       font-family: -system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Droid Sans, Helvetica Neue, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Droid Sans, Helvetica Neue, Arial, sans-serif;
       line-height: 20px;
+      display: block;
     }
   </style>
 </head>
 <body>
-<div id="app">Loading...</div>
-<script src="kotlin-fractals2-handson.js"></script>
+  <div id="app">Loading...</div>
+  <textarea id="input_text"></textarea>
+  <select id="lang_select">
+    <option value="volvo">Volvo</option>
+    <option value="saab">Saab</option>
+    <option value="mercedes">Mercedes</option>
+    <option value="audi">Audi</option>
+  </select>
+  <button id="transliterate_button"></button>
+  <script src="lib/kotlin.js"></script>
+  <script src="IPA-Transcribers.js"></script>
 </body>
 </html>

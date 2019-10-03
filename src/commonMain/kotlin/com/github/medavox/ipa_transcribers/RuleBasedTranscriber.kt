@@ -38,33 +38,6 @@ abstract class RuleBasedTranscriber:Transcriber, BaseRules {
         UnmatchedOutput(it.substring(1), it[0].toString())
     }
 
-    /*Automatically applies the rule which consumes the most characters*/
-    /*fun String.greedy(rules: List<Rule>, onNoRuleMatch: (unmatched: String) -> UnmatchedOutput):String {
-        var out:String = ""
-        var processingWord = this
-        loop@ while(processingWord.isNotEmpty()) {
-            //val matchResult:MatchResult? = rule.unconsumedMatcher.find(processingWord)
-            val rule:Rule? = rules.filter { it.unconsumedMatcher.find(processingWord)?.range?.start == 0 }
-                .sortedBy { it.lettersConsumed }.lastOrNull()
-            if(rule == null) {
-                //no rule matched; call the lambda!
-                val unmatchedOutput = onNoRuleMatch(processingWord)
-                processingWord = unmatchedOutput.newWorkingInput
-                out = unmatchedOutput.output(out)
-            }else {
-                out = rule.outputString(out)
-                System.out.println("matched rule:$rule")
-                //number of letters consumed is the match length, unless explicitly specified
-                val actualLettersConsumed = rule.lettersConsumed ?: rule.unconsumedMatcher.find(processingWord)?.value?.length ?: 0
-                if(actualLettersConsumed > 0) {
-                    processingWord = processingWord.substring(actualLettersConsumed)
-                    continue@loop
-                }//else keep going through the rule list
-            }
-        }
-        return out
-    }*/
-
     /**Applies the rule which consumes the most characters.
      *
      * Attempt 2

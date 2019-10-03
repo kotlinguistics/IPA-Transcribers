@@ -113,7 +113,54 @@ object ChinesePinyin: RuleBasedTranscriber() {
 
         //medial = /y/, coda = /n/
         Rule("yun", "yn"),
-        Rule("yuan", "ɥɛn")
+        Rule("yuan", "ɥɛn"),
+
+        //Erhua rules
+        //---------------------------------------------------
+
+        //no medial
+        Rule("ar", "ɐʵ"),
+        Rule("or", "ɔʵ"),
+        Rule("e'r", "ɤʵ"),
+        Rule("air", "ɐʵ"),
+        Rule("eir", "ɚ̯"),
+        Rule("aor", "au̯˞"),
+        Rule("our", "ou̯˞"),
+        Rule("anr", "ɐʵ"),
+        Rule("enr", "ɚ̯"),
+        Rule("angr","ɑ̃ʵ"),
+        Rule("engr","ɤ̃ʵ"),
+
+        //medial = /j/
+        Rule("yir","jɚ"),
+        Rule("yar","jɐʵ"),
+        Rule("yer","jɛʵ"),
+        Rule("yaor","jau̯ʵ"),
+        Rule("your","jou̯ʵ"),
+        Rule("yanr","jɐʵ"),
+        Rule("yinr","jɚ"),
+        Rule("yangr","jɑ̃ʵ"),
+        Rule("yingr","jɤ̃ʵ"),
+
+        //medial = /w/
+        Rule("wur", "u˞"),
+        Rule("war", "wɐʵ"),
+        Rule("wor", "wɔʵ"),
+        Rule("wair", "wɐʵ"),
+        Rule("weir", "wɚ̯"),
+        Rule("wanr", "wɐʵ"),
+        Rule("wenr", "wɚ̯"),
+        Rule("wangr", "wɑ̃ʵ"),
+        Rule("wengr", "wɤ̃ʵ"),//or ʊ̃˞
+
+        //medial = /y/
+        Rule("yur", "ɥɚ"),
+        Rule("yuer", "ɥœʵ"),
+        Rule("yuanr", "ɥɐʵ"),
+        Rule("yunr", "ɥɚ"),
+        Rule("yongr", "jʊ̃ʵ"),
+
+        Rule("","")
     )
 
     //only contains rules which differ from the equivalent rule in finalRules.
@@ -182,7 +229,59 @@ object ChinesePinyin: RuleBasedTranscriber() {
 
         //medial = /y/, coda = /n/
         Rule("ün", "yn"),//todo: ü is written as u after j, q, or x
-        Rule("üan", "ɥɛn")//todo: ü is written as u after j, q, or x
+        Rule("üan", "ɥɛn"),//todo: ü is written as u after j, q, or x
+
+        //----------------------------------------------------------------------------
+        //Erhua rules
+
+        //no medial
+        Rule("ir", "ɚ"),
+        Rule("or", "ɔʵ"),
+        Rule("er", "ɤʵ"),
+        Rule("air", "ɐʵ"),
+        Rule("eir", "ɚ̯"),
+        Rule("aor", "au̯˞"),
+        Rule("our", "ou̯˞"),
+        Rule("anr", "ɐʵ"),
+        Rule("enr", "ɚ̯"),
+        Rule("angr", "ɑ̃ʵ"),
+        Rule("engr", "ɤ̃ʵ"),
+
+        //medial = /j/
+        Rule("ir", "jɚ"),
+        Rule("iar", "jɐʵ"),
+        Rule("ier", "jɛʵ"),
+        Rule("iaor", "jau̯ʵ"),
+        Rule("iur", "jou̯ʵ"),
+        Rule("ianr", "jɐʵ"),
+        Rule("inr", "jɚ"),
+        Rule("iangr", "jɑ̃ʵ"),
+        Rule("ingr", "jɤ̃ʵ"),
+
+
+        //fixme: the following finals (which expect a preceding initial) haven't got an <r> on the end,
+        // which means there's nothing distinguishing them from their non-erhua counterparts!
+        // find out if this an error on Wikipedia, or if there really is no orthographical distinction.
+        //[u˞] -u
+        //[wɐʵ] -ua
+        //[wɔʵ] -uo
+        //[wɐʵ] -uai
+        //[wɚ̯] -ui
+        //[wɐʵ] -uan
+        //[wɚ̯] -un
+        //[wɑ̃ʵ] -uang
+        //medial = /w/
+        Rule("ongr", "wɤ̃ʵ"),//or ʊ̃˞
+
+        //medial = /y/
+        Rule("ür", "ɥɚ"),
+        Rule("üer", "ɥœʵ"),
+        Rule("üanr", "ɥɐʵ"),
+        Rule("ünr", "ɥɚ"),
+        Rule("iongr", "jʊ̃ʵ"),
+
+
+        Rule("","")//todo: delete after finishing
     )
 
     //this is a Finite State Machine which greedily applies the rule which matches the most characters

@@ -8,7 +8,8 @@ import com.github.medavox.normaliseNfd
 /**Status:COMPLETE
  * All the 'modern' combining jamo have been transcribed.
  *
- * All Unicode combining-character syllable-initial consonants have been transcribed (unicode block U+1100 - U+1112).
+ * All Unicode combining-character syllable-initial consonants have been transcribed
+ * (unicode block U+1100 - U+1112).
  * All Unicode combining-character vowels have been transcribed (Unicode block U+1161 - U+1175).
  * For Unicode combining-character syllable-final consonants: the simple ones have been transcribed -
  * jamo which are only a single 'plain' letter.
@@ -73,7 +74,8 @@ object KoreanHangeul: RuleBasedTranscriber() {
         Rule("[ᆮᇀᆾᇂᆺᆻᆽ]", "t̚"),
         Rule("ᆼ", "ŋ"),
 
-        //Sandhi consonant clusters. These rules need to be applied before the normal consonant cluster rules
+        //Sandhi consonant clusters.
+        // These rules need to be applied before the normal consonant cluster rules
         Rule("ᆪ ᄋ", "k s"),
         Rule("ᆰ ᄋ", "l k"),
         Rule("ᆬ ᄋ", "n tɕ"),

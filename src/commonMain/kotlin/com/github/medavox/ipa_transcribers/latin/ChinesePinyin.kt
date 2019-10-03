@@ -12,12 +12,23 @@ object ChinesePinyin: RuleBasedTranscriber() {
     //Unlike European languages,
     // clusters of letters — initials (声母; 聲母; shēngmǔ) and finals (韵母; 韻母; yùnmǔ) —
     // and not consonant and vowel letters,
-    // form the fundamental elements in pinyin (and most other phonetic systems used to describe the Han language).
+    // form the fundamental elements in pinyin
+    // (and most other phonetic systems used to describe the Han language).
     // Every Mandarin syllable can be spelled with exactly one initial followed by one final,
     // except for the special syllable er or when a trailing -r is considered part of a syllable.
-    // The latter case, though a common practice in some sub-dialects, is rarely used in official publications.
+    // The latter case, though a common practice in some sub-dialects,
+    // is rarely used in official publications.
     //
-    //Even though most initials contain a consonant, finals are not always simple vowels, especially in compound finals (复韵母; 複韻母; fùyùnmǔ), i.e. when a "medial" is placed in front of the final. For example, the medials [i] and [u] are pronounced with such tight openings at the beginning of a final that some native Chinese speakers (especially when singing) pronounce yī (衣, clothes, officially pronounced /í/) as /jí/ and wéi (围; 圍, to enclose, officially pronounced /uěi/) as /wěi/ or /wuěi/. Often these medials are treated as separate from the finals rather than as part of them; this convention is followed in the chart of finals below.
+    //Even though most initials contain a consonant, finals are not always simple vowels,
+    // especially in compound finals (复韵母; 複韻母; fùyùnmǔ),
+    // i.e. when a "medial" is placed in front of the final.
+    // For example, the medials [i] and [u] are pronounced with such tight openings at the
+    // beginning of a final that some native Chinese speakers (especially when singing)
+    // pronounce yī (衣, clothes, officially pronounced /í/) as /jí/ and wéi
+    // (围; 圍, to enclose, officially pronounced /uěi/) as /wěi/ or /wuěi/.
+    //
+    // Often these medials are treated as separate from the finals rather than as part of them;
+    // this convention is followed in the chart of finals below.
     private var mode:Mode = INITIALS
     private enum class Mode {
         INITIALS,
@@ -224,7 +235,8 @@ object ChinesePinyin: RuleBasedTranscriber() {
         Rule("wang", "waŋ"),
 
         //medial = /y/, no coda
-        Rule("ü", "y"),//todo: ü is written as u after j, q, or x (and technically y, but that is handled here)
+        Rule("ü", "y"),//todo: ü is written as u after j, q, or x
+        //                                  (and technically y, but that is handled here)
         Rule("üe", "ɥe"),//todo: ü is written as u after j, q, or x
 
         //medial = /y/, coda = /n/
@@ -259,9 +271,9 @@ object ChinesePinyin: RuleBasedTranscriber() {
         Rule("ingr", "jɤ̃ʵ"),
 
 
-        //fixme: the following finals (which expect a preceding initial) haven't got an <r> on the end,
-        // which means there's nothing distinguishing them from their non-erhua counterparts!
-        // find out if this an error on Wikipedia, or if there really is no orthographical distinction.
+    //fixme: the following finals (which expect a preceding initial) haven't got an <r> on the end,
+    // which means there's nothing distinguishing them from their non-erhua counterparts!
+    // find out if this an error on Wikipedia, or if there really is no orthographical distinction.
         //[u˞] -u
         //[wɐʵ] -ua
         //[wɔʵ] -uo
@@ -284,7 +296,7 @@ object ChinesePinyin: RuleBasedTranscriber() {
         Rule("","")//todo: delete after finishing
     )
 
-    //this is a Finite State Machine which greedily applies the rule which matches the most characters
+    //A Finite State Machine which greedily applies the rule that matches the most characters
     fun String.processPinyin(onNoRuleMatch:(unmatched:String) -> UnmatchedOutput) : String {
         var out:String = ""
         var processingWord:String = this
@@ -292,7 +304,8 @@ object ChinesePinyin: RuleBasedTranscriber() {
 
         //when in Mode.FINALS_NO_INITAL, try the finalRulesNoInitials first,
         //and if nothing matches, try the normal finalRules list.
-        //that way, we can omit rules from finalRulesNoInitials whose output is the same as the equivalent finalRules
+        //that way, we can omit rules from finalRulesNoInitials whose output is the same as
+        // the equivalent finalRules
         loop@ while(processingWord.isNotEmpty()) {
             //uses the first rule which matches -- so rule order matters
 
@@ -308,9 +321,11 @@ object ChinesePinyin: RuleBasedTranscriber() {
                     //the consumed matcher must either be null (unspecified), or
                     (it.consumedMatcher == null ||
                     //it must match at the end of the "already-consumed input" string
-                    it.consumedMatcher.findAll(consumed).lastOrNull()?.range?.endInclusive == consumed.length-1)
+                    it.consumedMatcher.findAll(consumed).lastOrNull()?.range?.
+                        endInclusive == consumed.length-1)
             }.maxBy {
-                it.lettersConsumed ?: it.unconsumedMatcher.find(processingWord)!!.value.length//shouldn't be null,
+                //shouldn't be null,
+                it.lettersConsumed ?: it.unconsumedMatcher.find(processingWord)!!.value.length
                 //because we've already filtered out the null ones in the above filter{} block
             }
 

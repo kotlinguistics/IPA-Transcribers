@@ -13,7 +13,7 @@ interface BaseRules {
     }
     val devanagariBaseRules:List<IRule> get() = listOf(
 
-        //consonants.
+        //Consonants
         // These have an inherent schwa (which is often romanised as 'a'),
         //if there isn't another vowel attached to that character.
         Rule("क़", "qə"),//2
@@ -58,7 +58,8 @@ interface BaseRules {
         Rule("ह", "ɦə"),//1
 
 
-        //Vowels. Each vowel has an independent form, and a form which attaches to the previous consonant.
+        //Vowels
+        //Each vowel has an independent form, and a form which attaches to the previous consonant.
         //Much kudos to Unicode's Devanagari support;
         // the vowels act like separate characters on a character level,
         // but combine with their previous consonant to form the right character visually.
@@ -78,7 +79,8 @@ interface BaseRules {
         RevisingRule("ं", {l(it)}),// "anusvara" diacritic nasalises the preceding consonant*
         //or in modern hindi and marathi, sometimes its vowel as well. It's comlicated.
 
-        Rule("ँ", "̃"), //nasalised vowel diacritic. Presumably can go over any (or some) other vowels
+        //nasalised vowel diacritic. Presumably can go over any (or some) other vowels
+        Rule("ँ", "̃"),
 
         //numbers, for completeness' sake
         Rule("०", "0"),

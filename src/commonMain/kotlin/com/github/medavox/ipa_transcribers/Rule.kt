@@ -32,11 +32,14 @@ sealed class IRule(
      * starting from the most recently consumed character - the end of the used-up input-string.
      * If not null, BOTH matchers must match.*/
     val consumedMatcher:Regex?,
+
     /**The incoming native text that this rule operates on.*/
     val unconsumedMatcher: Regex,
+
     /**A lambda which returns the new output string, __replacing the whole of the old output string.__
      * Use this constructor if your rule has side effects, such as counting vowels so far.*/
     val outputString: (soFar:String, theMatches:MatchGroupCollection) -> String,
+
     /**The number of letters of native/input text that have been 'consumed' by this rule.
      * if not specified, defaults to the size of the Regex match.*/
     val lettersConsumed: Int? = null)

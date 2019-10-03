@@ -10,8 +10,8 @@ import com.github.medavox.ipa_transcribers.latin.German.Vowels.*
  * In terms of accuracy, it's going to be close,
  * but it can never be 100% with the vowels, because the vowel length rules don't always apply.
  *
- * Still to do: rules around final consonant devoicing,
- * and voicing harmonisation (eg when an unvoiced consonant devoices surrounding or following consonants)*/
+ * Still to do: rules around final consonant devoicing, and voicing harmonisation
+ * (eg when an unvoiced consonant devoices surrounding or following consonants)*/
 object German: RuleBasedTranscriber() {
     override val completionStatus: CompletionStatus = CompletionStatus.SURFACE_LEVEL_COMPLETE
 
@@ -19,8 +19,10 @@ object German: RuleBasedTranscriber() {
     val consonants = "bcdfghjklmnpqrstvwxyz"
 
     //A doubled consonant after a vowel indicates that the vowel is short,
-    //while a single consonant often indicates the vowel is long, e.g. Kamm ('comb') has a short vowel /kam/,
-    //while kam ('came') has a long vowel /kaːm/. Two consonants are not doubled: k, which is replaced by ck
+    //while a single consonant often indicates the vowel is long,
+    //e.g. Kamm ('comb') has a short vowel /kam/, while kam ('came') has a long vowel /kaːm/.
+    //
+    // Two consonants are not doubled: k, which is replaced by ck
     // (until the spelling reform of 1996, however, ck was divided across a line break as k-k),
     //and z, which is replaced by tz.
     //In loanwords, kk (which may correspond with cc in the original spelling) and zz can occur.
@@ -143,23 +145,25 @@ object German: RuleBasedTranscriber() {
         Rule("ie", "iː"),
         //Occasionally – typically in word-final position – this digraph <ie> represents /iː.ə/
         //as in the plural noun Knie /kniː.ə/ ('knees') (cf. singular Knie /kniː/).
-        //In Fraktur, where capital I and J are identical or near-identical J {\displaystyle {\mathfrak {J}}}
-        //{\displaystyle {\mathfrak {J}}}, the combinations Ie and Je are confusable;
-        //hence the combination Ie is not used at the start of a word, for example Igel ('hedgehog'), Ire ('Irishman').
+        //In Fraktur, where capital I and J are identical or near-identical,
+        // the combinations Ie and Je are confusable; hence the combination Ie is not used at the
+        // start of a word, for example Igel ('hedgehog'), Ire ('Irishman').
 
-        //The letters a, e, o are doubled in a few words that have long vowels, for instance Saat ('seed'),
-        //See ('sea'/'lake'), Moor ('moor').
+        //The letters a, e, o are doubled in a few words that have long vowels,
+        // for instance Saat ('seed'), See ('sea'/'lake'), Moor ('moor').
         Rule("aa", A.long),
         Rule("ee", E.long),
         Rule("oo", O.long),
 
         //A doubled consonant after a vowel indicates that the vowel is short,
-        //while a single consonant often indicates the vowel is long, e.g. Kamm ('comb') has a short vowel /kam/,
-        //while kam ('came') has a long vowel /kaːm/. Two consonants are not doubled: k, which is replaced by ck
+        //while a single consonant often indicates the vowel is long,
+        // e.g. Kamm ('comb') has a short vowel /kam/, while kam ('came') has a long vowel /kaːm/.
+        // Two consonants are not doubled: k, which is replaced by ck
         // (until the spelling reform of 1996, however, ck was divided across a line break as k-k),
         //and z, which is replaced by tz.
         //In loanwords, kk (which may correspond with cc in the original spelling) and zz can occur.
-        //Consonants are sometimes doubled in writing to indicate the preceding vowel is to be pronounced as a short vowel.
+        //Consonants are sometimes doubled in writing to indicate the preceding vowel is to be
+        // pronounced as a short vowel.
         Rule("a$vowelShorteningConsonantPairs", A.short, 1),
         Rule("ä$vowelShorteningConsonantPairs", Ä.short, 1),
         Rule("e$vowelShorteningConsonantPairs", E.short, 1),
@@ -173,9 +177,10 @@ object German: RuleBasedTranscriber() {
         Rule("ä", "Ä"),
         Rule("ö", "Ö"),
 
-        //For different consonants and for sounds represented by more than one letter (ch and sch) after a vowel,
-        //no clear rule can be given, because they can appear after long vowels,
-        // yet are not redoubled if belonging to the same stem, e.g. Mond /moːnt/ 'moon', Hand /hant/ 'hand'.
+        //For different consonants and for sounds represented by more than one letter (ch and sch)
+        // after a vowel, no clear rule can be given, because they can appear after long vowels,
+        // yet are not redoubled if belonging to the same stem, e.g.
+        // Mond /moːnt/ 'moon', Hand /hant/ 'hand'.
         LookbackRule(" ", "mond( |$)", "moːnt", 4),
         LookbackRule("( |^)", "hand( |$)", "hant", 4),
         //On a stem boundary, reduplication usually takes place, e.g., nimm-t 'takes';
@@ -183,10 +188,11 @@ object German: RuleBasedTranscriber() {
         // e.g., Geschäft /ɡəˈʃɛft/ 'business' despite schaffen 'to get something done'.
 
         //ß indicates that the preceding vowel is long, e.g. Straße 'street' vs. Masse 'amount'.
-        //In addition to that, texts written before the 1996 spelling reform also use ß at the ends of words and before
+        //In addition to that,
+        // texts written before the 1996 spelling reform also use ß at the ends of words and before
         //consonants, e.g. naß 'wet' and mußte 'had to' (after the reform spelled nass and musste),
-        //so vowel length in these positions could not be detected by the ß, cf. Maß 'measure' and fußte 'was based'
-        // (after the reform still spelled Maß and fußte).
+        //so vowel length in these positions could not be detected by the ß,
+        // cf. Maß 'measure' and fußte 'was based' (after the reform still spelled Maß and fußte).
 
         //A vowel usually represents a long sound if the vowel in question occurs:
         //=======================================================================
@@ -213,12 +219,15 @@ object German: RuleBasedTranscriber() {
         Rule("u[$consonants]{1}($| |[$vowels])", U.long, 1),
         Rule("ü[$consonants]{1}($| |[$vowels])", Ü_Y.long, 1),
 
-        //A silent h indicates a long vowel in certain cases. That h derives from an old /x/ in some words,
-        //for instance sehen ('to see') zehn ('ten'), but in other words it has no etymological justification,
-        //for instance gehen ('to go') or mahlen ('to mill'). Occasionally a digraph can be redundantly followed by h,
-        //either due to analogy, such as sieht ('sees', from sehen) or etymology, such as Vieh ('cattle', MHG vihe),
+        //A silent h indicates a long vowel in certain cases.
+        //That h derives from an old /x/ in some words, for instance sehen ('to see') zehn ('ten'),
+        // but in other words it has no etymological justification,
+        //for instance gehen ('to go') or mahlen ('to mill').
+        //Occasionally a digraph can be redundantly followed by h, either due to analogy,
+        // such as sieht ('sees', from sehen) or etymology, such as Vieh ('cattle', MHG vihe),
         //rauh ('rough', pre-1996 spelling, now written rau, MHG ruh).
-        CapturingRule(Regex("([$vowels])h"), {soFar, groups -> soFar+Vowels.from(groups[1]!!.value).long}, 2),
+        CapturingRule(Regex("([$vowels])h"),
+            {soFar, groups -> soFar+Vowels.from(groups[1]!!.value).long}, 2),
 
        //old -- use these to double-check the new vowel rules, when they're done
 /*        Rule("wird", "ɪɐ̯"),
@@ -250,11 +259,12 @@ object German: RuleBasedTranscriber() {
         Rule("w", "v"),
         Rule("r[$vowels]", "ʁ", 1),
         Rule("r($| )", "ɐ", 1),
-        //todo:Double consonants are pronounced as single consonants, except in compound words.
 
         //b: at end of syllable: [p]; otherwise: [b] or [b̥]
         Rule("b(^| )", "p", 1),
-        //TODO ch: after a, o, and u: [x]; after other vowels or consonants or initially: [ç] or [k] (word-initially in Southern Germany);
+        //ch: after a, o, and u: [x];
+        // after other vowels or consonants or initially: [ç] or [k]
+        // (word-initially in Southern Germany);
         //chs: [ks] within a morpheme (e.g. Dachs [daks] "badger"); [çs] or [xs] across a morpheme boundary (e.g.
         // Dachs [daxs] "roof (genitive)")
         Rule("chs", "ks"),
@@ -272,20 +282,24 @@ object German: RuleBasedTranscriber() {
             //Many speakers pronounce ⟨dsch⟩ as [t͡ʃ] (= ⟨tsch⟩), because [dʒ] is not native to German.
         //dt: [t]
         Rule("dt", "t"),
-        //g: when part of word-final -ig: [ç] or [k] (Southern German); at the end of a syllable: [k]; otherwise: [ɡ] or [ɡ̊]
+        //g: when part of word-final -ig: [ç] or [k] (Southern German);
+        // at the end of a syllable: [k]; otherwise: [ɡ] or [ɡ̊]
         Rule("ig( |$)", "ɪç"),
         //h: before a vowel: [h]; when lengthening a vowel: silent
         Rule("h[$vowels]", "h", 1),
         //j: [j] in most words; [ʒ] in loanwords from French (as in jardin, French for garden)
         Rule("j", "j"),
-        //ng: usually: [ŋ]; in compound words where the first element ends in "n" and the second element begins with "g" (-n·g-): [nɡ] or [nɡ̊]
+        //ng: usually: [ŋ];
+        // in compound words where the first element ends in "n" and the second element begins with
+        // "g" (-n·g-): [nɡ] or [nɡ̊]
         Rule("ng", "ŋ"),
         //nk: [ŋk]
         Rule("nk", "ŋk"),
         //pf: [pf] in all cases with some speakers;
         Rule("pf", "pf"),
-            //with other speakers [f] at the beginning of words (or at the beginning of compound words' elements)
-            // and [pf] in all other cases
+        //with other speakers [f] at the beginning of words
+        // (or at the beginning of compound words' elements)
+        // and [pf] in all other cases
 
         //ph: [f]
         Rule("ph", "f"),
@@ -307,9 +321,11 @@ object German: RuleBasedTranscriber() {
         Rule("s($| )", "s", 1),
         LookbackRule("[$vowels]?", "s[$vowels]", "z", 1),
 
-        //the suffix -chen always [ç]. In Austro-Bavarian, especially in Austria, [ç] may always be substituted by [x].
-        //sch: [ʃ]; however, [sç] when part of the -chen diminutive of a word ending on "s", (e.g. Mäuschen "little mouse")
+        //the suffix -chen is always [ç].
+        // In Austro-Bavarian, especially in Austria, [ç] may always be substituted by [x].
         Rule("chen", "ç", 2),
+        //sch: [ʃ]; however, [sç] when part of the -chen diminutive of a word ending on "s",
+        // (e.g. Mäuschen "little mouse")
         Rule("sch", "ʃ"),
 
         //ss, ß: [s]

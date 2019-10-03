@@ -3,7 +3,8 @@ import org.junit.Before
 import java.io.ByteArrayOutputStream
 import java.io.PrintStream
 
-/**Common functionality when testing that a transcriber covers all possible codepoints in a language's unicode block.*/
+/**Common functionality when testing that a transcriber covers all possible codepoints in a
+ * language's unicode block.*/
 abstract class CoverageTest {
     protected val errOut:ByteArrayOutputStream = ByteArrayOutputStream()
 

@@ -10,7 +10,7 @@ import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
  * So this transcriber takes their romanisation and converts it to IPA.
  *
  * However, Google's romanisation also throws away a lot of the original information in the arabic text.
- * For example, glottalised consonants are not transliterated differently than glottalised consonants,
+ * For example, glottalised consonants aren't transliterated differently than glottalised consonants,
  * despite these being distinguished in Arabic.*/
 object ArabicGoogleRomanised: RuleBasedTranscriber() {
     override val completionStatus: CompletionStatus = CompletionStatus.COMPLETE_PARTIAL

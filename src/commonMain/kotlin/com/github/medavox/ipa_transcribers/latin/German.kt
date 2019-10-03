@@ -5,9 +5,15 @@ package com.github.medavox.ipa_transcribers.latin
 import com.github.medavox.ipa_transcribers.*
 import com.github.medavox.ipa_transcribers.latin.German.Vowels.*
 
-/**This transcriber follows pronunciation in Standard German, as spoken in Germany.*/
+/**This transcriber follows pronunciation in Standard German, as spoken in Germany.
+ *
+ * In terms of accuracy, it's going to be close,
+ * but it can never be 100% with the vowels, because the vowel length rules don't always apply.
+ *
+ * Still to do: rules around final consonant devoicing,
+ * and voicing harmonisation (eg when an unvoiced consonant devoices surrounding or following consonants)*/
 object German: RuleBasedTranscriber() {
-    override val completionStatus: CompletionStatus = CompletionStatus.IN_PROGRESS
+    override val completionStatus: CompletionStatus = CompletionStatus.SURFACE_LEVEL_COMPLETE
 
     val vowels = "aeiouäöü"
     val consonants = "bcdfghjklmnpqrstvwxyz"

@@ -1,4 +1,4 @@
-package com.github.medavox.ipa_transcribers.asian_unique
+package com.github.medavox.ipa_transcribers.other
 
 import com.github.medavox.ipa_transcribers.CompletionStatus
 import com.github.medavox.ipa_transcribers.Rule

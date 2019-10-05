@@ -1,7 +1,7 @@
 package com.github.medavox.ipa_transcribers
 
 import com.github.medavox.ipa_transcribers.arabic.*
-import com.github.medavox.ipa_transcribers.asian_unique.*
+import com.github.medavox.ipa_transcribers.other.*
 import com.github.medavox.ipa_transcribers.brahmic.*
 import com.github.medavox.ipa_transcribers.latin.*
 

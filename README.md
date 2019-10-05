@@ -57,33 +57,39 @@ The languages I aim to support, and their eligibility for rule-based transcriber
 
 Language                | Rule-based eligible?
 ------------------------|------------
-Mandarin Chinese        | no
-English                 | maybe?
-Hindi                   | yes
-Spanish                 | yes
-French                  | probably
-Modern Standard Arabic  | partially
-Russian                 | mostly - no vowel reduction
+Arabic, Modern Standard | partially
 Bengali                 | yes
+Chinese (Mandarin)      | no
+Chinese Bopomofo/Zhuyin | yes
+Chinese Pinyin          | yes
+English                 | maybe? very irregular, many loanwords = multiple simultaneous spelling systems
+Filipino/Tagalog        | yes
+French                  | mostly
+German                  | mostly
+Gujarati                | yes
+Hausa                   | yes
+Hindi                   | yes
+Indonesian/Malay        | yes
+Italian                 | yes
 Japanese Kanji          | no
 Japanese Katakana       | yes
 Japanese Hiragana       | yes
+Javanese                | yes
+Korean                  | mostly
+Marathi                 | yes
+Persian/Dari/Farsi/Tajik| partially
 Portuguese              | probably
-Indonesian              | yes
-Urdu                    | partially
-German                  | probably
 Punjabi Gurmukhi        | yes
 Punjabi/Lahnda Shahmukhi| partially
+Russian                 | mostly - no vowel reduction
+Spanish                 | yes
 Swahili                 | yes
-Javanese                | yes
-Telugu                  | yes
-Turkish                 | yes
-Korean                  | yes, mostly
-Marathi                 | yes
 Tamil                   | yes
-Persian/Dari            | partially
+Telugu                  | yes
+Thai                    | technically yes, but reportedly very irregular
+Turkish                 | yes
+Urdu                    | partially
 Vietnamese              | signs point to no
-Italian                 | probably
 
 
 **"Probably"**: this language uses the latin alphabet (which means it probably can be transliterated),
@@ -102,15 +108,19 @@ for information on the completion status for each language, look in the `project
 If:-
 
 * you have insight into *how* a system works in a particular language's orthography,
-* you want to add support for a language I've not included here,
+* you want to add support for a language not included here,
 * or if you spot a mistake in the IPA output,
 
-please do one of the following (Most preferred first):
+please do one of the following (most preferred first):
 
 1. Submit a pull request with the relevant work implemented (*provide code*)
-2. Open an issue, describing *how* a language feature works (*provide language-specific knowledge*),
-3. Tell me that for input *x*, output *y* is wrong and should instead be *z* (*provide correct example(s)*)
-4. Request a feature and I will record your interest. Given enough interest, I *may* still try to implement other languages or features.
+    - This project supports code in either Java or Kotlin.
+2. Open an issue, describing *how* a language feature works (*provide language-specific knowledge*)
+    - regular rules are best, if they exist.
+3. Mention that for input *x*, output *y* is wrong and should instead be *z* (*provide correct example(s)*)
+    - I'll do my best to work this into an applicable rule.
+4. Request a feature and I will record your interest.
+    - Given enough interest, I *may* still try to implement other languages or features.
  
 As of writing this (March 2019), I'm still working on implementing the basic rule-based transcribers
 for all the eligible languages I'll be covering.
@@ -133,14 +143,18 @@ The orthography of some languages contains little or no information about its in
 
 This is called [Orthographic Depth](https://en.wikipedia.org/wiki/Orthographic_depth).
 Languages with high orthographic depth cannot be transliterated (or fully transliterated) in a purely rule-based way,
-using only the native orthography. 
+using only the native orthography.
+They require familiarity with the language, writing system or culture to be pronounced correctly.
 
 Examples of prominent languages with high orthographic depth are
 
-* Chinese (whose writing system is a modified ideography, 
-  containing little to no pronunciation information beyond rhyming hints), 
+* Chinese (whose primary writing system is a modified ideography, 
+  containing very little pronunciation information), 
 * Arabic (whose writing system doesn't normally record short vowels), and
-* Japanese (it's complicated, but in short the roots of words in normal text are written down with modified versions of Chinese characters called Kanji)
+* Japanese (it's complicated, but in short the roots of words in normal text are written down with
+ modified versions of Chinese ideograms called Kanji,
+ whose pronunciation comes from a 17th-century Japanese approximation of classical Chinese,
+ and has only a very tenuous relation to the modern Chinese pronunciation)
 
 I have withheld web-scraper-based transliterators for languages like these.
 
@@ -172,11 +186,11 @@ One goal of the language was to maximise the verbal familiarity of each word to 
 
 For instance, the word for 'bridge' in French is *ponte*, and in Italian is *puente*. 
 There is also a more obscure English word 'pont', which is a type of ferry boat.
-Although the definition is not related, it is related. 
+Although the definition is not the same, it is related -- both are means of crossing water. 
 So by choosing a word in my language for bridge that sounded similar (say, 'pont'),
 I could reduce the difficulty in remembering the words of the language for more people.
 
-In practice, there need to be comparisons between more languages than just French, Italian and English. 
+In reality, there need to be comparisons between more languages than just French, Italian and English. 
 I decided to compare words in the top 25<sup>[1](#numlangs)</sup> most widely spoken languages on the planet,
 and prioritise that language based on its number of speakers (both L1 and L2).
 
@@ -187,7 +201,7 @@ However, even between languages with Latin writing systems,
 differences in the spelling system caused my text-only approach to miss words that were 
 *spelled differently, but pronounced the same*.
 
-So I created this software to allow direct, equivalent comparisons between languages --
+So I created this software to allow more direct, accurate comparisons between languages --
 regardless of orthography or spelling system used.
 
 I'm sure, however, that this software can be put to other uses.
@@ -208,3 +222,10 @@ given the large scope of this project.
 
 If you take issue with any inaccuracies in this software,
 please submit an issue or pull request, either detailing your grievances, or fixing the problem.
+
+This software is primarily about writing systems, not languages. 
+However the way that a language uses a writing system is often highly unique, 
+and tied to the language itself
+
+I have grouped transcribers by writing system family,
+not by any linguistic, political, historical or geographic considerations.

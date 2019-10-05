@@ -51,7 +51,7 @@ abstract class RuleBasedTranscriber:Transcriber, BaseRules {
         The first rule will match, even though the second one consumes more characters.
 
         Includes the consumed match (if any) in the specificity metric.
-     */
+     *///todo: when 2 rules are of equal specificity, use the one that appears first
     fun String.processGreedily(rules:List<IRule>, onNoRuleMatch:(unmatched:String) -> UnmatchedOutput) : String {
         var out:String = ""
         var processingWord:String = this

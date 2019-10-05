@@ -3,6 +3,7 @@ package com.github.medavox.ipa_transcribers.brahmic
 import com.github.medavox.ipa_transcribers.CompletionStatus
 import com.github.medavox.ipa_transcribers.IRule
 import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
+import com.github.medavox.ipa_transcribers.brahmic.DevanagariBaseRules.devanagariBaseRules
 
 /**Status: surface-level complete
  * Hindi uses the Devanagari writing system, a descendant of the Brahmi writing system

@@ -4,6 +4,8 @@ import com.github.medavox.ipa_transcribers.CompletionStatus
 import com.github.medavox.ipa_transcribers.IRule
 import com.github.medavox.ipa_transcribers.Rule
 import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
+import com.github.medavox.ipa_transcribers.latin.LatinBaseRules.latinBaseRules
+
 //write google -> IPA arabic transcriber
 /**Google Translate's romanisation of Arabic includes vowel information not present in the Arabic text.
  * Maybe they have a lookup dictionary.

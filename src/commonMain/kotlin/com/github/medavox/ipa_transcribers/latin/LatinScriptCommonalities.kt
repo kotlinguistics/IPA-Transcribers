@@ -1,7 +1,8 @@
 package com.github.medavox.ipa_transcribers.latin
 
 import com.github.medavox.ipa_transcribers.Rule
-object LatinBaseRules {
+/**Rules for Latin-Script letters whose pronunciation across all languages varies more rarely.*/
+object LatinScriptCommonalities {
     val latinBaseRules: List<Rule> get() = listOf(
             Rule("a", "a"),
             Rule("b", "b"),

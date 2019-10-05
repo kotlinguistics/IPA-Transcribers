@@ -1,7 +1,7 @@
 package com.github.medavox.ipa_transcribers.latin
 
 import com.github.medavox.ipa_transcribers.*
-import com.github.medavox.ipa_transcribers.latin.LatinBaseRules.latinBaseRules
+import com.github.medavox.ipa_transcribers.latin.LatinScriptCommonalities.latinBaseRules
 
 /**Status:COMPLETE
  * barring any major irregularities.

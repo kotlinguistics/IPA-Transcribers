@@ -4,7 +4,7 @@ package com.github.medavox.ipa_transcribers.latin
 
 import com.github.medavox.ipa_transcribers.*
 import com.github.medavox.ipa_transcribers.latin.German.Vowels.*
-import com.github.medavox.ipa_transcribers.latin.LatinBaseRules.latinBaseRules
+import com.github.medavox.ipa_transcribers.latin.LatinScriptCommonalities.latinBaseRules
 
 /**This transcriber follows pronunciation in Standard German, as spoken in Germany.
  *

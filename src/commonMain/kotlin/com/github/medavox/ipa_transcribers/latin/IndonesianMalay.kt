@@ -3,7 +3,7 @@ package com.github.medavox.ipa_transcribers.latin
 import com.github.medavox.ipa_transcribers.CompletionStatus
 import com.github.medavox.ipa_transcribers.Rule
 import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
-import com.github.medavox.ipa_transcribers.latin.LatinBaseRules.latinBaseRules
+import com.github.medavox.ipa_transcribers.latin.LatinScriptCommonalities.latinBaseRules
 
 /**Transcriber for the language known as Indonesian in Indonesia, and Malay in Malaysia*/
 object IndonesianMalay:RuleBasedTranscriber() {

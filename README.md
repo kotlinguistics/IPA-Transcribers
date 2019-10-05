@@ -211,7 +211,8 @@ I'm sure, however, that this software can be put to other uses.
              
 ## DISCLAIMER
 
-Language and its use is a deeply personal experience, and has often been politicised.
+Language and its use is an inherently personal experience, 
+and has often been politicised as a result.
 
 I do not intend to make any judgment or create any offense with this software,
 or to take any political stance whatsoever, towards or against any language or culture.
@@ -223,9 +224,25 @@ given the large scope of this project.
 If you take issue with any inaccuracies in this software,
 please submit an issue or pull request, either detailing your grievances, or fixing the problem.
 
-This software is primarily about writing systems, not languages. 
-However the way that a language uses a writing system is often highly unique, 
-and tied to the language itself
+### Grouping Rationale
 
-I have grouped transcribers by writing system family,
+This software is primarily designed around writing systems, not languages. 
+However, the way that a language uses a writing system is often highly unique to that language, 
+and tied to the language itself. 
+
+For instance, every European language has its own spelling conventions; 
+and every language using the Arabic script uses it slightly differently, 
+to represent its own phonemic inventory.
+
+Therefore, it makes sense to include the name of a language in a transcriber,
+as it has been designed for that particular language's idiomatic use of that writing system.
+
+I have grouped transcribers solely by writing system family,
 not by any linguistic, political, historical or geographic considerations.
+
+This means that in some cases, different writing systems for the same language 
+(or closely-related languages, or different dialects of the same language, depending on your view)
+have been included in different packages.
+
+An example of this is Hindi and Urdu (collectively called Hindustani), 
+which use the Devanagari and Arabic scripts respectively, but are mutually intelligible languages.

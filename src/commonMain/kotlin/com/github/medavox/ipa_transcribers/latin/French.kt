@@ -1,19 +1,16 @@
 package com.github.medavox.ipa_transcribers.latin
 
-import com.github.medavox.ipa_transcribers.CompletionStatus
-import com.github.medavox.ipa_transcribers.IRule
-import com.github.medavox.ipa_transcribers.Rule
-import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
+import com.github.medavox.ipa_transcribers.*
 
 import com.github.medavox.ipa_transcribers.latin.LatinScriptCommonalities.latinBaseRules
 
 object French:RuleBasedTranscriber() {
     override val completionStatus: CompletionStatus = CompletionStatus.IN_PROGRESS
+    private val silencableConsonants = "sxztdnpg"
+    private val vowels = "aâeêiîoôuûéèëàï"
+    private val consonants = "bdfghklmnpqstvz"
     //French pronunciation follows strict rules based on spelling, but French spelling is often based more on history than phonology. The rules for pronunciation vary between dialects, but the standard rules are:
-    //
-    //Final single consonants, in particular s, x, z, t, d, n, p and g, are normally silent.
-    //(A consonant is considered "final" when no vowel follows it,
-    // even if one or more consonants follow it.)
+
     //The final letters f, k, q, and l, however, are normally pronounced.
     //The final c is sometimes pronounced like in bac, sac, roc, avec
     //but can also be silent like in blanc or estomac.
@@ -47,16 +44,51 @@ object French:RuleBasedTranscriber() {
     //It can also be noted that in Quebec French,
     //the second example (l'homme qui l'a vu) is more emphasized on l'a vu.
     private val rules:List<IRule> = listOf(
+        //Rule("ai", "jɛ̃"),
+        Rule("à", "a"),
         //The cedilla (la cédille) ç (e.g., garçon—boy) means that the letter ç is pronounced /s/
         // in front of the back vowels a, o and u (c is otherwise /k/ before a back vowel).
         Rule("ç", "s"),
 
         // C is always pronounced /s/ in front of the front vowels e, i, and y
         Rule("c[iey]", "s", 1),
-        Rule("c[aou]", "k", 1),
+        Rule("c[^ieyh]", "k", 1),
+        Rule("qu", "k"),
 
+        //FRICATIVES
+        //----------
         Rule("ch", "ʃ"),
+        Rule("g[ieéè]", "ʒ", 1),
+        Rule("gn", "ɲ"),
+        Rule("j", "ʒ"),
+        LookbackRule("[$vowels]","s[$vowels]", "z", 1),
+        Rule("(ss)", "s"),
+        Rule("ti(on|ence)", "sj", 2),
 
+        //NASAL VOWELS
+        //------
+        Rule(Regex("([ae][mn])[^$vowels]"), "ɑ̃", 2),
+        Rule(Regex("(ean|aon)[^$vowels]"), "ɑ̃", 3),
+        Rule("ie[nm][^$vowels]", "jɛ̃", 3),
+        Rule("u[nm][^$vowels]", "œ̃", 2),
+        Rule("oi", "wa"),
+        Rule("oin", "wɛ̃"),
+
+        //the french r
+        Rule("r", "ʁ"),
+        //-eu in the interior of a word = œ heure
+        LookbackRule("(?!\\b)", "eu(?!\\b)", "œ", 2),
+        //-eu before [z] = ø creuse
+        //-eu as a final sound = ø  peu
+        Rule("eu(se)?", "ø", 2),
+
+        //SEMIVOWELS
+        //----------
+        Rule("(ui|uy)", "ɥ"),
+        LookbackRule("[$vowels]", "il(le?)?\\b", "j"),
+
+        //VOWELS
+        //------
         //The acute accent (l'accent aigu) é (e.g., école—school) means that the vowel is
         // pronounced /e/ instead of the default /ə/.
         Rule("é", "e"),
@@ -69,10 +101,10 @@ object French:RuleBasedTranscriber() {
         // pronounced /ɛ/
         Rule("ê", "ɛ"),
         Rule("e", "ə"),
-        Rule("gn", "ɲ"),
-        Rule("h", ""),
-        Rule("j", "ʃ"),
-
+        //Final single consonants, in particular s, x, z, t, d, n, p and g, are normally silent.
+        //(A consonant is considered "final" when no vowel follows it,
+        // even if one or more consonants follow it.)
+        //Rule("", ""),
         //The circumflex (l'accent circonflexe) signifies that an ô is pronounced /o/.
         //In standard French, it also signifies a pronunciation of /ɑ/ for the letter â,
         //but this differentiation is disappearing.
@@ -80,11 +112,23 @@ object French:RuleBasedTranscriber() {
         //where that letter s was not pronounced.
         // Thus, forest became forêt, hospital became hôpital, and hostel became hôtel.)
         Rule("ô", "o"),
-        Rule("qu", "k")
-    ) + latinBaseRules.filter { with(it.unconsumedMatcher) {
-        this != Regex("e") &&
-        this != Regex("h")
-    } }
+        Rule("(œ|oe)u?", "œ"),
+        Rule("aur", "ɔ", 2),
+        Rule("e?au", "o"),
+        Rule(Regex("e[$silencableConsonants]+\\b"), "e", 1),
+        Rule(Regex("o[$silencableConsonants]+\\b"), "o", 1),
+
+        //SILENT LETTERS
+        //--------------
+        LookbackRule(Regex("[^ ]"), Regex("[$silencableConsonants]+\\b"), ""),
+        Rule("h", ""),
+        Rule("['’]", "")
+    ) + latinBaseRules.filter {
+        with(it.unconsumedMatcher.toString()) {
+        this != "e" &&
+        this != "y" &&
+        this != "h"
+    } } + westernPunctuation
 
     override fun transcribe(nativeText: String): String {
         return nativeText.toLowerCase().processGreedily(rules, ::reportOnceAndCopy)

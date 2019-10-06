@@ -20,6 +20,7 @@ object LatinScriptCommonalities {
             Rule("n", "n"),
             Rule("o", "o"),
             Rule("p", "p"),
+            Rule("ph", "f"),//greek loanwords are common
 
             Rule("s", "s"),
             Rule("t", "t"),

@@ -302,10 +302,8 @@ object German: RuleBasedTranscriber() {
         // (or at the beginning of compound words' elements)
         // and [pf] in all other cases
 
-        //ph: [f]
-        Rule("ph", "f"),
         //qu: [kv] or [kw] (in a few regions)
-        Rule("qu", "kf"),
+        Rule("qu", "kf"),//it's actually going to be devoiced
 
         //r: the pronunciation of r varies regionally:
         //[ʁ] before vowels, [ɐ] otherwise; or

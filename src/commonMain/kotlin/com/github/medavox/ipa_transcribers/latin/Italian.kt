@@ -144,8 +144,6 @@ object Italian: RuleBasedTranscriber() {
         // and derived words (e.g. analizzo /anaˈliddzo/, a derivative of analizzare).
 
 
-        //alternative spelling of /f/, probably from greek loanwords, like in english
-        Rule("ph", "f"),
         //h is always silent, or is part of a digraph
         Rule("h", "")
 

@@ -1,6 +1,7 @@
 package com.github.medavox.ipa_transcribers.latin
 
 import com.github.medavox.ipa_transcribers.*
+import com.github.medavox.ipa_transcribers.latin.LatinScriptCommonalities.latinBaseRules
 
 /**I'm not hopeful that this will work well enough to use,
  * but Mark Rosenfelder seems fairly confident that he's compiled a list of English spelling rules
@@ -371,7 +372,6 @@ Rule 56 goes with rule 16, which changed s to $ before some instances of u. */
         //1. Make the following unconditional replacements:
         Rule("t?ch", "tʃ"),
         Rule("sc?h", "ʃ"),
-        Rule("ph", "f"),
         Rule("th", "θ"),
         Rule("qu", "kw"),
         Rule("wr", "r"),
@@ -499,7 +499,7 @@ Rule 56 goes with rule 16, which changed s to $ before some instances of u. */
         // Hyphens can however be treated as word separators (mother-in-law is pronounced like mother in law).
         Rule("-", " "),
         Rule("", "")
-    )//+latinBaseRules+westernPunctuation
+    )+latinBaseRules+westernPunctuation
     override fun transcribe(nativeText: String): String {
         return nativeText.toLowerCase().processWithRules(rules, reportAndCopy)
     }

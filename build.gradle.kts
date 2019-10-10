@@ -55,7 +55,8 @@ kotlin.sourceSets["commonTest"].dependencies {
     implementation("junit:junit:4.12")
 
     //for getting the most up-to-date list of names for unicode characters
-    implementation(("com.ibm.icu:icu4j:62.1"))
+    implementation("com.ibm.icu:icu4j:62.1")
+    implementation("org.jsoup:jsoup:1.12.1")
 }
 
 //kotlin.sourceSets["androidMain"]

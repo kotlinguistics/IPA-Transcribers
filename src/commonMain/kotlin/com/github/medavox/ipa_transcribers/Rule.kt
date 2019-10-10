@@ -136,6 +136,11 @@ class RevisingRule(match:Regex, outputString:(soFar:String) -> String, lettersUs
     :this(Regex(match), outputString, lettersUsed)
 }
 
+/**Use Regex capturing groups (from the match) in the output string.
+ * Useful for matching a whole class of characters with one rule (eg vowels),
+ * and repeating that character in the output.
+ * The capturing groups aren't access with the traditional string markers (\1 or $1),
+ * but rather with the passed [MatchGroupCollection]'s methods.*/
 class CapturingRule(match:Regex, outputString: (soFar:String, theMatches:MatchGroupCollection) -> String,
                     lettersConsumed: Int?=null):IRule(null, match, outputString, lettersConsumed) {
     constructor(match: String, outputString: (soFar:String, theMatches:MatchGroupCollection) -> String,
@@ -143,7 +148,8 @@ class CapturingRule(match:Regex, outputString: (soFar:String, theMatches:MatchGr
 }
 
 /**Match against BOTH the start of the input string,
- * AND the end of the already-consumed string - the input characters that have already been matched so far.*/
+ * AND the end of the already-consumed string - the input characters that have already been matched so far.
+ * Useful for rules where a match only applies after a different match.*/
 class LookbackRule(consumedMatcher:Regex, unconsumedMatcher:Regex, output:String, lettersConsumed:Int?=null )
     :IRule(consumedMatcher, unconsumedMatcher, { s, _->s+output}, lettersConsumed) {
 

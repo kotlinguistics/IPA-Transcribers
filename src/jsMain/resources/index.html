@@ -4,26 +4,22 @@
   <meta charset="UTF-8">
   <title>IPA Transcribers</title>
   <style>
+    body > * { display: block; }
     body {
       margin: 0;
       padding: 1em;
       font-size: 13px;
       font-family: -system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Droid Sans, Helvetica Neue, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Droid Sans, Helvetica Neue, Arial, sans-serif;
       line-height: 20px;
-      display: block;
     }
   </style>
 </head>
 <body>
-  <div id="app">Loading...</div>
-  <textarea id="input_text"></textarea>
-  <select id="lang_select">
-    <option value="volvo">Volvo</option>
-    <option value="saab">Saab</option>
-    <option value="mercedes">Mercedes</option>
-    <option value="audi">Audi</option>
-  </select>
-  <button id="transliterate_button"></button>
+  <textarea id="input_text" ></textarea>
+  <select id="lang_select"></select>
+  <button id="transliterate_button" type="button">transcribe</button>
+  <textarea id="output_text" readonly="readonly"></textarea>
+  <textarea id="errors_text" readonly="readonly"></textarea>
   <script src="IPA-transcribers.js"></script>
 </body>
 </html>

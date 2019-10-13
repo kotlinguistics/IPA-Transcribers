@@ -3,6 +3,12 @@ import org.jetbrains.kotlin.config.KotlinCompilerVersion
 //import org.jetbrains.kotlin.gradle.tasks.*
 //import org.gradle.jvm.tasks.Jar
 
+//to run the code (manually test it),
+//call ./gradlew jsRun
+
+//to compile the code into a single JS file (includin all depepndencies),
+//call ./gradlew jsBrowserWebpack
+
 plugins {
     kotlin("multiplatform") version "1.3.40"
     java

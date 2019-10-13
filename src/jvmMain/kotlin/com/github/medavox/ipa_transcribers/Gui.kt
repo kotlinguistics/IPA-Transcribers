@@ -1,5 +1,6 @@
 package com.github.medavox.ipa_transcribers
 
+import com.github.medavox.UiStrings
 import javafx.application.Application
 import javafx.event.ActionEvent
 import javafx.geometry.Insets
@@ -30,16 +31,16 @@ class Gui : Application() {
 
         val input = TextArea()
         input.setEditable(true)
-        input.setPromptText("enter native text")
+        input.promptText = UiStrings.inputHint
         input.setWrapText(true)
 
         val output = TextArea()
-        output.promptText = "transliteration appears here"
+        output.promptText = UiStrings.outputHint
         output.setEditable(false)
         output.setWrapText(true)
 
         val errors = TextArea()
-        errors.promptText = "errors appear here"
+        errors.promptText = UiStrings.errorsHint
         errors.setEditable(false)
         errors.setWrapText(true)
         errors.text
@@ -47,10 +48,10 @@ class Gui : Application() {
         val menuButton = MenuButton()
         var selection: Language = Language.ENGLISH
         val languagesMenuItems:Array<MenuItem> = Language.values().
-            map{
+            map {
                 val m = MenuItem(it.neim)
-                m.setOnAction {
-                        event -> menuButton.text = it.neim
+                m.setOnAction { event ->
+                    menuButton.text = it.neim
                     selection = it
                 }
                 m

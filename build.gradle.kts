@@ -10,14 +10,10 @@ import org.jetbrains.kotlin.config.KotlinCompilerVersion
 //call ./gradlew jsBrowserWebpack
 
 plugins {
-    kotlin("multiplatform") version "1.3.40"
+    kotlin("multiplatform") version "1.3.50"
+    id("kotlin-dce-js") version "1.3.50"
     java
-    //`kotlin-dsl`
-    //id("java")
-    //id ("org.jetbrains.kotlin.jvm") version "1.3.10"
     id ("org.jetbrains.dokka") version "0.9.18"
-    //kotlin("jvm") version "1.3.40"
-
 }
 
 group ="com.github.medavox"

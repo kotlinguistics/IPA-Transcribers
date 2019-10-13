@@ -53,7 +53,7 @@ kotlin.sourceSets["commonMain"].dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-html-common:0.6.12")
 }
 
-kotlin.sourceSets["commonTest"].dependencies {
+kotlin.sourceSets["jvmTest"].dependencies {
     implementation("junit:junit:4.12")
 
     //for getting the most up-to-date list of names for unicode characters

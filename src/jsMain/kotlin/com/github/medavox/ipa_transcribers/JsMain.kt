@@ -1,10 +1,7 @@
 package com.github.medavox.ipa_transcribers
 
 import com.github.medavox.UiStrings
-import org.w3c.dom.HTMLButtonElement
-import org.w3c.dom.HTMLSelectElement
-import org.w3c.dom.HTMLTextAreaElement
-import org.w3c.dom.Option
+import org.w3c.dom.*
 import org.w3c.dom.events.Event
 import kotlin.browser.document
 
@@ -34,4 +31,8 @@ fun main() {
         outputTextArea.textContent = transcribr.transcribe(inputTextArea.value)
         errorsTextArea.textContent = "transcriber: $transcribr"
     })
+
+    //remove js warning
+    val jsWarning = document.getElementById("js_warning") as HTMLDivElement
+    jsWarning.remove()
 }

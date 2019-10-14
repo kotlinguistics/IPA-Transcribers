@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>IPA Transcribers</title>
+  <style>
+    body > * { display: block; }
+    body {
+      margin: 0;
+      padding: 1em;
+      font-size: 13px;
+      font-family: -system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Droid Sans, Helvetica Neue, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Droid Sans, Helvetica Neue, Arial, sans-serif;
+      line-height: 20px;
+    }
+  </style>
+  <script type="text/javascript" src="kotlin.js" defer></script>
+  <script type="text/javascript" src="IPA-transcribers.js" defer></script>
+</head>
+<body>
+  <textarea id="input_text" ></textarea>
+  <select id="lang_select"></select>
+  <button id="transliterate_button" type="button">transcribe</button>
+  <textarea id="output_text" readonly></textarea>
+  <textarea id="errors_text" readonly></textarea>
+</body>
+</html>

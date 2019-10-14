@@ -45,7 +45,7 @@ kotlin.sourceSets["jvmMain"].dependencies {
 
 kotlin.sourceSets["jsMain"].dependencies {
     implementation(kotlin("stdlib-js"))
-    implementation("org.jetbrains.kotlinx:kotlinx-html-js:0.6.12")
+    //implementation("org.jetbrains.kotlinx:kotlinx-html-js:0.6.12")
 }
 
 kotlin.sourceSets["commonMain"].dependencies {

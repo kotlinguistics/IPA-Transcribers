@@ -1145,14 +1145,10 @@
     var L3406603774387020532 = new Kotlin.Long(1993859828, 793161749);
     var L_9223372036854775807 = new Kotlin.Long(1, -2147483648);
     var L2047 = Kotlin.Long.fromInt(2047);
-    CharProgressionIterator.prototype = Object.create(CharIterator.prototype);
-    CharProgressionIterator.prototype.constructor = CharProgressionIterator;
     IntProgressionIterator.prototype = Object.create(IntIterator.prototype);
     IntProgressionIterator.prototype.constructor = IntProgressionIterator;
     LongProgressionIterator.prototype = Object.create(LongIterator.prototype);
     LongProgressionIterator.prototype.constructor = LongProgressionIterator;
-    CharRange.prototype = Object.create(CharProgression.prototype);
-    CharRange.prototype.constructor = CharRange;
     IntRange.prototype = Object.create(IntProgression.prototype);
     IntRange.prototype.constructor = IntRange;
     LongRange.prototype = Object.create(LongProgression.prototype);
@@ -1352,18 +1348,6 @@
       }
       return optimizeReadOnlySet(toCollection_8($receiver, LinkedHashSet_init_0()));
     }
-    function max_11($receiver) {
-      var iterator = $receiver.iterator();
-      if (!iterator.hasNext())
-        return null;
-      var max = iterator.next();
-      while (iterator.hasNext()) {
-        var e = iterator.next();
-        if (Kotlin.compareTo(max, e) < 0)
-          max = e;
-      }
-      return max;
-    }
     function plus_4($receiver, elements) {
       if (Kotlin.isType(elements, Collection)) {
         var result = ArrayList_init_0($receiver.size + elements.size | 0);
@@ -1533,12 +1517,6 @@
     function MutableListIterator() {
     }
     MutableListIterator.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'MutableListIterator', interfaces: [MutableIterator, ListIterator]};
-    function CharIterator() {
-    }
-    CharIterator.prototype.next = function () {
-      return toBoxedChar(this.nextChar());
-    };
-    CharIterator.$metadata$ = {kind: Kind_CLASS, simpleName: 'CharIterator', interfaces: [Iterator]};
     function IntIterator() {
     }
     IntIterator.prototype.next = function () {
@@ -1551,29 +1529,6 @@
       return this.nextLong();
     };
     LongIterator.$metadata$ = {kind: Kind_CLASS, simpleName: 'LongIterator', interfaces: [Iterator]};
-    function CharProgressionIterator(first, last, step) {
-      CharIterator.call(this);
-      this.step = step;
-      this.finalElement_0 = last | 0;
-      this.hasNext_0 = this.step > 0 ? first <= last : first >= last;
-      this.next_0 = this.hasNext_0 ? first | 0 : this.finalElement_0;
-    }
-    CharProgressionIterator.prototype.hasNext = function () {
-      return this.hasNext_0;
-    };
-    CharProgressionIterator.prototype.nextChar = function () {
-      var value = this.next_0;
-      if (value === this.finalElement_0) {
-        if (!this.hasNext_0)
-          throw NoSuchElementException_init();
-        this.hasNext_0 = false;
-      }
-       else {
-        this.next_0 = this.next_0 + this.step | 0;
-      }
-      return toChar(value);
-    };
-    CharProgressionIterator.$metadata$ = {kind: Kind_CLASS, simpleName: 'CharProgressionIterator', interfaces: [CharIterator]};
     function IntProgressionIterator(first, last, step) {
       IntIterator.call(this);
       this.step = step;
@@ -1620,46 +1575,7 @@
       return value;
     };
     LongProgressionIterator.$metadata$ = {kind: Kind_CLASS, simpleName: 'LongProgressionIterator', interfaces: [LongIterator]};
-    function CharProgression(start, endInclusive, step) {
-      CharProgression$Companion_getInstance();
-      if (step === 0)
-        throw IllegalArgumentException_init_0('Step must be non-zero.');
-      if (step === -2147483648)
-        throw IllegalArgumentException_init_0('Step must be greater than Int.MIN_VALUE to avoid overflow on negation.');
-      this.first = start;
-      this.last = toChar(getProgressionLastElement(start | 0, endInclusive | 0, step));
-      this.step = step;
-    }
-    CharProgression.prototype.iterator = function () {
-      return new CharProgressionIterator(this.first, this.last, this.step);
-    };
-    CharProgression.prototype.isEmpty = function () {
-      return this.step > 0 ? this.first > this.last : this.first < this.last;
-    };
-    CharProgression.prototype.equals = function (other) {
-      return Kotlin.isType(other, CharProgression) && (this.isEmpty() && other.isEmpty() || (this.first === other.first && this.last === other.last && this.step === other.step));
-    };
-    CharProgression.prototype.hashCode = function () {
-      return this.isEmpty() ? -1 : (31 * ((31 * (this.first | 0) | 0) + (this.last | 0) | 0) | 0) + this.step | 0;
-    };
-    CharProgression.prototype.toString = function () {
-      return this.step > 0 ? String.fromCharCode(this.first) + '..' + String.fromCharCode(this.last) + ' step ' + this.step : String.fromCharCode(this.first) + ' downTo ' + String.fromCharCode(this.last) + ' step ' + (-this.step | 0);
-    };
-    function CharProgression$Companion() {
-      CharProgression$Companion_instance = this;
-    }
-    CharProgression$Companion.prototype.fromClosedRange_ayra44$ = function (rangeStart, rangeEnd, step) {
-      return new CharProgression(rangeStart, rangeEnd, step);
-    };
-    CharProgression$Companion.$metadata$ = {kind: Kind_OBJECT, simpleName: 'Companion', interfaces: []};
     var CharProgression$Companion_instance = null;
-    function CharProgression$Companion_getInstance() {
-      if (CharProgression$Companion_instance === null) {
-        new CharProgression$Companion();
-      }
-      return CharProgression$Companion_instance;
-    }
-    CharProgression.$metadata$ = {kind: Kind_CLASS, simpleName: 'CharProgression', interfaces: [Iterable]};
     function IntProgression(start, endInclusive, step) {
       IntProgression$Companion_getInstance();
       if (step === 0)
@@ -1749,44 +1665,7 @@
       return Kotlin.compareTo(this.start, this.endInclusive) > 0;
     };
     ClosedRange.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'ClosedRange', interfaces: []};
-    function CharRange(start, endInclusive) {
-      CharRange$Companion_getInstance();
-      CharProgression.call(this, start, endInclusive, 1);
-    }
-    Object.defineProperty(CharRange.prototype, 'start', {get: function () {
-      return toBoxedChar(this.first);
-    }});
-    Object.defineProperty(CharRange.prototype, 'endInclusive', {get: function () {
-      return toBoxedChar(this.last);
-    }});
-    CharRange.prototype.contains_mef7kx$ = function (value) {
-      return this.first <= value && value <= this.last;
-    };
-    CharRange.prototype.isEmpty = function () {
-      return this.first > this.last;
-    };
-    CharRange.prototype.equals = function (other) {
-      return Kotlin.isType(other, CharRange) && (this.isEmpty() && other.isEmpty() || (this.first === other.first && this.last === other.last));
-    };
-    CharRange.prototype.hashCode = function () {
-      return this.isEmpty() ? -1 : (31 * (this.first | 0) | 0) + (this.last | 0) | 0;
-    };
-    CharRange.prototype.toString = function () {
-      return String.fromCharCode(this.first) + '..' + String.fromCharCode(this.last);
-    };
-    function CharRange$Companion() {
-      CharRange$Companion_instance = this;
-      this.EMPTY = new CharRange(toChar(1), toChar(0));
-    }
-    CharRange$Companion.$metadata$ = {kind: Kind_OBJECT, simpleName: 'Companion', interfaces: []};
     var CharRange$Companion_instance = null;
-    function CharRange$Companion_getInstance() {
-      if (CharRange$Companion_instance === null) {
-        new CharRange$Companion();
-      }
-      return CharRange$Companion_instance;
-    }
-    CharRange.$metadata$ = {kind: Kind_CLASS, simpleName: 'CharRange', interfaces: [ClosedRange, CharProgression]};
     function IntRange(start, endInclusive) {
       IntRange$Companion_getInstance();
       IntProgression.call(this, start, endInclusive, 1);
@@ -3273,11 +3152,6 @@
       HashMap_init_1(initialCapacity, loadFactor, $this);
       LinkedHashMap.call($this);
       $this.map_97q5dv$_0 = HashMap_init_0();
-      return $this;
-    }
-    function LinkedHashMap_init_2(initialCapacity, $this) {
-      $this = $this || Object.create(LinkedHashMap.prototype);
-      LinkedHashMap_init_1(initialCapacity, 0.0, $this);
       return $this;
     }
     function LinkedHashSet() {
@@ -4836,57 +4710,7 @@
       EmptyMap_instance = this;
       this.serialVersionUID_0 = L8246714829545688274;
     }
-    EmptyMap.prototype.equals = function (other) {
-      return Kotlin.isType(other, Map) && other.isEmpty();
-    };
-    EmptyMap.prototype.hashCode = function () {
-      return 0;
-    };
-    EmptyMap.prototype.toString = function () {
-      return '{}';
-    };
-    Object.defineProperty(EmptyMap.prototype, 'size', {get: function () {
-      return 0;
-    }});
-    EmptyMap.prototype.isEmpty = function () {
-      return true;
-    };
-    EmptyMap.prototype.containsKey_11rb$ = function (key) {
-      return false;
-    };
-    EmptyMap.prototype.containsValue_11rc$ = function (value) {
-      return false;
-    };
-    EmptyMap.prototype.get_11rb$ = function (key) {
-      return null;
-    };
-    Object.defineProperty(EmptyMap.prototype, 'entries', {get: function () {
-      return EmptySet_getInstance();
-    }});
-    Object.defineProperty(EmptyMap.prototype, 'keys', {get: function () {
-      return EmptySet_getInstance();
-    }});
-    Object.defineProperty(EmptyMap.prototype, 'values', {get: function () {
-      return EmptyList_getInstance();
-    }});
-    EmptyMap.prototype.readResolve_0 = function () {
-      return EmptyMap_getInstance();
-    };
-    EmptyMap.$metadata$ = {kind: Kind_OBJECT, simpleName: 'EmptyMap', interfaces: [Serializable, Map]};
     var EmptyMap_instance = null;
-    function EmptyMap_getInstance() {
-      if (EmptyMap_instance === null) {
-        new EmptyMap();
-      }
-      return EmptyMap_instance;
-    }
-    function emptyMap() {
-      var tmp$;
-      return Kotlin.isType(tmp$ = EmptyMap_getInstance(), Map) ? tmp$ : throwCCE_0();
-    }
-    function mapOf_0(pairs) {
-      return pairs.length > 0 ? toMap_2(pairs, LinkedHashMap_init_2(mapCapacity(pairs.length))) : emptyMap();
-    }
     function mapCapacity(expectedSize) {
       if (expectedSize < 3) {
         return expectedSize + 1 | 0;
@@ -4897,18 +4721,6 @@
       return 2147483647;
     }
     var INT_MAX_POWER_OF_TWO;
-    function putAll($receiver, pairs) {
-      var tmp$;
-      for (tmp$ = 0; tmp$ !== pairs.length; ++tmp$) {
-        var tmp$_0 = pairs[tmp$];
-        var key = tmp$_0.component1(), value = tmp$_0.component2();
-        $receiver.put_xwzc9p$(key, value);
-      }
-    }
-    function toMap_2($receiver, destination) {
-      putAll(destination, $receiver);
-      return destination;
-    }
     function addAll($receiver, elements) {
       var tmp$;
       if (Kotlin.isType(elements, Collection))
@@ -5892,35 +5704,6 @@
       this.name = 'NotImplementedError';
     }
     NotImplementedError.$metadata$ = {kind: Kind_CLASS, simpleName: 'NotImplementedError', interfaces: [Error_0]};
-    function Pair(first, second) {
-      this.first = first;
-      this.second = second;
-    }
-    Pair.prototype.toString = function () {
-      return '(' + this.first + ', ' + this.second + ')';
-    };
-    Pair.$metadata$ = {kind: Kind_CLASS, simpleName: 'Pair', interfaces: [Serializable]};
-    Pair.prototype.component1 = function () {
-      return this.first;
-    };
-    Pair.prototype.component2 = function () {
-      return this.second;
-    };
-    Pair.prototype.copy_xwzc9p$ = function (first, second) {
-      return new Pair(first === void 0 ? this.first : first, second === void 0 ? this.second : second);
-    };
-    Pair.prototype.hashCode = function () {
-      var result = 0;
-      result = result * 31 + Kotlin.hashCode(this.first) | 0;
-      result = result * 31 + Kotlin.hashCode(this.second) | 0;
-      return result;
-    };
-    Pair.prototype.equals = function (other) {
-      return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.first, other.first) && Kotlin.equals(this.second, other.second)))));
-    };
-    function to($receiver, that) {
-      return new Pair($receiver, that);
-    }
     function Triple(first, second, third) {
       this.first = first;
       this.second = second;
@@ -5976,7 +5759,6 @@
     package$collections.ArrayList_init_287e2$ = ArrayList_init;
     package$collections.mapCapacity_za3lpa$ = mapCapacity;
     package$ranges.coerceAtLeast_dqglrj$ = coerceAtLeast_2;
-    package$collections.LinkedHashMap_init_bwtc7$ = LinkedHashMap_init_2;
     package$collections.toCollection_5n4o2z$ = toCollection;
     package$collections.addAll_ipc267$ = addAll;
     package$collections.LinkedHashMap_init_q3lmfv$ = LinkedHashMap_init;
@@ -5987,7 +5769,6 @@
     package$collections.toCollection_5cfyqp$ = toCollection_8;
     package$collections.toSet_7wnvza$ = toSet_8;
     package$collections.Collection = Collection;
-    package$collections.max_exjks8$ = max_11;
     package$collections.plus_mydzjv$ = plus_4;
     package$collections.joinTo_gcc71v$ = joinTo_8;
     package$collections.joinToString_fmv235$ = joinToString_8;
@@ -6020,21 +5801,15 @@
     package$collections.MutableIterator = MutableIterator;
     package$collections.ListIterator = ListIterator;
     package$collections.MutableListIterator = MutableListIterator;
-    package$collections.CharIterator = CharIterator;
     package$collections.IntIterator = IntIterator;
     package$collections.LongIterator = LongIterator;
-    package$ranges.CharProgressionIterator = CharProgressionIterator;
     package$ranges.IntProgressionIterator = IntProgressionIterator;
     package$ranges.LongProgressionIterator = LongProgressionIterator;
-    Object.defineProperty(CharProgression, 'Companion', {get: CharProgression$Companion_getInstance});
-    package$ranges.CharProgression = CharProgression;
     Object.defineProperty(IntProgression, 'Companion', {get: IntProgression$Companion_getInstance});
     package$ranges.IntProgression = IntProgression;
     Object.defineProperty(LongProgression, 'Companion', {get: LongProgression$Companion_getInstance});
     package$ranges.LongProgression = LongProgression;
     package$ranges.ClosedRange = ClosedRange;
-    Object.defineProperty(CharRange, 'Companion', {get: CharRange$Companion_getInstance});
-    package$ranges.CharRange = CharRange;
     Object.defineProperty(IntRange, 'Companion', {get: IntRange$Companion_getInstance});
     package$ranges.IntRange = IntRange;
     Object.defineProperty(LongRange, 'Companion', {get: LongRange$Companion_getInstance});
@@ -6169,10 +5944,6 @@
     Object.defineProperty(package$collections, 'EmptyList', {get: EmptyList_getInstance});
     package$collections.listOf_i5x0yv$ = listOf_0;
     package$collections.get_indices_gzk92b$ = get_indices_12;
-    package$collections.emptyMap_q3lmfv$ = emptyMap;
-    package$collections.mapOf_qfcya0$ = mapOf_0;
-    package$collections.putAll_5gv49o$ = putAll;
-    package$collections.toMap_ujwnei$ = toMap_2;
     package$collections.removeAll_uhyeqt$ = removeAll_0;
     package$collections.removeAll_qafx1e$ = removeAll_1;
     package$sequences.emptySequence_287e2$ = emptySequence;
@@ -6224,8 +5995,6 @@
     Result.Failure = Result$Failure;
     package$kotlin.throwOnFailure_iacion$ = throwOnFailure;
     package$kotlin.NotImplementedError = NotImplementedError;
-    package$kotlin.Pair = Pair;
-    package$kotlin.to_ujzrz7$ = to;
     package$kotlin.Triple = Triple;
     MutableMap.prototype.getOrDefault_xwzc9p$ = Map.prototype.getOrDefault_xwzc9p$;
     AbstractMap.prototype.getOrDefault_xwzc9p$ = Map.prototype.getOrDefault_xwzc9p$;

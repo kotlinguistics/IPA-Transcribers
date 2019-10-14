@@ -11,7 +11,6 @@
   }
 }(this, function (_, Kotlin) {
   'use strict';
-  var Kind_OBJECT = Kotlin.Kind.OBJECT;
   var Regex_init = Kotlin.kotlin.text.Regex_init_61zpoe$;
   var listOf = Kotlin.kotlin.collections.listOf_i5x0yv$;
   var Kind_INTERFACE = Kotlin.Kind.INTERFACE;
@@ -19,6 +18,7 @@
   var Kind_CLASS = Kotlin.Kind.CLASS;
   var throwISE = Kotlin.throwISE;
   var plus = Kotlin.kotlin.collections.plus_mydzjv$;
+  var Kind_OBJECT = Kotlin.Kind.OBJECT;
   var throwCCE = Kotlin.throwCCE;
   var equals = Kotlin.equals;
   var hashCode = Kotlin.hashCode;
@@ -118,20 +118,6 @@
   RussianCyrillic.prototype.constructor = RussianCyrillic;
   Thai.prototype = Object.create(RuleBasedTranscriber.prototype);
   Thai.prototype.constructor = Thai;
-  function UiStrings() {
-    UiStrings_instance = this;
-    this.errorsHint = 'errors appear here';
-    this.outputHint = 'transliteration appears here';
-    this.inputHint = 'enter native text';
-  }
-  UiStrings.$metadata$ = {kind: Kind_OBJECT, simpleName: 'UiStrings', interfaces: []};
-  var UiStrings_instance = null;
-  function UiStrings_getInstance() {
-    if (UiStrings_instance === null) {
-      new UiStrings();
-    }
-    return UiStrings_instance;
-  }
   function BaseRules() {
   }
   Object.defineProperty(BaseRules.prototype, 'westernPunctuation', {get: function () {
@@ -803,6 +789,20 @@
   function Transcriber() {
   }
   Transcriber.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'Transcriber', interfaces: []};
+  function UiStrings() {
+    UiStrings_instance = this;
+    this.errorsHint = 'errors appear here';
+    this.outputHint = 'transliteration appears here';
+    this.inputHint = 'enter native text';
+  }
+  UiStrings.$metadata$ = {kind: Kind_OBJECT, simpleName: 'UiStrings', interfaces: []};
+  var UiStrings_instance = null;
+  function UiStrings_getInstance() {
+    if (UiStrings_instance === null) {
+      new UiStrings();
+    }
+    return UiStrings_instance;
+  }
   function Arabic() {
     Arabic_instance = this;
     RuleBasedTranscriber.call(this);
@@ -2096,12 +2096,12 @@
     };
   }
   function main() {
-    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3;
+    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4;
     var slekt = Kotlin.isType(tmp$ = document.getElementById('lang_select'), HTMLSelectElement) ? tmp$ : throwCCE();
     var $receiver = Language$values();
-    var tmp$_4;
-    for (tmp$_4 = 0; tmp$_4 !== $receiver.length; ++tmp$_4) {
-      var element = $receiver[tmp$_4];
+    var tmp$_5;
+    for (tmp$_5 = 0; tmp$_5 !== $receiver.length; ++tmp$_5) {
+      var element = $receiver[tmp$_5];
       slekt.add(new Option(element.neim, element.name, false, false));
     }
     var inputTextArea = Kotlin.isType(tmp$_0 = document.getElementById('input_text'), HTMLTextAreaElement) ? tmp$_0 : throwCCE();
@@ -2112,6 +2112,8 @@
     errorsTextArea.setAttribute('placeholder', UiStrings_getInstance().errorsHint);
     var button = Kotlin.isType(tmp$_3 = document.getElementById('transliterate_button'), HTMLButtonElement) ? tmp$_3 : throwCCE();
     button.addEventListener('click', main$lambda(slekt, inputTextArea, outputTextArea, errorsTextArea));
+    var jsWarning = Kotlin.isType(tmp$_4 = document.getElementById('js_warning'), HTMLDivElement) ? tmp$_4 : throwCCE();
+    jsWarning.remove();
   }
   function main$ObjectLiteral() {
   }
@@ -2143,7 +2145,6 @@
   var package$com = _.com || (_.com = {});
   var package$github = package$com.github || (package$com.github = {});
   var package$medavox = package$github.medavox || (package$github.medavox = {});
-  Object.defineProperty(package$medavox, 'UiStrings', {get: UiStrings_getInstance});
   var package$ipa_transcribers = package$medavox.ipa_transcribers || (package$medavox.ipa_transcribers = {});
   package$ipa_transcribers.BaseRules = BaseRules;
   Object.defineProperty(CompletionStatus, 'UNSTARTED', {get: CompletionStatus$UNSTARTED_getInstance});
@@ -2199,6 +2200,7 @@
   RuleBasedTranscriber.UnmatchedOutput = RuleBasedTranscriber$UnmatchedOutput;
   package$ipa_transcribers.RuleBasedTranscriber = RuleBasedTranscriber;
   package$ipa_transcribers.Transcriber = Transcriber;
+  Object.defineProperty(package$medavox, 'UiStrings', {get: UiStrings_getInstance});
   var package$arabic = package$ipa_transcribers.arabic || (package$ipa_transcribers.arabic = {});
   Object.defineProperty(package$arabic, 'Arabic', {get: Arabic_getInstance});
   Object.defineProperty(package$arabic, 'Persian', {get: Persian_getInstance});

@@ -6,7 +6,7 @@ import org.jetbrains.kotlin.config.KotlinCompilerVersion
 //to run the code (manually test it),
 //call ./gradlew jsRun
 
-//to compile the code into a single JS file (includin all depepndencies),
+//to compile the code into a single JS file (including all dependencies),
 //call ./gradlew jsBrowserWebpack
 
 plugins {
@@ -62,10 +62,6 @@ kotlin.sourceSets["jvmTest"].dependencies {
 }
 
 //kotlin.sourceSets["androidMain"]
-
-//compileKotlin.kotlinOptions.jvmTarget = "1.8"
-
-//compileTestKotlin.kotlinOptions.jvmTarget = "1.8"
 
 val run by tasks.creating(JavaExec::class) {
     group = "application"

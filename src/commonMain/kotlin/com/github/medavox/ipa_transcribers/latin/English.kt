@@ -1,6 +1,7 @@
 package com.github.medavox.ipa_transcribers.latin
 
 import com.github.medavox.ipa_transcribers.*
+import com.github.medavox.ipa_transcribers.latin.English.Vowels.*
 import com.github.medavox.ipa_transcribers.latin.LatinScriptCommonalities.latinBaseRules
 
 /**I'm not hopeful that this will work well enough to use,
@@ -19,12 +20,10 @@ object English:RuleBasedTranscriber() {
     Consonants
     ----------
 IPA 	Phoneme 	Samples
-ŋ 	 ñ 	 sing, think
 θ 	 + 	 thin
 ð 	 + 	 this  NOTE: was originally underlined in HTML. Check original page for the rules involving this
 ʃ 	 $ 	 shack
 ʒ 	 $ 	 measure NOTE: was also originally underlined in the HTML version.
-tʃ 	 ç 	 chew
 dʒ 	 j 	 judge
 
 
@@ -33,19 +32,13 @@ dʒ 	 j 	 judge
 IPA 	Phoneme 	Samples
  e 	 ä 	 rate
  æ 	 â 	 rat
- i 	 ë 	 meet, machine
- ɛ 	 ê 	 met, dread
- aj 	 ï 	 bite, cycle
- ɪ 	 î 	 bit, lick
  o 	 ö 	 note, sow
  a 	 ô 	 not, clock
  ju 	 ü 	 cute, you
- ʌ 	 û 	 cut, come
 
  u 	 u 	 coot
  ɔ 	 ò 	 caught, dog
  ʊ 	 ù 	 cook, put
- ə 	 @ 	 above, cynic, until
 
  aw 	 ôw 	 crowd, loud
  oj 	 öy 	 boy, droid
@@ -53,9 +46,9 @@ IPA 	Phoneme 	Samples
  j 	 y 	 you, million
  w 	 w 	 wait, cow
 
- ɚ 	 @r 	 search, manor, bird
- n̩ 	 @n 	 button, happen
- l̩ 	 @l 	 battle, final
+ ɚ 	 ər 	 search, manor, bird
+ n̩ 	 ən 	 button, happen
+ l̩ 	 əl 	 battle, final
  */
 
     //rules still to do:
@@ -64,10 +57,10 @@ Replacing y
 
 12. Replace y with i if it's not adjacent to a vowel-- we'll worry later about how to pronounce the i.
 
-Thus, system = sîst@m but you, where the y adjoins a vowel, is yu.
+Thus, system = sɪstəm but you, where the y adjoins a vowel, is yu.
 Simplification of stl
 
-13. The t in stl is lost before a final vowel: bustle = bûs@l", bristly = brîslë.
+13. The t in stl is lost before a final vowel: bustle = bʌsəl", bristly = brɪsli.
 
 This could perhaps be generalized; but in slow speech I leave the t in (say) coastline or Christlike.
 I'm also tempted to generalize to all stops, but the only instance in the sample lexicon is muscle,
@@ -76,17 +69,17 @@ and it's pretty silly to have a rule that applies to a single word.
 (Af)frication before <i>
 -----------------------
 
-15. tu becomes çu before a vowel, or before a liquid (r, l) followed by a vowel: mutual = müçu@l, mature = m@çur.
+15. tu becomes tʃu before a vowel, or before a liquid (r, l) followed by a vowel: mutual = mütʃuəl, mature = mətʃur.
 
-16. s becomes $ (or $ if it's preceded by a vowel):
+16. s becomes ʃ (or ʒ if it's preceded by a vowel):
 
-    before o-- passion = pâ$@n, vision = vî$@n". Note that the i is lost.
-    before ur-- assure = @$ur; leisure = lë$@r.
-    after k and before a vowel: sexual = sêk$u@l.
+    before o-- passion = pâʃən, vision = vɪʒən". Note that the i is lost.
+    before ur-- assure = əʃur; leisure = liʒər.
+    after k and before a vowel: sexual = sɛkʃuəl.
 
 At some point English affricated a number of consonants before a i or y that preceded another vowel,
 including the [y] sound that begins ü Sometimes the y has been lost since.
-This process seems to be no longer productive-- compare costume, Casio. (Or is it? In quick speech I do say kôsçùm.)
+This process seems to be no longer productive-- compare costume, Casio. (Or is it? In quick speech I do say kôstʃùm.)
 
 Voicing of s
 ----------
@@ -124,7 +117,7 @@ The inserted e or u are orthographic only; they make sure rule 21 applies or doe
 In French, there's a parallel with c:
 
     ka ke ki ko ku can be written ca que qui co cu
-    sa se si so su can be written cea ce ci ceo ceu (but it's more usual to write ça ce ci ço çu)
+    sa se si so su can be written cea ce ci ceo ceu (but it's more usual to write tʃa ce ci tʃo tʃu)
 
 but it doesn't work so well in English, since our qu is still kw.
 The inserted e is found in just a few words (e.g. placeable), due to compounding.
@@ -142,27 +135,32 @@ Each vowel letter has two basic interpretations, which by convention are called 
 But I think the more familiar terms will be more readable,
 and remind readers that their old English teachers were onto something after all.)
 
-In my transcription, long vowels are marked with a diaresis, since html doesn't supply a macron (äëïöü),
-and short vowels with a circumflex (âêîôû).
-Now you can see why I chose those odd representations-- they come from the basic logic of English spelling.
+In my transcription, long vowels are marked with a diaresis, since html doesn't supply a macron (äiajöü),
+and short vowels with a circumflex (âɛɪôû).
+Now you can see why I chose those odd representations --
+they come from the basic logic of English spelling.
 
-The above rules work in conjunction with rule 54, which means that doubling a consonant changes a medial vowel from long to short: later/latter, Peter/petter, biter/bitter, hoping/hopping, cuter/cutter.
+The above rules work in conjunction with rule 54,
+which means that doubling a consonant changes a medial vowel from long to short:
+later/latter, Peter/petter, biter/bitter, hoping/hopping, cuter/cutter.
 
 Exceptions, but general ones
 ---------------------------
 
-27. Final ind is ïnd, final oss is òs; final og is òg: mind, boss, dog = mïnd bòs dòg.
+27. Final ind is ajnd, final oss is ɒs; final og is ɒg: mind, boss, dog = majnd bɒs dɒg.
 
-28. o also becomes ò before f and another consonant (offer = òf@r, soften = sòf@n).
+28. o also becomes ɒ before f and another consonant (offer = ɒfər, soften = sɒfən).
 
-29. wa is pronounced wô before a dental or alveolar consonant (t d n s +): want, wander, swan, Rwanda, swat, wad, wasp, and as wò between w and (t)$: wash, squash, watch = wò$ skwò$ wòç.
+29. wa is pronounced wô before a dental or alveolar consonant (t d n s +): want, wander, swan,
+Rwanda, swat, wad, wasp, and as wò between w and (t)ʃ: wash, squash, watch = wɒʃ skwɒʃ wɒtʃ.
 
-29a. u is pronounced u before l, or after a labial stop (pb) and before a sibilant (s$ç): adult, push, butch. (This doesn't apply if the u is long: mule.)
+29a. u is pronounced u before l, or after a labial stop (pb) and before a sibilant (sʃtʃ):
+adult, push, butch. (This doesn't apply if the u is long: mule.)
 
 I don't think I ever noticed these generalizations till I started working out the rules for this page.
 At least some of these, such as 29a, are sound changes from Shakespeare's time.
 
-Rules such as 6, 18, 19, 27, 28, and 51 introduce ò,
+Rules such as 6, 18, 19, 27, 28, and 51 introduce ɒ,
 a vowel which (as signalled by the odd diacritic in my transcription) doesn't fit well into English phonology.
 The fact that a velar occurs in many of the rule conditions suggests that
 it was originally an allophonic variant of /ô/ and /â/ in this environment --
@@ -176,21 +174,23 @@ Softening of gn
 --------
 
 30. Except before a vowel, the vowel in ign or igm lengthens,
-and the g is lost: alignment paradigm = @lïnm@nt, pär@dïm, but igneous = îgnë@s.
+and the g is lost: alignment paradigm = əlajnmənt, parədajm, but igneous = ɪgniəs.
 
-31. The g is simply lost in eign: feign = fän.
+31. The g is simply lost in eign: feign = feɪn.
 
 Add shortening; stir
 --------
 
-Some vowels that are orthographically long are pronounced short, and frankly I haven't put my finger on the pattern.
+Some vowels that are orthographically long are pronounced short,
+and frankly I haven't put my finger on the pattern.
 In the file I did add this rule:
 
 34. Shorten a vowel that precedes a simple, final CV syllable (and is not the first syllable in the word).
 
 This handles words like anomaly, cinema, sanity, biology, century;
 but it fails on other words, like patina, tuxedo, agora.
-Obviously the shortened vowels are all unstressed; but the idea here is to predict pronunciations from the spelling,
+Obviously the shortened vowels are all unstressed;
+but the idea here is to predict pronunciations from the spelling,
 and the spelling doesn't indicate the stress.
 
 (We've already removed silent e, so this rule isn't triggered by words like phoneme.)
@@ -207,39 +207,39 @@ this, and not ch or ough, is the real weak point of English spelling.
 
 36. Exceptions to the following rule:
 
-    Final ow is pronounced ö: slow, rainbow, overthrow.
-    oo is pronuonced ù before a k: book, crook, look.
-    ei is pronuonced ë after s: perceive, ceiling, seize.
-    ie is pronounced ï finally: dye, necktie.
-    oul becomes ù before a final d.
+    Final ow is pronounced əʊ: slow, rainbow, overthrow.
+    oo is pronuonced ʊ before a k: book, crook, look.
+    ei is pronuonced i after s: perceive, ceiling, seize.
+    ie is pronounced aj finally: dye, necktie.
+    oul becomes ʊ before a final d.
 
 37. Make the following substitutions:
  eau      	 ö
  ai 	 ä
  au, aw 	 ò
- ee 	 ë
- ea 	 ë
+ ee 	 i
+ ea 	 i
  ei 	 ä
- eo 	 ë@
+ eo 	 iə
  eu, ew 	 ü
- ie 	 ë
- iV 	 ë@
+ ie 	 i
+ iV 	 iə
  oa 	 ö
  oe 	 ö
  oo 	 u
  ou, ow 	 ôw
  oi 	 öy
- ua 	 ü@
+ ua 	 üə
  ue 	 u
  ui 	 u
 
 Again, the program is not smart enough to recognize when the digraph spans a morpheme boundary,
-and thus should be treated as two separate vowels: goer = gö@r, coaxial = köâksë@l.
+and thus should be treated as two separate vowels: goer = gəʊər, coaxial = kəʊæksiəl.
 
 Annoyingly, some of these digraphs have at least two values:
 cf. wool, fool; mead, dread; fief, friend; reign, seize; ground, group.
 The values in the table are those that occur most often.
-(The alternatives are generally just a step or two apart phonetically, e.g. u/ù, ë/ê, ä/ë.)
+(The alternatives are generally just a step or two apart phonetically, e.g. u/ʊ, i/ɛ, e/i.)
 
 For ease of exposition I've put the final ie rule here, but it really goes before rule 14 (affrication);
 otherwise terrible things happen to words like untie.
@@ -247,21 +247,21 @@ otherwise terrible things happen to words like untie.
 Those pesky final syllabics
 --------------------------
 
-39. Any short vowel reduces to @ before a final n: human, frighten, cabin, button.
+39. Any short vowel reduces to ə before a final n: human, frighten, cabin, button.
 
 These rules don't apply to monosyllables (pal, can),
-nor to vowels that have already been assigned a particular value by an earlier rule (e.g. meal to mël by rule 37).
+nor to vowels that have already been assigned a particular value by an earlier rule (e.g. meal to mil by rule 37).
 
 These rules could probably be refined; they don't apply to stressed finals, but again,
 the orthography doesn't indicate stress.
 
-You can take @l as a phonemic representation, or add a rule at the end to replace it with vocalic l. Ditto for @n.
+You can take əl as a phonemic representation, or add a rule at the end to replace it with vocalic l. Ditto for ən.
 Suffix simplifications
 
 40. The following suffixes are reduced as follows:
- -able, -ible      	 @b@l
- -lion 	 ly@n
- -nion 	 ny@n
+ -able, -ible      	 əbəl
+ -lion 	 lyən
+ -nion 	 nyən
 
 Again, we really shouldn't have 'rules' for single lexical entries.
 But these suffixes are common, so the rule has a large yield.
@@ -271,16 +271,16 @@ Unpronounceable finals
 Final vowel coloration
 
 42. Pronounce any remaining final vowel as follows:
- -a      	 @
- -i 	 ë
- -o 	 ö
+ -a      	 ə
+ -i 	 i
+ -o 	 əʊ
  -u 	 u
 
 A final vowel is usually the mark of a foreign word,
 which is why final vowels tend to have the 'continental' values: sushi, cello, haiku.
 Earlier borrowings were nativized, meaning that final vowels had to be written as diphthongs (e.g. Munsee, Hindoo).
 
-Since final -e is already in use, we used to mark one that was supposed to be pronounced (Chloë = klöë),
+Since final -e is already in use, we used to mark one that was supposed to be pronounced (Chloi = klöi),
 or, if we were borrowing from French, we retained the accent (café = kâfä).
 But English seems to be so allergic to diacritics that these helpful conventions have largely been lost.
 
@@ -288,19 +288,19 @@ Vowels before r
 -------------
 
 <r> is hell on English vowels; it tends to color the vowels, and in many dialects, disappear.
-In GA there are 12 monophthongal vowels, but only 6 can appear before <r> -- ä ë ô ö ò u-- plus @r,
+In GA there are 12 monophthongal vowels, but only 6 can appear before <r> -- ä i ô ö ò u-- plus ər,
 which is really just a prolonged vocalic r.
 
 43. An ôw, ô, or ò resulting from the previous rules changes to ö before an r: course = körs, for = för.
 
 44. war is pronounced wör, except before a vowel: warlock, war, dwarf = wörlôk, wör, dwörf;
-and wor is pronounced w@r: word, worst, worry.
+and wor is pronounced wər: word, worst, worry.
 
-45. ê or â before a double r (and ê before ri) become ä: terror, marry, merit = tär@r, märë, märît.
+45. ɛ or â before a double r (and ɛ before ri) become ä: terror, marry, merit = tärər, märi, märɪt.
 
 46. â before any other r becomes ô: mark, star = môrk, stôr.
 
-47. ê, î, û before r are reduced to schwa: perk, fir, fur = p@rk, f@r, f@r.
+47. ɛ, ɪ, ʌ before r are reduced to schwa: perk, fir, fur = pərk, fər, fər.
 
 Thanks to the infamous rule 45, I pronounce Mary, merry, marry the same. If you left this rule out,
 it would probably correctly predict the pronunciation of Easterners and Britons who distinguish them.
@@ -312,57 +312,89 @@ The careful reader may wonder why ng was not handled earlier, with the other con
 The reason is that orthographically, it acts as a double consonant-- e.g. singer has a short not a long i.
 But now it's time to handle it.
 
-For lack of an eng, I represent the velar nasal as ñ; don't confuse it with a palatalized ny.
+For lack of an eng, I represent the velar nasal as ŋ; don't confuse it with a palatalized ny.
 
-48. ng becomes ñg before a liquid (r, l) or semivowel (y, w): angry, England, singular, anguish = äñgrë, îñglând, sîñgül@r, äñgwî$.
+48. ng becomes ŋg before a liquid (r, l) or semivowel (y, w):
+angry, England, singular, anguish = äŋgri, ɪŋglând, sɪŋgülər, äŋgwɪʃ.
 
-49. ng becomes ñ finally, or before another consonant: hung = hûng, length = läñ+.
+49. ng becomes ŋ finally, or before another consonant: hung = hʌng, length = lɛŋθ.
 
-50. n becomes ñ before a velar stop (k, g): anger = äñg@r, think = +îñk.
+50. n becomes ŋ before a velar stop (k, g): anger = äŋgər, think = +ɪŋk.
 
-51. ô becomes ò, and â becomes ä before ñ: song = sòñ; hang = häñ.
+51. ô becomes ò, and â becomes ä before ŋ: song = sòŋ; hang = häŋ.
 
 Note that rule 50 doesn't apply to words like hung, because rule 49 already removed the g in those words.
 
 50 is arguably merely allophonic, but since it's completely consistent I treated it as a spelling rule.
 You could certainly say that a word like ungrateful 'really' has an underlying /ng/,
 because it's composed of <un> plus grateful;
-then this, as in most languages, will get pronounced ñg.
-But if you go that route, you can't actually show that English allows /ñg/ as well as /ng/--
+then this, as in most languages, will get pronounced ŋg.
+But if you go that route, you can't actually show that English allows /ŋg/ as well as /ng/--
 how do we know that wrong isn't actually /ròng/, modified by the allophonic rule?
-The important thing is not to pretend that we have a contrast of /ng/ and /ñg/.
+The important thing is not to pretend that we have a contrast of /ng/ and /ŋg/.
 
 Voicing of s
 -----------
 
 52. s is voiced finally, after a voiced oral stop: dogs = dògz.
 
-53. It's also voiced before final m: prism = prîzm.
+53. It's also voiced before final m: prism = prɪzm.
 
-The first of these rules is really morphophonemic: the plural, possessive, and 3p singular inflections of English are spelled s even when, by assimilation, they're pronounced z. This rule is not phonological, as can be seen by a word like chance = çâns; compare fans = fânz.
+The first of these rules is really morphophonemic: the plural, possessive, and 3p singular inflections of English are spelled s even when, by assimilation, they're pronounced z. This rule is not phonological, as can be seen by a word like chance = tʃâns; compare fans = fânz.
 
 Double consonants
 ----------------
 
-54. A double consonant is pronounced singly: dinner, buzzard, hassle = dîn@r, bûz@rd, hâs@l.
+54. A double consonant is pronounced singly: dinner, buzzard, hassle = dɪnər, bʌzərd, hâsəl.
 
-55. A t disappears before ç, and a d before j: batch = bâç, judge = jûj.
+55. A t disappears before tʃ, and a d before j: batch = bâtʃ, judge = jʌj.
 
-56. An s disappears before $: pressure = prê$r.
-
-Rule 54 works hand in hand with rule 25: a consonant is doubled to show that the preceding vowel is short:
-redder = rêd@r (compare red, where the d doesn't need to be doubled because a vowel preceding a final consonant is already short).
-
-Rule 55 is something of a corollary: to 'double' ç, we write tch rather than chch;
-and to double a j, we write dg rather than jj or gg.
+56. An s disappears before ʃ: pressure = prɛʃr.
 
 Rule 56 goes with rule 16, which changed s to $ before some instances of u. */
 
-    fun longPronunciation(vowel:Char):String {
-        return "not yet implemented"
-    }
-    fun shortPronunciation(vowel:Char):String {
-        return "not yet implemented"
+    val vowelShorteningConsonantPairs:String = "(bb|ck|dd|dg|ff|gg|ll|mm|nn|pp|rr|ss|tt|tch|zz)"
+
+    /**Stolen from German!
+     * (who knew that English could use the spelling rules of its closest included relative?)
+     * Short Vowels
+    a: [a] as in Wasser "water"
+    e: [ɛ] as in Bed bed; unstressed [ə] as in Ochse "ox"
+    i: [ɪ] as in Mittel "means"
+    o: [ɔ] as in kommen "to come"
+    u: [ʊ] as in Mutter "mother"
+    y: [ʏ] as in Dystrophie "dystrophy"
+
+    Long vowels
+
+    generally pronounced with greater tenseness than short vowels.
+    a, ah, and aa: [aː]
+    e, eh, and ee: [eː]
+    i, ie, ih, and ieh: [iː]
+    o, oh, and oo: [oː]
+    u and uh: [uː]
+    y: [yː]
+     * */
+    private enum class Vowels(val short:String, val long:String) {
+        A("a", "eɪ"),
+        E("ɛ", "iː"),
+        I("ɪ", "aɪ"),
+        O("ɒ", "əʊ"),
+        U("ʌ", "ju");
+
+        companion object {
+            fun from(vowel: String): Vowels = when (vowel) {
+                "a" -> A
+                "e" -> E
+                "i" -> I
+                "o" -> O
+                "u" -> U
+                else -> throw IllegalArgumentException(
+                    "only the following Strings of length 1 are valid input to this method:" +
+                            "aeiouäöü"
+                )
+            }
+        }
     }
     const val vowels = "aeiou"
     const val consonants = "bcdfghjklmnpqrstvwxz"
@@ -390,10 +422,10 @@ Rule 56 goes with rule 16, which changed s to $ before some instances of u. */
         //The notorious gh
         //4. Before a vowel, gh becomes g: ghost = göst.
         Rule("gh[$vowels]", "g", 2),
-        //5. gh turns a preceding single vowel long: right = rït.
+        //5. gh turns a preceding single vowel long: right = rajt.
         //[my note: i don't think <aght>, <eght>, <oght> or <ught> occur naturally in english, so this can just be for i ]
-        Rule("igh", longI),
-        //6. aught and ought become òt: daughter = dòt@r, sought = sòt.
+        Rule("igh", I.long),
+        //6. aught and ought become òt: daughter = dòtər, sought = sòt.
         Rule("aught", "ɔt"),
         Rule("ought", "ɔt"),
         //7. Any other ough becomes ö: dough = dö.
@@ -405,24 +437,24 @@ Rule 56 goes with rule 16, which changed s to $ before some instances of u. */
         //8. Elsewhere, gh is simply dropped: freight = frät.
         Rule("gh", ""),
 
-        //9. In initial gn, kn, mn, pt, ps, tm, pronounce the second letter only: gnostic = nôstîk, psycho = sïkö, knight = nït.
+        //9. In initial gn, kn, mn, pt, ps, tm, pronounce the second letter only: gnostic = nôstɪk, psycho = sajkö, knight = najt.
         LookbackRule("( |^)", "gn", "n"),
         LookbackRule("( |^)", "kn", "n"),
         LookbackRule("( |^)", "mn", "n"),
         LookbackRule("( |^)", "pt", "t"),
         LookbackRule("( |^)", "tm", "m"),
 
-        // 10. Replace y with ï if it ends a one-syllable word: ply = plï.
+        // 10. Replace y with aj if it ends a one-syllable word: ply = plaj.
         LookbackRule("(^|\\s)[^$vowels]+", "y(\\s|$)", "aɪ", 1),
 
-        //11. ey is pronounced ë;
+        //11. ey is pronounced i;
         Rule("ey", "i"),
         // ay is ä;
         Rule("ay", "eɪ"),
-        // and oy is öy: say, monkey boy = sä mûnkë böy.
+        // and oy is öy: say, monkey boy = sä mʌnki böy.
         Rule("oy", "oj"),
 
-        //14. ci or ti becomes $ before a vowel: gracious = grä$@s, nation = nä$@n.
+        //14. ci or ti becomes ʃ before a vowel: gracious = greɪʃəs, nation = neɪʃən.
         Rule(Regex("(ti|ci)[$vowels]"), "ʃ", 2),
 
         //18. al is pronounced òl before r, s, m, a dental stop, or final ll: also, already, wall, bald, although, almost.
@@ -431,53 +463,73 @@ Rule 56 goes with rule 16, which changed s to $ before some instances of u. */
         //19. alk becomes òk, except initially: walk = wòk.
         LookbackRule("[^\\s]", "alk", "ɔk"),
 
-        //20. c becomes s before a front vowel, k elsewhere: cell = sêl, acid = âsîd,
-        // but cow = kôw, backer = bâk@r, clear = klër.
+        //20. c becomes s before a front vowel, k elsewhere: cell = sɛl, acid = âsɪd,
+        // but cow = kôw, backer = bâkər, clear = klir.
         Rule("c[iey]", "s", 1),
         Rule("c", "k"),
 
         //22. If the g doesn't begin the word, and the triggering e precedes o or a, the e is lost:
-        // changeable = cänj@b@l; dungeon = dûnj@n (but geology = jëôl@jë).
+        // changeable = tʃeɪndʒəbəl; dungeon = dʌndʒən (but geology = dʒiɒlədʒi).
         Rule("ge[oa]", "dʒ", 2),
-        //21. g becomes j before a front vowel, g elsewhere: gel = jêl, turgid = t@rjîd, but got = gôt, twig = twîg, gleam = glëm.
+        //21. g becomes j before a front vowel, g elsewhere: gel = dʒɛl, turgid = tərdʒɪd, but got = gôt, twig = twɪg, gleam = glim.
         Rule("g[iey]", "dʒ", 1),
         Rule("g", "g"),
-        //23. Initial gu or final gue is pronounced g: guest = gêst, plague = pläg.
+        //23. Initial gu or final gue is pronounced g: guest = gɛst, plague = pläg.
         LookbackRule("(^$|\\s)", "gu", "g"),
-        Rule("gue($|\\s)", "g"),
+        Rule("gue\\b", "g"),
         // (Medially, it tends to be gw instead: language, anguish.)
         Rule("gu", "gw"),
 
-        //24. le and re (after a consonant, and ending the word) should be rewritten @l, @r.
+        //24. le and re (after a consonant, and ending the word) should be rewritten əl, ər.
         //To be precise, they become syllabic consonants: the final sound in bottle is a prolonged dark l.
         //I think this is an allophonic detail, however:
-        // if you like, just add a rule at the end to turn all instances of @r into syllabic r.
-        LookbackRule("[$consonants]", "le(\\s|$)", "əɫ", 2),
-        LookbackRule("[$consonants]", "re(\\s|$)", "ər", 2),
+        // if you like, just add a rule at the end to turn all instances of ər into syllabic r.
+        LookbackRule("[$consonants]", "le\\b", "əɫ", 2),
+        LookbackRule("[$consonants]", "re\\b", "ər", 2),
 
         //these are the two most important rules of English spelling.
         //25. Vowels are pronounced long before an intervocalic consonant
-        // (rate, mete, fine, rote, cute = rät mët fïn röt küt).
+        // (rate, mete, fine, rote, cute = rät mit fajn röt küt).
         //26. They're short before two consonants (baffle, held, children, rotten, butler),
-        //or before a final consonant (pat, pet, pit, pot, but = pât pêt pît pôt bût).
-        Rule(Regex("a[$consonants][$vowels]"), "eɪ", 1),
-        Rule(Regex("e[$consonants][$vowels]"), "iː", 1),
-        Rule(Regex("i[$consonants][$vowels]"), "aɪ", 1),
-        Rule(Regex("o[$consonants][$vowels]"), "oʊ", 1),
-        Rule(Regex("u[$consonants][$vowels]"), "ju", 1),
+        //or before a final consonant (pat, pet, pit, pot, but = pât pɛt pɪt pôt bʌt).
+        Rule(Regex("a[$consonants][$vowels]"), A.long, 1),
+        Rule(Regex("e[$consonants][$vowels]"), E.long, 1),
+        Rule(Regex("i[$consonants][$vowels]"), I.long, 1),
+        Rule(Regex("o[$consonants][$vowels]"), O.long, 1),
+        Rule(Regex("u[$consonants][$vowels]"), U.long, 1),
 
-        Rule(Regex("a[$consonants]([$consonants]|\\s|$)"), "æ", 1),
-        Rule(Regex("e[$consonants]([$consonants]|\\s|\$)"), "ɛ", 1),
-        Rule(Regex("i[$consonants]([$consonants]|\\s|\$)"), "ɪ", 1),
-        Rule(Regex("o[$consonants]([$consonants]|\\s|\$)"), "ɒ", 1),
-        Rule(Regex("u[$consonants]([$consonants]|\\s|\$)"), "ʌ", 1),
 
-        //32. Except before a vowel, ous reduces to @s: jealous = jêl@s.
+        //Rule 54 works hand in hand with rule 25:
+        // a consonant is doubled to show that the preceding vowel is short: redder = rɛdər
+        //(compare red, where the d doesn't need to be doubled because a vowel preceding a final
+        // consonant is already short).
+
+        //Rule 55 is something of a corollary: to 'double' tʃ, we write tch rather than chch;
+        //and to double a /dʒ/, we write dg rather than jj or gg.
+        Rule(Regex("a$vowelShorteningConsonantPairs"),  A.short, 1),
+        Rule(Regex("a[$consonants]\\b"), A.short, 1),
+
+        Rule(Regex("e$vowelShorteningConsonantPairs"), E.short, 1),
+        Rule(Regex("e[$consonants]\\b"), E.short, 1),
+
+        Rule(Regex("i$vowelShorteningConsonantPairs"), I.short, 1),
+        Rule(Regex("i[$consonants]\\b"), I.short, 1),
+
+        Rule(Regex("o$vowelShorteningConsonantPairs"), O.short, 1),
+        Rule(Regex("o[$consonants]\\b"), O.short, 1),
+
+        Rule(Regex("u$vowelShorteningConsonantPairs"), U.short, 1),
+        Rule(Regex("u[$consonants]\\b"), U.short, 1),
+
+        Rule("ee", E.long),
+        Rule("oo", O.long),
+
+        //32. Except before a vowel, ous reduces to əs: jealous = jɛləs.
         //Note the importance of order: this rule has to be ordered before silent e deletion,
         // or it will apply to words like arouse.
-        Rule("ous", "əs"),
+        Rule("ous[^e]", "əs"),
 
-        //33. Remove final e: rate mike cute = rät mïk küt (unless it's the only vowel in the word, as in he).
+        //33. Remove final e: rate mike cute = rät majk küt (unless it's the only vowel in the word, as in he).
         LookbackRule("[$vowels][$consonants]{1,2}", "e", ""),
         //This and rules 25 and 26 (on long and short vowels) are the guts of the English spelling system. They allow the five vowel symbols to represent ten vowel phonemes.
 
@@ -487,10 +539,10 @@ Rule 56 goes with rule 16, which changed s to $ before some instances of u. */
         // safety, lovely, changeable, careful, warehouse, jukebox, placement, placeholder
         // the e in the first morpheme should be deleted by this rule.
 
-        //35. <i> before another vowel becomes ï@ [ajə] in the initial syllable: bias, diagram = bï@s, dï@grâm.
+        //35. <i> before another vowel becomes ajə [ajə] in the initial syllable: bias, diagram = bajəs, dajəgrâm.
         LookbackRule("(^|\\s)[^$vowels]+","[iy][$vowels]", "ajə"),
 
-        //38. Any vowel reduces to @ before final l: battle, final, hovel, evil, symbol.
+        //38. Any vowel reduces to ə before final l: battle, final, hovel, evil, symbol.
         Rule("[$vowels]l", "əɫ"),
 
         //3. Ignore apostrophes (can't, cop's, o'clock).

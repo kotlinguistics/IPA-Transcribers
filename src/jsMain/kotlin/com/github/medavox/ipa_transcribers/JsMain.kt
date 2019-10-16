@@ -29,7 +29,7 @@ fun main() {
     button.addEventListener("click", { event:Event ->
         val transcribr = Language.values().firstOrNull { it.ordinal == slekt.selectedIndex }!!.transcriber
         outputTextArea.textContent = transcribr.transcribe(inputTextArea.value)
-        errorsTextArea.textContent = "transcriber: $transcribr"
+        //errorsTextArea.textContent = "transcriber: $transcribr"
     })
 
     //remove js warning

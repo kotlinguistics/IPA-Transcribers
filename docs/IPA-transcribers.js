@@ -78,6 +78,8 @@
   ChinesePinyin$Mode.prototype.constructor = ChinesePinyin$Mode;
   ChinesePinyin.prototype = Object.create(RuleBasedTranscriber.prototype);
   ChinesePinyin.prototype.constructor = ChinesePinyin;
+  English$Vowels.prototype = Object.create(Enum.prototype);
+  English$Vowels.prototype.constructor = English$Vowels;
   English.prototype = Object.create(RuleBasedTranscriber.prototype);
   English.prototype.constructor = English;
   FilipinoTagalog.prototype = Object.create(RuleBasedTranscriber.prototype);
@@ -1440,20 +1442,105 @@
     English_instance = this;
     RuleBasedTranscriber.call(this);
     this.completionStatus_tzvcsz$_0 = CompletionStatus$IN_PROGRESS_getInstance();
+    this.vowelShorteningConsonantPairs = '(bb|ck|dd|dg|ff|gg|ll|mm|ng|nn|pp|rr|ss|tt|tch|zz)';
     this.vowels = 'aeiou';
     this.consonants = 'bcdfghjklmnpqrstvwxz';
     this.longI = 'a\u026A';
-    this.rules = plus(plus(listOf([Rule_init('t?ch', 't\u0283'), Rule_init('sc?h', '\u0283'), Rule_init('th', '\u03B8'), Rule_init('qu', 'kw'), Rule_init('wr', 'r'), Rule_init('who', 'h', 1), Rule_init('wh', 'w'), LookbackRule_init('e', 'xh[aeiou]', 'gz', 2), Rule_init('xh', 'ks'), LookbackRule_init('e', 'x[aeiou]', 'gz', 1), Rule_init('x', 'ks'), Rule_init('rh', 'r'), Rule_init('gh[aeiou]', 'g', 2), Rule_init('igh', this.longI), Rule_init('aught', '\u0254t'), Rule_init('ought', '\u0254t'), Rule_init('rough', 'r\u028Cf'), Rule_init(' cough', ' k\u0252f'), Rule_init(' through ', ' \u03B8ru '), Rule_init('ough', 'o\u028A'), Rule_init('gh', ''), LookbackRule_init('( |^)', 'gn', 'n'), LookbackRule_init('( |^)', 'kn', 'n'), LookbackRule_init('( |^)', 'mn', 'n'), LookbackRule_init('( |^)', 'pt', 't'), LookbackRule_init('( |^)', 'tm', 'm'), LookbackRule_init('(^|\\s)[^aeiou]+', 'y(\\s|$)', 'a\u026A', 1), Rule_init('ey', 'i'), Rule_init('ay', 'e\u026A'), Rule_init('oy', 'oj'), new Rule(Regex_init('(ti|ci)[aeiou]'), '\u0283', 2), new Rule(Regex_init('al([lrsmtd]|th)'), '\u0254\u026B', 2), LookbackRule_init('[^\\s]', 'alk', '\u0254k'), Rule_init('c[iey]', 's', 1), Rule_init('c', 'k'), Rule_init('ge[oa]', 'd\u0292', 2), Rule_init('g[iey]', 'd\u0292', 1), Rule_init('g', 'g'), LookbackRule_init('(^$|\\s)', 'gu', 'g'), Rule_init('gue($|\\s)', 'g'), Rule_init('gu', 'gw'), LookbackRule_init('[bcdfghjklmnpqrstvwxz]', 'le(\\s|$)', '\u0259\u026B', 2), LookbackRule_init('[bcdfghjklmnpqrstvwxz]', 're(\\s|$)', '\u0259r', 2), new Rule(Regex_init('a[bcdfghjklmnpqrstvwxz][aeiou]'), 'e\u026A', 1), new Rule(Regex_init('e[bcdfghjklmnpqrstvwxz][aeiou]'), 'i\u02D0', 1), new Rule(Regex_init('i[bcdfghjklmnpqrstvwxz][aeiou]'), 'a\u026A', 1), new Rule(Regex_init('o[bcdfghjklmnpqrstvwxz][aeiou]'), 'o\u028A', 1), new Rule(Regex_init('u[bcdfghjklmnpqrstvwxz][aeiou]'), 'ju', 1), new Rule(Regex_init('a[bcdfghjklmnpqrstvwxz]([bcdfghjklmnpqrstvwxz]|\\s|$)'), '\xE6', 1), new Rule(Regex_init('e[bcdfghjklmnpqrstvwxz]([bcdfghjklmnpqrstvwxz]|\\s|$)'), '\u025B', 1), new Rule(Regex_init('i[bcdfghjklmnpqrstvwxz]([bcdfghjklmnpqrstvwxz]|\\s|$)'), '\u026A', 1), new Rule(Regex_init('o[bcdfghjklmnpqrstvwxz]([bcdfghjklmnpqrstvwxz]|\\s|$)'), '\u0252', 1), new Rule(Regex_init('u[bcdfghjklmnpqrstvwxz]([bcdfghjklmnpqrstvwxz]|\\s|$)'), '\u028C', 1), Rule_init('ous', '\u0259s'), LookbackRule_init('[aeiou][bcdfghjklmnpqrstvwxz]{1,2}', 'e', ''), LookbackRule_init('(^|\\s)[^aeiou]+', '[iy][aeiou]', 'aj\u0259'), Rule_init('[aeiou]l', '\u0259\u026B'), Rule_init("'", ''), Rule_init('-', ' '), Rule_init('', '')]), LatinScriptCommonalities_getInstance().latinBaseRules), this.westernPunctuation);
+    this.rules = plus(plus(listOf([Rule_init('t?ch', 't\u0283'), Rule_init('sc?h', '\u0283'), Rule_init('th', '\u03B8'), Rule_init('qu', 'kw'), Rule_init('wr', 'r'), Rule_init('who', 'h', 2), Rule_init('wh', 'w'), LookbackRule_init('e', 'xh[aeiou]', 'gz', 2), Rule_init('xh', 'ks'), LookbackRule_init('e', 'x[aeiou]', 'gz', 1), Rule_init('x', 'ks'), Rule_init('rh', 'r'), Rule_init('gh[aeiou]', 'g', 2), Rule_init('igh', English$Vowels$I_getInstance().long), Rule_init('aught', '\u0254t'), Rule_init('ought', '\u0254t'), Rule_init('rough', 'r\u028Cf'), Rule_init(' cough', ' k\u0252f'), Rule_init(' through ', ' \u03B8ru '), Rule_init('ough', 'o\u028A'), Rule_init('gh', ''), LookbackRule_init('( |^)', 'gn', 'n'), LookbackRule_init('( |^)', 'kn', 'n'), LookbackRule_init('( |^)', 'mn', 'n'), LookbackRule_init('( |^)', 'pt', 't'), LookbackRule_init('( |^)', 'tm', 'm'), LookbackRule_init('(^|\\s)[^aeiou]+', 'y(\\s|$)', 'a\u026A', 1), Rule_init('ey', 'i'), Rule_init('ay', 'e\u026A'), Rule_init('oy', '\u0254\u026A'), Rule_init('y[^aeiou]', '\u026A', 1), Rule_init('y[aeiou]', 'j', 1), new Rule(Regex_init('(ti|ci)[aeiou]'), '\u0283', 2), new Rule(Regex_init('al([lrsmtd]|th)'), '\u0254\u026B', 2), LookbackRule_init('[^\\s]', 'alk', '\u0254k'), Rule_init('c[iey]', 's', 1), Rule_init('c', 'k'), Rule_init('ge[oa]', 'd\u0292', 2), Rule_init('g[iey]', 'd\u0292', 1), Rule_init('g', 'g'), LookbackRule_init('(^$|\\s)', 'gu', 'g'), Rule_init('gue\\b', 'g'), Rule_init('gu', 'gw'), Rule_init('ind\\b', 'ajnd'), Rule_init('eig[nm][^aeiou]', English$Vowels$A_getInstance().long, 3), Rule_init('ig[nm][^aeiou]', English$Vowels$I_getInstance().long, 2), LookbackRule_init('[bcdfghjklmnpqrstvwxz]', 'le\\b', '\u0259\u026B', 2), LookbackRule_init('[bcdfghjklmnpqrstvwxz]', 're\\b', '\u0259r', 2), new Rule(Regex_init('a[bcdfghjklmnpqrstvwxz][aeiou]'), English$Vowels$A_getInstance().long, 1), new Rule(Regex_init('e[bcdfghjklmnpqrstvwxz][aeiou]'), English$Vowels$E_getInstance().long, 1), new Rule(Regex_init('i[bcdfghjklmnpqrstvwxz][aeiou]'), English$Vowels$I_getInstance().long, 1), new Rule(Regex_init('o[bcdfghjklmnpqrstvwxz][aeiou]'), English$Vowels$O_getInstance().long, 1), new Rule(Regex_init('u[bcdfghjklmnpqrstvwxz][aeiou]'), English$Vowels$U_getInstance().long, 1), new Rule(Regex_init('a(bb|ck|dd|dg|ff|gg|ll|mm|ng|nn|pp|rr|ss|tt|tch|zz)'), English$Vowels$A_getInstance().short, 1), new Rule(Regex_init('a[bcdfghjklmnpqrstvwxz]\\b'), English$Vowels$A_getInstance().short, 1), new Rule(Regex_init('e(bb|ck|dd|dg|ff|gg|ll|mm|ng|nn|pp|rr|ss|tt|tch|zz)'), English$Vowels$E_getInstance().short, 1), new Rule(Regex_init('e[bcdfghjklmnpqrstvwxz]\\b'), English$Vowels$E_getInstance().short, 1), new Rule(Regex_init('i(bb|ck|dd|dg|ff|gg|ll|mm|ng|nn|pp|rr|ss|tt|tch|zz)'), English$Vowels$I_getInstance().short, 1), new Rule(Regex_init('i[bcdfghjklmnpqrstvwxz]\\b'), English$Vowels$I_getInstance().short, 1), new Rule(Regex_init('o(bb|ck|dd|dg|ff|gg|ll|mm|ng|nn|pp|rr|ss|tt|tch|zz)'), English$Vowels$O_getInstance().short, 1), new Rule(Regex_init('o[bcdfghjklmnpqrstvwxz]\\b'), English$Vowels$O_getInstance().short, 1), new Rule(Regex_init('u(bb|ck|dd|dg|ff|gg|ll|mm|ng|nn|pp|rr|ss|tt|tch|zz)'), English$Vowels$U_getInstance().short, 1), new Rule(Regex_init('u[bcdfghjklmnpqrstvwxz]\\b'), English$Vowels$U_getInstance().short, 1), Rule_init('ee', English$Vowels$E_getInstance().long), Rule_init('oo', English$Vowels$O_getInstance().long), Rule_init('ous[^e]', '\u0259s'), LookbackRule_init('[aeiou][bcdfghjklmnpqrstvwxz]{1,2}', 'e', ''), new Rule(Regex_init('a\\b'), English$Vowels$A_getInstance().long, 1), new Rule(Regex_init('e\\b'), English$Vowels$E_getInstance().long, 1), new Rule(Regex_init('i\\b'), English$Vowels$I_getInstance().long, 1), new Rule(Regex_init('o\\b'), English$Vowels$O_getInstance().long, 1), new Rule(Regex_init('u\\b'), English$Vowels$U_getInstance().long, 1), LookbackRule_init('(^|\\s)[^aeiou]+', '[iy][aeiou]', 'aj\u0259'), Rule_init('[aeiou]l', '\u0259\u026B'), Rule_init("'", ''), Rule_init('-', ' '), Rule_init('', '')]), LatinScriptCommonalities_getInstance().latinBaseRules), this.westernPunctuation);
   }
   Object.defineProperty(English.prototype, 'completionStatus', {get: function () {
     return this.completionStatus_tzvcsz$_0;
   }});
-  English.prototype.longPronunciation_s8itvh$ = function (vowel) {
-    return 'not yet implemented';
+  function English$Vowels(name, ordinal, short, long) {
+    Enum.call(this);
+    this.short = short;
+    this.long = long;
+    this.name$ = name;
+    this.ordinal$ = ordinal;
+  }
+  function English$Vowels_initFields() {
+    English$Vowels_initFields = function () {
+    };
+    English$Vowels$A_instance = new English$Vowels('A', 0, 'a', 'e\u026A');
+    English$Vowels$E_instance = new English$Vowels('E', 1, '\u025B', 'i\u02D0');
+    English$Vowels$I_instance = new English$Vowels('I', 2, '\u026A', 'a\u026A');
+    English$Vowels$O_instance = new English$Vowels('O', 3, '\u0252', '\u0259\u028A');
+    English$Vowels$U_instance = new English$Vowels('U', 4, '\u028C', 'ju');
+    English$Vowels$Companion_getInstance();
+  }
+  var English$Vowels$A_instance;
+  function English$Vowels$A_getInstance() {
+    English$Vowels_initFields();
+    return English$Vowels$A_instance;
+  }
+  var English$Vowels$E_instance;
+  function English$Vowels$E_getInstance() {
+    English$Vowels_initFields();
+    return English$Vowels$E_instance;
+  }
+  var English$Vowels$I_instance;
+  function English$Vowels$I_getInstance() {
+    English$Vowels_initFields();
+    return English$Vowels$I_instance;
+  }
+  var English$Vowels$O_instance;
+  function English$Vowels$O_getInstance() {
+    English$Vowels_initFields();
+    return English$Vowels$O_instance;
+  }
+  var English$Vowels$U_instance;
+  function English$Vowels$U_getInstance() {
+    English$Vowels_initFields();
+    return English$Vowels$U_instance;
+  }
+  function English$Vowels$Companion() {
+    English$Vowels$Companion_instance = this;
+  }
+  English$Vowels$Companion.prototype.from_61zpoe$ = function (vowel) {
+    switch (vowel) {
+      case 'a':
+        return English$Vowels$A_getInstance();
+      case 'e':
+        return English$Vowels$E_getInstance();
+      case 'i':
+        return English$Vowels$I_getInstance();
+      case 'o':
+        return English$Vowels$O_getInstance();
+      case 'u':
+        return English$Vowels$U_getInstance();
+      default:throw IllegalArgumentException_init('only the following Strings of length 1 are valid input to this method:' + 'aeiou\xE4\xF6\xFC');
+    }
   };
-  English.prototype.shortPronunciation_s8itvh$ = function (vowel) {
-    return 'not yet implemented';
-  };
+  English$Vowels$Companion.$metadata$ = {kind: Kind_OBJECT, simpleName: 'Companion', interfaces: []};
+  var English$Vowels$Companion_instance = null;
+  function English$Vowels$Companion_getInstance() {
+    English$Vowels_initFields();
+    if (English$Vowels$Companion_instance === null) {
+      new English$Vowels$Companion();
+    }
+    return English$Vowels$Companion_instance;
+  }
+  English$Vowels.$metadata$ = {kind: Kind_CLASS, simpleName: 'Vowels', interfaces: [Enum]};
+  function English$Vowels$values() {
+    return [English$Vowels$A_getInstance(), English$Vowels$E_getInstance(), English$Vowels$I_getInstance(), English$Vowels$O_getInstance(), English$Vowels$U_getInstance()];
+  }
+  English$Vowels.values = English$Vowels$values;
+  function English$Vowels$valueOf(name) {
+    switch (name) {
+      case 'A':
+        return English$Vowels$A_getInstance();
+      case 'E':
+        return English$Vowels$E_getInstance();
+      case 'I':
+        return English$Vowels$I_getInstance();
+      case 'O':
+        return English$Vowels$O_getInstance();
+      case 'U':
+        return English$Vowels$U_getInstance();
+      default:throwISE('No enum constant com.github.medavox.ipa_transcribers.latin.English.Vowels.' + name);
+    }
+  }
+  English$Vowels.valueOf_61zpoe$ = English$Vowels$valueOf;
   English.prototype.transcribe_61zpoe$ = function (nativeText) {
     return this.processWithRules_lyv0qx$(nativeText.toLowerCase(), this.rules, this.reportAndCopy);
   };
@@ -2072,7 +2159,7 @@
     }
     return Thai_instance;
   }
-  function main$lambda(closure$slekt, closure$inputTextArea, closure$outputTextArea, closure$errorsTextArea) {
+  function main$lambda(closure$slekt, closure$inputTextArea, closure$outputTextArea) {
     return function (event) {
       var $receiver = Language$values();
       var firstOrNull$result;
@@ -2091,7 +2178,6 @@
        while (false);
       var transcribr = ensureNotNull(firstOrNull$result).transcriber;
       closure$outputTextArea.textContent = transcribr.transcribe_61zpoe$(closure$inputTextArea.value);
-      closure$errorsTextArea.textContent = 'transcriber: ' + transcribr;
       return Unit;
     };
   }
@@ -2111,7 +2197,7 @@
     outputTextArea.setAttribute('placeholder', UiStrings_getInstance().outputHint);
     errorsTextArea.setAttribute('placeholder', UiStrings_getInstance().errorsHint);
     var button = Kotlin.isType(tmp$_3 = document.getElementById('transliterate_button'), HTMLButtonElement) ? tmp$_3 : throwCCE();
-    button.addEventListener('click', main$lambda(slekt, inputTextArea, outputTextArea, errorsTextArea));
+    button.addEventListener('click', main$lambda(slekt, inputTextArea, outputTextArea));
     var jsWarning = Kotlin.isType(tmp$_4 = document.getElementById('js_warning'), HTMLDivElement) ? tmp$_4 : throwCCE();
     jsWarning.remove();
   }
@@ -2119,12 +2205,16 @@
   }
   function err() {
     err_instance = this;
+    var tmp$;
+    this.errorsTextArea = Kotlin.isType(tmp$ = document.getElementById('errors_text'), HTMLTextAreaElement) ? tmp$ : throwCCE();
   }
   err.prototype.print_61zpoe$ = function (err) {
-    throw new NotImplementedError_init();
+    var tmp$;
+    tmp$ = this.errorsTextArea;
+    tmp$.textContent = tmp$.textContent + err;
   };
   err.prototype.println_61zpoe$ = function (err) {
-    throw new NotImplementedError_init();
+    return this.print_61zpoe$(err + '\n');
   };
   err.$metadata$ = {kind: Kind_OBJECT, simpleName: 'err', interfaces: []};
   var err_instance = null;
@@ -2135,7 +2225,7 @@
     return err_instance;
   }
   function get_unicodeName($receiver) {
-    throw new NotImplementedError_init();
+    return 'blah';
   }
   function normaliseNfd($receiver) {
     var tmp$;

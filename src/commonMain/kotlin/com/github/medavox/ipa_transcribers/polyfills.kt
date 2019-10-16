@@ -1,4 +1,4 @@
-package com.github.medavox
+package com.github.medavox.ipa_transcribers
 
 expect object err {
     fun print(err:String)

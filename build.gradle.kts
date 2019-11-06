@@ -28,8 +28,14 @@ repositories {
 }
 
 kotlin {
-    jvm{
+    jvm {
         withJava()
+        val main by compilations.getting {
+            kotlinOptions {
+                // Setup the Kotlin compiler options for the 'main' compilation:
+                jvmTarget = "1.8"
+            }
+        }
     }
     js {
         browser()
@@ -82,7 +88,7 @@ val run by tasks.creating(JavaExec::class) {
     systemProperty("java.awt.headless", "true")
 }
 
-val fatJar = task("fatJar", type = Jar::class) {
+/*val fatJar = task("fatJar", type = Jar::class) {
 //task fatJar(type: Jar) {
     manifest {
         //attributes["Implementation-Title"] = "Gradle Jar File Example"
@@ -95,4 +101,4 @@ val fatJar = task("fatJar", type = Jar::class) {
     //with jar
     from(configurations.runtimeClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
     with(tasks.jar.get() as CopySpec)
-}
+}*/

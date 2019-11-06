@@ -13,6 +13,10 @@ object RussianCyrillic:RuleBasedTranscriber() {
     override val completionStatus: CompletionStatus = CompletionStatus.IN_PROGRESS
     //todo: implement vowel reduction in unstressed vowels
     //TODO:voicing assimilation, and devoicing at end of word
+
+    //fixme: <e> should not be /je/ in the middle of a word unless it's after a vowel or ь, ъ
+    // So like, еда /jeda/, подъезд /podjezd/, море /morʲe/ and not /morʲje/
+    // (thanks to Seirus on the conlang critic discord server)
     private const val softenableConsonants = "бвгдзклмнпрстфх"
     //Consonant letters represent both
     // "soft" (palatalized, represented in the IPA with a ⟨ʲ⟩) and

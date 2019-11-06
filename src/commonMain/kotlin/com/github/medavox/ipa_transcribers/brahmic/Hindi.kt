@@ -22,6 +22,7 @@ object Hindi:RuleBasedTranscriber() {
     private val consonants = "बभदधजझडढफ़गघग़हयकखलमनणञङपफक़रढ़सषशतथचछटठवख़ज़झ़"
     private var lastWasConsonant:Boolean = false
     //todo:use these schwa-deletion rules (and the relevant paper!)
+    //todo: nasal assimilation
     //from https://www.quora.com/Are-there-any-strict-rules-for-schwa-deletion-in-Hindi
     //    Final schwa must be deleted. This is the rule that must be applied first.
     // However, if deleting that schwa produces a consonant cluster or other sound that is extremely

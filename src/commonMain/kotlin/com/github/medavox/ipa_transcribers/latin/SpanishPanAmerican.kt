@@ -341,6 +341,7 @@ object SpanishPanAmerican: RuleBasedTranscriber() {
     /**Removes the stress accents from vowels,
      * which aren't needed for our IPA orthography-to-sound transcription,
      * and in fact get in the way ("o" != "ó")*/
+    //todo:the acute accent in spanish does two things, mark irregular stress and split up diphthongs
     fun String.removeStressAccents():String {
         return this
             .replace("á", "a")

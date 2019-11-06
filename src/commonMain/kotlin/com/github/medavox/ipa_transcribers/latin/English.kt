@@ -11,6 +11,10 @@ import com.github.medavox.ipa_transcribers.latin.LatinScriptCommonalities.latinB
  * So here goes.
  * Based on [work by Mark Rosenfelder](http://zompist.com/spell.html)
  * See also more formal work by Edward Carney*/
+
+//fixme: examples with BUGS:
+// cloud = kloʌd
+// thanks to jan Misali
 object English:RuleBasedTranscriber() {
     override val completionStatus: CompletionStatus = CompletionStatus.IN_PROGRESS
     //todo:english: download Mellon Carnegie Uni pronouncing dictionary, check it has the 1000 most common english words

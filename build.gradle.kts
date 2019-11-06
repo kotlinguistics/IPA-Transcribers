@@ -9,21 +9,18 @@ import org.jetbrains.kotlin.config.KotlinCompilerVersion
 //to compile the code into a single JS file (including all dependencies),
 //call ./gradlew jsBrowserWebpack
 
+//to make a pair of js files (kotlin.js, and our code) which are much smaller than the webpack,
+//call ./gradlew runDceJsKotlin
+
 plugins {
     kotlin("multiplatform") version "1.3.50"
     id("kotlin-dce-js") version "1.3.50"
-    java
+    //java
     id ("org.jetbrains.dokka") version "0.9.18"
 }
 
 group ="com.github.medavox"
 version = "0.2"
-
-java {
-    targetCompatibility = JavaVersion.VERSION_1_8
-    sourceCompatibility = JavaVersion.VERSION_1_8
-}
-//sourceCompatibility = JavaVersion.VERSION_1_8
 
 repositories {
     mavenCentral()
@@ -31,10 +28,17 @@ repositories {
 }
 
 kotlin {
-    jvm()
+    jvm{
+        withJava()
+    }
     js {
         browser()
     }
+}
+
+java {
+    targetCompatibility = JavaVersion.VERSION_1_8
+    sourceCompatibility = JavaVersion.VERSION_1_8
 }
 
 kotlin.sourceSets["jvmMain"].dependencies {

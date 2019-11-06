@@ -3,7 +3,7 @@ package com.github.medavox.ipa_transcribers.other
 import com.github.medavox.ipa_transcribers.CompletionStatus
 import com.github.medavox.ipa_transcribers.Rule
 import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
-import com.github.medavox.normaliseNfd
+import com.github.medavox.ipa_transcribers.normaliseNfd
 
 /**Status:COMPLETE
  * All the 'modern' combining jamo have been transcribed.

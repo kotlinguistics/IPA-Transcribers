@@ -1,7 +1,7 @@
 package com.github.medavox.ipa_transcribers
 
-import com.github.medavox.err
-import com.github.medavox.unicodeName
+import com.github.medavox.ipa_transcribers.err
+import com.github.medavox.ipa_transcribers.unicodeName
 
 /***This API takes a context-free approach:
  * Regex is matched to the start of the string only,

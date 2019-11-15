@@ -1,3 +1,4 @@
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import org.jetbrains.kotlin.config.KotlinCompilerVersion
 
 //import org.jetbrains.kotlin.gradle.tasks.*
@@ -17,6 +18,7 @@ plugins {
     id("kotlin-dce-js") version "1.3.50"
     //java
     id ("org.jetbrains.dokka") version "0.9.18"
+    id("com.github.johnrengelman.shadow") version "5.2.0"
 }
 
 group ="com.github.medavox"
@@ -88,17 +90,10 @@ val run by tasks.creating(JavaExec::class) {
     systemProperty("java.awt.headless", "true")
 }
 
-/*val fatJar = task("fatJar", type = Jar::class) {
-//task fatJar(type: Jar) {
+tasks.withType<ShadowJar> {
+    minimize()
     manifest {
-        //attributes["Implementation-Title"] = "Gradle Jar File Example"
-        attributes["Implementation-Version"] = archiveVersion
-        attributes["Main-Class"] = "MainKt"
+        attributes["Implementation-Version"] = version
+        attributes["Main-Class"] = "FakeMainKt"
     }
-    //baseName = rootProject.name+"-standalone"
-    baseName = "${project.name}-standalone"
-    //from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
-    //with jar
-    from(configurations.runtimeClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
-    with(tasks.jar.get() as CopySpec)
-}*/
+}

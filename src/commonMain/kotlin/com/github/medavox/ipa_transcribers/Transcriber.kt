@@ -11,5 +11,5 @@ package com.github.medavox.ipa_transcribers
  *  transcriptions, but ignore
  *  Irish, Scottish, Texan, Indian, African, Australian, New Zealand, South African and International variants.*/
 interface Transcriber {
-    fun transcribe(nativeText:String):String//:String
+    fun transcribe(nativeText:String):String
 }

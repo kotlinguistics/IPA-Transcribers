@@ -5,10 +5,8 @@ package com.github.medavox.ipa_transcribers
  *
  *  Features:
  - optionally specify number of letters consumed, if different from match length
- - (per-rule) either a string or lambda. The lambba can access state persisting across whole word
- - lambda on no rule matched
- - support for multiple simultaneous output variants, eg british and american english
- - transcribe() function can return just a String for languages with only one variant
+ - (per-rule) either a string or lambda. The lambda can access state persisting across the whole string
+ - execute a lambda function on no rule matched
 
 In Russian, we need to know the previous consonant to check if it can be softened;
 but we also need to print out the following vowel so we don't reprocess it again as a word-initial.
@@ -23,7 +21,7 @@ instead of feeding the chopped-off string (with the characters consumed so far r
 we have to match regexes on two strings: the consumed-so-far characters AND the unconsumed characters.
 The regex for the consumed-so-far string is optional.
 
-@Constructor
+@constructor
 primary constructor
  @property consumedMatcher
  */
@@ -139,7 +137,7 @@ class RevisingRule(match:Regex, outputString:(soFar:String) -> String, lettersUs
 /**Use Regex capturing groups (from the match) in the output string.
  * Useful for matching a whole class of characters with one rule (eg vowels),
  * and repeating that character in the output.
- * The capturing groups aren't access with the traditional string markers (\1 or $1),
+ * The capturing groups aren't accessed with the traditional string markers (\1 or $1),
  * but rather with the passed [MatchGroupCollection]'s methods.*/
 class CapturingRule(match:Regex, outputString: (soFar:String, theMatches:MatchGroupCollection) -> String,
                     lettersConsumed: Int?=null):IRule(null, match, outputString, lettersConsumed) {

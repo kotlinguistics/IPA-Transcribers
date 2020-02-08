@@ -6,10 +6,10 @@ import com.github.medavox.ipa_transcribers.*
 import com.github.medavox.ipa_transcribers.latin.German.Vowels.*
 import com.github.medavox.ipa_transcribers.latin.LatinScriptCommonalities.latinBaseRules
 
-/**This transcriber follows pronunciation in Standard German, as spoken in Germany.
+/**This transcriber transcribes the pronunciation of Standard German, as spoken in Germany.
  *
  * In terms of accuracy, it's going to be close,
- * but it can never be 100% with the vowels, because the vowel length rules don't always apply.
+ * but it can never be 100% with the vowels, because the vowel length rules don't always apply consistently.
  *
  * Still to do: rules around final consonant devoicing, and voicing harmonisation
  * (eg when an unvoiced consonant devoices surrounding or following consonants)*/

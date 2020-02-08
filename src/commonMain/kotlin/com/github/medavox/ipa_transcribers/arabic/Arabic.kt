@@ -6,14 +6,14 @@ import com.github.medavox.ipa_transcribers.RuleBasedTranscriber
 
 
 /**Partial transcriber for Modern Standard Arabic.
- * Transcribes the sound recorded in the orthography.
- * However, he Arabic script is an abugida,
+ * Transcribes the sounds recorded in the orthography.
+ * However, the Arabic script is an Abjad,
  * which means it does not (in normal writing) record all vowels.
  *
  * This means that a simple rule-based approach *cannot* produce a complete representation of
  * a word's pronunciation, given its standard spelling.
  *
- * But we can at least transcribe the information that arabic DOES provide.*/
+ * But we can at least transcribe the information that Arabic DOES provide.*/
 object Arabic : RuleBasedTranscriber() {
     override val completionStatus: CompletionStatus = CompletionStatus.IN_PROGRESS
     val rules:List<Rule> = listOf<Rule>(

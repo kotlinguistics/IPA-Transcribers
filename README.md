@@ -9,7 +9,12 @@ which is capable of transcribing most orthographical information present in a la
 Some languages are partially or completely incompatible with this approach; [details are 
 below](#depth).
 
-## How To Install
+## How to use
+
+* [online version](https://kotlinguistics.github.io/IPA-Transcribers)
+* Desktop app (instructions below)
+
+## How To Install Library in a Gradle/Maven project
 
 First, add the jitpack repository if you haven't already:
 
@@ -50,6 +55,19 @@ dependencies {
     <version>v0.1</version>
 </dependency>
 ```
+
+## How to Build
+
+To build the web app, run:
+
+```shell script
+./gradlew jsBrowserWebpack
+```
+then either run
+```shell script
+./update-site.sh
+```
+or just copy `src/jsMain/resources/index.html`, 
 
 ## Language Support
 

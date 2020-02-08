@@ -73,7 +73,7 @@ object DevanagariBaseRules {
         RevisingRule("[ऋृ]", {l(it)+"ɾɪ"}),
         RevisingRule("्", {l(it)}),// ् "virama" is a diacritic which suppresses the inherent vowel
         RevisingRule("ं", {l(it)}),// "anusvara" diacritic nasalises the preceding consonant*
-        //or in modern hindi and marathi, sometimes its vowel as well. It's comlicated.
+        //or in modern hindi and marathi, sometimes its vowel as well. It's complicated.
 
         //nasalised vowel diacritic. Presumably can go over any (or some) other vowels
         Rule("ँ", "̃"),

@@ -11,18 +11,47 @@ below](#depth).
 
 ## How to use
 
-* [online version](https://kotlinguistics.github.io/IPA-Transcribers)
-* Desktop app (instructions below)
+You can use this repo in the following ways:
 
-## How To Install Library in a Gradle/Maven project
+* The [online version](https://kotlinguistics.github.io/IPA-Transcribers)
+* Desktop app
+* local webpage
+* as a library in your JVM/Android project
 
-First, add the jitpack repository if you haven't already:
+
+### As a Webpage
+
+To build it:
+
+```shell script
+./gradlew jsBrowserWebpack
+./update-site.sh # or manually copy the files specified in that script
+```
+
+then open `./docs/index.html` in your browser.
+
+### As a Java Desktop App
+
+to build it:
+
+```shell script
+./gradlew shadowJar
+```
+
+to run it:
+
+```shell script
+java -jar build/libs/IPA-transcribers-0.2-all.jar
+```
+
+### As a Library in a Gradle/Maven project
+
+First, add the jitpack repository to your repositories if you haven't already:
 
 `gradle`
 ``` gradle
 allprojects {
     repositories {
-        ...
         maven { url 'https://jitpack.io' }
     }
 }
@@ -55,19 +84,6 @@ dependencies {
     <version>v0.1</version>
 </dependency>
 ```
-
-## How to Build
-
-To build the web app, run:
-
-```shell script
-./gradlew jsBrowserWebpack
-```
-then either run
-```shell script
-./update-site.sh
-```
-or just copy `src/jsMain/resources/index.html`, 
 
 ## Language Support
 
@@ -121,18 +137,19 @@ without resorting to lookup-tables, and/or a context-sensitive approach.
 for information on the completion status for each language, look in the `project boards` section of this repo's GitHub page.
 
 
-## This Project Actively Welcomes Pull Requests
+## HELP WANTED
 
 If:-
 
-* you have insight into *how* a system works in a particular language's orthography,
+* you know how a particular language's writing system works,
 * you want to add support for a language not included here,
 * or if you spot a mistake in the IPA output,
 
 please do one of the following (most preferred first):
 
 1. Submit a pull request with the relevant work implemented (*provide code*)
-    - This project supports code in either Java or Kotlin.
+    - This project supports code in either Java or Kotlin;
+    - but you can also just pass me some Regex rules.
 2. Open an issue, describing *how* a language feature works (*provide language-specific knowledge*)
     - regular rules are best, if they exist.
 3. Mention that for input *x*, output *y* is wrong and should instead be *z* (*provide correct example(s)*)
@@ -140,7 +157,10 @@ please do one of the following (most preferred first):
 4. Request a feature and I will record your interest.
     - Given enough interest, I *may* still try to implement other languages or features.
  
-As of writing this (March 2019), I'm still working on implementing the basic rule-based transcribers
+
+The bulk of this project is in [this directory](./src/commonMain/kotlin/com/github/medavox/ipa_transcribers).
+
+As of writing this (November 2019), I'm still working on implementing the basic rule-based transcribers
 for all the eligible languages I'll be covering.
 
 Please bear in mind that this project is a massive undertaking for one person;

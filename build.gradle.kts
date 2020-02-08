@@ -94,6 +94,6 @@ tasks.withType<ShadowJar> {
     minimize()
     manifest {
         attributes["Implementation-Version"] = version
-        attributes["Main-Class"] = "FakeMainKt"
+        attributes["Main-Class"] = "com.github.medavox.ipa_transcribers.Launcher"
     }
 }

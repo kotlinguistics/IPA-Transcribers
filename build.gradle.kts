@@ -19,6 +19,9 @@ plugins {
     //java
     id ("org.jetbrains.dokka") version "0.10.1"
     id("com.github.johnrengelman.shadow") version "5.2.0"
+
+    //adds a task 'dependencyUpdates' which checks for newer versions of dependencies;
+    //apparently this is a feature only built into Android Studio, not IntelliJ IDEA
     id("com.github.ben-manes.versions") version "0.27.0"
 }
 

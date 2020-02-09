@@ -14,11 +14,12 @@ import org.jetbrains.kotlin.config.KotlinCompilerVersion
 //call ./gradlew runDceJsKotlin
 
 plugins {
-    kotlin("multiplatform") version "1.3.50"
-    id("kotlin-dce-js") version "1.3.50"
+    kotlin("multiplatform") version "1.3.61"
+    id("kotlin-dce-js") version "1.3.61"
     //java
-    id ("org.jetbrains.dokka") version "0.9.18"
+    id ("org.jetbrains.dokka") version "0.10.1"
     id("com.github.johnrengelman.shadow") version "5.2.0"
+    id("com.github.ben-manes.versions") version "0.27.0"
 }
 
 group ="com.github.medavox"
@@ -52,7 +53,7 @@ java {
 kotlin.sourceSets["jvmMain"].dependencies {
     implementation(kotlin("stdlib", KotlinCompilerVersion.VERSION))
     //implementation("commons-cli:commons-cli:1.4")
-    implementation("info.picocli:picocli:4.0.1")
+    implementation("info.picocli:picocli:4.1.4")
 }
 
 kotlin.sourceSets["jsMain"].dependencies {
@@ -62,15 +63,15 @@ kotlin.sourceSets["jsMain"].dependencies {
 
 kotlin.sourceSets["commonMain"].dependencies {
     implementation(kotlin("stdlib-common"))
-    implementation("org.jetbrains.kotlinx:kotlinx-html-common:0.6.12")
+    implementation("org.jetbrains.kotlinx:kotlinx-html-common:0.7.1")
 }
 
 kotlin.sourceSets["jvmTest"].dependencies {
-    implementation("junit:junit:4.12")
+    implementation("junit:junit:4.13")
 
     //for getting the most up-to-date list of names for unicode characters
-    implementation("com.ibm.icu:icu4j:62.1")
-    implementation("org.jsoup:jsoup:1.12.1")
+    implementation("com.ibm.icu:icu4j:65.1")
+    implementation("org.jsoup:jsoup:1.12.2")
 }
 
 //kotlin.sourceSets["androidMain"]

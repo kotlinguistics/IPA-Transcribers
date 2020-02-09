@@ -19,8 +19,7 @@ You can use this repo in the following ways:
 * as a library in your JVM/Android project
 
 
-<details>
-<summary><h3>As a Webpage</h3></summary>
+<details><summary>As a Webpage</summary>
 
 To build it:
 
@@ -32,8 +31,7 @@ To build it:
 then open `./docs/index.html` in your browser.
 </details>
 
-<details>
-<summary><h3>As a Java Desktop App</h3></summary>
+<details><summary>As a Java Desktop App</summary>
 
 to build it:
 
@@ -48,13 +46,11 @@ java -jar build/libs/IPA-transcribers-0.2-all.jar
 ```
 </details>
 
-<details>
-<summary><h3>As a Library in a Gradle/Maven project</h3></summary>
+<details><summary>As a Library in a Gradle/Maven project</summary>
 
 First, add the jitpack repository to your repositories if you haven't already:
 
-<details open>
-<summary>gradle</summary>
+<details open><summary>gradle</summary>
 
 ```gradle
 allprojects {
@@ -65,8 +61,7 @@ allprojects {
 ```
 </details>
 
-<details>
-<summary>maven</summary>
+<details><summary>maven</summary>
 
 ```xml
 <repositories>
@@ -80,8 +75,7 @@ allprojects {
 </details>
 Then add this library to your project:
 
-<details>
-<summary>gradle</summary>
+<details><summary>gradle</summary>
 
 ```gradle
 dependencies {

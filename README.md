@@ -19,8 +19,7 @@ You can use this repo in the following ways:
 * as a library in your JVM/Android project
 
 
-<details>
-<summary><h3>As a Webpage</h3></summary>
+### As a Webpage
 
 To build it:
 
@@ -30,10 +29,8 @@ To build it:
 ```
 
 then open `./docs/index.html` in your browser.
-</details>
 
-<details>
-<summary><h3>As a Java Desktop App</h3></summary>
+### As a Java Desktop App
 
 to build it:
 
@@ -46,29 +43,22 @@ to run it:
 ```shell script
 java -jar build/libs/IPA-transcribers-0.2-all.jar
 ```
-</details>
 
-<details>
-<summary><h3>As a Library in a Gradle/Maven project</h3></summary>
+### As a Library in a Gradle/Maven project
 
 First, add the jitpack repository to your repositories if you haven't already:
 
-<details open>
-<summary>gradle</summary>
-
-```gradle
+`gradle`
+``` gradle
 allprojects {
     repositories {
         maven { url 'https://jitpack.io' }
     }
 }
 ```
-</details>
 
-<details>
-<summary>maven</summary>
-
-```xml
+`maven`
+``` xml
 <repositories>
     <repository>
         <id>jitpack.io</id>
@@ -77,32 +67,23 @@ allprojects {
 </repositories>
 ```
 
-</details>
 Then add this library to your project:
 
-<details>
-<summary>gradle</summary>
-
-```gradle
+`gradle`
+``` gradle
 dependencies {
     implementation 'com.github.medavox:IPA-Transcribers:v0.1'
 }
 ```
 
-</details>
-
-<details>
-<summary>maven</summary>
-
-```xml
+`maven`
+``` xml
 <dependency>
     <groupId>com.github.medavox</groupId>
     <artifactId>IPA-Transcribers</artifactId>
     <version>v0.1</version>
 </dependency>
 ```
-</details>
-</details>
 
 ## Language Support
 

@@ -41,7 +41,7 @@ to build it:
 to run it:
 
 ```shell script
-java -jar build/libs/IPA-transcribers-0.2-all.jar
+java -jar build/libs/IPA-transcribers-0.3-all.jar
 ```
 
 ### As a Library in a Gradle/Maven project
@@ -72,7 +72,7 @@ Then add this library to your project:
 `gradle`
 ``` gradle
 dependencies {
-    implementation 'com.github.medavox:IPA-Transcribers:v0.1'
+    implementation 'com.github.medavox:IPA-Transcribers:v0.3'
 }
 ```
 
@@ -81,7 +81,7 @@ dependencies {
 <dependency>
     <groupId>com.github.medavox</groupId>
     <artifactId>IPA-Transcribers</artifactId>
-    <version>v0.1</version>
+    <version>v0.3</version>
 </dependency>
 ```
 

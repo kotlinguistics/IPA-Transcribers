@@ -93,42 +93,6 @@ dependencies {
 ```
 </details>
 
-## HELP WANTED
-
-If:-
-
-* you know how a particular language's writing system works,
-* you want to add support for a language not included here,
-* or if you spot a mistake in the IPA output,
-
-please do one of the following (most preferred first):
-
-1. Submit a pull request with the relevant work implemented (*provide code*)
-    - This project supports code in either Java or Kotlin;
-    - but you can also just pass me some Regex rules.
-2. Open an issue, describing *how* a language feature works (*provide language-specific knowledge*)
-    - regular rules are best, if they exist.
-3. Mention that for input *x*, output *y* is wrong and should instead be *z* (*provide correct example(s)*)
-    - I'll do my best to work this into an applicable rule.
-4. Request a feature and I will record your interest.
-    - Given enough interest, I *may* still try to implement other languages or features.
- 
-
-The bulk of this project is in [this directory](./src/commonMain/kotlin/com/github/medavox/ipa_transcribers).
-
-As of writing this (November 2019), I'm still working on implementing the basic rule-based transcribers
-for all the eligible languages I'll be covering.
-
-Please bear in mind that this project is a massive undertaking for one person;
-It isn't possible for me (or arguably, any one person) 
-to have sufficient knowledge of *every* language here to cover it perfectly.
-
-As a result, without external help from **users like you**:
-
-* the transcriptions will remain quite "broad",
-* syllable stress will not be transcribed
-* and any other syllable-level pronunciation systems won't be covered.
-
 ## Limitations
 
 ### <a name="depth"> Languages with High Orthographic Depth (Spelling doesn't convey pronunciation)</a>
@@ -167,6 +131,42 @@ and as such it would be wrong for me to provide a means for placing an undue bur
 * [Vowel reduction](https://en.wikipedia.org/wiki/Vowel_reduction), such as in
   [English](https://en.wikipedia.org/wiki/Stress_and_vowel_reduction_in_English) 
   and [Russian](https://en.wikipedia.org/wiki/Vowel_reduction_in_Russian) has accordingly been ignored.
+
+## HELP WANTED
+
+If:-
+
+* you know how a particular language's writing system works,
+* you want to add support for a language not included here,
+* or if you spot a mistake in the IPA output,
+
+please do one of the following (most preferred first):
+
+1. Submit a pull request with the relevant work implemented (*provide code*)
+    - This project supports code in either Java or Kotlin;
+    - but you can also just pass me some Regex rules.
+2. Open an issue, describing *how* a language feature works (*provide language-specific knowledge*)
+    - regular rules are best, if they exist.
+3. Mention that for input *x*, output *y* is wrong and should instead be *z* (*provide correct example(s)*)
+    - I'll do my best to work this into an applicable rule.
+4. Request a feature and I will record your interest.
+    - Given enough interest, I *may* still try to implement other languages or features.
+ 
+
+The bulk of this project is in [this directory](./src/commonMain/kotlin/com/github/medavox/ipa_transcribers).
+
+As of writing this (November 2019), I'm still working on implementing the basic rule-based transcribers
+for all the eligible languages I'll be covering.
+
+Please bear in mind that this project is a massive undertaking for one person;
+It isn't possible for me (or arguably, any one person) 
+to have sufficient knowledge of *every* language here to cover it perfectly.
+
+As a result, without external help from **users like you**:
+
+* the transcriptions will remain quite "broad",
+* syllable stress will not be transcribed
+* and any other syllable-level pronunciation systems won't be covered.
 
 ## Why?
 

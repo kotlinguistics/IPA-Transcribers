@@ -18,8 +18,8 @@ You can use this repo in the following ways:
 * local webpage
 * as a library in your JVM/Android project
 
-
-### As a Webpage
+<details>
+  <summary>As a local webpage</summary>
 
 To build it:
 
@@ -30,7 +30,10 @@ To build it:
 
 then open `./docs/index.html` in your browser.
 
-### As a Java Desktop App
+</details>
+
+<details>
+  <summary>As a Java desktop app</summary>
 
 to build it:
 
@@ -44,7 +47,11 @@ to run it:
 java -jar build/libs/IPA-transcribers-0.3-all.jar
 ```
 
-### As a Library in a Gradle/Maven project
+</details>
+
+<details>
+  <summary>As a library in a Gradle/Maven project</summary>
+
 
 First, add the jitpack repository to your repositories if you haven't already:
 
@@ -84,58 +91,7 @@ dependencies {
     <version>v0.3</version>
 </dependency>
 ```
-
-## Language Support
-
-The languages I aim to support, and their eligibility for rule-based transcribers:
-
-Language                | Rule-based eligible?
-------------------------|------------
-Arabic, Modern Standard | partially
-Bengali                 | yes
-Chinese (Mandarin)      | no
-Chinese Bopomofo/Zhuyin | yes
-Chinese Pinyin          | yes
-English                 | maybe? very irregular, many loanwords = multiple simultaneous spelling systems
-Filipino/Tagalog        | yes
-French                  | mostly
-German                  | mostly
-Gujarati                | yes
-Hausa                   | yes
-Hindi                   | yes
-Indonesian/Malay        | yes
-Italian                 | yes
-Japanese Kanji          | no
-Japanese Katakana       | yes
-Japanese Hiragana       | yes
-Javanese                | yes
-Korean                  | mostly
-Marathi                 | yes
-Persian/Dari/Farsi/Tajik| partially
-Portuguese              | probably
-Punjabi Gurmukhi        | yes
-Punjabi/Lahnda Shahmukhi| partially
-Russian                 | mostly - no vowel reduction
-Spanish                 | yes
-Swahili                 | yes
-Tamil                   | yes
-Telugu                  | yes
-Thai                    | technically yes, but reportedly very irregular
-Turkish                 | yes
-Urdu                    | partially
-Vietnamese              | signs point to no
-
-
-**"Probably"**: this language uses the latin alphabet (which means it probably can be transliterated),
-but has used it for a long time (say, at least 1000 years),
-so may be too irregular for rule-based -- further research is required.
-
-**"Partially"**: this language uses the Arabic script, which only records some vowels. 
-There isn't enough information present in the orthography to make a complete transcription of all the phonemes,
-without resorting to lookup-tables, and/or a context-sensitive approach.
-
-for information on the completion status for each language, look in the `project boards` section of this repo's GitHub page.
-
+</details>
 
 ## HELP WANTED
 

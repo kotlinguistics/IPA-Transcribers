@@ -19,7 +19,7 @@ You can use this repo in the following ways:
 * as a library in your JVM/Android project
 
 <details>
-  <summary>As a local webpage</summary>
+  <summary><b>As a local webpage</b></summary>
 
 To build it:
 
@@ -33,7 +33,7 @@ then open `./docs/index.html` in your browser.
 </details>
 
 <details>
-  <summary>As a Java desktop app</summary>
+  <summary> <b>As a Java desktop app</b></summary>
 
 to build it:
 
@@ -50,7 +50,7 @@ java -jar build/libs/IPA-transcribers-0.3-all.jar
 </details>
 
 <details>
-  <summary>As a library in a Gradle/Maven project</summary>
+  <summary><b>As a library in a Gradle/Maven project</b></summary>
 
 
 First, add the jitpack repository to your repositories if you haven't already:

@@ -82,7 +82,6 @@ enum class Language(val neim:String, val transcriber: Transcriber) {
     ITALIAN("Italian", Italian),
     JAPANESE_LIMITED("Japanese (Katakana & Hiragana Only)", JapaneseOnlyKatakanaHiragana),
     KOREAN("Korean", KoreanHangeul),
-    MALAY("Malay", IndonesianMalay),
     MARATHI("Marathi", Marathi),
     PERSIAN("Persian/Farsi/Dari/Tajik", Persian),
     PORTUGUESE_BRAZILIAN("Portuguese (Brazilian)", PortugueseBrazilian),

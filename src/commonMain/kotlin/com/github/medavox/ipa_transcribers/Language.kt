@@ -78,7 +78,7 @@ enum class Language(val neim:String, val transcriber: Transcriber) {
     GUJARATI("Gujarati", Gujarati),
     HAUSA("Hausa", Hausa),
     HINDI("Hindi", Hindi),
-    INDONESIAN_MALAY("Indonesian//Malay", IndonesianMalay),
+    INDONESIAN_MALAY("Indonesian/Malay", IndonesianMalay),
     ITALIAN("Italian", Italian),
     JAPANESE_LIMITED("Japanese (Katakana & Hiragana Only)", JapaneseOnlyKatakanaHiragana),
     KOREAN("Korean", KoreanHangeul),

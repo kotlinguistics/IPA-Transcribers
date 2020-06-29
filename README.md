@@ -93,6 +93,8 @@ dependencies {
 ```
 </details>
 
+The bulk of this project lives in [this directory](./src/commonMain/kotlin/com/github/medavox/ipa_transcribers).
+
 ## Limitations
 
 ### <a name="depth"> Languages with High Orthographic Depth (Spelling doesn't convey pronunciation)</a>
@@ -152,9 +154,6 @@ please do one of the following (most preferred first):
 4. Request a feature and I will record your interest.
     - Given enough interest, I *may* still try to implement other languages or features.
  
-
-The bulk of this project is in [this directory](./src/commonMain/kotlin/com/github/medavox/ipa_transcribers).
-
 As of writing this (November 2019), I'm still working on implementing the basic rule-based transcribers
 for all the eligible languages I'll be covering.
 

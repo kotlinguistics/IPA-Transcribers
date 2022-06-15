@@ -1,4 +1,5 @@
 package com.github.medavox.ipa_transcribers
+/*TODO: redo GUI in Jetpack Compose
 
 import com.github.medavox.UiStrings
 import javafx.application.Application
@@ -14,10 +15,12 @@ import javafx.stage.Stage
 //https://docs.oracle.com/javase/8/javafx/get-started-tutorial/form.htm#CFHEAHGB
 //https://docs.oracle.com/javase/8/javafx/get-started-tutorial/hello_world.htm
 //
+*/
 /**Provides a Desktop GUI for the library.
  * Implemented with JavaFX, available as part of Java 8's language API.
  * Note that after Java 8, JavaFX was made an external library.
- * @see [https://docs.oracle.com/javase/8/javafx/api](JavaFX javadoc)*/
+ * @see [https://docs.oracle.com/javase/8/javafx/api](JavaFX javadoc)*//*
+
 class Gui : Application() {
     //input = multi-line text input field
     //language choice = dropdown list
@@ -87,3 +90,4 @@ class Gui : Application() {
         primaryStage.show()
     }
 }
+*/

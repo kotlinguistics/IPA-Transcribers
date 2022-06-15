@@ -1,4 +1,5 @@
 package com.github.medavox.ipa_transcribers;
+/*TODO: redo GUI in Jetpack Compose
 
 import javafx.scene.control.TextArea;
 
@@ -224,3 +225,4 @@ public class PrintStreamCapturer extends PrintStream {
         }
     }
 }
+*/

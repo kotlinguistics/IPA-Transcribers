@@ -14,7 +14,7 @@ below](#depth).
 You can use this repo in the following ways:
 
 * The [online version](https://kotlinguistics.github.io/IPA-Transcribers)
-* Desktop app
+* ~~Desktop app~~ TODO: replace broken JavaFX with Jetpack Compose
 * local webpage
 * as a library in your JVM/Android project
 
@@ -33,7 +33,7 @@ then open `./docs/index.html` in your browser.
 </details>
 
 <details>
-  <summary> <b>As a Java desktop app</b></summary>
+  <summary> <b><strike>As a Java desktop app</strike></b></summary>
 
 to build it:
 
@@ -41,7 +41,7 @@ to build it:
 ./gradlew shadowJar
 ```
 
-to run it:
+~~to run it:~~ (currently broken)
 
 ```shell script
 java -jar build/libs/IPA-transcribers-0.3-all.jar

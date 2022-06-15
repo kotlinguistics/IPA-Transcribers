@@ -14,15 +14,14 @@ import org.jetbrains.kotlin.config.KotlinCompilerVersion
 //call ./gradlew runDceJsKotlin
 
 plugins {
-    kotlin("multiplatform") version "1.3.72"
-    id("kotlin-dce-js") version "1.3.72"
+    kotlin("multiplatform") version "1.7.0"
     //java
-    id ("org.jetbrains.dokka") version "0.10.1"
-    id("com.github.johnrengelman.shadow") version "5.2.0"
+    id ("org.jetbrains.dokka") version "1.6.21"
+    id("com.github.johnrengelman.shadow") version "7.1.2"
 
     //adds a task 'dependencyUpdates' which checks for newer versions of dependencies;
     //apparently this is a feature only built into Android Studio, not IntelliJ IDEA
-    id("com.github.ben-manes.versions") version "0.28.0"
+    id("com.github.ben-manes.versions") version "0.42.0"
 }
 
 group ="com.github.medavox"
@@ -56,7 +55,7 @@ java {
 kotlin.sourceSets["jvmMain"].dependencies {
     implementation(kotlin("stdlib", KotlinCompilerVersion.VERSION))
     //implementation("commons-cli:commons-cli:1.4")
-    implementation("info.picocli:picocli:4.3.2")
+    implementation("info.picocli:picocli:4.6.3")
 }
 
 kotlin.sourceSets["jsMain"].dependencies {
@@ -66,15 +65,15 @@ kotlin.sourceSets["jsMain"].dependencies {
 
 kotlin.sourceSets["commonMain"].dependencies {
     implementation(kotlin("stdlib-common"))
-    implementation("org.jetbrains.kotlinx:kotlinx-html-common:0.7.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-html-common:0.7.3")
 }
 
 kotlin.sourceSets["jvmTest"].dependencies {
-    implementation("junit:junit:4.13")
+    implementation("junit:junit:4.13.2")
 
     //for getting the most up-to-date list of names for unicode characters
-    implementation("com.ibm.icu:icu4j:67.1")
-    implementation("org.jsoup:jsoup:1.13.1")
+    implementation("com.ibm.icu:icu4j:71.1")
+    implementation("org.jsoup:jsoup:1.15.1")
 }
 
 //kotlin.sourceSets["androidMain"]

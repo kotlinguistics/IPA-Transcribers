@@ -1,7 +1,7 @@
 package com.github.medavox.ipa_transcribers
 
 import org.w3c.dom.HTMLTextAreaElement
-import kotlin.browser.document
+import kotlinx.browser.document
 
 actual object err {
     val errorsTextArea = document.getElementById("errors_text") as HTMLTextAreaElement

@@ -3,7 +3,7 @@ package com.github.medavox.ipa_transcribers
 import com.github.medavox.UiStrings
 import org.w3c.dom.*
 import org.w3c.dom.events.Event
-import kotlin.browser.document
+import kotlinx.browser.document
 
 fun main() {
     val slekt = document.getElementById("lang_select") as HTMLSelectElement

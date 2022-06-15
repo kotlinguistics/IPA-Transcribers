@@ -51,21 +51,28 @@ java {
     targetCompatibility = JavaVersion.VERSION_1_8
     sourceCompatibility = JavaVersion.VERSION_1_8
 }
-
+val kotlinxHtmlVersion = "0.7.5"
 kotlin.sourceSets["jvmMain"].dependencies {
     implementation(kotlin("stdlib", KotlinCompilerVersion.VERSION))
     //implementation("commons-cli:commons-cli:1.4")
     implementation("info.picocli:picocli:4.6.3")
+    // include for JVM target
+    implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:$kotlinxHtmlVersion")
+
 }
 
 kotlin.sourceSets["jsMain"].dependencies {
     implementation(kotlin("stdlib-js"))
-    //implementation("org.jetbrains.kotlinx:kotlinx-html-js:0.6.12")
+    // include for JS target
+    implementation("org.jetbrains.kotlinx:kotlinx-html-js:$kotlinxHtmlVersion")
+
 }
 
 kotlin.sourceSets["commonMain"].dependencies {
     implementation(kotlin("stdlib-common"))
-    implementation("org.jetbrains.kotlinx:kotlinx-html-common:0.7.3")
+
+    // include for Common module
+    implementation("org.jetbrains.kotlinx:kotlinx-html:$kotlinxHtmlVersion")
 }
 
 kotlin.sourceSets["jvmTest"].dependencies {

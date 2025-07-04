@@ -1,9 +1,7 @@
 package com.github.medavox.ipa_transcribers
 
-import com.github.medavox.ipa_transcribers.err
-import com.github.medavox.ipa_transcribers.unicodeName
-
-/***This API takes a context-free approach:
+/***The engine that ingests rules and input text, and produces output text.
+ * This API takes a context-free approach:
  * Regex is matched to the start of the string only,
  * and the output String is not interpreted as Regex.
  *
@@ -11,12 +9,18 @@ import com.github.medavox.ipa_transcribers.unicodeName
  * only simple substitutions matched by Regular expressions may be used.
  **/
 abstract class RuleBasedTranscriber:Transcriber, BaseRules {
-    abstract val completionStatus:CompletionStatus
+    abstract val completionStatus: CompletionStatus
     data class UnmatchedOutput(val newWorkingInput:String, val output:(soFar:String) -> String) {
         constructor(newWorkingInput: String, output:String):this(newWorkingInput, {it+output})
     }
     private var reportedChars:String = ""
-    fun reportOnceAndCopy(it:String):UnmatchedOutput {
+
+    /**Fallbacks which 'handle' (in some way) any encountered string that has no Rule which consumes it in the current ruleset.
+     *
+     * ----------*/
+
+    /**Report (log) the first instance of an unmatched String, then copy it verbatim to the output string. */
+    fun reportOnceAndCopy(it:String): UnmatchedOutput {
         if(!reportedChars.contains(it[0])) {
             err.println("copying unknown char '${it[0]}'/'${it[0].toInt().unicodeName}' to output...")
             reportedChars += it[0]
@@ -24,21 +28,25 @@ abstract class RuleBasedTranscriber:Transcriber, BaseRules {
         return UnmatchedOutput(it.substring(1), it[0].toString())
     }
 
+    /**Report every instance of the unmatched String, then omit it from the output*/
     val reportAndSkip:(String) -> UnmatchedOutput get() = {
         err.println("unknown char '${it[0]}'; skipping...")
         UnmatchedOutput(it.substring(1), "")
     }
 
+    /**Report every instance of the unmatched String, then copy it verbatim to the output*/
     val reportAndCopy:(String) -> UnmatchedOutput get() = {
         err.println("copying unknown char '${it[0]}' to output...")
         UnmatchedOutput(it.substring(1), it[0].toString())
     }
 
-    val copy:(String) -> UnmatchedOutput get() = {
+    /**Copy any unmatched Strings verbatim to the output, without reporting them.*/
+    val copy: (String) -> UnmatchedOutput get() = {
         UnmatchedOutput(it.substring(1), it[0].toString())
     }
 
-    /**Applies the rule which consumes the most characters.
+    /**WIP do not use
+     * Applies the rule which consumes the most characters.
      *
      * Attempt 2
      * This greedy matcher matches against the most specific rule,
@@ -53,8 +61,8 @@ abstract class RuleBasedTranscriber:Transcriber, BaseRules {
         Includes the consumed match (if any) in the specificity metric.
      *///todo: when 2 rules are of equal specificity, use the one that appears first
     fun String.processGreedily(rules:List<IRule>, onNoRuleMatch:(unmatched:String) -> UnmatchedOutput) : String {
-        var out:String = ""
-        var processingWord:String = this
+        var out: String = ""
+        var processingWord: String = this
         var consumed = ""
         loop@ while(processingWord.isNotEmpty()) {
             //get the regex result of the unconsumedInput and alreadyConsumed matchers,
@@ -98,35 +106,47 @@ abstract class RuleBasedTranscriber:Transcriber, BaseRules {
         return out
     }
 
+
+    /**The default function to use. Acts as the engine of this entire program.
+     * More or less single-pass; at each point in the input String, consumes characters using the first rule which matches the input.
+     * the read-head is then advanced forwards in the input string by however many characters the executed Rule states it consumed.
+     * Once a rule has matched at the current read-head, been executed and has advanced the read-head,
+     * start again, looking for a matching Rule in order from the supplied list at the current point in the remaining input.
+     */
     fun String.processWithRules(rules:List<IRule>, onNoRuleMatch:(unmatched:String) -> UnmatchedOutput) : String {
-        var out:String = ""
-        var processingWord:String = this
+        var out: String = ""
+        var processingWord: String = this
         var consumed = ""
         loop@ while(processingWord.isNotEmpty()) {
             //uses the first rule which matches -- so rule order matters
             for (rule in rules) {
                 val unconsumedMatch:MatchResult? = rule.unconsumedMatcher.find(processingWord)
 
-                val consumedMatches:Boolean = rule.consumedMatcher == null ||// if it's null, that counts as matching:
+                val consumedMatches: Boolean = rule.consumedMatcher == null ||// if it's null, that counts as matching:
                         //rules that don't specify a consumedMatcher aren't checked against it
 
-                        //if it has been specified by this rule, it has to match at the end of the already-consumed string
+                    //if it has been specified by this rule, it has to match at the end of the already-consumed string
                     rule.consumedMatcher.findAll(consumed).lastOrNull()?.range?.endInclusive == consumed.length-1
 
                 //if the rule matches the start of the remaining string, and the end of the consumed string
                 if(consumedMatches && unconsumedMatch?.range?.start == 0) {
                     //println("rule '$rule' matches '$processingWord'")
+                    //add the output of this rule to the in-progress output string
                     out = rule.outputString(out, unconsumedMatch.groups)
-                    //number of letters consumed is the match length, unless explicitly specified
+
+                    //figure out how far to advance the read-head of the remaining input string
+                    //number of letters consumed is the match length, unless explicitly specified otherwise by the rule
                     val actualLettersConsumed = rule.lettersConsumed ?: unconsumedMatch.value.length
                     if(actualLettersConsumed > 0) {
+                        //place consumed characters into the consumed string
                         consumed += processingWord.substring(0, actualLettersConsumed)
+                        //remove consumed characters from the start of the remaining input string
                         processingWord = processingWord.substring(actualLettersConsumed)
                         continue@loop
-                    }//else keep going through the rule list
+                    }//else keep going through the rule list --  rules which consume no chars will fall through to later rules
                 }
             }
-            //no rule matched; call the lambda!
+            //no rule matched; call the fallback lambda
             val unmatchedOutput = onNoRuleMatch(processingWord)
             processingWord = unmatchedOutput.newWorkingInput
             out = unmatchedOutput.output(out)
